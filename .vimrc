@@ -1,1 +1,1 @@
-/home/bb/.vimrc
+.~/.vimrc
