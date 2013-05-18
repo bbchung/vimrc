@@ -10,6 +10,7 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'bbchung/chaotic'
+Bundle 'kien/ctrlp.vim'
 Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/c.vim'
 Bundle 'vim-scripts/CSApprox'
