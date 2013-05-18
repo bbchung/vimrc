@@ -311,9 +311,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 augroup bb
-	au BufWritePost *.c,*.h,*.cpp,*.hpp,*.php,*.py,*.sh silent! TlistUpdate
-	au BufWritePost *.c,*.h,*.cpp,*.hpp call s:init_tag()
-	au BufReadPost *.c,*.h,*.cpp,*.hpp call s:init_tag()
+	au BufWritePost *.[ch],*.[ch]pp,*.php,*.py,*.sh silent! TlistUpdate
+	au BufWritePost *.[ch],*.[ch]pp call s:init_tag()
+	au BufReadPost *.[ch],*.[ch]pp call s:init_tag()
 	au BufWritePost *.py,*.php,*sh silent !chmod +x %
 
 	au FileType c,cpp call s:ft_cpp()
@@ -321,5 +321,5 @@ augroup bb
 	au FileType tex call s:ft_tex()
 
 	au VimEnter * call s:load_session()
-	au VimLeave *.cpp,*.hpp,*.c,*.h call s:save_session()
+	au VimLeave *.[ch],*.[ch]pp call s:save_session()
 augroup end
