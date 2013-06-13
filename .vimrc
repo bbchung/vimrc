@@ -12,16 +12,17 @@ call vundle#rc()
 Bundle 'bbchung/chaotic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'gmarik/vundle'
-Bundle 'vim-scripts/c.vim'
-Bundle 'vim-scripts/CSApprox'
+"Bundle 'vim-scripts/c.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/taglist.vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/MatchTagAlways'
-Bundle 'bufexplorer.zip'
 Bundle 'SirVer/ultisnips'
+
+Bundle 'taglist.vim'
+Bundle 'CSApprox'
+Bundle 'bufexplorer.zip'
 Bundle 'a.vim'
 filetype plugin indent on     " required!
 
@@ -105,12 +106,6 @@ execute "set undodir=".s:dir
 "	endif
 "endfunction
 
-function! s:sudo_write()
-	silent execute "w !sudo tee >/dev/null %"
-	if &filetype == 'cpp' || &filetype == 'c'	
-		silent execute "!global -u"
-	endif
-endfunction
 
 function! s:ft_cpp()
 "	let g:pyclewn_args="-w bottom"
@@ -144,12 +139,13 @@ endfunction
 function! s:init_tag()
 	if !cscope_connection()
 		if !filereadable("GTAGS")	
-			echo "building tags..."
-			silent execute "!gtags"
+			echo "init tags..."
+			silent! execute "!gtags"
 		endif
 		cs add GTAGS
 	else
-		silent execute "!global -u"
+		silent! execute "!killall -9 global > /dev/null 2>&1"
+		silent! execute "!global -u &"
 	endif
 endfunction
 
@@ -243,6 +239,8 @@ let g:NERDTreeWinPos = 'right'
 
 "Taglist"
 "let Tlist_Use_Right_Window = 1
+"
+let g:EasyGrepMode=2
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -253,7 +251,7 @@ let g:NERDTreeWinPos = 'right'
 "imap <S-TAB> <C-R>=AutoTab(1)<CR><C-R>=AutoSelect()<CR>
 nmap <F2> :Tlist<CR>
 nmap <F4> :NERDTreeToggle<CR>
-command W call s:sudo_write()
+command W silent execute "w !sudo > /dev/null tee %"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autosave session
@@ -312,9 +310,8 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 augroup bb
-	au BufWritePost *.[ch],*.[ch]pp,*.php,*.py,*.sh silent! TlistUpdate
 	au BufWritePost *.[ch],*.[ch]pp call s:init_tag()
-	au BufReadPost *.[ch],*.[ch]pp call s:init_tag()
+	au VimEnter *.[ch],*.[ch]pp call s:init_tag()
 	au BufWritePost *.py,*.php,*sh silent !chmod +x %
 
 	au FileType c,cpp call s:ft_cpp()
