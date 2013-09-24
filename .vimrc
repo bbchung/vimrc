@@ -19,7 +19,9 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'SirVer/ultisnips'
+Bundle 'jiangmiao/auto-pairs'
 
+Bundle 'Conque-GDB'
 Bundle 'taglist.vim'
 Bundle 'CSApprox'
 Bundle 'bufexplorer.zip'
@@ -44,7 +46,7 @@ set number				" show line numbers
 set showcmd				" display incomplete commands
 set title				" show title in console title bar
 set ttyfast				" smoother changes
-set previewheight=6
+set previewheight=4
 set novisualbell		" turn off visual bell
 set tabstop=4			" numbers of spaces of tab character
 set shiftwidth=4		" numbers of spaces to (auto)indent
@@ -225,11 +227,13 @@ let g:Powerline_symbols = 'unicode'
 
 "ycm"
 let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 nmap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "syntastic"
 let g:syntastic_enable_signs=0
+let g:syntastic_loc_list_height=5
+ 
 
 "UltiSnips"
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
