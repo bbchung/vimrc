@@ -9,6 +9,8 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+Bundle 'tomtom/tcomment_vim'
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'gmarik/vundle'
@@ -224,10 +226,11 @@ let Tlist_WinWidth=24
 
 "powerline"
 let g:Powerline_symbols = 'unicode'
+"let g:Powerline_colorscheme = 'solarized256'
 
 "ycm"
 let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 nmap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "syntastic"
