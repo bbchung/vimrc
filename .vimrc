@@ -317,9 +317,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 augroup bb
-	au BufWritePost *.[ch],*.[ch]pp call s:init_tag()
-	au VimEnter *.[ch],*.[ch]pp call s:init_tag()
-	au BufWritePost *.py,*.php,*sh silent !chmod +x %
+"	au BufWritePost *.[ch],*.[ch]pp call s:init_tag()
+"	au VimEnter *.[ch],*.[ch]pp call s:init_tag()
+"	au BufWritePost *.py,*.php,*sh silent !chmod +x %
 
 	au FileType c,cpp call s:ft_cpp()
 	au FileType python call s:ft_python()
