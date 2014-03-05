@@ -15,6 +15,7 @@ Bundle 'bbchung/chaotic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'gmarik/vundle'
 "Bundle 'vim-scripts/c.vim'
+Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'Lokaltog/vim-powerline'
@@ -89,13 +90,13 @@ execute "set undodir=".s:dir
 " Functions definitions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "function! s:check_compiler()
-	"if executable("clang")
-	"	let g:C_CCompiler='clang'
+"if executable("clang")
+"	let g:C_CCompiler='clang'
 "	if executable("gcc")
 "		let g:C_CCompiler='gcc'
 "	endif
-	"if executable("clang++")
-	"	let g:C_CplusCompiler='clang++'
+"if executable("clang++")
+"	let g:C_CplusCompiler='clang++'
 "	if executable("g++")
 "		let g:C_CplusCompiler='g++'
 "	endif
@@ -112,9 +113,9 @@ execute "set undodir=".s:dir
 
 
 function! s:ft_cpp()
-"	let g:pyclewn_args="-w bottom"
-"	nmap <C-F6> :silent! call EnterDebugMode() <CR>
-"	nmap <C-F8> :silent! call ExitDebugMode() <CR>
+	"	let g:pyclewn_args="-w bottom"
+	"	nmap <C-F6> :silent! call EnterDebugMode() <CR>
+	"	nmap <C-F8> :silent! call ExitDebugMode() <CR>
 	"execute "set makeprg=make\\ -j3\\ CC=".g:C_CCompiler."\\ CXX=".g:C_CplusCompiler
 	execute "set makeprg=make\\ -j3"
 	set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
@@ -224,6 +225,14 @@ let Tlist_WinWidth=24
 "let g:Tex_DefaultTargetFormat='pdf'
 "let Tex_CompileRule_pdf='xelatex -interaction=nonstopmode $*'
 
+" clang-format
+let g:clang_format#style_options = {
+			\ "AccessModifierOffset" : -4,
+			\ "AllowShortIfStatementsOnASingleLine" : "false", 
+			\ "AlwaysBreakTemplateDeclarations" : "true", 
+			\ "Standard" : "C++11", 
+			\ "BreakBeforeBraces" : "Allman" } 
+
 "powerline"
 let g:Powerline_symbols = 'unicode'
 "let g:Powerline_colorscheme = 'solarized256'
@@ -236,7 +245,6 @@ nmap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "syntastic"
 let g:syntastic_enable_signs=0
 let g:syntastic_loc_list_height=5
- 
 
 "UltiSnips"
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
@@ -317,9 +325,9 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 augroup bb
-"	au BufWritePost *.[ch],*.[ch]pp call s:init_tag()
-"	au VimEnter *.[ch],*.[ch]pp call s:init_tag()
-"	au BufWritePost *.py,*.php,*sh silent !chmod +x %
+	"	au BufWritePost *.[ch],*.[ch]pp call s:init_tag()
+	"	au VimEnter *.[ch],*.[ch]pp call s:init_tag()
+	"	au BufWritePost *.py,*.php,*sh silent !chmod +x %
 
 	au FileType c,cpp call s:ft_cpp()
 	au FileType python call s:ft_python()
@@ -327,4 +335,10 @@ augroup bb
 
 	au VimEnter * call s:load_session()
 	au VimLeave *.[ch],*.[ch]pp call s:save_session()
-augroup end
+
+	autocmd FileType c,cpp,objc nnoremap <Leader>= :ClangFormat<CR>
+	autocmd FileType c,cpp,objc vnoremap <Leader>= :ClangFormat<CR>
+
+	augroup end
+
+
