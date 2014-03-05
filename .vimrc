@@ -336,8 +336,8 @@ augroup bb
 	au VimEnter * call s:load_session()
 	au VimLeave *.[ch],*.[ch]pp call s:save_session()
 
-	autocmd FileType c,cpp,objc nnoremap <Leader>= :ClangFormat<CR>
-	autocmd FileType c,cpp,objc vnoremap <Leader>= :ClangFormat<CR>
+	autocmd FileType c,cpp,objc nnoremap = :ClangFormat<CR>
+	autocmd FileType c,cpp,objc vnoremap = :ClangFormat<CR>
 
 	augroup end
 
