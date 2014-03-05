@@ -5,10 +5,23 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General vim settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+	echo "Installing Vundle.."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+	let iCanHazVundle=0
+endif
+
 set nocompatible
 filetype off
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+Bundle 'gmarik/vundle'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
@@ -22,6 +35,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets.git'
 Bundle 'jiangmiao/auto-pairs'
 
 Bundle 'Conque-GDB'
@@ -29,8 +43,13 @@ Bundle 'taglist.vim'
 Bundle 'CSApprox'
 Bundle 'bufexplorer.zip'
 Bundle 'a.vim'
-filetype plugin indent on     " required!
+if iCanHazVundle == 0
+	echo "Installing Bundles, please ignore key map error messages"
+	echo ""
+	:BundleInstall
+endif
 
+filetype plugin indent on     " required!
 
 if has("gui_running")
 	set guifont=Inconsolata\ 15		
@@ -340,5 +359,3 @@ augroup bb
 	autocmd FileType c,cpp,objc vmap = :ClangFormat<CR>
 
 	augroup end
-
-
