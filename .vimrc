@@ -7,8 +7,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
-if !filereadable(vundle_readme)
+let vundle=expand('~/.vim/bundle/vundle')
+if !isdirectory (vundle)
 	echo "Installing Vundle.."
 	echo ""
 	silent !mkdir -p ~/.vim/bundle
@@ -27,7 +27,6 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'gmarik/vundle'
-"Bundle 'vim-scripts/c.vim'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
@@ -37,11 +36,11 @@ Bundle 'Valloric/MatchTagAlways'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jiangmiao/auto-pairs'
+Bundle 'jlanzarotta/bufexplorer'
 
 Bundle 'Conque-GDB'
 Bundle 'taglist.vim'
 Bundle 'CSApprox'
-Bundle 'bufexplorer.zip'
 Bundle 'a.vim'
 if iCanHazVundle == 0
 	echo "Installing Bundles, please ignore key map error messages"
@@ -135,19 +134,19 @@ function! s:ft_cpp()
 	"	let g:pyclewn_args="-w bottom"
 	"	nmap <C-F6> :silent! call EnterDebugMode() <CR>
 	"	nmap <C-F8> :silent! call ExitDebugMode() <CR>
-	"execute "set makeprg=make\\ -j3\\ CC=".g:C_CCompiler."\\ CXX=".g:C_CplusCompiler
+	"   execute "set makeprg=make\\ -j3\\ CC=".g:C_CCompiler."\\ CXX=".g:C_CplusCompiler
 	execute "set makeprg=make\\ -j3"
 	set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
 	set textwidth=0
 	set noexpandtab
-	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
-	nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
-	nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
-	nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
-	nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
-	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
+	"	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	"	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
+	"	nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
+	"	nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
+	"	nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
+	"	nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
+	"	nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	"	nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
 endfunction
 
 function! s:ft_python()
@@ -355,7 +354,7 @@ augroup bb
 	au VimEnter * call s:load_session()
 	au VimLeave *.[ch],*.[ch]pp call s:save_session()
 
-"	autocmd FileType c,cpp,objc nmap = :ClangFormat<CR>
+	"	autocmd FileType c,cpp,objc nmap = :ClangFormat<CR>
 	autocmd FileType c,cpp,objc vmap = :ClangFormat<CR>
 
-	augroup end
+augroup end
