@@ -79,7 +79,7 @@ set ignorecase
 set smartcase
 set pumheight=12
 set nospell				" disable spell checking 
-set foldmethod=syntax
+set foldmethod=manual
 set switchbuf=usetab	"use opened buffer
 set mouse=a
 set ttymouse=xterm2
@@ -138,7 +138,7 @@ function! s:ft_cpp()
 	execute "set makeprg=make\\ -j3"
 	set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
 	set textwidth=0
-	set noexpandtab
+	set expandtab
 	"	nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 	"	nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
 	"	nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
@@ -249,6 +249,8 @@ let g:clang_format#style_options = {
 			\ "AllowShortIfStatementsOnASingleLine" : "false", 
 			\ "AlwaysBreakTemplateDeclarations" : "true", 
 			\ "Standard" : "C++11", 
+			\ "IndentWidth" : 4, 
+			\ "UseTab" : "Never", 
 			\ "BreakBeforeBraces" : "Allman" } 
 
 "powerline"
