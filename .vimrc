@@ -256,7 +256,7 @@ let g:clang_format#style_options = {
 			\ "BreakBeforeBraces" : "Allman" } 
 
 "powerline"
-let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'compatible'
 "let g:Powerline_colorscheme = 'solarized256'
 
 "ycm"
