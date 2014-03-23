@@ -248,6 +248,7 @@ let Tlist_WinWidth=24
 " clang-format
 let g:clang_format#style_options = {
 			\ "BasedOnStyle" : "LLVM",
+			\ "PointerBindsToType" : "true",
 			\ "ColumnLimit" : 0,
 			\ "AccessModifierOffset" : -4,
 			\ "AllowShortIfStatementsOnASingleLine" : "false", 
