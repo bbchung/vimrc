@@ -119,7 +119,7 @@ nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>u :call AutoTagUpdate()<CR>  
+nmap <silent> <C-\>u :call AutoTagUpdate()<CR>  
 
 if !cscope_connection()
 	if filereadable("GTAGS")	
@@ -135,7 +135,7 @@ if !cscope_connection()
 	endif
 endif
 
-function! s:AutoTagUpdate()
+function! AutoTagUpdate()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u"
 	endif
@@ -314,7 +314,7 @@ let Tlist_Show_One_File=1
 let Tlist_WinWidth=24
 "let Tlist_Auto_Open = 1
 "let Tlist_Display_Prototype=1
-nmap <F2> :Tlist<CR>
+nmap <silent> <F2> :Tlist<CR>
 "let Tlist_Use_Right_Window = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -350,7 +350,7 @@ let g:Powerline_symbols = 'compatible'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_confirm_extra_conf=0
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-nmap <C-]> :YcmCompleter GoTo<CR>
+nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: syntastic  
@@ -367,4 +367,4 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " Plugin: NERDTree  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
-nmap <F4> :NERDTreeToggle<CR>
+nmap <silent> <F4> :NERDTreeToggle<CR>
