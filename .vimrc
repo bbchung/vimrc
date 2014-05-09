@@ -136,26 +136,13 @@ endif
 
 function! AutoTagUpdate()
 	if cscope_connection(1, 'GTAGS')
-		execute "!global -u"
+		execute "!global -u > /dev/null 2>&1"
 	endif
 	if cscope_connection(1, 'cscope.out')
-		execute "!cscope -Rbkq"
+		execute "!cscope -bkqR"
 		cs reset
 	endif
 endfunction
-
-"function! s:init_tag()
-"	if !cscope_connection()
-"		if !filereadable("GTAGS")	
-"			echo "init tags..."
-"			silent! execute "!gtags"
-"		endif
-"		cs add GTAGS
-"	else
-"		silent! execute "!killall -9 global > /dev/null 2>&1"
-"		silent! execute "!global -u &"
-"	endif
-"endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoTypes
