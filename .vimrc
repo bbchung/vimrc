@@ -6,14 +6,13 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let vundle manage plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let iCanHazVundle=1
-let vundle=expand('~/.vim/bundle/vundle')
-if !isdirectory (vundle)
+let s:vundle_path=expand('~/.vim/bundle/vundle')
+if !isdirectory (s:vundle_path)
 	echo "Installing Vundle.."
 	echo ""
 	silent !mkdir -p ~/.vim/bundle
 	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-	let iCanHazVundle=0
+	let s:can_install_bundle
 endif
 
 set nocompatible
@@ -42,8 +41,8 @@ Bundle 'Conque-GDB'
 Bundle 'taglist.vim'
 Bundle 'CSApprox'
 Bundle 'a.vim'
-if iCanHazVundle == 0
-	echo "Installing Bundles, please ignore key map error messages"
+if exists('s:can_install_bundle') 
+	echo "Installing Bundles"
 	echo ""
 	:BundleInstall
 endif
