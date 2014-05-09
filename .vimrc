@@ -109,7 +109,7 @@ execute "set undodir=".s:dir
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set cst
 set csto=1
-set cscopeverbose  
+set nocsverb
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
@@ -141,9 +141,7 @@ function! AutoTagUpdate()
 	endif
 	if cscope_connection(1, 'cscope.out')
 		execute "!cscope -Rbkq"
-		set nocsverb
 		cs reset
-		set csverb
 	endif
 endfunction
 
