@@ -118,7 +118,7 @@ nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
-nmap <silent> <C-\>u :call AutoTagUpdate()<CR>
+nmap <silent> <C-\>u :call CsUpdate()<CR>
 
 if !cscope_connection()
 	if filereadable("GTAGS")	
@@ -134,7 +134,7 @@ if !cscope_connection()
 	endif
 endif
 
-function! AutoTagUpdate()
+fun! CsUpdate()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u > /dev/null 2>&1"
 	endif
@@ -142,40 +142,24 @@ function! AutoTagUpdate()
 		execute "!cscope -bkqR"
 		cs reset
 	endif
-endfunction
+endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoTypes
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType c,cpp call s:ft_cpp()
-au FileType python call s:ft_python()
-au FileType tex call s:ft_tex()
-au FileType c,cpp,objc vmap = :ClangFormat<CR>
+au FileType c,cpp set textwidth=0 expandtab
+au FileType python set textwidth=0 expandtab
+au FileType tex set textwidth=120 noexpandtab
+au FileType c,cpp,objc vmap <silent>= :ClangFormat<CR>
 
-function! s:ft_cpp()
-	"execute "set makeprg=make\\ -j3"
-	"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
-	set textwidth=0
-	set expandtab
-endfunction
-
-function! s:ft_python()
-	set textwidth=0
-	set expandtab
-endfunction
-
-function! s:ft_tex()
-	set textwidth=120
-	set noexpandtab
-endfunction
-
+"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoTab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "imap <TAB> <C-R>=AutoTab(0)<CR><C-R>=AutoSelect()<CR>
 "imap <S-TAB> <C-R>=AutoTab(1)<CR><C-R>=AutoSelect()<CR>
 "
-"function! AutoTab(force)
+"fun! AutoTab(force)
 "	if match(getline('.')[col('.')-2], '\t\|\s\|\b') == 0 || col('.') == 1 || &omnifunc == ""
 "		return "\<TAB>"
 "	else
@@ -185,15 +169,15 @@ endfunction
 "			return "\<c-x>\<c-o>\<c-p>"
 "		endif
 "	endif
-"endfunction
+"endf
 
-"function! AutoSelect()
+"fun! AutoSelect()
 "	if pumvisible()
 "		return "\<Down>"
 "	else
 "		return ""
 "	endif
-"endfunction
+"endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SudoWrite
@@ -205,6 +189,7 @@ command W silent execute "w !sudo > /dev/null tee %"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au VimEnter * call s:load_session()
 au VimLeave *.[ch],*.[ch]pp call s:save_session()
+
 fun! s:load_session()
 	if argc() > 0
 		return
@@ -213,10 +198,10 @@ fun! s:load_session()
 	silent! rviminfo .viminfo	
 endf
 
-function! s:save_session()
+fun! s:save_session()
 	mksession! .session
 	wviminfo! .viminfo
-endfunction
+endf
 
 "let s:session_loaded = 0
 "un! s:confirm_load_session()
@@ -233,7 +218,7 @@ endfunction
 "	endif
 "endf
 
-"function! s:confirm_save_session()
+"fun! s:confirm_save_session()
 "	if s:session_loaded == 1
 "		mksession! .session
 "		wviminfo! .viminfo
@@ -251,12 +236,12 @@ endfunction
 "		wviminfo! .viminfo
 "		return
 "	endif
-"endfunction
+"endf
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: Pyclewn
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"function! EnterDebugMode()
+"fun! EnterDebugMode()
 "	Pyclewn
 "	Cmapkeys
 "	nmap <C-P> :exe "Cprint " . expand("<cword>") <CR> 
@@ -264,9 +249,9 @@ endfunction
 "	nmap <C-F7> :Cshell setsid xterm -e inferior_tty.py &<CR>
 "	set nomodifiable
 "	1,$foldopen!
-"endfunction
+"endf
 
-"function! ExitDebugMode()
+"fun! ExitDebugMode()
 "	Cquit
 "	nbclose
 "	set modifiable
@@ -280,7 +265,7 @@ endfunction
 "	if (bufexists("(clewn)_dbgvar") > 0)
 "		bd (clewn)_dbgvar
 "	endif
-"endfunction
+"endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: CSApprox	
