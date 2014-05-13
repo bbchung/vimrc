@@ -298,15 +298,20 @@ nmap <silent> <F2> :Tlist<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_format#style_options = {
 			\ "BasedOnStyle" : "LLVM",
+			\ "Language" : "Cpp",
 			\ "PointerBindsToType" : "true",
 			\ "ColumnLimit" : 0,
 			\ "AccessModifierOffset" : -4,
 			\ "AllowShortIfStatementsOnASingleLine" : "false", 
+			\ "AllowShortLoopsOnASingleLine " : "false", 
+			\ "AllowShortFunctionsOnASingleLine " : "false",
+			\ "MaxEmptyLinesToKeep  " : 2,
 			\ "AlwaysBreakTemplateDeclarations" : "true", 
 			\ "Standard" : "C++11", 
 			\ "IndentWidth" : 4, 
 			\ "UseTab" : "Never", 
-			\ "BreakBeforeBraces" : "Allman" } 
+			\ "BreakBeforeBraces" : "Allman"
+			\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: vim-powerline 
