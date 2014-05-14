@@ -299,7 +299,7 @@ nmap <silent> <F2> :Tlist<CR>
 let g:clang_format#style_options = {
 			\ "BasedOnStyle" : "LLVM",
 			\ "Language" : "Cpp",
-			\ "PointerBindsToType" : "true",
+			\ "PointerBindsToType" : "false",
 			\ "ColumnLimit" : 0,
 			\ "AccessModifierOffset" : -4,
 			\ "AllowShortIfStatementsOnASingleLine" : "false", 
@@ -307,10 +307,10 @@ let g:clang_format#style_options = {
 			\ "AllowShortFunctionsOnASingleLine " : "false",
 			\ "MaxEmptyLinesToKeep  " : 2,
 			\ "AlwaysBreakTemplateDeclarations" : "true", 
-			\ "Standard" : "C++11", 
+			\ "Standard" : "Cpp03", 
 			\ "IndentWidth" : 4, 
 			\ "UseTab" : "Never", 
-			\ "BreakBeforeBraces" : "Allman"
+			\ "BreakBeforeBraces" : "Linux"
 			\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
