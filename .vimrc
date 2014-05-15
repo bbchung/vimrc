@@ -310,7 +310,8 @@ let g:clang_format#style_options = {
 			\ "Standard" : "Cpp03", 
 			\ "IndentWidth" : 4, 
 			\ "UseTab" : "Never", 
-			\ "BreakBeforeBraces" : "Linux"
+			\ "BreakBeforeBraces" : "Allman",
+			\ "IndentCaseLabels " : "true",
 			\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
