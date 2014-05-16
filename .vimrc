@@ -81,7 +81,8 @@ set ignorecase
 set smartcase
 set pumheight=12
 set nospell				" disable spell checking 
-set foldmethod=manual
+set foldmethod=syntax
+set foldlevelstart=20
 set switchbuf=usetab	"use opened buffer
 set mouse=a
 set ttymouse=xterm2
