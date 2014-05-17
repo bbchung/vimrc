@@ -138,10 +138,13 @@ endif
 fun! CsUpdate()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u > /dev/null 2>&1"
-	endif
-	if cscope_connection(1, 'cscope.out')
+	elseif cscope_connection(1, 'cscope.out')
 		execute "!cscope -bkqR"
 		cs reset
+	else
+		execute "!gtags"
+		set cscopeprg=gtags-cscope
+		cs add GTAGS
 	endif
 endf
 
