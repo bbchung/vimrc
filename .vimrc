@@ -39,7 +39,7 @@ Bundle 'jlanzarotta/bufexplorer'
 
 Bundle 'Conque-GDB'
 Bundle 'taglist.vim'
-Bundle 'CSApprox'
+"Bundle 'CSApprox'
 Bundle 'a.vim'
 if exists('s:can_install_bundle') 
 	echo "Installing Bundles"
@@ -60,6 +60,7 @@ endif
 
 colorscheme chaotic
 syntax on				" syntax highlighing
+set cursorline
 set conceallevel=0
 set concealcursor=nc
 set ls=2				" allways show status line
