@@ -308,15 +308,18 @@ let g:clang_format#style_options = {
 			\ "ColumnLimit" : 0,
 			\ "AccessModifierOffset" : -4,
 			\ "AllowShortIfStatementsOnASingleLine" : "false", 
-			\ "AllowShortLoopsOnASingleLine " : "false", 
-			\ "AllowShortFunctionsOnASingleLine " : "false",
-			\ "MaxEmptyLinesToKeep  " : 2,
+			\ "AllowShortLoopsOnASingleLine" : "false", 
+			\ "AllowShortFunctionsOnASingleLine" : "false",
+			\ "MaxEmptyLinesToKeep" : 2,
 			\ "AlwaysBreakTemplateDeclarations" : "true", 
 			\ "Standard" : "Cpp03", 
 			\ "IndentWidth" : 4, 
 			\ "UseTab" : "Never", 
 			\ "BreakBeforeBraces" : "Allman",
-			\ "IndentCaseLabels " : "true",
+			\ "IndentCaseLabels" : "true",
+			\ "BreakConstructorInitializersBeforeComma" : "true",
+			\ "AllowAllParametersOfDeclarationOnNextLine" : "false",
+			\ "BinPackParameters" : "false",
 			\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
