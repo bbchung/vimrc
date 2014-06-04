@@ -95,13 +95,16 @@ set ssop=buffers,curdir,folds,winsize,options,globals
 set tenc=utf8
 set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
-setl updatetime=1000
+setl updatetime=1200
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let @/ = 'a'
+"au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+"au CursorHold *.[ch],*.[ch]pp call s:sss()
 set hls
-au CursorHold * exe printf('match Search /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+au CursorHold * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UndoDir
