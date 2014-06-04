@@ -99,6 +99,7 @@ set ff=unix
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 set undofile
+setl updatetime=1200
 let s:dir=$HOME."/.vimundodir"
 if !isdirectory(s:dir)
 	call mkdir(s:dir, "p")
@@ -352,3 +353,14 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
+
+  let @/ = ''
+au VimEnter set hls
+    augroup auto_highlight
+au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>' | set hls
+    augroup end
+    setl updatetime=500
+nnoremap z/ :call AutoHighlightToggle()<Bar>set hls<CR>
+function! AutoHighlightToggle()
+endfunction
+
