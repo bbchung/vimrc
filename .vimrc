@@ -64,7 +64,6 @@ set cursorline
 set conceallevel=0
 set concealcursor=nc
 set ls=2				" allways show status line
-set hlsearch			" highlight searches
 set ruler				" show the cursor position all the time
 set number				" show line numbers
 set showcmd				" display incomplete commands
@@ -96,15 +95,30 @@ set ssop=buffers,curdir,folds,winsize,options,globals
 set tenc=utf8
 set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
+setl updatetime=1000
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AutoHighlight
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set hls
+au CursorHold * exe printf('match Search /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UndoDir
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set undofile
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-set undofile
-setl updatetime=1200
-let s:dir=$HOME."/.vimundodir"
-if !isdirectory(s:dir)
-	call mkdir(s:dir, "p")
-endif
-execute "set undodir=".s:dir
+
+au VimEnter * call s:InitUndoDir()
+
+fun! s:InitUndoDir()
+	let s:dir=$HOME."/.vimundodir"
+	if !isdirectory(s:dir)
+		call mkdir(s:dir, "p")
+	endif
+	execute "set undodir=".s:dir
+endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoTags
@@ -123,19 +137,23 @@ nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
 nmap <silent> <C-\>u :call CsUpdate()<CR>
 
-if !cscope_connection()
-	if filereadable("GTAGS")	
-		set cscopeprg=gtags-cscope
-		cs add GTAGS
-	endif
-endif
+au VimEnter *.[ch],*.[ch]pp call s:CsInit()
 
-if !cscope_connection()
-	if filereadable("cscope.out")
-		set cscopeprg=cscope
-		cs add cscope.out  
+fun! s:CsInit()
+	if !cscope_connection()
+		if filereadable("GTAGS")	
+			set cscopeprg=gtags-cscope
+			cs add GTAGS
+		endif
 	endif
-endif
+
+	if !cscope_connection()
+		if filereadable("cscope.out")
+			set cscopeprg=cscope
+			cs add cscope.out  
+		endif
+	endif
+endf
 
 fun! CsUpdate()
 	if cscope_connection(1, 'GTAGS')
@@ -353,14 +371,3 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
-
-  let @/ = ''
-au VimEnter set hls
-    augroup auto_highlight
-au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>' | set hls
-    augroup end
-    setl updatetime=500
-nnoremap z/ :call AutoHighlightToggle()<Bar>set hls<CR>
-function! AutoHighlightToggle()
-endfunction
-
