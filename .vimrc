@@ -110,7 +110,7 @@ set undofile
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
-au VimEnter * call s:InitUndoDir()
+au VimEnter *.[ch],*.[ch]pp call s:InitUndoDir()
 
 fun! s:InitUndoDir()
 	let s:dir=$HOME."/.vimundodir"
