@@ -105,6 +105,7 @@ setl updatetime=1200
 "au CursorHold *.[ch],*.[ch]pp call s:sss()
 set hls
 au CursorHold * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+au CursorMoved * match none
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UndoDir
