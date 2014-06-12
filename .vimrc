@@ -102,7 +102,7 @@ set updatetime=1200
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hls
 
-augroup Highlight
+augroup AutoHighlight
 	au!
 	au CursorHold *.[ch],*.[ch]pp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
 	au CursorMoved *.[ch],*.[ch]pp match none
@@ -207,7 +207,6 @@ augroup Project
 
 	au VimLeavePre * if s:in_project==1 | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
-
 augroup END
 
 fun! s:load_project()
