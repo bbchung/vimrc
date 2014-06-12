@@ -95,17 +95,19 @@ set ssop=buffers,curdir,folds,winsize,options,globals
 set tenc=utf8
 set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
-setl updatetime=1200
+set updatetime=1200
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let @/ = 'a'
-"au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-"au CursorHold *.[ch],*.[ch]pp call s:sss()
 set hls
-au CursorHold *.[ch],*.[ch]pp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-au CursorMoved *.[ch],*.[ch]pp match none
+
+augroup Highlight
+	au!
+	au CursorHold *.[ch],*.[ch]pp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+	au CursorMoved *.[ch],*.[ch]pp match none
+	"au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UndoDir
@@ -114,7 +116,10 @@ set undofile
 set undolevels=1000 "maximum number of changes that can be undone
 set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
-au VimEnter *.[ch],*.[ch]pp call s:InitUndoDir()
+augroup UndoDir
+	au!
+	au VimEnter * call s:InitUndoDir()
+augroup END
 
 fun! s:InitUndoDir()
 	let s:dir=$HOME."/.vimundodir"
@@ -131,26 +136,37 @@ set cst
 set csto=1
 set nocsverb
 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
-nmap <silent> <C-\>u :call CsUpdate()<CR>
+fun! s:map_for_tag()
+	silent! nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	silent! nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
+	silent! nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	silent! nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent> <C-\>u :call UpdateTags()<CR>
+endf
 
-au VimEnter *.[ch],*.[ch]pp call s:CsInit()
+fun! s:unmap_tag()
+	silent! unmap <C-\>s
+	silent! unmap <C-\>g
+	silent! unmap <C-\>c
+	silent! unmap <C-\>t
+	silent! unmap <C-\>e
+	silent! unmap <C-\>f
+	silent! unmap <C-\>i
+	silent! unmap <C-\>d
+	silent! unmap <C-\>u
+endf
 
-fun! s:CsInit()
+fun! s:InitTagsIfNoConn()
 	if !cscope_connection()
 		if filereadable("GTAGS")	
 			set cscopeprg=gtags-cscope
 			cs add GTAGS
 		endif
 	endif
-
 	if !cscope_connection()
 		if filereadable("cscope.out")
 			set cscopeprg=cscope
@@ -159,7 +175,7 @@ fun! s:CsInit()
 	endif
 endf
 
-fun! CsUpdate()
+fun! UpdateTags()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u > /dev/null 2>&1"
 	elseif cscope_connection(1, 'cscope.out')
@@ -173,14 +189,39 @@ fun! CsUpdate()
 endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AutoTypes
+" Project
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType c,cpp set textwidth=0 expandtab
-au FileType python set textwidth=0 expandtab
-au FileType tex set textwidth=120 noexpandtab
-au FileType c,cpp,objc vmap <silent>= :ClangFormat<CR>
+augroup Project
+	au!
+	au FileType * call s:unmap_tag()
+
+	au Filetype c,cpp,objc
+	            \ call s:InitTagsIfNoConn()  |
+				\ call s:map_for_tag() |
+	            \ set textwidth=0 expandtab |
+	            \ vmap <silent>= :ClangFormat<CR> |
+	            \ let s:in_project=1
+
+	au FileType python set textwidth=0 expandtab
+	au FileType tex set textwidth=120 noexpandtab
+
+	au VimLeavePre * if s:in_project==1 | call s:save_project() | endif
+	au VimEnter * if argc()== 0 | call s:load_project() | endif
+
+augroup END
+
+fun! s:load_project()
+	silent! source .session
+	silent! rviminfo .viminfo	
+endf
+
+fun! s:save_project()
+	mksession! .session
+	wviminfo! .viminfo
+endf
 
 "set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoTab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -210,26 +251,11 @@ au FileType c,cpp,objc vmap <silent>= :ClangFormat<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SudoWrite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command W silent execute "w !sudo > /dev/null tee %"
+command! W silent execute "w !sudo > /dev/null tee %"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoSession
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au VimEnter * call s:load_session()
-au VimLeave *.[ch],*.[ch]pp call s:save_session()
-
-fun! s:load_session()
-	if argc() > 0
-		return
-	endif
-	silent! source .session
-	silent! rviminfo .viminfo	
-endf
-
-fun! s:save_session()
-	mksession! .session
-	wviminfo! .viminfo
-endf
 
 "let s:session_loaded = 0
 "un! s:confirm_load_session()
