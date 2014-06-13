@@ -205,7 +205,7 @@ augroup Project
 	au FileType python set textwidth=0 expandtab
 	au FileType tex set textwidth=120 noexpandtab
 
-	au VimLeavePre * if s:in_project==1 | call s:save_project() | endif
+	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
 augroup END
 
