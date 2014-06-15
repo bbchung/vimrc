@@ -118,10 +118,10 @@ set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 augroup UndoDir
 	au!
-	au VimEnter * call s:InitUndoDir()
+	au VimEnter * call s:create_undo_folder_if_not_exist()
 augroup END
 
-fun! s:InitUndoDir()
+fun! s:create_undo_folder_if_not_exist()
 	let s:dir=$HOME."/.vimundodir"
 	if !isdirectory(s:dir)
 		call mkdir(s:dir, "p")
@@ -137,15 +137,15 @@ set csto=1
 set nocsverb
 
 fun! s:map_for_tag()
-	silent! nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
-	silent! nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	silent! nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <silent> <C-\>u :call UpdateTags()<CR>
+	silent! nmap <silent><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+	silent! nmap <silent><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
+	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent><silent> <C-\>u :call UpdateTags()<CR>
 endf
 
 fun! s:unmap_tag()
@@ -160,7 +160,7 @@ fun! s:unmap_tag()
 	silent! unmap <C-\>u
 endf
 
-fun! s:InitTagsIfNoConn()
+fun! s:init_tags_if_no_conn()
 	if !cscope_connection()
 		if filereadable("GTAGS")	
 			set cscopeprg=gtags-cscope
@@ -191,12 +191,20 @@ endf
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Project
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+fun! s:load_project()
+	silent! source .session
+	silent! rviminfo .viminfo	
+endf
+
+fun! s:save_project()
+	mksession! .session
+	wviminfo! .viminfo
+endf
+
 augroup Project
 	au!
-	au FileType * call s:unmap_tag()
-
 	au Filetype c,cpp,objc
-	            \ call s:InitTagsIfNoConn()  |
+	            \ call s:init_tags_if_no_conn()  |
 				\ call s:map_for_tag() |
 	            \ set textwidth=0 expandtab |
 	            \ vmap <silent>= :ClangFormat<CR> |
@@ -209,15 +217,6 @@ augroup Project
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
 augroup END
 
-fun! s:load_project()
-	silent! source .session
-	silent! rviminfo .viminfo	
-endf
-
-fun! s:save_project()
-	mksession! .session
-	wviminfo! .viminfo
-endf
 
 "set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
 
@@ -336,8 +335,8 @@ let Tlist_Show_One_File=1
 let Tlist_WinWidth=24
 "let Tlist_Auto_Open = 1
 "let Tlist_Display_Prototype=1
-nmap <silent> <F2> :Tlist<CR>
 "let Tlist_Use_Right_Window = 1
+nmap <silent> <F2> :Tlist<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: VIM-LaTeX	
