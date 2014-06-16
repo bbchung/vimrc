@@ -6,11 +6,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let vundle manage plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:vundle_path=expand('~/.vim/bundle/vundle')
-if !isdirectory (s:vundle_path)
+let s:vundle_path=expand('~/.vim/bundle')
+if !isdirectory(s:vundle_path."/vundle/.git")
 	echo "Installing Vundle.."
 	echo ""
-	silent !mkdir -p ~/.vim/bundle
+	call mkdir(s:vundle_path, 'p')
 	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 	let s:can_install_bundle=1
 endif
