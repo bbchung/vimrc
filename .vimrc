@@ -12,7 +12,7 @@ if !isdirectory (s:vundle_path)
 	echo ""
 	silent !mkdir -p ~/.vim/bundle
 	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-	let s:can_install_bundle
+	let s:can_install_bundle=1
 endif
 
 set nocompatible
