@@ -197,8 +197,8 @@ fun! s:load_project()
 endf
 
 fun! s:save_project()
-	mksession! .session
-	wviminfo! .viminfo
+	silent! mksession! .session
+	silent! wviminfo! .viminfo
 endf
 
 augroup Project
@@ -372,8 +372,9 @@ let g:clang_format#style_options = {
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: vim-powerline 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:Powerline_symbols = 'compatible'
-"let g:Powerline_colorscheme = 'solarized256'
+"let g:Powerline_symbols = 'compatible'
+"let g:Powerline_theme = 'solarized256'
+let g:Powerline_colorscheme = 'solarized256'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: YouCompleteMe  
