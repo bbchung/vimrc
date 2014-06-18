@@ -96,18 +96,27 @@ set tenc=utf8
 set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
 set updatetime=1200
+set hls
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set hls
+nmap <silent> <Leader>h :call ToggleAutoHighlight()<CR>
 
-augroup AutoHighlight
-	au!
-	au CursorHold *.[ch],*.[ch]pp exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-	au CursorMoved *.[ch],*.[ch]pp match none
-	"au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-augroup END
+fun! ToggleAutoHighlight()
+	if exists('s:auto_highlight_on') && s:auto_highlight_on==1
+		match none
+		au! AutoHighlight
+		let s:auto_highlight_on=0
+	else
+		augroup AutoHighlight
+			au CursorHold * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+			au CursorMoved * match none
+			"au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+		augroup END
+		let s:auto_highlight_on=1
+	endif
+endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UndoDir
@@ -215,6 +224,7 @@ augroup Project
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
+	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight() 
 augroup END
 
 
