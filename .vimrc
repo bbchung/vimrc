@@ -101,7 +101,7 @@ set hls
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <Leader>h :call ToggleAutoHighlight()<CR>
+nmap <silent> <F3> :call ToggleAutoHighlight()<CR>
 
 fun! ToggleAutoHighlight()
 	if exists('s:auto_highlight_on') && s:auto_highlight_on==1
