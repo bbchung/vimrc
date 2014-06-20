@@ -41,7 +41,7 @@ Bundle 'jlanzarotta/bufexplorer'
 "Bundle 'CSApprox'
 Bundle 'taglist.vim'
 Bundle 'a.vim'
-if exists('s:can_install_bundle') 
+if exists('s:can_install_bundle')
 	echo "Installing Bundles"
 	echo ""
 	:BundleInstall
@@ -53,7 +53,7 @@ filetype plugin indent on
 " General vim settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has("gui_running")
-	set guifont=Inconsolata\ 15		
+	set guifont=Inconsolata\ 15
 else
 	set t_Co=256
 endif
@@ -80,7 +80,7 @@ set modeline			" last lines in document sets vim mode
 set ignorecase
 set smartcase
 set pumheight=12
-set nospell				" disable spell checking 
+set nospell				" disable spell checking
 set foldmethod=syntax
 set foldlevelstart=20
 set switchbuf=usetab	"use opened buffer
@@ -147,13 +147,13 @@ set nocsverb
 
 fun! s:map_for_tag()
 	silent! nmap <silent><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <silent><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <silent><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <silent><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>  
-	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>  
+	silent! nmap <silent><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+	silent! nmap <silent><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+	silent! nmap <silent><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+	silent! nmap <silent><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>  
+	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 	silent! nmap <silent><silent> <C-\>u :call UpdateTags()<CR>
 endf
 
@@ -171,7 +171,7 @@ endf
 
 fun! s:init_tags_if_no_conn()
 	if !cscope_connection()
-		if filereadable("GTAGS")	
+		if filereadable("GTAGS")
 			set cscopeprg=gtags-cscope
 			cs add GTAGS
 		endif
@@ -179,7 +179,7 @@ fun! s:init_tags_if_no_conn()
 	if !cscope_connection()
 		if filereadable("cscope.out")
 			set cscopeprg=cscope
-			cs add cscope.out  
+			cs add cscope.out
 		endif
 	endif
 endf
@@ -202,7 +202,7 @@ endf
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 fun! s:load_project()
 	silent! source .session
-	silent! rviminfo .viminfo	
+	silent! rviminfo .viminfo
 endf
 
 fun! s:save_project()
@@ -213,18 +213,18 @@ endf
 augroup Project
 	au!
 	au Filetype c,cpp,objc
-	            \ call s:init_tags_if_no_conn()  |
+				\ call s:init_tags_if_no_conn()  |
 				\ call s:map_for_tag() |
-	            \ set textwidth=0 expandtab |
-	            \ vmap <silent>= :ClangFormat<CR> |
-	            \ let s:in_project=1
+				\ set textwidth=0 expandtab |
+				\ vmap <silent>= :ClangFormat<CR> |
+				\ let s:in_project=1
 
 	au FileType python set textwidth=0 expandtab
 	au FileType tex set textwidth=120 noexpandtab
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
-	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight() 
+	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight()
 augroup END
 
 
@@ -274,7 +274,7 @@ command! W silent execute "w !sudo > /dev/null tee %"
 "	let choice = confirm("session file exists.", "&Load\n&Ignore", 1)
 "	if choice == 1
 "		silent! source .session
-"		silent! rviminfo .viminfo	
+"		silent! rviminfo .viminfo
 "		let s:session_loaded = 1
 "	endif
 "	endif
@@ -306,8 +306,8 @@ command! W silent execute "w !sudo > /dev/null tee %"
 "fun! EnterDebugMode()
 "	Pyclewn
 "	Cmapkeys
-"	nmap <C-P> :exe "Cprint " . expand("<cword>") <CR> 
-"	"nmap <C-D> :silent! exe "Cdbgvar " . expand("<cword>") <CR> 
+"	nmap <C-P> :exe "Cprint " . expand("<cword>") <CR>
+"	"nmap <C-D> :silent! exe "Cdbgvar " . expand("<cword>") <CR>
 "	nmap <C-F7> :Cshell setsid xterm -e inferior_tty.py &<CR>
 "	set nomodifiable
 "	1,$foldopen!
@@ -330,7 +330,7 @@ command! W silent execute "w !sudo > /dev/null tee %"
 "endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: CSApprox	
+" Plugin: CSApprox
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "if !has("gui_running")
 "	let g:CSApprox_loaded=0
@@ -338,7 +338,7 @@ command! W silent execute "w !sudo > /dev/null tee %"
 "endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: TagList	
+" Plugin: TagList
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
@@ -349,14 +349,14 @@ let Tlist_WinWidth=24
 nmap <silent> <F2> :Tlist<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: VIM-LaTeX	
+" Plugin: VIM-LaTeX
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:tex_flavor='latex'
 "let g:Tex_DefaultTargetFormat='pdf'
 "let Tex_CompileRule_pdf='xelatex -interaction=nonstopmode $*'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: vim-clang-format	
+" Plugin: vim-clang-format
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_format#style_options = {
 			\ "BasedOnStyle" : "LLVM",
@@ -364,14 +364,14 @@ let g:clang_format#style_options = {
 			\ "PointerBindsToType" : "false",
 			\ "ColumnLimit" : 0,
 			\ "AccessModifierOffset" : -4,
-			\ "AllowShortIfStatementsOnASingleLine" : "false", 
-			\ "AllowShortLoopsOnASingleLine" : "false", 
+			\ "AllowShortIfStatementsOnASingleLine" : "false",
+			\ "AllowShortLoopsOnASingleLine" : "false",
 			\ "AllowShortFunctionsOnASingleLine" : "false",
 			\ "MaxEmptyLinesToKeep" : 2,
-			\ "AlwaysBreakTemplateDeclarations" : "true", 
-			\ "Standard" : "Cpp03", 
-			\ "IndentWidth" : 4, 
-			\ "UseTab" : "Never", 
+			\ "AlwaysBreakTemplateDeclarations" : "true",
+			\ "Standard" : "Cpp03",
+			\ "IndentWidth" : 4,
+			\ "UseTab" : "Never",
 			\ "BreakBeforeBraces" : "Allman",
 			\ "IndentCaseLabels" : "true",
 			\ "BreakConstructorInitializersBeforeComma" : "true",
@@ -380,14 +380,14 @@ let g:clang_format#style_options = {
 			\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: vim-powerline 
+" Plugin: vim-powerline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:Powerline_symbols = 'compatible'
 "let g:Powerline_theme = 'solarized256'
 let g:Powerline_colorscheme = 'solarized256'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: YouCompleteMe  
+" Plugin: YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_confirm_extra_conf=0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
@@ -395,18 +395,18 @@ let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
 nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: syntastic  
+" Plugin: syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_enable_signs=0
 let g:syntastic_loc_list_height=5
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: UltiSnips  
+" Plugin: UltiSnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: NERDTree  
+" Plugin: NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
