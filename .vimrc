@@ -170,7 +170,7 @@ fun! s:unmap_tag()
 	silent! unmap <C-\>u
 endf
 
-fun! s:init_tags_if_no_conn()
+fun! s:add_tags_if_no_conn()
 	if !cscope_connection()
 		if filereadable("GTAGS")
 			set cscopeprg=gtags-cscope
@@ -185,6 +185,11 @@ fun! s:init_tags_if_no_conn()
 	endif
 endf
 
+fun! s:init_tags()
+	call s:add_tags_if_no_conn()
+	UpdateTypesFile
+endf
+
 fun! UpdateTags()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u > /dev/null 2>&1"
@@ -196,6 +201,8 @@ fun! UpdateTags()
 		set cscopeprg=gtags-cscope
 		cs add GTAGS
 	endif
+
+	UpdateTypesFile
 endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -214,7 +221,7 @@ endf
 augroup Project
 	au!
 	au Filetype c,cpp,objc
-				\ call s:init_tags_if_no_conn()  |
+				\ call s:init_tags() |
 				\ call s:map_for_tag() |
 				\ set textwidth=0 expandtab |
 				\ vmap <silent>= :ClangFormat<CR> |
