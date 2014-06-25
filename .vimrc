@@ -360,7 +360,7 @@ nmap <silent> <F2> :Tlist<CR>
 " Plugin: vim-clang-format
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:clang_format#style_options = {
-			\ "BasedOnStyle" : "LLVM",
+    \ "BasedOnStyle" : "LLVM",
 			\ "Language" : "Cpp",
 			\ "PointerBindsToType" : "false",
 			\ "ColumnLimit" : 0,
@@ -411,3 +411,12 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: TagHighlight
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+hi link Class Type 
+hi link DefinedName Identifier
+hi link EnumerationValue Identifier
+hi link EnumeratorName Type
+hi link Member Normal
