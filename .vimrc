@@ -40,6 +40,7 @@ Bundle 'jlanzarotta/bufexplorer'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'taglist.vim'
+Bundle 'TagHighlight'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
 	echo "Installing Bundles"
