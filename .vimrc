@@ -155,7 +155,7 @@ fun! s:map_for_tag()
 	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><silent> <C-\>u :call UpdateTags()<CR>
+	silent! nmap <silent><silent> <C-\>u :call UpdateTags()<CR>:UpdateTypesFile<CR>
 endf
 
 fun! s:unmap_tag()
@@ -185,11 +185,6 @@ fun! s:add_tags_if_no_conn()
 	endif
 endf
 
-fun! s:init_tags()
-	call s:add_tags_if_no_conn()
-	UpdateTypesFile
-endf
-
 fun! UpdateTags()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u > /dev/null 2>&1"
@@ -201,8 +196,6 @@ fun! UpdateTags()
 		set cscopeprg=gtags-cscope
 		cs add GTAGS
 	endif
-
-	UpdateTypesFile
 endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -221,7 +214,7 @@ endf
 augroup Project
 	au!
 	au Filetype c,cpp,objc
-				\ call s:init_tags() |
+				\ call s:add_tags_if_no_conn() |
 				\ call s:map_for_tag() |
 				\ set textwidth=0 expandtab |
 				\ vmap <silent>= :ClangFormat<CR> |
@@ -232,7 +225,7 @@ augroup Project
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
-	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight()
+	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight() | UpdateTypesFile
 augroup END
 
 
