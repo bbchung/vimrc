@@ -21,7 +21,6 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
-Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rhysd/vim-clang-format'
@@ -44,6 +43,7 @@ Bundle 'xolox/vim-misc'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'taglist.vim'
+"Bundle 'TagHighlight'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
 	echo "Installing Bundles"
