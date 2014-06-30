@@ -36,11 +36,14 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jlanzarotta/bufexplorer'
+Bundle 'xolox/vim-easytags'
+Bundle 'xolox/vim-misc'
+
+
 
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'taglist.vim'
-Bundle 'TagHighlight'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
 	echo "Installing Bundles"
@@ -155,7 +158,7 @@ fun! s:map_for_tag()
 	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><silent> <C-\>u :call UpdateTags()<CR>:UpdateTypesFile<CR>
+	silent! nmap <silent><silent> <C-\>u :call UpdateCscope()<CR>:UpdateTypesFile<CR>
 endf
 
 fun! s:unmap_tag()
@@ -185,7 +188,7 @@ fun! s:add_tags_if_no_conn()
 	endif
 endf
 
-fun! UpdateTags()
+fun! UpdateCscope()
 	if cscope_connection(1, 'GTAGS')
 		execute "!global -u > /dev/null 2>&1"
 	elseif cscope_connection(1, 'cscope.out')
@@ -225,7 +228,7 @@ augroup Project
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
-	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight() | UpdateTypesFile
+	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight() | UpdateTags
 augroup END
 
 
@@ -413,10 +416,7 @@ let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: TagHighlight
+" Plugin: easytags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi link Class Normal 
-hi link DefinedName Identifier
-hi link EnumerationValue Identifier
-hi link EnumeratorName Normal
-hi link Member Normal
+let g:easytags_events = ['BufWritePost']
+
