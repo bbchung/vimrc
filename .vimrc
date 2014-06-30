@@ -415,8 +415,8 @@ nmap <silent> <F4> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: TagHighlight
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi link Class Type 
+hi link Class Normal 
 hi link DefinedName Identifier
 hi link EnumerationValue Identifier
-hi link EnumeratorName Type
+hi link EnumeratorName Normal
 hi link Member Normal
