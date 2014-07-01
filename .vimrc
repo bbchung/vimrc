@@ -158,7 +158,7 @@ fun! s:map_for_tag()
 	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><silent> <C-\>u :call UpdateCscope()<CR>:UpdateTypesFile<CR>
+	silent! nmap <silent><silent> <C-\>u :call UpdateCscope()<CR>
 endf
 
 fun! s:unmap_tag()
@@ -228,7 +228,7 @@ augroup Project
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
-	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight() | UpdateTags
+	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight()
 augroup END
 
 
@@ -418,5 +418,6 @@ nmap <silent> <F4> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: easytags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:easytags_events = ['BufWritePost']
+let g:easytags_events = ['VimEnter']
+let g:easytags_updatetime_warn=0
 
