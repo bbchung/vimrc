@@ -418,6 +418,7 @@ nmap <silent> <F4> :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: easytags
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:easytags_events = ['VimEnter', 'BufWritePost']
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
 let g:easytags_updatetime_warn=0
-hi link cTypeTag cppStructure
+let g:easytags_dynamic_files=2
+hi link cTypeTag Function
