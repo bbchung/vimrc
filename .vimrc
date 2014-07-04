@@ -35,8 +35,8 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jlanzarotta/bufexplorer'
-Bundle 'xolox/vim-easytags'
-Bundle 'xolox/vim-misc'
+"Bundle 'xolox/vim-easytags'
+"Bundle 'xolox/vim-misc'
 
 
 
@@ -414,11 +414,3 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: easytags
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:easytags_events = ['BufReadPost', 'BufWritePost']
-let g:easytags_updatetime_warn=0
-let g:easytags_dynamic_files=2
-hi link cTypeTag Function
