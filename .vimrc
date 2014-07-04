@@ -158,7 +158,6 @@ fun! s:map_for_tag()
 	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><silent> <C-\>u :call UpdateCscope()<CR>
 endf
 
 fun! s:unmap_tag()
@@ -223,6 +222,7 @@ augroup Project
 				\ vmap <silent>= :ClangFormat<CR> |
 				\ let s:in_project=1
 
+	au BufWritePost *.[ch],*.[ch]pp silent! call UpdateCscope()
 	au FileType python set textwidth=0 expandtab
 	au FileType tex set textwidth=120 noexpandtab
 
