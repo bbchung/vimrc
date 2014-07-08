@@ -22,6 +22,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'bbchung/chaotic'
+Bundle 'bbchung/vim-clang-highlighting'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
@@ -101,6 +102,7 @@ set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
 set updatetime=1200
 set hls
+set nocursorline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AutoHighlight
