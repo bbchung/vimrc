@@ -212,7 +212,6 @@ augroup Project
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
-	au VimEnter *.[ch],*.[ch]pp call ToggleAutoHighlight()
 augroup END
 
 
