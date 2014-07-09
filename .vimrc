@@ -104,25 +104,6 @@ set updatetime=1200
 set hls
 set nocursorline
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AutoHighlight
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <F3> :call ToggleAutoHighlight()<CR>
-
-fun! ToggleAutoHighlight()
-	if exists('s:auto_highlight_on') && s:auto_highlight_on==1
-		match none
-		au! AutoHighlight
-		let s:auto_highlight_on=0
-	else
-		augroup AutoHighlight
-			au CursorHold * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-			au CursorMoved * match none
-			"au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-		augroup END
-		let s:auto_highlight_on=1
-	endif
-endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UndoDir
@@ -226,6 +207,7 @@ augroup Project
 
 	au BufWritePost *.[ch],*.[ch]pp silent! call UpdateCscope()
 	au FileType python set textwidth=0 expandtab
+	au FileType vim set textwidth=0 expandtab
 	au FileType tex set textwidth=120 noexpandtab
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
