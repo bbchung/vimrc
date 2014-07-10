@@ -22,7 +22,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'bbchung/chaotic'
-Bundle 'bbchung/vim-clang-highlighting'
+Bundle 'bbchung/clighter'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
