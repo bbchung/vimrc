@@ -23,6 +23,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'bbchung/chaotic'
 Bundle 'bbchung/clighter'
+Bundle 'bbchung/gasynctags'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
@@ -126,64 +127,6 @@ fun! s:create_undo_folder_if_not_exist()
 endf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AutoTags
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set cst
-set csto=1
-set nocsverb
-
-fun! s:map_for_tag()
-	silent! nmap <silent><C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-	silent! nmap <silent><C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-	silent! nmap <silent><C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	silent! nmap <silent><C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-endf
-
-fun! s:unmap_tag()
-	silent! unmap <C-\>s
-	silent! unmap <C-\>g
-	silent! unmap <C-\>c
-	silent! unmap <C-\>t
-	silent! unmap <C-\>e
-	silent! unmap <C-\>f
-	silent! unmap <C-\>i
-	silent! unmap <C-\>d
-	silent! unmap <C-\>u
-endf
-
-fun! s:add_tags_if_no_conn()
-	if !cscope_connection()
-		if filereadable("GTAGS")
-			set cscopeprg=gtags-cscope
-			cs add GTAGS
-		endif
-	endif
-	if !cscope_connection()
-		if filereadable("cscope.out")
-			set cscopeprg=cscope
-			cs add cscope.out
-		endif
-	endif
-endf
-
-fun! UpdateCscope()
-	if cscope_connection(1, 'GTAGS')
-		execute "!global -u > /dev/null 2>&1"
-	elseif cscope_connection(1, 'cscope.out')
-		execute "!cscope -bkqR"
-		cs reset
-	else
-		execute "!gtags"
-		set cscopeprg=gtags-cscope
-		cs add GTAGS
-	endif
-endf
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Project
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 fun! s:load_project()
@@ -199,13 +142,10 @@ endf
 augroup Project
 	au!
 	au Filetype c,cpp,objc
-				\ call s:add_tags_if_no_conn() |
-				\ call s:map_for_tag() |
 				\ set textwidth=0 expandtab |
 				\ vmap <silent>= :ClangFormat<CR> |
 				\ let s:in_project=1
 
-	au BufWritePost *.[ch],*.[ch]pp silent! call UpdateCscope()
 	au FileType python set textwidth=0 expandtab
 	au FileType vim set textwidth=0 expandtab
 	au FileType tex set textwidth=120 noexpandtab
