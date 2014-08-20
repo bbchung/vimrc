@@ -66,7 +66,7 @@ endif
 
 colorscheme chaotic
 syntax on				" syntax highlighing
-set cursorline
+set nocursorline
 set conceallevel=0
 set concealcursor=nc
 set ls=2				" allways show status line
@@ -103,7 +103,6 @@ set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
 set updatetime=1200
 set hls
-set nocursorline
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -285,6 +284,7 @@ nmap <silent> <F2> :Tlist<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin: vim-clang-format
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:clang_format#command = "clang-format-3.5"
 let g:clang_format#style_options = {
     \ "BasedOnStyle" : "LLVM",
 			\ "Language" : "Cpp",
@@ -337,3 +337,5 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
+
+nmap <silent> <Leader>r :call clighter#Rename()<CR>
