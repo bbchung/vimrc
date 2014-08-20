@@ -66,6 +66,8 @@ endif
 
 colorscheme chaotic
 syntax on				" syntax highlighing
+set term=xterm-256color
+set t_ZH=[3m
 set nocursorline
 set conceallevel=0
 set concealcursor=nc
