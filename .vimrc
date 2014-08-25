@@ -110,22 +110,12 @@ set hls
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UndoDir
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let s:dir=$HOME."/.vim/undo"
+if !isdirectory(s:dir)
+    call mkdir(s:dir, "p")
+endif
 set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-
-augroup UndoDir
-	au!
-	au VimEnter * call s:create_undo_folder_if_not_exist()
-augroup END
-
-fun! s:create_undo_folder_if_not_exist()
-	let s:dir=$HOME."/.vimundodir"
-	if !isdirectory(s:dir)
-		call mkdir(s:dir, "p")
-	endif
-	execute "set undodir=".s:dir
-endf
+execute "set undodir=".s:dir
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Project
