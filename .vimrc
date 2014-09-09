@@ -44,6 +44,7 @@ Bundle 'jlanzarotta/bufexplorer'
 
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
+Bundle 'gtags.vim'
 Bundle 'taglist.vim'
 "Bundle 'TagHighlight'
 Bundle 'a.vim'
@@ -330,4 +331,14 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: Clighter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: gtags.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+silent! nmap <silent><C-\>s :GtagsCursor<CR>
+silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
+silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
