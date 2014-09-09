@@ -1,6 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
-" Last modify at 2014-05-09
+" Last modify at 2014-09-09
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -29,7 +29,6 @@ Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-"Bundle 'tomtom/tcomment_vim'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/MatchTagAlways'
@@ -37,8 +36,6 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jlanzarotta/bufexplorer'
-"Bundle 'xolox/vim-easytags'
-"Bundle 'xolox/vim-misc'
 
 
 
@@ -46,7 +43,6 @@ Bundle 'jlanzarotta/bufexplorer'
 "Bundle 'CSApprox'
 Bundle 'gtags.vim'
 Bundle 'taglist.vim'
-"Bundle 'TagHighlight'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
 	echo "Installing Bundles"
