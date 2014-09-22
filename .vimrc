@@ -1,8 +1,6 @@
-" vim:tw=78:ts=8:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
-" Last modify at 2014-09-09
+" Last modify at 2014-09-22
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " let vundle manage plugins {
@@ -19,7 +17,7 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 Bundle 'gmarik/vundle'
 Bundle 'bbchung/chaotic'
 Bundle 'bbchung/clighter'
@@ -47,6 +45,7 @@ if exists('s:can_install_bundle')
 	:BundleInstall
 endif
 
+call vundle#end()
 filetype plugin indent on
 " }
 
@@ -60,6 +59,11 @@ endif
 colorscheme chaotic
 syntax on				" syntax highlighing
 set term=xterm-256color
+set ttyfast				" smoother changes
+set title				" show title in console title bar
+set novisualbell		" turn off visual bell
+set mouse=a
+set ttymouse=xterm2
 set t_ZH=[3m
 set nocursorline
 set conceallevel=0
@@ -68,24 +72,19 @@ set ls=2				" allways show status line
 set ruler				" show the cursor position all the time
 set number				" show line numbers
 set showcmd				" display incomplete commands
-set title				" show title in console title bar
-set ttyfast				" smoother changes
-set previewheight=4
-set novisualbell		" turn off visual bell
 set tabstop=4			" numbers of spaces of tab character
+set nowrap
 set shiftwidth=4		" numbers of spaces to (auto)indent
 set scrolloff=3			" keep 3 lines when scrolling
 set incsearch			" do incremental searching
 set nobackup			" do not keep a backup file
-set modeline			" last lines in document sets vim mode
+set modeline			" document sets vim mode
 set ignorecase
 set smartcase
 set pumheight=12
+set previewheight=4
 set nospell				" disable spell checking
 set foldlevelstart=20
-set switchbuf=usetab	"use opened buffer
-set mouse=a
-set ttymouse=xterm2
 set tabpagemax=100
 set wildmode=list:longest,full
 set cot=longest,menuone
@@ -102,11 +101,10 @@ if !isdirectory(s:dir)
 endif
 set undofile
 execute "set undodir=".s:dir
+command! W silent execute "w !sudo > /dev/null tee %"
 " }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Project
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Project {
 fun! s:load_project()
 	silent! source .session
 	silent! rviminfo .viminfo
@@ -119,150 +117,32 @@ endf
 
 augroup Project
 	au!
-	au Filetype c,cpp,objc
-				\ set textwidth=0 expandtab si foldmethod=syntax|
+	au Filetype c,cpp,objc set tw=0 et fdm=syntax |
 				\ vmap <silent>= :ClangFormat<CR> |
 				\ let s:in_project=1
+				"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
 
-	au FileType python set textwidth=0 expandtab
-	au FileType vim set textwidth=0 expandtab
-	au FileType tex set textwidth=120 noexpandtab
+	au FileType python set tw=0 et
+	au FileType vim set tw=0 et
+	au FileType tex set tw=120 noet
+	au FileType help set tw=78 noet
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
 augroup END
+" }
 
-
-"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AutoTab
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"imap <TAB> <C-R>=AutoTab(0)<CR><C-R>=AutoSelect()<CR>
-"imap <S-TAB> <C-R>=AutoTab(1)<CR><C-R>=AutoSelect()<CR>
-"
-"fun! AutoTab(force)
-"	if match(getline('.')[col('.')-2], '\t\|\s\|\b') == 0 || col('.') == 1 || &omnifunc == ""
-"		return "\<TAB>"
-"	else
-"		if pumvisible() && a:force == 0
-"			return ""
-"		else
-"			return "\<c-x>\<c-o>\<c-p>"
-"		endif
-"	endif
-"endf
-
-"fun! AutoSelect()
-"	if pumvisible()
-"		return "\<Down>"
-"	else
-"		return ""
-"	endif
-"endf
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SudoWrite
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! W silent execute "w !sudo > /dev/null tee %"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AutoSession
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"let s:session_loaded = 0
-"un! s:confirm_load_session()
-"if argc() > 0
-"	return
-"endif
-"if filereadable('.session')
-"	let choice = confirm("session file exists.", "&Load\n&Ignore", 1)
-"	if choice == 1
-"		silent! source .session
-"		silent! rviminfo .viminfo
-"		let s:session_loaded = 1
-"	endif
-"	endif
-"endf
-
-"fun! s:confirm_save_session()
-"	if s:session_loaded == 1
-"		mksession! .session
-"		wviminfo! .viminfo
-"		return
-"	endif
-"
-"	let choice = 0
-"	if !filereadable('.session')
-"		let choice = confirm("create new session?", "&Yes\n&No", 2)
-"	else
-"		let choice = confirm("overwrite session?", "&Yes\n&No", 2)
-"	endif
-"	if choice == 1
-"		mksession! .session
-"		wviminfo! .viminfo
-"		return
-"	endif
-"endf
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: Pyclewn
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"fun! EnterDebugMode()
-"	Pyclewn
-"	Cmapkeys
-"	nmap <C-P> :exe "Cprint " . expand("<cword>") <CR>
-"	"nmap <C-D> :silent! exe "Cdbgvar " . expand("<cword>") <CR>
-"	nmap <C-F7> :Cshell setsid xterm -e inferior_tty.py &<CR>
-"	set nomodifiable
-"	1,$foldopen!
-"endf
-
-"fun! ExitDebugMode()
-"	Cquit
-"	nbclose
-"	set modifiable
-"	nunmap <C-F7>
-"	nunmap <C-P>
-"	Cunmapkeys
-"	"silent! nunmap <C-D>
-"	if (bufexists("(clewn)_console") > 0)
-"		bd (clewn)_console
-"	endif
-"	if (bufexists("(clewn)_dbgvar") > 0)
-"		bd (clewn)_dbgvar
-"	endif
-"endf
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: CSApprox
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"if !has("gui_running")
-"	let g:CSApprox_loaded=0
-"	let g:CSApprox_verbose_level=0
-"endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: TagList
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: TagList {
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=24
+nmap <silent> <F2> :Tlist<CR>
 "let Tlist_Auto_Open = 1
 "let Tlist_Display_Prototype=1
 "let Tlist_Use_Right_Window = 1
-nmap <silent> <F2> :Tlist<CR>
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: VIM-LaTeX
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:tex_flavor='latex'
-"let g:Tex_DefaultTargetFormat='pdf'
-"let Tex_CompileRule_pdf='xelatex -interaction=nonstopmode $*'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: vim-clang-format
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: vim-clang-format {
 let g:clang_format#command = "clang-format-3.5"
 let g:clang_format#style_options = {
     \ "BasedOnStyle" : "LLVM",
@@ -284,48 +164,43 @@ let g:clang_format#style_options = {
 			\ "AllowAllParametersOfDeclarationOnNextLine" : "false",
 			\ "BinPackParameters" : "false",
 			\}
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: vim-powerline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: vim-powerline {
+let g:Powerline_colorscheme = 'solarized256'
 "let g:Powerline_symbols = 'compatible'
 "let g:Powerline_theme = 'solarized256'
-let g:Powerline_colorscheme = 'solarized256'
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: YouCompleteMe {
 let g:ycm_confirm_extra_conf=0
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 nmap <silent> <C-]> :YcmCompleter GoTo<CR>
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: syntastic {
 let g:syntastic_enable_signs=0
 let g:syntastic_loc_list_height=5
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: UltiSnips
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: UltiSnips {
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: NERDTree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: NERDTree {
 let g:NERDTreeWinPos = 'right'
 nmap <silent> <F4> :NERDTreeToggle<CR>
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: Clighter
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: Clighter {
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin: gtags.vim
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin: gtags.vim {
 silent! nmap <silent><C-\>s :GtagsCursor<CR>
 silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
+" }
 
+" vim:tw=78:ts=8:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
