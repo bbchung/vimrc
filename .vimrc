@@ -1,11 +1,11 @@
+" vim:tw=78:ts=8:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
 " Last modify at 2014-09-09
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let vundle manage plugins
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
 if !isdirectory(s:vundle_path."/vundle/.git")
 	echo "Installing Vundle.."
@@ -36,9 +36,6 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jlanzarotta/bufexplorer'
-
-
-
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'gtags.vim'
@@ -51,10 +48,9 @@ if exists('s:can_install_bundle')
 endif
 
 filetype plugin indent on
+" }
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General vim settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General vim settings {
 if has("gui_running")
 	set guifont=Inconsolata\ 15
 else
@@ -86,14 +82,12 @@ set ignorecase
 set smartcase
 set pumheight=12
 set nospell				" disable spell checking
-set foldmethod=syntax
 set foldlevelstart=20
 set switchbuf=usetab	"use opened buffer
 set mouse=a
 set ttymouse=xterm2
 set tabpagemax=100
 set wildmode=list:longest,full
-set si					" syntax indent, like autoindent but consider some syntax
 set cot=longest,menuone
 set grepprg=grep\ -nH\ $*
 set ssop=buffers,curdir,folds,winsize,options,globals
@@ -102,17 +96,13 @@ set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
 set updatetime=1200
 set hls
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UndoDir
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:dir=$HOME."/.vim/undo"
 if !isdirectory(s:dir)
     call mkdir(s:dir, "p")
 endif
 set undofile
 execute "set undodir=".s:dir
+" }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Project
@@ -130,7 +120,7 @@ endf
 augroup Project
 	au!
 	au Filetype c,cpp,objc
-				\ set textwidth=0 expandtab |
+				\ set textwidth=0 expandtab si foldmethod=syntax|
 				\ vmap <silent>= :ClangFormat<CR> |
 				\ let s:in_project=1
 
@@ -338,3 +328,4 @@ nmap <silent> <Leader>r :call clighter#Rename()<CR>
 silent! nmap <silent><C-\>s :GtagsCursor<CR>
 silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
+
