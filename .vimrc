@@ -34,10 +34,10 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jlanzarotta/bufexplorer'
+Bundle 'majutsushi/tagbar'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'gtags.vim'
-Bundle 'taglist.vim'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
 	echo "Installing Bundles"
@@ -132,14 +132,10 @@ augroup Project
 augroup END
 " }
 
-" Plugin: TagList {
-let Tlist_Exit_OnlyWindow=1
-let Tlist_Show_One_File=1
-let Tlist_WinWidth=24
-nmap <silent> <F2> :Tlist<CR>
-"let Tlist_Auto_Open = 1
-"let Tlist_Display_Prototype=1
-"let Tlist_Use_Right_Window = 1
+" Plugin: Tagbar {
+let g:tagbar_left = 1
+let g:tagbar_width = 28
+nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
