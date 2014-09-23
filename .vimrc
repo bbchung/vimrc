@@ -165,11 +165,6 @@ let g:clang_format#style_options = {
 
 " Plugin: airline {
 let g:airline_theme = 'powerlineish'
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = '⎇'
 " }
 
 " Plugin: YouCompleteMe {
