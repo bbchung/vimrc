@@ -27,7 +27,8 @@ Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/powerline'
+Bundle 'bling/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'Raimondi/delimitMate'
@@ -38,6 +39,7 @@ Bundle 'majutsushi/tagbar'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'gtags.vim'
+"Bundle 'taglist.vim'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
 	echo "Installing Bundles"
@@ -162,10 +164,8 @@ let g:clang_format#style_options = {
 			\}
 " }
 
-" Plugin: vim-powerline {
-let g:Powerline_colorscheme = 'solarized256'
-"let g:Powerline_symbols = 'compatible'
-"let g:Powerline_theme = 'solarized256'
+" Plugin: airline {
+let g:airline_theme = 'powerlineish'
 " }
 
 " Plugin: YouCompleteMe {
