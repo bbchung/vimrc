@@ -95,7 +95,7 @@ set ssop=buffers,curdir,folds,winsize,options,globals
 set tenc=utf8
 set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
-set updatetime=1200
+set updatetime=700
 set hls
 let s:dir=$HOME."/.vim/undo"
 if !isdirectory(s:dir)
