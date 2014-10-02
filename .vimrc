@@ -27,8 +27,8 @@ Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-"Bundle 'Lokaltog/powerline'
-Bundle 'bling/vim-airline'
+Bundle 'Lokaltog/vim-powerline'
+"Bundle 'bling/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
@@ -161,10 +161,6 @@ let g:clang_format#style_options = {
 			\ "AllowAllParametersOfDeclarationOnNextLine" : "false",
 			\ "BinPackParameters" : "false",
 			\}
-" }
-
-" Plugin: airline {
-let g:airline_theme = 'powerlineish'
 " }
 
 " Plugin: YouCompleteMe {
