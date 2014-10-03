@@ -19,7 +19,6 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 Bundle 'gmarik/vundle'
-Bundle 'bbchung/vimrc'
 Bundle 'bbchung/chaotic'
 Bundle 'bbchung/clighter'
 Bundle 'bbchung/gasynctags'
