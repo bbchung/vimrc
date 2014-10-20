@@ -2,7 +2,6 @@
 " bbchung vimrc
 " Last modify at 2014-09-22
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
 if !isdirectory(s:vundle_path."/vundle/.git")
@@ -119,7 +118,6 @@ endf
 augroup Project
 	au!
 	au Filetype c,cpp,objc set tw=0 et fdm=syntax |
-				\ vmap <silent>= :ClangFormat<CR> |
 				\ let s:in_project=1
 				"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
 
@@ -140,6 +138,7 @@ nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
+let g:clang_format#auto_formatexpr=1
 let g:clang_format#command = "clang-format-3.5"
 let g:clang_format#style_options = {
     \ "BasedOnStyle" : "LLVM",
