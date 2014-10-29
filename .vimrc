@@ -128,6 +128,7 @@ augroup Project
 
 	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
 	au VimEnter * if argc()== 0 | call s:load_project() | endif
+	au BufRead,BufNewFile *.asm set filetype=nasm
 augroup END
 " }
 
@@ -164,7 +165,6 @@ let g:clang_format#style_options = {
 
 " Plugin: YouCompleteMe {
 let g:ycm_confirm_extra_conf=0
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
 nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 " }
