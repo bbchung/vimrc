@@ -97,7 +97,7 @@ set ff=unix
 set updatetime=700
 set hls
 set undofile
- 
+
 let &undodir=$HOME."/.vim/undo"
 if !isdirectory(&undodir)
     call mkdir(&undodir, "p")
@@ -119,7 +119,7 @@ fun! s:source_session()
 	endif
 
     if argc() == 0 && filereadable(".session")
-        echohl WarningMsg |
+        echohl MoreMsg |
                     \ echomsg "Session Loaded" |
                     \ echohl None
 		silent! source .session
