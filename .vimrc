@@ -108,22 +108,22 @@ command! W silent execute "w !sudo > /dev/null tee %"
 
 " AutoSession {
 fun! s:save_session()
-    if exists('s:session')
+    if exists('s:mksession')
 		silent! mksession! .session
     endif
 endf
 
 fun! s:source_session()
 	if index(["c", "cpp", "objc"], &filetype) != -1
-		let s:session=1
+		let s:mksession=1
 	endif
 
-    if filereadable(".session")
+    if argc() == 0 && filereadable(".session")
         echohl WarningMsg |
                     \ echomsg "Session Loaded" |
                     \ echohl None
 		silent! source .session
-		let s:session=1
+		let s:mksession=1
     endif
 endf
 
