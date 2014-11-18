@@ -1,15 +1,15 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
-" Last modify at 2014-09-22
+" Last modify at 2014-11-18
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
 if !isdirectory(s:vundle_path."/vundle/.git")
-	echo "Installing Vundle.."
-	echo ""
-	call mkdir(s:vundle_path, 'p')
-	silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-	let s:can_install_bundle=1
+    echo "Installing Vundle.."
+    echo ""
+    call mkdir(s:vundle_path, 'p')
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let s:can_install_bundle=1
 endif
 
 set nocompatible
@@ -41,9 +41,9 @@ Bundle 'gtags.vim'
 "Bundle 'taglist.vim'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
-	echo "Installing Bundles"
-	echo ""
-	:BundleInstall
+    echo "Installing Bundles"
+    echo ""
+    :BundleInstall
 endif
 
 call vundle#end()
@@ -52,9 +52,9 @@ filetype plugin indent on
 
 " General vim settings {
 if has("gui_running")
-	set guifont=Inconsolata\ 15
+    set guifont=Inconsolata\ 15
 else
-	set t_Co=256
+    set t_Co=256
 endif
 
 colorscheme chaotic
@@ -96,40 +96,55 @@ set fencs=utf8,big5,gb2312,utf-16
 set ff=unix
 set updatetime=700
 set hls
-let s:dir=$HOME."/.vim/undo"
-if !isdirectory(s:dir)
-    call mkdir(s:dir, "p")
-endif
 set undofile
-execute "set undodir=".s:dir
+ 
+let &undodir=$HOME."/.vim/undo"
+if !isdirectory(&undodir)
+    call mkdir(&undodir, "p")
+endif
+
 command! W silent execute "w !sudo > /dev/null tee %"
 " }
 
+" AutoSession {
+fun! s:save_session()
+    if exists('s:session')
+		silent! mksession! .session
+    endif
+endf
+
+fun! s:source_session()
+	if index(["c", "cpp", "objc"], &filetype) != -1
+		let s:session=1
+	endif
+
+    if filereadable(".session")
+        echohl WarningMsg |
+                    \ echomsg "Session Loaded" |
+                    \ echohl None
+		silent! source .session
+		let s:session=1
+    endif
+endf
+
+augroup AutoSession
+    au!
+    au VimLeavePre * call s:save_session()
+    au VimEnter * call s:source_session()
+augroup END
+" }
+
 " Project {
-fun! s:load_project()
-	silent! source .session
-	silent! rviminfo .viminfo
-endf
-
-fun! s:save_project()
-	silent! mksession! .session
-	silent! wviminfo! .viminfo
-endf
-
 augroup Project
-	au!
-	au Filetype c,cpp,objc set tw=0 et fdm=syntax |
-				\ let s:in_project=1
-				"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
+    au!
+    au Filetype c,cpp,objc set tw=0 et fdm=syntax
+							"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
+    au FileType python set tw=0 et
+    au FileType vim set tw=0 et
+    au FileType tex set tw=120 noet
+    au FileType help set tw=78 noet
 
-	au FileType python set tw=0 et
-	au FileType vim set tw=0 et
-	au FileType tex set tw=120 noet
-	au FileType help set tw=78 noet
-
-	au VimLeavePre * if exists('s:in_project') | call s:save_project() | endif
-	au VimEnter * if argc()== 0 | call s:load_project() | endif
-	au BufRead,BufNewFile *.asm set filetype=nasm
+    au BufRead,BufNewFile *.asm set filetype=nasm
 augroup END
 " }
 
@@ -197,4 +212,5 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " Plugin: vim-aireline {
 let g:airline_theme="powerlineish"
 " }
-" vim:tw=78:ts=8:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
+
+" vim:tw=78:ts=4:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
