@@ -146,7 +146,6 @@ augroup Project
 
     au BufRead,BufNewFile *.asm set filetype=nasm
 augroup END
-" }
 
 fun! s:python_proj()
 	set tw=0
@@ -155,6 +154,9 @@ fun! s:python_proj()
 		set formatprg=autopep8\ -aa\ -
 	endif
 endf
+
+" }
+
 
 " Plugin: Tagbar {
 let g:tagbar_left = 1
