@@ -157,7 +157,6 @@ endf
 
 " }
 
-
 " Plugin: Tagbar {
 let g:tagbar_left = 1
 let g:tagbar_width = 28
