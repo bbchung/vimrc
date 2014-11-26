@@ -139,7 +139,7 @@ augroup Project
     au!
     au Filetype c,cpp,objc set tw=0 et fdm=syntax
 							"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
-    au FileType python set tw=0 et
+    au FileType python call s:python_proj()
     au FileType vim set tw=0 et
     au FileType tex set tw=120 noet
     au FileType help set tw=78 noet
@@ -147,6 +147,14 @@ augroup Project
     au BufRead,BufNewFile *.asm set filetype=nasm
 augroup END
 " }
+
+fun! s:python_proj()
+	set tw=0
+	set expandtab
+	if executable("autopep8")
+		set formatprg=autopep8\ -aa\ -
+	endif
+endf
 
 " Plugin: Tagbar {
 let g:tagbar_left = 1
