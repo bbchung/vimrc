@@ -1,6 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
-" Last modify at 2014-11-18
+" Last modify at 2014-11-27
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
@@ -114,7 +114,7 @@ fun! s:save_session()
 endf
 
 fun! s:source_session()
-	if index(["c", "cpp", "objc"], &filetype) != -1
+	if index(["c", "cpp", "objc", "objcpp", "python"], &filetype) != -1
 		let s:mksession=1
 	endif
 
@@ -134,22 +134,30 @@ augroup AutoSession
 augroup END
 " }
 
-" Project {
-augroup Project
+" FileTypeConfig {
+augroup FileTypeConfig
     au!
-    au Filetype c,cpp,objc set tw=0 et fdm=syntax
-							"set formatprg=astyle\ -A1TCSKfpHUk3W3ynq\ --delete-empty-lines
-    au FileType python call s:python_proj()
-    au FileType vim set tw=0 et
-    au FileType tex set tw=120 noet
-    au FileType help set tw=78 noet
-
-    au BufRead,BufNewFile *.asm set filetype=nasm
+	au FileType * call s:config_dev()
+    au FileType python call s:config_python()
+    au FileType tex set tw=78
+    au FileType help set tw=78
+    au FileType asm set filetype=nasm
 augroup END
 
-fun! s:python_proj()
-	set tw=0
-	set expandtab
+fun! s:config_dev()
+	if index(["c", "cpp", "objc", "objcpp", "python", "nasm"], &filetype) != -1
+		set tw=0
+		set expandtab
+		set tabstop=4
+		set shiftwidth=4
+		set fdm=syntax
+	else
+		set noexpandtab
+		set fdm=manual
+	endif
+endf
+
+fun! s:config_python()
 	if executable("autopep8")
 		set formatprg=autopep8\ -aa\ -
 	endif
@@ -222,4 +230,4 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 let g:airline_theme="powerlineish"
 " }
 
-" vim:tw=78:ts=4:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
+" vim:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
