@@ -58,33 +58,33 @@ else
 endif
 
 colorscheme chaotic
-syntax on				" syntax highlighing
+syntax on               " syntax highlighing
 set term=xterm-256color
-set ttyfast				" smoother changes
-set title				" show title in console title bar
-set novisualbell		" turn off visual bell
+set ttyfast             " smoother changes
+set title               " show title in console title bar
+set novisualbell        " turn off visual bell
 set mouse=a
 set ttymouse=xterm2
 set t_ZH=[3m
 set nocursorline
 set conceallevel=0
 set concealcursor=nc
-set ls=2				" allways show status line
-set ruler				" show the cursor position all the time
-set number				" show line numbers
-set showcmd				" display incomplete commands
-set tabstop=4			" numbers of spaces of tab character
+set ls=2                " allways show status line
+set ruler               " show the cursor position all the time
+set number              " show line numbers
+set showcmd             " display incomplete commands
+set tabstop=4           " numbers of spaces of tab character
 set nowrap
-set shiftwidth=4		" numbers of spaces to (auto)indent
-set scrolloff=3			" keep 3 lines when scrolling
-set incsearch			" do incremental searching
-set nobackup			" do not keep a backup file
-set modeline			" document sets vim mode
+set shiftwidth=4        " numbers of spaces to (auto)indent
+set scrolloff=3         " keep 3 lines when scrolling
+set incsearch           " do incremental searching
+set nobackup            " do not keep a backup file
+set modeline            " document sets vim mode
 set ignorecase
 set smartcase
 set pumheight=12
 set previewheight=4
-set nospell				" disable spell checking
+set nospell             " disable spell checking
 set foldlevelstart=20
 set tabpagemax=100
 set wildmode=list:longest,full
@@ -109,21 +109,21 @@ command! W silent execute "w !sudo > /dev/null tee %"
 " AutoSession {
 fun! s:save_session()
     if exists('s:mksession')
-		silent! mksession! .session
+        silent! mksession! .session
     endif
 endf
 
 fun! s:source_session()
-	if index(["c", "cpp", "objc", "objcpp", "python"], &filetype) != -1
-		let s:mksession=1
-	endif
+    if index(["c", "cpp", "objc", "objcpp", "python"], &filetype) != -1
+        let s:mksession=1
+    endif
 
     if argc() == 0 && filereadable(".session")
         echohl MoreMsg |
                     \ echomsg "Session Loaded" |
                     \ echohl None
-		silent! source .session
-		let s:mksession=1
+        silent! source .session
+        let s:mksession=1
     endif
 endf
 
@@ -137,7 +137,7 @@ augroup END
 " FileTypeConfig {
 augroup FileTypeConfig
     au!
-	au FileType * call s:config_dev()
+    au FileType * call s:config_dev()
     au FileType python call s:config_python()
     au FileType tex set tw=78
     au FileType help set tw=78
@@ -145,22 +145,22 @@ augroup FileTypeConfig
 augroup END
 
 fun! s:config_dev()
-	if index(["c", "cpp", "objc", "objcpp", "python", "nasm"], &filetype) != -1
-		set tw=0
-		set expandtab
-		set tabstop=4
-		set shiftwidth=4
-		set fdm=syntax
-	else
-		set noexpandtab
-		set fdm=manual
-	endif
+    if index(["c", "cpp", "objc", "objcpp", "python", "nasm", "vim"], &filetype) != -1
+        set tw=0
+        set expandtab
+        set tabstop=4
+        set shiftwidth=4
+        set fdm=syntax
+    else
+        set noexpandtab
+        set fdm=manual
+    endif
 endf
 
 fun! s:config_python()
-	if executable("autopep8")
-		set formatprg=autopep8\ -aa\ -
-	endif
+    if executable("autopep8")
+        set formatprg=autopep8\ -aa\ -
+    endif
 endf
 
 " }
@@ -175,25 +175,25 @@ nmap <silent> <F2> :TagbarToggle<CR>
 let g:clang_format#auto_formatexpr=1
 let g:clang_format#command = "clang-format-3.5"
 let g:clang_format#style_options = {
-    \ "BasedOnStyle" : "LLVM",
-			\ "Language" : "Cpp",
-			\ "PointerBindsToType" : "false",
-			\ "ColumnLimit" : 0,
-			\ "AccessModifierOffset" : -4,
-			\ "AllowShortIfStatementsOnASingleLine" : "false",
-			\ "AllowShortLoopsOnASingleLine" : "false",
-			\ "AllowShortFunctionsOnASingleLine" : "false",
-			\ "MaxEmptyLinesToKeep" : 2,
-			\ "AlwaysBreakTemplateDeclarations" : "true",
-			\ "Standard" : "Cpp03",
-			\ "IndentWidth" : 4,
-			\ "UseTab" : "Never",
-			\ "BreakBeforeBraces" : "Allman",
-			\ "IndentCaseLabels" : "true",
-			\ "BreakConstructorInitializersBeforeComma" : "true",
-			\ "AllowAllParametersOfDeclarationOnNextLine" : "false",
-			\ "BinPackParameters" : "false",
-			\}
+            \ "BasedOnStyle" : "LLVM",
+            \ "Language" : "Cpp",
+            \ "PointerBindsToType" : "false",
+            \ "ColumnLimit" : 0,
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "false",
+            \ "AllowShortLoopsOnASingleLine" : "false",
+            \ "AllowShortFunctionsOnASingleLine" : "false",
+            \ "MaxEmptyLinesToKeep" : 2,
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "Cpp03",
+            \ "IndentWidth" : 4,
+            \ "UseTab" : "Never",
+            \ "BreakBeforeBraces" : "Allman",
+            \ "IndentCaseLabels" : "true",
+            \ "BreakConstructorInitializersBeforeComma" : "true",
+            \ "AllowAllParametersOfDeclarationOnNextLine" : "false",
+            \ "BinPackParameters" : "false",
+            \}
 " }
 
 " Plugin: YouCompleteMe {
@@ -230,4 +230,4 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 let g:airline_theme="powerlineish"
 " }
 
-" vim:noet:foldmarker={,}:foldlevel=0:foldmethod=marker:
+" vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
