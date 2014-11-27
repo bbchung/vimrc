@@ -35,6 +35,7 @@ Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets.git'
 Bundle 'jlanzarotta/bufexplorer'
 Bundle 'majutsushi/tagbar'
+Bundle 'nanotech/jellybeans.vim'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 Bundle 'gtags.vim'
@@ -51,11 +52,6 @@ filetype plugin indent on
 " }
 
 " General vim settings {
-if has("gui_running")
-    set guifont=Inconsolata\ 15
-else
-    set t_Co=256
-endif
 
 colorscheme chaotic
 syntax on               " syntax highlighing
