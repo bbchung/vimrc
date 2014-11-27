@@ -135,8 +135,7 @@ augroup FileTypeConfig
     au!
     au FileType * call s:config_dev()
     au FileType python call s:config_python()
-    au FileType tex set tw=78
-    au FileType help set tw=78
+    au FileType tex,help set tw=78 cc=78
     au FileType asm set filetype=nasm
 augroup END
 
