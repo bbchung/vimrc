@@ -38,7 +38,6 @@ Bundle 'majutsushi/tagbar'
 Bundle 'nanotech/jellybeans.vim'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
-Bundle 'gtags.vim'
 "Bundle 'taglist.vim'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
