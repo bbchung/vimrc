@@ -54,7 +54,13 @@ filetype plugin indent on
 
 colorscheme chaotic
 syntax on               " syntax highlighing
+
 set term=xterm-256color
+if has("termtruecolor") == 1
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+    set guicolors
+endif
 set ttyfast             " smoother changes
 set title               " show title in console title bar
 set novisualbell        " turn off visual bell
