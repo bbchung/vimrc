@@ -226,8 +226,4 @@ silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " }
 
-" Plugin: vim-aireline {
-let g:airline_theme="powerlineish"
-" }
-
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
