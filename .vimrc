@@ -174,7 +174,7 @@ nmap <silent> <F2> :TagbarToggle<CR>
 
 " Plugin: vim-clang-format {
 let g:clang_format#auto_formatexpr=1
-let g:clang_format#command = "clang-format"
+"let g:clang_format#command = "clang-format"
 let g:clang_format#style_options = {
             \ "BasedOnStyle" : "LLVM",
             \ "Language" : "Cpp",
