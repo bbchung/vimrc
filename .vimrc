@@ -219,7 +219,7 @@ nmap <silent> <F4> :NERDTreeToggle<CR>
 
 " Plugin: Clighter {
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
-let g:clighter_libclang_file = 'libclang-3.5.so.1'
+let g:clighter_libclang_file = 'libclang-3.6.so.1'
 " }
 
 " Plugin: gtags.vim {
