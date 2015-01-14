@@ -20,7 +20,7 @@ call vundle#begin()
 Bundle 'gmarik/vundle'
 Bundle 'bbchung/chaotic'
 Bundle 'bbchung/clighter'
-Bundle 'bbchung/gasynctags'
+Bundle 'bbchung/gtags'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
@@ -145,6 +145,12 @@ augroup FileTypeConfig
 augroup END
 
 fun! s:config_dev()
+    if index(["c", "cpp", "python", "vim"], &filetype) != -1 && executable("gtags")
+        if !filereadable("GPATH") || !filereadable("GRTAGS") || !filereadable("GTAGS")
+            silent call system("gtags")
+        endif
+    endif
+
     if index(["c", "cpp", "objc", "objcpp", "python", "nasm", "vim"], &filetype) != -1
         set tw=0
         set expandtab
@@ -223,6 +229,7 @@ let g:clighter_libclang_file = 'libclang-3.6.so.1'
 " }
 
 " Plugin: gtags.vim {
+let g:Gtags_Auto_Update=1
 silent! nmap <silent><C-\>s :GtagsCursor<CR>
 silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
