@@ -138,19 +138,23 @@ augroup END
 " FileTypeConfig {
 augroup FileTypeConfig
     au!
-    au FileType * call s:config_dev()
+    au FileType * call s:config_vim()
     au FileType python call s:config_python()
     au FileType tex,help set tw=78 cc=78
     au FileType asm set filetype=nasm
+    au FileType c,cpp,python,vim call s:build_gtags_if_need()
 augroup END
 
-fun! s:config_dev()
-    if index(["c", "cpp", "python", "vim"], &filetype) != -1 && executable("gtags")
-        if !filereadable("GPATH") || !filereadable("GRTAGS") || !filereadable("GTAGS")
-            silent call system("gtags")
-        endif
+fun! s:build_gtags_if_need()
+    if !filereadable("GPATH") || !filereadable("GRTAGS") || !filereadable("GTAGS")
+        echohl MoreMsg |
+                \ echomsg "Building gtags" |
+                \ echohl None
+        silent call system("gtags")
     endif
+endf
 
+fun! s:config_vim()
     if index(["c", "cpp", "objc", "objcpp", "python", "nasm", "vim"], &filetype) != -1
         set tw=0
         set expandtab
