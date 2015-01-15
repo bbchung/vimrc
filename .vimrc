@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc " Last modify at 2014-11-27
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
 if !isdirectory(s:vundle_path."/vundle/.git")
@@ -26,9 +25,7 @@ Bundle 'rhysd/vim-clang-format'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-"Bundle 'Lokaltog/vim-powerline'
-"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'bling/vim-airline'
+Bundle 'itchyny/lightline.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Raimondi/delimitMate'
 Bundle 'SirVer/ultisnips'
@@ -226,10 +223,6 @@ let g:clighter_libclang_file = 'libclang-3.6.so.1'
 silent! nmap <silent><C-\>s :GtagsCursor<CR>
 silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
-" }
-
-" Plugin: airline {
-  let g:airline_theme='wombat'
 " }
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
