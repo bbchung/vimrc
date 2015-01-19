@@ -86,7 +86,8 @@ set previewheight=4
 set nospell             " disable spell checking
 set foldlevelstart=20
 set tabpagemax=100
-set wildmode=list:longest,full
+set wildmode=longest,full
+set wildmenu
 set cot=longest,menuone
 set grepprg=grep\ -nH\ $*
 set ssop=buffers,curdir,folds,winsize,options,globals
