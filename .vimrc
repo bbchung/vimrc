@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" bbchung vimrc " Last modify at 2014-11-27
+" bbchung vimrc " Last modify at 2015/01/20
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
@@ -172,8 +172,8 @@ nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
-let g:clang_format#auto_formatexpr=1
 "let g:clang_format#command = "clang-format"
+let g:clang_format#auto_formatexpr=1
 let g:clang_format#style_options = {
             \ "BasedOnStyle" : "LLVM",
             \ "Language" : "Cpp",
