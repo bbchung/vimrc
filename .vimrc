@@ -172,7 +172,7 @@ nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
-"let g:clang_format#command = "clang-format"
+let g:clang_format#command = "clang-format-3.7"
 let g:clang_format#auto_formatexpr=1
 let g:clang_format#style_options = {
             \ "BasedOnStyle" : "LLVM",
@@ -218,7 +218,7 @@ nmap <silent> <F4> :NERDTreeToggle<CR>
 
 " Plugin: Clighter {
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
-let g:clighter_libclang_file = 'libclang-3.6.so.1'
+let g:clighter_libclang_file = 'libclang-3.7.so.1'
 " }
 
 " Plugin: gtags.vim {
