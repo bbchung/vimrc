@@ -76,6 +76,7 @@ set tabstop=4           " numbers of spaces of tab character
 set nowrap
 set shiftwidth=4        " numbers of spaces to (auto)indent
 set scrolloff=3         " keep 3 lines when scrolling
+set sidescrolloff=1
 set incsearch           " do incremental searching
 set nobackup            " do not keep a backup file
 set modeline            " document sets vim mode
