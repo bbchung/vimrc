@@ -1,5 +1,5 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" bbchung vimrc " Last modify at 2015/01/20
+" bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let vundle manage plugins {
 let s:vundle_path=expand('~/.vim/bundle')
