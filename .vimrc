@@ -74,8 +74,9 @@ set ruler               " show the cursor position all the time
 set number              " show line numbers
 set showcmd             " display incomplete commands
 set tabstop=4           " numbers of spaces of tab character
-set nowrap
 set shiftwidth=4        " numbers of spaces to (auto)indent
+set cc=0
+set nowrap
 set scrolloff=3         " keep 3 lines when scrolling
 set sidescrolloff=1
 set incsearch           " do incremental searching
@@ -139,32 +140,11 @@ augroup END
 " FileTypeConfig {
 augroup FileTypeConfig
     au!
-    au FileType * call s:config_vim()
-    au FileType python call s:config_python()
-    au FileType tex,help set tw=78 cc=78
-    au FileType asm set filetype=nasm
+    au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 et fdm=syntax
+    au FileType python setlocal formatprg=autopep8\ -aa\ -
+    au FileType tex,help setlocal tw=78 cc=78
+    au FileType asm setlocal filetype=nasm
 augroup END
-
-fun! s:config_vim()
-    if index(["c", "cpp", "objc", "objcpp", "python", "nasm", "vim"], &filetype) != -1
-        set tw=0
-        set expandtab
-        set tabstop=4
-        set shiftwidth=4
-        set fdm=syntax
-        set cc=0
-    else
-        set noexpandtab
-        set fdm=manual
-    endif
-endf
-
-fun! s:config_python()
-    if executable("autopep8")
-        set formatprg=autopep8\ -aa\ -
-    endif
-endf
-
 " }
 
 " Plugin: Tagbar {
