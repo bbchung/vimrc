@@ -17,22 +17,23 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 Bundle 'gmarik/vundle'
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
-Bundle 'bbchung/clighter'
-Bundle 'bbchung/gasynctags'
-Bundle 'kien/ctrlp.vim'
-Bundle 'rhysd/vim-clang-format'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'itchyny/lightline.vim'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'Raimondi/delimitMate'
+Bundle 'rhysd/vim-clang-format'
+Bundle 'bbchung/clighter'
+Bundle 'bbchung/gasynctags'
+Bundle 'Shougo/unite.vim' 
+Bundle 'majutsushi/tagbar'
+"Bundle 'kien/ctrlp.vim'
+"Bundle 'jlanzarotta/bufexplorer'
+"Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-Bundle 'jlanzarotta/bufexplorer'
-Bundle 'majutsushi/tagbar'
-Bundle 'nanotech/jellybeans.vim'
+Bundle 'Raimondi/delimitMate'
 "Bundle 'Conque-GDB'
 "Bundle 'CSApprox'
 "Bundle 'taglist.vim'
@@ -212,11 +213,6 @@ let g:syntastic_loc_list_height=5
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " }
 
-" Plugin: NERDTree {
-let g:NERDTreeWinPos = 'right'
-nmap <silent> <F4> :NERDTreeToggle<CR>
-" }
-
 " Plugin: Clighter {
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
 "let g:clighter_libclang_file = 'libclang-3.7.so.1'
@@ -226,6 +222,11 @@ nmap <silent> <Leader>r :call clighter#Rename()<CR>
 silent! nmap <silent><C-\>s :GtagsCursor<CR>
 silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
+" }
+
+" Plugin: unite.vim {
+silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
+nmap <silent> <C-p> :Unite -here file_rec<CR>
 " }
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
