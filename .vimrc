@@ -209,4 +209,12 @@ silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
 nmap <silent> <C-p> :Unite -here file_rec<CR>
 " }
 
+" Plugin: lightline.vim {
+let g:lightline = {
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'myreadonly', 'relativepath', 'modified' ] ],
+			\ }}
+" }
+
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
