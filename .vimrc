@@ -20,6 +20,7 @@ Bundle 'gmarik/vundle'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'itchyny/lightline.vim'
+"Bundle 'bling/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'bbchung/clighter'
@@ -205,8 +206,8 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " }
 
 " Plugin: unite.vim {
-silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
-nmap <silent> <C-p> :Unite -here file_rec<CR>
+silent! nmap <silent> <Leader>be :Unite -start-insert -here buffer<CR>
+nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
 " }
 
 " Plugin: lightline.vim {
