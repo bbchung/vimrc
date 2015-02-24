@@ -215,7 +215,12 @@ let g:lightline = {
 			\ 'active': {
 			\   'left': [ [ 'mode', 'paste' ],
 			\             [ 'myreadonly', 'relativepath', 'modified' ] ],
-			\ }}
+			\ },
+			\ 'inactive': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'myreadonly', 'relativepath', 'modified' ] ],
+			\ }
+            \}
 " }
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
