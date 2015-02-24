@@ -206,7 +206,7 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " }
 
 " Plugin: unite.vim {
-silent! nmap <silent> <Leader>be :Unite -start-insert -here buffer<CR>
+silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
 nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
 " }
 
