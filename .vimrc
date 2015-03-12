@@ -39,6 +39,7 @@ Bundle 'Raimondi/delimitMate'
 "Bundle 'CSApprox'
 "Bundle 'taglist.vim'
 Bundle 'a.vim'
+Bundle 'terryma/vim-multiple-cursors'
 if exists('s:can_install_bundle')
     echo "Installing Bundles"
     echo ""
