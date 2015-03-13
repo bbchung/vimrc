@@ -21,25 +21,23 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'itchyny/lightline.vim'
 "Bundle 'bling/vim-airline'
+Bundle 'Shougo/unite.vim' 
+Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'bbchung/clighter'
 Bundle 'bbchung/gasynctags'
-Bundle 'Shougo/unite.vim' 
-Bundle 'majutsushi/tagbar'
+Bundle 'klen/python-mode'
+Bundle 'scrooloose/syntastic'
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'jlanzarotta/bufexplorer'
 "Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
 Bundle 'Raimondi/delimitMate'
-"Bundle 'Conque-GDB'
-"Bundle 'CSApprox'
-"Bundle 'taglist.vim'
-Bundle 'a.vim'
 Bundle 'terryma/vim-multiple-cursors'
+Bundle 'a.vim'
 if exists('s:can_install_bundle')
     echo "Installing Bundles"
     echo ""
@@ -143,7 +141,7 @@ augroup END
 augroup FileTypeConfig
     au!
     au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 et fdm=syntax
-    au FileType python setlocal formatprg=autopep8\ -aa\ - ts=4
+    au FileType python setlocal autoindent ts=4 formatprg=autopep8\ -a\ -a\ --experimental\ -
     au FileType tex,help setlocal tw=78 cc=78 formatprg=
     au FileType asm setlocal filetype=nasm formatprg=
 augroup END
@@ -186,8 +184,12 @@ nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 " }
 
 " Plugin: syntastic {
-let g:syntastic_enable_signs=0
 let g:syntastic_loc_list_height=5
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": ["python"] }
+let g:syntastic_always_populate_loc_list=1
 " }
 
 " Plugin: UltiSnips {
@@ -221,6 +223,10 @@ let g:lightline = {
 			\             [ 'myreadonly', 'relativepath', 'modified' ] ],
 			\ }
             \}
+" }
+
+" Plugin: python-mode {
+let g:pymode_rope=0
 " }
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
