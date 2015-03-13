@@ -145,7 +145,7 @@ augroup FileTypeConfig
     au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 et fdm=syntax
     au FileType python setlocal formatprg=autopep8\ -aa\ - ts=4
     au FileType tex,help setlocal tw=78 cc=78 formatprg=
-    au FileType asm setlocal filetype=nasm
+    au FileType asm setlocal filetype=nasm formatprg=
 augroup END
 " }
 
