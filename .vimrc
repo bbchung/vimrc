@@ -27,7 +27,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'bbchung/clighter'
 Bundle 'bbchung/gasynctags'
-Bundle 'klen/python-mode'
+"Bundle 'klen/python-mode'
 Bundle 'scrooloose/syntastic'
 "Bundle 'kien/ctrlp.vim'
 "Bundle 'jlanzarotta/bufexplorer'
@@ -185,11 +185,9 @@ nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 
 " Plugin: syntastic {
 let g:syntastic_loc_list_height=5
-let g:syntastic_mode_map = {
-    \ "mode": "active",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": ["python"] }
 let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_enable_signs = 0
 " }
 
 " Plugin: UltiSnips {
@@ -223,10 +221,6 @@ let g:lightline = {
 			\             [ 'myreadonly', 'relativepath', 'modified' ] ],
 			\ }
             \}
-" }
-
-" Plugin: python-mode {
-let g:pymode_rope=0
 " }
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
