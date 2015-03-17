@@ -21,7 +21,8 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'itchyny/lightline.vim'
 "Bundle 'bling/vim-airline'
-Bundle 'Shougo/unite.vim' 
+"Bundle 'Shougo/unite.vim' 
+Bundle 'kien/ctrlp.vim' 
 Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rhysd/vim-clang-format'
@@ -207,9 +208,14 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " }
 
 " Plugin: unite.vim {
-silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
-nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
+"silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
+"nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
 " }
+
+" Plugin: unite.vim {
+silent! nmap <silent> <Leader>be :CtrlPBuffer<CR>
+" }
+
 
 " Plugin: lightline.vim {
 let g:lightline = {
