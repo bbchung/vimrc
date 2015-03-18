@@ -74,9 +74,9 @@ set ls=2                " allways show status line
 set ruler               " show the cursor position all the time
 set number              " show line numbers
 set showcmd             " display incomplete commands
-set tabstop=4           " numbers of spaces of tab character
+set softtabstop=4       " numbers of spaces of tab character
 set shiftwidth=4        " numbers of spaces to (auto)indent
-set cc=0
+set colorcolumn=0
 set nowrap
 set scrolloff=3         " keep 3 lines when scrolling
 set sidescrolloff=1
@@ -141,8 +141,8 @@ augroup END
 " FileTypeConfig {
 augroup FileTypeConfig
     au!
-    au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 et fdm=syntax
-    au FileType python setlocal autoindent ts=4 formatprg=autopep8\ -a\ -a\ --experimental\ -
+    au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 expandtab fdm=syntax
+    au FileType python setlocal ts=4 formatprg=autopep8\ -a\ -a\ --experimental\ -
     au FileType tex,help setlocal tw=78 cc=78 formatprg=
     au FileType asm setlocal filetype=nasm formatprg=
 augroup END
