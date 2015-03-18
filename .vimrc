@@ -1,28 +1,29 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " let vundle manage plugins {
-let s:vundle_path=expand('~/.vim/bundle')
-if !isdirectory(s:vundle_path."/vundle/.git")
+let s:vundle_root=expand($HOME.'/.vim/bundle')
+if !isdirectory(s:vundle_root."/vundle/.git")
     echo "Installing Vundle.."
     echo ""
-    call mkdir(s:vundle_path, 'p')
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    call mkdir(s:vundle_root, 'p')
+    silent execute '!git clone https://github.com/gmarik/vundle '.s:vundle_root.'/vundle'
     let s:can_install_bundle=1
 endif
 
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+execute 'set rtp+='.s:vundle_root.'/vundle'
 call vundle#begin()
 Bundle 'gmarik/vundle'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'bbchung/chaotic'
 Bundle 'itchyny/lightline.vim'
 "Bundle 'bling/vim-airline'
-"Bundle 'Shougo/unite.vim' 
-Bundle 'kien/ctrlp.vim' 
+"Bundle 'Shougo/unite.vim'
+Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rhysd/vim-clang-format'
@@ -40,8 +41,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'a.vim'
 if exists('s:can_install_bundle')
-    echo "Installing Bundles"
-    echo ""
+    echo "Installing Bundles\n"
     :BundleInstall
 endif
 
@@ -52,10 +52,10 @@ filetype plugin indent on
 " General vim settings {
 
 colorscheme chaotic
-syntax on               " syntax highlighing
+syntax on
 
 set term=xterm-256color
-if has("termtruecolor") == 1
+if has("termtruecolor")
     set t_8f=[38;2;%lu;%lu;%lum
     set t_8b=[48;2;%lu;%lu;%lum
     set guicolors
@@ -181,7 +181,6 @@ let g:clang_format#style_options = {
 " Plugin: YouCompleteMe {
 let g:ycm_confirm_extra_conf=0
 nmap <silent> <C-]> :YcmCompleter GoTo<CR>
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 " }
 
 " Plugin: syntastic {
@@ -212,7 +211,7 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 "nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
 " }
 
-" Plugin: unite.vim {
+" Plugin: CtrlP.vim {
 silent! nmap <silent> <Leader>be :CtrlPBuffer<CR>
 " }
 
