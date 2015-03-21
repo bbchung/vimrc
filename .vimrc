@@ -212,7 +212,7 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " }
 
 " Plugin: CtrlP.vim {
-silent! nmap <silent> <Leader>be :CtrlPBuffer<CR>
+silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
 " }
 
 
