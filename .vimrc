@@ -110,7 +110,7 @@ endif
 command! W silent execute "w !sudo > /dev/null tee %"
 " }
 
-" AutoSession {
+" AutoInit {
 fun! s:save_session()
     if exists('s:mksession')
         silent! mksession! .session
@@ -132,18 +132,24 @@ fun! s:source_session()
 endf
 
 fun! s:build_gtags()
+    if index(["c", "cpp"], &filetype) == -1
+        return
+    endif
+
     if executable('gtags') && !filereadable('GTAGS')
         echohl MoreMsg |
-                    \ echomsg "building gtags..." |
+                    \ echomsg "building gtags" |
                     \ echohl None
-        silent! !gtags
+        silent call system('gtags')
     endif
 endf
 
-augroup AutoSession
+augroup AutoInit
     au!
     au VimLeavePre * call s:save_session()
     au VimEnter * call s:source_session()
+
+    au VimEnter * call s:build_gtags()
 augroup END
 " }
 
@@ -154,7 +160,6 @@ augroup FileTypeConfig
     au FileType python setlocal ts=4 formatprg=autopep8\ -a\ -a\ --experimental\ -
     au FileType tex,help setlocal tw=78 cc=78 formatprg=
     au FileType asm setlocal filetype=nasm formatprg=
-    au FileType c,cpp call s:build_gtags()
 augroup END
 " }
 
@@ -226,8 +231,6 @@ let g:Gtags_Auto_Update = 1
 " Plugin: CtrlP.vim {
 "silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
 " }
-
-
 
 " Plugin: lightline.vim {
 let g:lightline = {
