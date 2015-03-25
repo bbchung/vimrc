@@ -60,7 +60,7 @@ if has("termtruecolor")
     set t_8b=[48;2;%lu;%lu;%lum
     set guicolors
 endif
-set lazyredraw
+"set lazyredraw
 set ttyfast             " smoother changes
 set title               " show title in console title bar
 set novisualbell        " turn off visual bell
