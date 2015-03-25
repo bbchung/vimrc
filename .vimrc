@@ -28,11 +28,11 @@ Bundle 'majutsushi/tagbar'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rhysd/vim-clang-format'
 Bundle 'bbchung/clighter'
-Bundle 'bbchung/gasynctags'
+Bundle 'bbchung/gtags.vim'
 "Bundle 'klen/python-mode'
 Bundle 'scrooloose/syntastic'
 "Bundle 'kien/ctrlp.vim'
-"Bundle 'jlanzarotta/bufexplorer'
+Bundle 'jlanzarotta/bufexplorer'
 "Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'SirVer/ultisnips'
@@ -131,6 +131,15 @@ fun! s:source_session()
     endif
 endf
 
+fun! s:build_gtags()
+    if executable('gtags') && !filereadable('GTAGS')
+        echohl MoreMsg |
+                    \ echomsg "building gtags..." |
+                    \ echohl None
+        silent! !gtags
+    endif
+endf
+
 augroup AutoSession
     au!
     au VimLeavePre * call s:save_session()
@@ -145,6 +154,7 @@ augroup FileTypeConfig
     au FileType python setlocal ts=4 formatprg=autopep8\ -a\ -a\ --experimental\ -
     au FileType tex,help setlocal tw=78 cc=78 formatprg=
     au FileType asm setlocal filetype=nasm formatprg=
+    au FileType c,cpp call s:build_gtags()
 augroup END
 " }
 
@@ -204,6 +214,8 @@ nmap <silent> <Leader>r :call clighter#Rename()<CR>
 silent! nmap <silent><C-\>s :GtagsCursor<CR>
 silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
+
+let g:Gtags_Auto_Update = 1
 " }
 
 " Plugin: unite.vim {
@@ -212,8 +224,9 @@ silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 " }
 
 " Plugin: CtrlP.vim {
-silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
+"silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
 " }
+
 
 
 " Plugin: lightline.vim {
