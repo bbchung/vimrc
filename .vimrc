@@ -216,9 +216,9 @@ nmap <silent> <Leader>r :call clighter#Rename()<CR>
 " }
 
 " Plugin: gtags.vim {
-silent! nmap <silent><C-\>s :GtagsCursor<CR>
-silent! nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
-silent! nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
+nmap <silent><C-\>s :GtagsCursor<CR>
+nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
+nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 
 let g:Gtags_Auto_Update = 1
 " }
