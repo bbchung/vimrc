@@ -2,51 +2,53 @@
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let vundle manage plugins {
-let s:vundle_root=expand($HOME.'/.vim/bundle')
-if !isdirectory(s:vundle_root."/vundle/.git")
-    echo "Installing Vundle.."
+" let Vim-Plug manage plugin {
+let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
+if !filereadable(s:vim_plug_dir.'/plug.vim')
+    echo "Installing Vim-Plug.."
     echo ""
-    call mkdir(s:vundle_root, 'p')
-    silent execute '!git clone https://github.com/gmarik/vundle '.s:vundle_root.'/vundle'
-    let s:can_install_bundle=1
+    call mkdir(s:vim_plug_dir, 'p')
+    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    let s:install_plug=1
 endif
 
-set nocompatible
-filetype off
+call plug#begin('~/.vim/plugged')
+Plug 'gmarik/vundle'
+Plug 'nanotech/jellybeans.vim'
+Plug 'bbchung/chaotic'
+Plug 'itchyny/lightline.vim'
+"Plug 'bling/vim-airline'
+"Plug 'Shougo/unite.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'Valloric/YouCompleteMe'
+Plug 'rhysd/vim-clang-format'
+Plug 'bbchung/clighter'
+Plug 'bbchung/gtags.vim'
+"Plug 'klen/python-mode'
+Plug 'scrooloose/syntastic'
+"Plug 'kien/ctrlp.vim'
+Plug 'jlanzarotta/bufexplorer'
+"Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'Raimondi/delimitMate'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'a.vim'
+call plug#end()
 
-execute 'set rtp+='.s:vundle_root.'/vundle'
-call vundle#begin()
-Bundle 'gmarik/vundle'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'bbchung/chaotic'
-Bundle 'itchyny/lightline.vim'
-"Bundle 'bling/vim-airline'
-"Bundle 'Shougo/unite.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'rhysd/vim-clang-format'
-Bundle 'bbchung/clighter'
-Bundle 'bbchung/gtags.vim'
-"Bundle 'klen/python-mode'
-Bundle 'scrooloose/syntastic'
-"Bundle 'kien/ctrlp.vim'
-Bundle 'jlanzarotta/bufexplorer'
-"Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'Raimondi/delimitMate'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'a.vim'
-if exists('s:can_install_bundle')
-    echo "Installing Bundles\n"
-    :BundleInstall
-endif
+fun! s:install_plug()
+    if exists('s:install_plug')
+        echo "Installing Plugins\n"
+        :PlugInstall
+    endif
+endf
 
-call vundle#end()
-filetype plugin indent on
+augroup PlugInstall
+    au!
+    au VimEnter * call s:install_plug()
+augroup END
 " }
 
 " General vim settings {
@@ -61,6 +63,7 @@ if has("termtruecolor")
     set guicolors
 endif
 "set lazyredraw
+set nocompatible
 set ttyfast             " smoother changes
 set title               " show title in console title bar
 set novisualbell        " turn off visual bell
