@@ -5,8 +5,7 @@
 " Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
-    call mkdir(s:vim_plug_dir, 'p')
-    execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
     let s:install_plug=1
 endif
 
