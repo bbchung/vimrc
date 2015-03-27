@@ -11,7 +11,6 @@ if !filereadable(s:vim_plug_dir.'/plug.vim')
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'gmarik/vundle'
 Plug 'nanotech/jellybeans.vim'
 Plug 'bbchung/chaotic'
 Plug 'itchyny/lightline.vim'
