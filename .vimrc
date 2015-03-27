@@ -2,11 +2,9 @@
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let Vim-Plug manage plugin {
+" Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
-    echo "Installing Vim-Plug.."
-    echo ""
     call mkdir(s:vim_plug_dir, 'p')
     execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     let s:install_plug=1
@@ -38,17 +36,13 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'a.vim'
 call plug#end()
 
-fun! s:install_plug()
-    if exists('s:install_plug')
-        echo "Installing Plugins\n"
-        :PlugInstall
-    endif
-endf
+if exists('s:install_plug')
+    augroup PlugInstall
+        au!
+        au VimEnter * PlugInstall
+    augroup END
+endif
 
-augroup PlugInstall
-    au!
-    au VimEnter * call s:install_plug()
-augroup END
 " }
 
 " General vim settings {
