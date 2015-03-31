@@ -17,6 +17,7 @@ Plug 'itchyny/lightline.vim'
 "Plug 'bling/vim-airline'
 "Plug 'Shougo/unite.vim'
 Plug 'kien/ctrlp.vim'
+Plug 'FelikZ/ctrlp-py-matcher'
 Plug 'majutsushi/tagbar'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
@@ -24,7 +25,6 @@ Plug 'bbchung/clighter'
 Plug 'bbchung/gtags.vim'
 "Plug 'klen/python-mode'
 Plug 'scrooloose/syntastic'
-"Plug 'kien/ctrlp.vim'
 Plug 'jlanzarotta/bufexplorer'
 "Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -226,6 +226,9 @@ let g:Gtags_Auto_Update = 1
 
 " Plugin: CtrlP.vim {
 "silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_lazy_update = 100
+let g:ctrlp_max_files = 0
 " }
 
 " Plugin: lightline.vim {
