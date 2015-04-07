@@ -5,7 +5,7 @@
 " Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
-    execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P ' . s:vim_plug_dir
+    execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
     let s:install_plug=1
 endif
 
@@ -199,6 +199,7 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_enable_signs = 0
 let g:syntastic_python_checkers = ['pylint', 'pyflakes', 'pep8']
+let g:syntastic_mode_map = {'passive_filetypes': ["python"] }
 " }
 
 " Plugin: UltiSnips {
