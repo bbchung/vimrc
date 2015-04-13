@@ -62,10 +62,11 @@ set novisualbell        " turn off visual bell
 set mouse=a
 set ttymouse=xterm2
 set t_ZH=[3m
-set nocursorline
 set conceallevel=0
 set concealcursor=nc
-set cursorline
+if !&diff
+    set cursorline
+endif
 set ls=2                " allways show status line
 set ruler               " show the cursor position all the time
 set number              " show line numbers
