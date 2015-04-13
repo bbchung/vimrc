@@ -65,6 +65,7 @@ set t_ZH=[3m
 set nocursorline
 set conceallevel=0
 set concealcursor=nc
+set cursorline
 set ls=2                " allways show status line
 set ruler               " show the cursor position all the time
 set number              " show line numbers
@@ -153,7 +154,7 @@ augroup FileTypeConfig
     au!
     au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 expandtab fdm=syntax
     au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ --experimental\ -
-    au FileType tex,help setlocal tw=78 cc=78 formatprg=
+    au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
     au FileType asm setlocal filetype=nasm formatprg=
 augroup END
 " }
@@ -208,8 +209,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 
 " Plugin: Clighter {
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
-"let g:clighter_libclang_file = 'libclang-3.7.so.1'
-let g:clighter_highlight_blacklist = ['clighterNamespaceRef', 'clighterFunctionDecl', 'clighterFieldDecl', 'clighterDeclRefExprCall', 'clighterMemberRefExprCall', 'clighterMemberRefExprVar', 'clighterNamespace', 'clighterNamespaceRef', 'cligherInclusionDirective', 'clighterVarDecl']
+let g:clighter_highlight_blacklist = ['clighterNamespaceRef', 'clighterFunctionDecl', 'clighterFieldDecl', 'clighterDeclRefExprCall', 'clighterMemberRefExprCall', 'clighterNamespace', 'clighterNamespaceRef', 'cligherInclusionDirective', 'clighterVarDecl']
 " }
 
 " Plugin: gtags.vim {
