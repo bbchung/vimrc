@@ -147,6 +147,10 @@ augroup AutoInit
     au VimEnter * call s:source_session()
 
     au VimEnter * call s:build_gtags()
+    autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
+        \ endif
 augroup END
 " }
 
