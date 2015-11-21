@@ -183,7 +183,7 @@ nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
-"let g:clang_format#command = "clang-format-3.6"
+let g:clang_format#command = "clang-format-3.7"
 let g:clang_format#auto_formatexpr=1
 let g:clang_format#style_options = {
             \ "BasedOnStyle" : "LLVM",
@@ -227,7 +227,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " Plugin: Clighter {
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
 let g:clighter_highlight_blacklist = ['clighterNamespaceRef', 'clighterFunctionDecl', 'clighterFieldDecl', 'clighterDeclRefExprCall', 'clighterMemberRefExprCall', 'clighterMemberRefExprVar', 'clighterNamespace', 'clighterNamespaceRef', 'cligherInclusionDirective', 'clighterVarDecl', 'clighterTypeRef', 'clighterParmDecl']
-let g:clighter_libclang_file='/usr/lib/libclang-3.6.so'
+let g:clighter_libclang_file='/usr/lib/x86_64-linux-gnu/libclang-3.7.so.1'
 " }
 
 " Plugin: gtags.vim {
