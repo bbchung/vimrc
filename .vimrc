@@ -228,6 +228,9 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 nmap <silent> <Leader>r :call clighter#Rename()<CR>
 let g:clighter_highlight_blacklist = ['clighterNamespaceRef', 'clighterFunctionDecl', 'clighterFieldDecl', 'clighterDeclRefExprCall', 'clighterMemberRefExprCall', 'clighterMemberRefExprVar', 'clighterNamespace', 'clighterNamespaceRef', 'cligherInclusionDirective', 'clighterVarDecl', 'clighterTypeRef', 'clighterParmDecl']
 let g:clighter_libclang_file='/usr/lib/x86_64-linux-gnu/libclang-3.7.so.1'
+if &diff == 1
+    let g:clighter_autostart = 0
+endif
 " }
 
 " Plugin: gtags.vim {
