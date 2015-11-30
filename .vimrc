@@ -15,8 +15,7 @@ Plug 'bbchung/chaotic'
 Plug 'itchyny/lightline.vim'
 "Plug 'bling/vim-airline'
 "Plug 'Shougo/unite.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'FelikZ/ctrlp-py-matcher'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'Valloric/YouCompleteMe'
 Plug 'rhysd/vim-clang-format'
@@ -55,6 +54,9 @@ if has("termtruecolor")
     set guicolors
 endif
 "set lazyredraw
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+endif
 set nocompatible
 set ttyfast             " smoother changes
 set title               " show title in console title bar
@@ -103,18 +105,6 @@ let &undodir=$HOME."/.vim/undo"
 if !isdirectory(&undodir)
     call mkdir(&undodir, "p")
 endif
-
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
 
 command! W silent execute "w !sudo > /dev/null tee %"
 " }
@@ -248,9 +238,11 @@ let g:Gtags_Auto_Update = 1
 
 " Plugin: CtrlP.vim {
 "silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
-let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
-let g:ctrlp_lazy_update = 100
-let g:ctrlp_max_files = 0
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
 " }
 
 " Plugin: lightline.vim {
