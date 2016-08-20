@@ -2,7 +2,6 @@
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 "Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
@@ -117,7 +116,7 @@ command! W silent execute "w !sudo > /dev/null tee %"
 " }
 
 " AutoInit {
-let s:session_file = '.nvim_session'
+let s:session_file = '~/.vim/session'
 
 fun! s:source_session()
     if index(['c', 'cpp', 'objc', 'objcpp', 'python'], &filetype) != -1
@@ -149,7 +148,7 @@ endf
 augroup AutoInit
     au!
     au VimLeavePre * execute('silent! mksession! '.s:session_file)
-"    au VimEnter * call s:source_session()
+    "au VimEnter * call s:source_session()
     au VimEnter * call s:build_gtags()
 augroup END
 " }
@@ -157,7 +156,6 @@ augroup END
 " FileTypeConfig {
 augroup FileTypeConfig
     au!
-    au FileType c,cpp let delimitMate_expand_cr=1
     au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 expandtab fdm=syntax
     au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
     au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
@@ -242,6 +240,8 @@ nmap <silent> <C-p> :FZF<CR>
   "let g:ctrlp_use_caching = 0
 "endif
 " }
+"
+let delimitMate_expand_cr=1
 
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
