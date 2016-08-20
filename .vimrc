@@ -2,7 +2,6 @@
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set termguicolors
 
 "Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
@@ -106,6 +105,8 @@ set updatetime=700
 set hlsearch
 set undofile
 set backspace=2
+set nostartofline
+set termguicolors
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
@@ -208,7 +209,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " }
 
 " Plugin: Clighter8 {
-"nmap <silent> <Leader>r :call ClampRename()<CR>
+nmap <silent> <Leader>r :call Rename()<CR>
 let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
 let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
 if &diff == 1
