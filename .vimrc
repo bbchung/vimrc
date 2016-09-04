@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
@@ -16,6 +15,7 @@ Plug 'twerth/ir_black'
 
 "Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 "Plug 'Shougo/unite.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -242,6 +242,7 @@ nmap <silent> <C-p> :FZF<CR>
 " }
 "
 let delimitMate_expand_cr=1
+let g:airline_theme='wombat'
 
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
