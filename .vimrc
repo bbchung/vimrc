@@ -113,6 +113,9 @@ if !isdirectory(&undodir)
 endif
 
 command! W silent execute "w !sudo > /dev/null tee %"
+vmap * y/<C-r>"<CR>
+vmap # y?<C-r>"<CR>
+
 " }
 
 " AutoInit {
