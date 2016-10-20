@@ -46,10 +46,7 @@ Plug 'a.vim'
 call plug#end()
 
 if exists('s:install_plug')
-    augroup PlugInstall
-        au!
-        au VimEnter * PlugInstall
-    augroup END
+    PlugInstall
 endif
 "}
 
@@ -173,7 +170,7 @@ nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
-let g:clang_format#command = 'clang-format-3.8'
+let g:clang_format#command = 'clang-format-3.9'
 let g:clang_format#auto_formatexpr=1
 
 " Plugin: YouCompleteMe {
@@ -212,7 +209,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " Plugin: Clighter8 {
 nmap <silent> <Leader>r :call Rename()<CR>
 let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
-let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
+let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
