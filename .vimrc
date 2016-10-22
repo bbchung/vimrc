@@ -62,30 +62,30 @@ endif
 if !&diff
     set cursorline
 endif
-set title               " show title in console title bar
-set novisualbell        " turn off visual bell
+set title
+set novisualbell
 set mouse=a
 set conceallevel=0
 set concealcursor=nc
-set laststatus=2                " allways show status line
-set ruler               " show the cursor position all the time
-set number              " show line numbers
-set showcmd             " display incomplete commands
-set softtabstop=4       " numbers of spaces of tab character
-set tabstop=4       " numbers of spaces of tab character
-set shiftwidth=4        " numbers of spaces to (auto)indent
+set laststatus=2
+set ruler
+set number
+set showcmd
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
 set colorcolumn=0
 set nowrap
-set scrolloff=3         " keep 3 lines when scrolling
+set scrolloff=3
 set sidescrolloff=1
-set incsearch           " do incremental searching
-set nobackup            " do not keep a backup file
-set modeline            " document sets vim mode
+set incsearch
+set nobackup
+set modeline
 set ignorecase
 set smartcase
 set pumheight=12
 set previewheight=4
-set nospell             " disable spell checking
+set nospell
 set foldlevelstart=20
 set tabpagemax=100
 set wildmode=longest,full
@@ -93,7 +93,6 @@ set wildmenu
 set completeopt=longest,menuone
 set grepprg=grep\ -nH\ $*
 set sessionoptions=buffers,curdir,folds,winsize,options,globals
-"set tenc=utf8
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf-16
 set fileformat=unix
@@ -115,22 +114,21 @@ vmap # y?<C-r>"<CR>
 
 " }
 
-" AutoInit {
 let s:session_file = '~/.vim/session'
 
-fun! s:source_session()
-    if index(['c', 'cpp', 'objc', 'objcpp', 'python'], &filetype) != -1
-        let s:mksession=1
-    endif
+"fun! s:source_session()
+    "if index(['c', 'cpp', 'objc', 'objcpp', 'python'], &filetype) != -1
+        "let s:mksession=1
+    "endif
 
-    if argc() == 0 && filereadable(s:session_file)
-        echohl MoreMsg |
-                    \ echomsg 'Session Loaded' |
-                    \ echohl None
-        execute('silent! source '.s:session_file)
-        let s:mksession=1
-    endif
-endf
+    "if argc() == 0 && filereadable(s:session_file)
+        "echohl MoreMsg |
+                    "\ echomsg 'Session Loaded' |
+                    "\ echohl None
+        "execute('silent! source '.s:session_file)
+        "let s:mksession=1
+    "endif
+"endf
 
 fun! s:build_gtags()
     if index(['c', 'cpp'], &filetype) == -1
@@ -151,7 +149,6 @@ augroup AutoInit
     "au VimEnter * call s:source_session()
     au VimEnter * call s:build_gtags()
 augroup END
-" }
 
 " FileTypeConfig {
 augroup FileTypeConfig
@@ -172,6 +169,7 @@ nmap <silent> <F2> :TagbarToggle<CR>
 " Plugin: vim-clang-format {
 let g:clang_format#command = 'clang-format-3.9'
 let g:clang_format#auto_formatexpr=1
+" }
 
 " Plugin: YouCompleteMe {
 let g:ycm_confirm_extra_conf=0
@@ -184,8 +182,8 @@ let g:ycm_style_warning_symbol = '💡'
 " }
 
 " Plugin: NeoMake {
-let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
-let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
+"let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
+"let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
 " }
 
 " Plugin: syntastic {
@@ -240,9 +238,13 @@ nmap <silent> <C-p> :FZF<CR>
   "let g:ctrlp_use_caching = 0
 "endif
 " }
-"
-let delimitMate_expand_cr=1
-let g:airline_theme='wombat'
 
+" Plugin: airline {
+let g:airline_theme='wombat'
+" }
+"
+" Plugin: delimitMate {
+let delimitMate_expand_cr=1
+" }
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
