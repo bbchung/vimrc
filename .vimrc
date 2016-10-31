@@ -22,7 +22,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf'
 Plug 'majutsushi/tagbar'
 
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 "Plug 'Rip-Rip/clang_complete'
 "Plug 'Shougo/deoplete.nvim'
 "
@@ -39,7 +39,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 Plug 'a.vim'
 "Plug 'Conque-GDB'
 "Plug 'CSApprox'
@@ -65,48 +65,38 @@ endif
 set title
 set novisualbell
 set mouse=a
-set conceallevel=0
-set concealcursor=nc
 set laststatus=2
-set ruler
 set number
-set showcmd
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
-set colorcolumn=0
-set nowrap
-set scrolloff=3
+set scrolloff=4
 set sidescrolloff=1
 set incsearch
-set nobackup
-set modeline
+set hlsearch
 set ignorecase
 set smartcase
 set pumheight=12
 set previewheight=4
-set nospell
 set foldlevelstart=20
 set tabpagemax=100
 set wildmode=longest,full
 set wildmenu
 set completeopt=longest,menuone
 set grepprg=grep\ -nH\ $*
-set sessionoptions=buffers,curdir,folds,winsize,options,globals
+set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf-16
 set fileformat=unix
 set updatetime=700
-set hlsearch
 set undofile
 set backspace=2
-set nostartofline
 set termguicolors
 
-let &undodir=$HOME.'/.vim/undo'
-if !isdirectory(&undodir)
-    call mkdir(&undodir, 'p')
-endif
+"let &undodir=$HOME.'/.vim/undo'
+"if !isdirectory(&undodir)
+    "call mkdir(&undodir, 'p')
+"endif
 
 command! W silent execute "w !sudo > /dev/null tee %"
 vmap * y/<C-r>"<CR>
