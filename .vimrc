@@ -114,7 +114,7 @@ vmap # y?<C-r>"<CR>
 
 " }
 
-let s:session_file = '~/.vim/session'
+let s:session_file = '.session'
 
 "fun! s:source_session()
     "if index(['c', 'cpp', 'objc', 'objcpp', 'python'], &filetype) != -1
@@ -143,22 +143,13 @@ fun! s:build_gtags()
     endif
 endf
 
-augroup AutoInit
-    au!
-    au VimLeavePre * execute('silent! mksession! '.s:session_file)
-    "au VimEnter * call s:source_session()
-    au VimEnter * call s:build_gtags()
-augroup END
+au VimLeave * execute('silent! mksession! '.s:session_file)
+"au VimEnter * call s:source_session()
+au VimEnter  call s:build_gtags()
 
-" FileTypeConfig {
-augroup FileTypeConfig
-    au!
-    au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 expandtab fdm=syntax
-    au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
-    au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
-    au FileType asm setlocal filetype=nasm formatprg=
-augroup END
-" }
+au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
+au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 
 " Plugin: Tagbar {
 let g:tagbar_left = 1
