@@ -229,4 +229,10 @@ let g:airline_theme='wombat'
 let delimitMate_expand_cr=1
 " }
 
+" Plugin: neocomplete {
+let g:neocomplete#enable_at_startup=1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+"
+
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
