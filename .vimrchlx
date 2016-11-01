@@ -28,7 +28,7 @@ Plug 'Shougo/neocomplete.vim'
 "Plug 'Shougo/deoplete.nvim'
 "
 Plug 'rhysd/vim-clang-format'
-"Plug 'bbchung/clighter8'
+Plug 'bbchung/clighter8'
 Plug 'bbchung/gtags.vim'
 
 "Plug 'scrooloose/syntastic'
@@ -56,15 +56,18 @@ endif
 
 " General vim settings {
 
-colorscheme jellybeans
+"colorscheme jellybeans
+colorscheme clighter8
 syntax on
+"set t_Co=256
+
 
 "set lazyredraw
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 if !&diff
-    set cursorline
+	set cursorline
 endif
 set title               " show title in console title bar
 set novisualbell        " turn off visual bell
@@ -75,7 +78,7 @@ set laststatus=2                " allways show status line
 set ruler               " show the cursor position all the time
 set number              " show line numbers
 set showcmd             " display incomplete commands
-set softtabstop=4       " numbers of spaces of tab character
+set softtabstop=0       " numbers of spaces of tab character
 set tabstop=4       " numbers of spaces of tab character
 set shiftwidth=4        " numbers of spaces to (auto)indent
 set colorcolumn=0
@@ -106,8 +109,8 @@ set hlsearch
 set undofile
 set backspace=2
 set nostartofline
-"set termguicolors
-set t_Co=256
+set noexpandtab
+set termguicolors
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
@@ -115,6 +118,8 @@ if !isdirectory(&undodir)
 endif
 
 command! W silent execute "w !sudo > /dev/null tee %"
+vmap * y/<C-r>"<CR>
+vmap # y?<C-r>"<CR>
 " }
 
 " AutoInit {
@@ -150,7 +155,7 @@ endf
 augroup AutoInit
     au!
     au VimLeavePre * execute('silent! mksession! '.s:session_file)
-    "au VimEnter * call s:source_session()
+    au VimEnter * call s:source_session()
     au VimEnter * call s:build_gtags()
 augroup END
 " }
@@ -158,7 +163,7 @@ augroup END
 " FileTypeConfig {
 augroup FileTypeConfig
     au!
-    au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 expandtab
+    au FileType c,cpp,objc,objcpp,python,nasm,vim setlocal tw=0 noexpandtab fdm=syntax
     au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
     au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
     au FileType asm setlocal filetype=nasm formatprg=
@@ -211,7 +216,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " Plugin: Clighter8 {
 nmap <silent> <Leader>r :call Rename()<CR>
 let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
-let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.8.so.1'
+let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
