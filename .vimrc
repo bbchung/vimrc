@@ -94,10 +94,10 @@ set undofile
 set backspace=2
 set termguicolors
 
-"let &undodir=$HOME.'/.vim/undo'
-"if !isdirectory(&undodir)
-    "call mkdir(&undodir, 'p')
-"endif
+let &undodir=$HOME.'/.vim/undo'
+if !isdirectory(&undodir)
+    call mkdir(&undodir, 'p')
+endif
 
 command! W silent execute "w !sudo > /dev/null tee %"
 vmap * y/<C-r>"<CR>
