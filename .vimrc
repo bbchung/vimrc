@@ -26,7 +26,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-
 "Plug 'Rip-Rip/clang_complete'
 "Plug 'Shougo/deoplete.nvim'
 "
-Plug 'rhysd/vim-clang-format'
+"Plug 'rhysd/vim-clang-format'
 Plug 'bbchung/clighter8'
 Plug 'bbchung/gtags.vim'
 
@@ -193,6 +193,7 @@ let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
+set formatexpr=ClFormat()
 " }
 
 " Plugin: gtags.vim {
@@ -233,6 +234,6 @@ let delimitMate_expand_cr=1
 let g:neocomplete#enable_at_startup=1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
-"
+
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
