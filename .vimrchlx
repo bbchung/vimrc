@@ -27,7 +27,7 @@ Plug 'Shougo/neocomplete.vim'
 "Plug 'Rip-Rip/clang_complete'
 "Plug 'Shougo/deoplete.nvim'
 "
-Plug 'rhysd/vim-clang-format'
+"Plug 'rhysd/vim-clang-format'
 Plug 'bbchung/clighter8'
 Plug 'bbchung/gtags.vim'
 
@@ -95,10 +95,10 @@ set undofile
 set backspace=2
 set termguicolors
 
-"let &undodir=$HOME.'/.vim/undo'
-"if !isdirectory(&undodir)
-    "call mkdir(&undodir, 'p')
-"endif
+let &undodir=$HOME.'/.vim/undo'
+if !isdirectory(&undodir)
+	call mkdir(&undodir, 'p')
+endif
 
 command! W silent execute "w !sudo > /dev/null tee %"
 vmap * y/<C-r>"<CR>
@@ -139,7 +139,7 @@ au VimLeave * execute('silent! mksession! '.s:session_file)
 "au VimEnter * call s:source_session()
 au VimEnter  call s:build_gtags()
 
-au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 fdm=syntax
+au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 fdm=indent
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 
@@ -193,6 +193,8 @@ let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
+set formatexpr=ClFormat()
+let g:clang_format_path='clang-format'
 " }
 
 " Plugin: gtags.vim {
@@ -233,6 +235,9 @@ let delimitMate_expand_cr=1
 let g:neocomplete#enable_at_startup=1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
-"
+
+map <C-K> :pyf /usr/local/bin/clang-format.py<cr>
+imap <C-K> <c-o>:pyf /usr/local/bin/clang-format.py<cr>
+
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:

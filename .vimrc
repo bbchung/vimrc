@@ -194,6 +194,7 @@ if &diff == 1
     let g:clighter8_autostart = 0
 endif
 set formatexpr=ClFormat()
+let g:clang_format_path='clang-format'
 " }
 
 " Plugin: gtags.vim {
