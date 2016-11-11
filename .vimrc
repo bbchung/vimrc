@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Vim-Plug {
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
     execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
@@ -240,11 +239,11 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 let g:lightline={}
 
 let g:lightline.active = {
-		    \ 'left': [ [ 'mode', 'paste' ],
-		    \           [ 'readonly', 'filename', 'modified' ] ],
-		    \ 'right': [ [ 'lineinfo' ],
-		    \            [ 'percent' ],
-		    \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+            \ 'left': [ [ 'mode', 'paste' ],
+            \           [ 'readonly', 'filename', 'modified' ] ],
+            \ 'right': [ [ 'lineinfo' ],
+            \            [ 'percent' ],
+            \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
 
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
