@@ -43,6 +43,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'a.vim'
 "Plug 'Conque-GDB'
 "Plug 'CSApprox'
+Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 if exists('s:install_plug')
