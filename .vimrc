@@ -136,7 +136,7 @@ endf
 
 au VimLeave * execute('silent! mksession! '.s:session_file)
 "au VimEnter * call s:source_session()
-au VimEnter  call s:build_gtags()
+au VimEnter * call s:build_gtags()
 
 au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
