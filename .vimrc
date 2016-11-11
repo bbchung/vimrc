@@ -127,10 +127,10 @@ fun! s:build_gtags()
     endif
 
     if executable('gtags') && !filereadable('GTAGS')
-        echohl MoreMsg |
-                    \ echomsg 'building gtags' |
-                    \ echohl None
-        silent call system('gtags')
+        let l:choice = confirm("build tag?", "&Yes\n&No", 2)
+        if l:choice == 1
+            silent call system('gtags')
+        endif
     endif
 endf
 
