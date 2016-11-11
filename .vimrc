@@ -127,7 +127,7 @@ fun! s:build_gtags()
     endif
 
     if executable('gtags') && !filereadable('GTAGS')
-        let l:choice = confirm("build tag?", "&Yes\n&No", 2)
+        let l:choice = confirm('build tag?', "&Yes\n&No", 2)
         if l:choice == 1
             silent call system('gtags')
         endif
@@ -175,11 +175,12 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_python_checkers = ['pylint', 'pyflakes', 'pep8']
-let g:syntastic_mode_map = {'passive_filetypes': ['python'] }
+"let g:syntastic_mode_map = {'passive_filetypes': ['python'] }
 let g:syntastic_error_symbol = '🚫'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_error_symbol = '💡'
 let g:syntastic_style_warning_symbol = '💡'
+let g:syntastic_vim_checkers = ['vint']
 " }
 
 " Plugin: UltiSnips {
@@ -187,7 +188,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " }
 
 " Plugin: Clighter8 {
-nmap <silent> <Leader>r :call Rename()<CR>
+nmap <silent> <Leader>r :call ClRename()<CR>
 let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
 let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
 if &diff == 1
