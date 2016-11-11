@@ -145,7 +145,7 @@ au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 " Plugin: Tagbar {
 let g:tagbar_left = 1
 let g:tagbar_width = 28
-nmap <silent> <F2> :TagbarToggle<CR>
+"nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
@@ -235,6 +235,15 @@ let delimitMate_expand_cr=1
 let g:neocomplete#enable_at_startup=1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+
+let g:lightline={}
+
+let g:lightline.active = {
+		    \ 'left': [ [ 'mode', 'paste' ],
+		    \           [ 'readonly', 'filename', 'modified' ] ],
+		    \ 'right': [ [ 'lineinfo' ],
+		    \            [ 'percent' ],
+		    \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
 
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
