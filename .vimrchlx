@@ -20,7 +20,7 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'Shougo/unite.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf'
-Plug 'majutsushi/tagbar'
+"Plug 'majutsushi/tagbar'
 
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 Plug 'Shougo/neocomplete.vim'
@@ -40,7 +40,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-fugitive'
+"Plug 'tpope/vim-fugitive'
 "Plug 'terryma/vim-multiple-cursors'
 Plug 'a.vim'
 "Plug 'Conque-GDB'
@@ -72,7 +72,7 @@ set number
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
-set scrolloff=4
+set scrolloff=8
 set sidescrolloff=1
 set incsearch
 set hlsearch
@@ -128,25 +128,25 @@ fun! s:build_gtags()
     endif
 
     if executable('gtags') && !filereadable('GTAGS')
-        echohl MoreMsg |
-                    \ echomsg 'building gtags' |
-                    \ echohl None
-        silent call system('gtags')
+        let l:choice = confirm('build tag?', "&Yes\n&No", 2)
+        if l:choice == 1
+            silent call system('gtags')
+        endif
     endif
 endf
 
 au VimLeave * execute('silent! mksession! '.s:session_file)
 "au VimEnter * call s:source_session()
-au VimEnter  call s:build_gtags()
+au VimEnter * call s:build_gtags()
 
-au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 fdm=indent
+au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 fdm=indent expandtab
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 
 " Plugin: Tagbar {
 let g:tagbar_left = 1
 let g:tagbar_width = 28
-nmap <silent> <F2> :TagbarToggle<CR>
+"nmap <silent> <F2> :TagbarToggle<CR>
 " }
 
 " Plugin: vim-clang-format {
@@ -190,9 +190,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 nmap <silent> <Leader>r :call Rename()<CR>
 let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
 let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
-if &diff == 1
-    let g:clighter8_autostart = 0
-endif
+let g:clighter8_autostart = 1
 set formatexpr=ClFormat()
 let g:clang_format_path='clang-format'
 " }
