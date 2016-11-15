@@ -20,7 +20,6 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'junegunn/fzf'
 Plug 'Yggdroot/LeaderF'
-"Plug 'majutsushi/tagbar'
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 "Plug 'Rip-Rip/clang_complete'
@@ -32,15 +31,18 @@ Plug 'bbchung/gtags.vim'
 Plug 'scrooloose/syntastic'
 "Plug 'benekastah/neomake'
 
-"Plug 'jlanzarotta/bufexplorer'
+"Plug 'majutsushi/tagbar'
+Plug 'jlanzarotta/bufexplorer'
 "Plug 'scrooloose/nerdtree'
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
-"Plug 'tpope/vim-fugitive'
 "Plug 'terryma/vim-multiple-cursors'
 Plug 'a.vim'
+
+"Plug 'tpope/vim-fugitive'
 "Plug 'Conque-GDB'
 "Plug 'CSApprox'
 Plug 'skywind3000/asyncrun.vim'

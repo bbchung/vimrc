@@ -35,7 +35,7 @@ Plug 'bbchung/gtags.vim'
 "Plug 'scrooloose/syntastic'
 "Plug 'benekastah/neomake'
 
-"Plug 'jlanzarotta/bufexplorer'
+Plug 'jlanzarotta/bufexplorer'
 "Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
@@ -214,7 +214,8 @@ let g:Gtags_Auto_Update = 1
 " }
 
 " Plugin: LeaderF {
-"let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ShortcutF = '<C-P>'
+
 " }
 
 " Plugin: CtrlP.vim {
