@@ -18,7 +18,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 "Plug 'Shougo/unite.vim'
 "Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf'
+Plug 'Yggdroot/LeaderF'
 "Plug 'majutsushi/tagbar'
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
@@ -31,7 +32,7 @@ Plug 'bbchung/gtags.vim'
 Plug 'scrooloose/syntastic'
 "Plug 'benekastah/neomake'
 
-Plug 'jlanzarotta/bufexplorer'
+"Plug 'jlanzarotta/bufexplorer'
 "Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
@@ -211,8 +212,13 @@ let g:Gtags_Auto_Update = 1
 " }
 
 " Plugin: FZF {
-nmap <silent> <C-p> :FZF<CR>
+"nmap <silent> <C-p> :FZF<CR>
 " }
+
+"" Plugin: LeaderF {
+let g:Lf_ShortcutF = '<C-P>'
+" }
+
 
 " Plugin: CtrlP.vim {
 "silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
