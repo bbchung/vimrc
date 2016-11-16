@@ -124,6 +124,10 @@ let s:session_file = '.session'
 "endf
 
 fun! s:build_gtags()
+    if &diff
+        return
+    endif
+
     if index(['c', 'cpp'], &filetype) == -1
         return
     endif
