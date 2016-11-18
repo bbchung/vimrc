@@ -247,7 +247,10 @@ let delimitMate_expand_cr=1
 let g:neocomplete#enable_at_startup=1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+" }
 
+
+" Plugin: lightline {
 let g:lightline={}
 
 let g:lightline.active = {
@@ -256,6 +259,7 @@ let g:lightline.active = {
             \ 'right': [ [ 'lineinfo' ],
             \            [ 'percent' ],
             \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+"
 
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
