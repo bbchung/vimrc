@@ -21,7 +21,7 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'junegunn/fzf'
 Plug 'Yggdroot/LeaderF'
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
 "Plug 'Rip-Rip/clang_complete'
 "
 "Plug 'rhysd/vim-clang-format'
@@ -200,7 +200,8 @@ let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
-set formatexpr=ClFormat()
+
+au FileType c,cpp set formatexpr=ClFormat()
 "let g:clang_format_path='clang-format'
 " }
 
