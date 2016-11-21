@@ -10,8 +10,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'nanotech/jellybeans.vim'
-Plug 'twerth/ir_black'
+"Plug 'nanotech/jellybeans.vim'
+"Plug 'twerth/ir_black'
 
 "Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-airline'
@@ -23,8 +23,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/LeaderF'
 "Plug 'majutsushi/tagbar'
 
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
-Plug 'Shougo/neocomplete.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
+"Plug 'Shougo/neocomplete.vim'
 "Plug 'Rip-Rip/clang_complete'
 "Plug 'Shougo/deoplete.nvim'
 "
@@ -32,7 +32,7 @@ Plug 'Shougo/neocomplete.vim'
 Plug 'bbchung/clighter8'
 Plug 'bbchung/gtags.vim'
 
-"Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 "Plug 'benekastah/neomake'
 
 Plug 'jlanzarotta/bufexplorer'
@@ -160,17 +160,18 @@ let g:clang_format#auto_formatexpr=1
 
 " Plugin: YouCompleteMe {
 let g:ycm_confirm_extra_conf=0
-"nmap <silent> <C-]> :YcmCompleter GoTo<CR>
+nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_error_symbol = '🚫'
-let g:ycm_warning_symbol = '⚠️'
-let g:ycm_style_error_symbol = '💡'
-let g:ycm_style_warning_symbol = '💡'
+let g:ycm_error_symbol = 'e'
+let g:ycm_warning_symbol = 'w'
+let g:ycm_style_error_symbol = 'e'
+let g:ycm_style_warning_symbol = 'w'
 " }
 
+
 " Plugin: NeoMake {
-let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
-let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
+"let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
+"let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
 " }
 
 " Plugin: syntastic {
@@ -178,13 +179,16 @@ let g:syntastic_cursor_columns = 0
 let g:syntastic_loc_list_height=5
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_enable_signs = 1
+let g:syntastic_enable_signs = 0
 let g:syntastic_python_checkers = ['pylint', 'pyflakes', 'pep8']
 let g:syntastic_mode_map = {'passive_filetypes': ['python'] }
 let g:syntastic_error_symbol = '🚫'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_error_symbol = '💡'
 let g:syntastic_style_warning_symbol = '💡'
+
+hi SyntasticError term=reverse cterm=bold,undercurl ctermbg=NONE ctermfg=1 gui=bold,undercurl guibg=bg guifg=#FF0000 guisp=Red
+hi SyntasticWarning term=underline cterm=bold,undercurl ctermbg=NONE ctermfg=3 gui=bold,undercurl guibg=bg guifg=#FFFF00 guisp=Blue
 " }
 
 " Plugin: UltiSnips {
@@ -192,7 +196,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " }
 
 " Plugin: Clighter8 {
-nmap <silent> <Leader>r :call Rename()<CR>
+nmap <silent> <Leader>r :call ClRename()<CR>
 let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
 let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 let g:clighter8_autostart = 1
