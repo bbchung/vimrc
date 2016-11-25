@@ -10,7 +10,7 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Plug 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim'
 "Plug 'twerth/ir_black'
 
 "Plug 'itchyny/lightline.vim'
@@ -32,7 +32,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-
 Plug 'bbchung/clighter8'
 Plug 'bbchung/gtags.vim'
 
-Plug 'scrooloose/syntastic'
+Plug 'maralla/validator.vim'
+"Plug 'scrooloose/syntastic'
 "Plug 'benekastah/neomake'
 
 Plug 'jlanzarotta/bufexplorer'
@@ -55,8 +56,8 @@ endif
 
 " General vim settings {
 
-colorscheme clighter8
 syntax on
+colorscheme clighter8
 
 "set lazyredraw
 if executable('ag')
@@ -160,7 +161,8 @@ let g:clang_format#auto_formatexpr=1
 
 " Plugin: YouCompleteMe {
 let g:ycm_confirm_extra_conf=0
-nmap <silent> <C-]> :YcmCompleter GoTo<CR>
+
+nmap <silent><C-\>g :YcmCompleter GoTo<CR>
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_error_symbol = 'e'
 let g:ycm_warning_symbol = 'w'
@@ -186,9 +188,6 @@ let g:syntastic_error_symbol = '🚫'
 let g:syntastic_warning_symbol = '⚠️'
 let g:syntastic_style_error_symbol = '💡'
 let g:syntastic_style_warning_symbol = '💡'
-
-hi SyntasticError term=reverse cterm=bold,undercurl ctermbg=NONE ctermfg=1 gui=bold,undercurl guibg=bg guifg=#FF0000 guisp=Red
-hi SyntasticWarning term=underline cterm=bold,undercurl ctermbg=NONE ctermfg=3 gui=bold,undercurl guibg=bg guifg=#FFFF00 guisp=Blue
 " }
 
 " Plugin: UltiSnips {
@@ -197,7 +196,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 
 " Plugin: Clighter8 {
 nmap <silent> <Leader>r :call ClRename()<CR>
-let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
+let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 let g:clighter8_autostart = 1
 set formatexpr=ClFormat()
@@ -251,5 +250,7 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 map <C-K> :pyf /usr/local/bin/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/local/bin/clang-format.py<cr>
 
+let g:validator_auto_open_quickfix = 1
+let g:validator_ignore = ['cpp, c']
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
