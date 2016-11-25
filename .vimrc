@@ -28,7 +28,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-
 Plug 'bbchung/clighter8'
 Plug 'bbchung/gtags.vim'
 
-Plug 'scrooloose/syntastic'
+Plug 'maralla/validator.vim'
+"Plug 'scrooloose/syntastic'
 "Plug 'benekastah/neomake'
 
 "Plug 'majutsushi/tagbar'
@@ -140,6 +141,7 @@ fun! s:build_gtags()
     endif
 endf
 
+augroup vimrc
 au VimLeave * execute('silent! mksession! '.s:session_file)
 "au VimEnter * call s:source_session()
 au VimEnter * call s:build_gtags()
@@ -147,6 +149,7 @@ au VimEnter * call s:build_gtags()
 au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
+augroup END
 
 " Plugin: Tagbar {
 let g:tagbar_left = 1
@@ -195,13 +198,16 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 
 " Plugin: Clighter8 {
 nmap <silent> <Leader>r :call ClRename()<CR>
-let g:clighter8_highlight_blacklist = ['clighter8NamespaceRef', 'clighter8FunctionDecl', 'clighter8FieldDecl', 'clighter8DeclRefExprCall', 'clighter8MemberRefExprCall', 'clighter8MemberRefExprVar', 'clighter8Namespace', 'clighter8NamespaceRef', 'clighter8InclusionDirective', 'clighter8VarDecl', 'clighter8TypeRef', 'clighter8ParmDecl']
+
+let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
 
+augroup vimrc
 au FileType c,cpp set formatexpr=ClFormat()
+augroup end
 "let g:clang_format_path='clang-format'
 " }
 
@@ -261,6 +267,15 @@ let g:lightline.active = {
             \            [ 'percent' ],
             \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
 "
+
+" Plugin: validator
+let g:validator_auto_open_quickfix = 0
+let g:validator_ignore = ['cpp, c']
+let g:validator_error_symbol = '🚫'
+let g:validator_warning_symbol = '⚠️'
+let g:validator_style_error_symbol = '💡'
+let g:validator_style_warning_symbol = '💡'
+" 
 
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
