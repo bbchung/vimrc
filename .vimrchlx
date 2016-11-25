@@ -91,7 +91,6 @@ set completeopt=longest,menuone
 set grepprg=grep\ -nH\ $*
 set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
-scriptencoding utf-8
 set fileencodings=utf-8,big5,gb2312,utf-16
 set fileformat=unix
 set updatetime=700
@@ -143,7 +142,7 @@ fun! s:build_gtags()
     endif
 endf
 
-augroup
+augroup vimrc
 au VimLeave * execute('silent! mksession! '.s:session_file)
 au VimEnter * call s:build_gtags()
 "au VimEnter * call s:source_session()
@@ -203,7 +202,7 @@ nmap <silent> <Leader>r :call ClRename()<CR>
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 let g:clighter8_autostart = 1
-augroup
+augroup vimrc
 au FileType c,cpp set formatexpr=ClFormat()
 augroup END
 let g:clang_format_path='clang-format'
