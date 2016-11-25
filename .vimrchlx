@@ -1,3 +1,4 @@
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " bbchung vimrc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,6 +91,7 @@ set completeopt=longest,menuone
 set grepprg=grep\ -nH\ $*
 set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
+scriptencoding utf-8
 set fileencodings=utf-8,big5,gb2312,utf-16
 set fileformat=unix
 set updatetime=700
@@ -141,13 +143,15 @@ fun! s:build_gtags()
     endif
 endf
 
+augroup
 au VimLeave * execute('silent! mksession! '.s:session_file)
-"au VimEnter * call s:source_session()
 au VimEnter * call s:build_gtags()
+"au VimEnter * call s:source_session()
 
 au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 fdm=indent expandtab
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
+augroup END
 
 " Plugin: Tagbar {
 let g:tagbar_left = 1
@@ -199,7 +203,9 @@ nmap <silent> <Leader>r :call ClRename()<CR>
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 let g:clighter8_autostart = 1
-set formatexpr=ClFormat()
+augroup
+au FileType c,cpp set formatexpr=ClFormat()
+augroup END
 let g:clang_format_path='clang-format'
 " }
 
@@ -251,6 +257,7 @@ map <C-K> :pyf /usr/local/bin/clang-format.py<cr>
 imap <C-K> <c-o>:pyf /usr/local/bin/clang-format.py<cr>
 
 let g:validator_auto_open_quickfix = 1
+"let g:validator_python_checkers = ['pylint']
 let g:validator_ignore = ['cpp, c']
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
