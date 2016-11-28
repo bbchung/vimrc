@@ -36,7 +36,6 @@ Plug 'maralla/validator.vim'
 Plug 'jlanzarotta/bufexplorer'
 "Plug 'scrooloose/nerdtree'
 
-Plug 'maralla/validator.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -229,10 +228,9 @@ let g:Gtags_Auto_Update = 1
 "nmap <silent> <C-p> :FZF<CR>
 " }
 
-"" Plugin: LeaderF {
+" Plugin: LeaderF {
 let g:Lf_ShortcutF = '<C-P>'
 " }
-
 
 " Plugin: CtrlP.vim {
 "silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
@@ -256,7 +254,6 @@ let g:neocomplete#enable_at_startup=1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 " }
-
 
 " Plugin: lightline {
 let g:lightline={}

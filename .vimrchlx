@@ -173,7 +173,6 @@ let g:ycm_style_error_symbol = 'e'
 let g:ycm_style_warning_symbol = 'w'
 " }
 
-
 " Plugin: NeoMake {
 "let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
 "let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
@@ -252,11 +251,13 @@ let g:neocomplete#enable_at_startup=1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 
-map <C-K> :pyf /usr/local/bin/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /usr/local/bin/clang-format.py<cr>
-
-let g:validator_auto_open_quickfix = 1
-"let g:validator_python_checkers = ['pylint']
+" Plugin: validator
+let g:validator_auto_open_quickfix = 0
 let g:validator_ignore = ['cpp, c']
+let g:validator_error_symbol = 'E'
+let g:validator_warning_symbol = 'W'
+let g:validator_style_error_symbol = 'S'
+let g:validator_style_warning_symbol = 'S'
+"
 
 " vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
