@@ -197,7 +197,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " }
 
 " Plugin: Clighter8 {
-nmap <silent> <Leader>r :call ClRename()<CR>
+nmap <silent> <Leader>r :ClRenameCursor<CR>
 
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
