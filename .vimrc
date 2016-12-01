@@ -26,7 +26,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-
 "
 "Plug 'rhysd/vim-clang-format'
 Plug 'bbchung/clighter8'
-Plug 'bbchung/gtags.vim'
+"Plug 'bbchung/gtags.vim'
 
 Plug 'maralla/validator.vim'
 "Plug 'scrooloose/syntastic'
@@ -124,27 +124,10 @@ let s:session_file = '.session'
     "endif
 "endf
 
-fun! s:build_gtags()
-    if &diff
-        return
-    endif
-
-    if index(['c', 'cpp'], &filetype) == -1
-        return
-    endif
-
-    if executable('gtags') && !filereadable('GTAGS')
-        let l:choice = confirm('build tag?', "&Yes\n&No", 2)
-        if l:choice == 1
-            silent call system('gtags')
-        endif
-    endif
-endf
 
 augroup vimrc
 au VimLeave * execute('silent! mksession! '.s:session_file)
 "au VimEnter * call s:source_session()
-au VimEnter * call s:build_gtags()
 
 au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
@@ -209,14 +192,11 @@ augroup vimrc
 au FileType c,cpp set formatexpr=ClFormat()
 augroup end
 "let g:clang_format_path='clang-format'
-" }
-
-" Plugin: gtags.vim {
 nmap <silent><C-\>s :GtagsCursor<CR>
 nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 
-let g:Gtags_Auto_Update = 1
+let g:Gtags_Auto_Update = 0
 " }
 
 " Plugin: unite.vim {
