@@ -272,4 +272,4 @@ au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 augroup END
 "}
 
-"vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
+" vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
