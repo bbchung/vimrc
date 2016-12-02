@@ -1,6 +1,3 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" bbchung vimrc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "Vim-Plug {
 let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
     execute '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
@@ -9,53 +6,213 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+"Plugin Group: Color Scheme {
 Plug 'nanotech/jellybeans.vim'
 Plug 'twerth/ir_black'
+"}
 
-"Plug 'itchyny/lightline.vim'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plugin Group: Status Bar{
+"Plugin: lightline.vim {
+Plug 'itchyny/lightline.vim'
 
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \ }
+      \ }
+"}
+
+"Plugin: vim-airline {
+"Plug 'bling/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"let g:airline_theme='wombat'
+"}
+"}
+
+"Plugin Group: Search{
+"Plugin: unite.vim {
 "Plug 'Shougo/unite.vim'
+"silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
+"nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
+"}
+
+"Plugin: ctrlp.vim {
 "Plug 'ctrlpvim/ctrlp.vim'
+"silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
+"if executable('ag')
+  "set grepprg=ag\ --nogroup\ --nocolor
+  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  "let g:ctrlp_use_caching = 0
+"endif
+"}
+
+"Plugin: fzf {
 "Plug 'junegunn/fzf'
+"nmap <silent> <C-p> :FZF<CR>
+"}
+
+"Plugin: LeaderF {
 Plug 'Yggdroot/LeaderF'
+let g:Lf_ShortcutF = '<C-P>'
+"}
 
+"}
+
+"Plugin Group: Autocomplete{
+"Plugin: YouCompleteMe {
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
+let g:ycm_confirm_extra_conf=0
+nmap <silent> <C-]> :YcmCompleter GoTo<CR>
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_error_symbol = '❌'
+let g:ycm_warning_symbol = '❗️'
+let g:ycm_style_error_symbol = '💡'
+let g:ycm_style_warning_symbol = '💡'
+"}
+
+"Plugin: neocomplete {
+"Plug 'Shougo/neocomplete.vim'
+"let g:neocomplete#enable_at_startup=1
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+"}
+
+"Plugin: clang_complete {
 "Plug 'Rip-Rip/clang_complete'
-"
+"}
+"}
+
+"Plugin Group: C++{
+"Plugin: vim-clang-format{
 "Plug 'rhysd/vim-clang-format'
+"let g:clang_format#command = 'clang-format-3.9'
+"let g:clang_format#auto_formatexpr=1
+"}
+
+"Plugin: Clighter8 {
 Plug 'bbchung/clighter8'
-"Plug 'bbchung/gtags.vim'
+nmap <silent> <Leader>r :ClRenameCursor<CR>
 
-Plug 'maralla/validator.vim'
-"Plug 'scrooloose/syntastic'
-"Plug 'benekastah/neomake'
+let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
+let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
+if &diff == 1
+    let g:clighter8_autostart = 0
+endif
 
-"Plug 'majutsushi/tagbar'
-Plug 'jlanzarotta/bufexplorer'
-"Plug 'scrooloose/nerdtree'
+augroup vimrc
+au FileType c,cpp set formatexpr=ClFormat()
+augroup end
+"let g:clang_format_path='clang-format'
+nmap <silent><C-\>s :GtagsCursor<CR>
+nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
+nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 
-Plug 'scrooloose/nerdcommenter'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'Raimondi/delimitMate'
-"Plug 'terryma/vim-multiple-cursors'
+let g:Gtags_Auto_Update = 0
+"}
+
+"Plugin: a.vim {
 Plug 'a.vim'
+"}
 
-"Plug 'tpope/vim-fugitive'
+"Plugin: Conque-GDB {
 "Plug 'Conque-GDB'
+"}
+"}
+
+"Plugin Group: Linter{
+"Plugin: validator.vim {
+Plug 'maralla/validator.vim'
+let g:validator_auto_open_quickfix = 0
+let g:validator_ignore = ['cpp, c']
+let g:validator_error_symbol = '❌'
+let g:validator_warning_symbol = '❗️'
+let g:validator_style_error_symbol = '💡'
+let g:validator_style_warning_symbol = '💡'
+"}
+
+"Plugin: syntastic {
+"Plug 'scrooloose/syntastic'
+"let g:syntastic_cursor_columns = 0
+"let g:syntastic_loc_list_height=5
+"let g:syntastic_always_populate_loc_list=1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_enable_signs = 1
+"let g:syntastic_python_checkers = ['pylint', 'pyflakes', 'pep8']
+"let g:syntastic_mode_map = {'passive_filetypes': ['python'] }
+"let g:syntastic_error_symbol = '❌'
+"let g:syntastic_warning_symbol = '❗️'
+"let g:syntastic_style_error_symbol = '💡'
+"let g:syntastic_style_warning_symbol = '💡'
+"let g:syntastic_vim_checkers = ['vint']
+"}
+
+"Plugin: neomake {
+"Plug 'benekastah/neomake'
+"let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
+"let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
+"}
+"}
+
+"Plugin Group: Explorer{
+"Plugin: tagbar {
+"Plug 'majutsushi/tagbar'
+"let g:tagbar_left = 1
+"let g:tagbar_width = 28
+"nmap <silent> <F2> :TagbarToggle<CR>
+"}
+
+"Plugin: bufexplorer {
+Plug 'jlanzarotta/bufexplorer'
+"}
+
+"Plugin: nerdtree {
+"Plug 'scrooloose/nerdtree'
+"}
+" }
+
+"Plugin Group: Edit{
+"Plugin: nerdcommenter {
+Plug 'scrooloose/nerdcommenter'
+"}
+
+"Plugin: ultisnips {
+Plug 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger = '<Leader><tab>'
+"}
+
+"Plugin: vim-snippets {
+Plug 'honza/vim-snippets'
+"}
+
+"Plugin: delimitMate {
+"Plug 'Raimondi/delimitMate'
+"let delimitMate_expand_cr=1
+"}
+
+"Plugin: auto-pairs {
+Plug 'jiangmiao/auto-pairs'
+"}
+"}
+
+"Plugin: vim-fugitive {
+"Plug 'tpope/vim-fugitive'
+"}
+
+"Plugin: CSApprox {
 "Plug 'CSApprox'
-Plug 'skywind3000/asyncrun.vim'
+"}
+
+"Plugin: asyncrun.vim {
+"Plug 'skywind3000/asyncrun.vim'
+"}
+
 call plug#end()
 
 if exists('s:install_plug')
     PlugInstall
 endif
-"}
 
-" General vim settings {
-
+"General vim settings {
 colorscheme clighter8
 syntax on
 
@@ -106,154 +263,13 @@ command! W silent execute "w !sudo > /dev/null tee %"
 vmap * y/<C-r>"<CR>
 vmap # y?<C-r>"<CR>
 
-" }
-
-let s:session_file = '.session'
-
-"fun! s:source_session()
-    "if index(['c', 'cpp', 'objc', 'objcpp', 'python'], &filetype) != -1
-        "let s:mksession=1
-    "endif
-
-    "if argc() == 0 && filereadable(s:session_file)
-        "echohl MoreMsg |
-                    "\ echomsg 'Session Loaded' |
-                    "\ echohl None
-        "execute('silent! source '.s:session_file)
-        "let s:mksession=1
-    "endif
-"endf
-
-
 augroup vimrc
-au VimLeave * execute('silent! mksession! '.s:session_file)
-"au VimEnter * call s:source_session()
+au VimLeave * silent! mksession! .session
 
 au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 augroup END
+"}
 
-" Plugin: Tagbar {
-let g:tagbar_left = 1
-let g:tagbar_width = 28
-"nmap <silent> <F2> :TagbarToggle<CR>
-" }
-
-" Plugin: vim-clang-format {
-let g:clang_format#command = 'clang-format-3.9'
-let g:clang_format#auto_formatexpr=1
-" }
-
-" Plugin: YouCompleteMe {
-let g:ycm_confirm_extra_conf=0
-nmap <silent> <C-]> :YcmCompleter GoTo<CR>
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_error_symbol = '❌'
-let g:ycm_warning_symbol = '❗️'
-let g:ycm_style_error_symbol = '💡'
-let g:ycm_style_warning_symbol = '💡'
-" }
-
-" Plugin: NeoMake {
-"let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
-"let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
-" }
-
-" Plugin: syntastic {
-let g:syntastic_cursor_columns = 0
-let g:syntastic_loc_list_height=5
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_enable_signs = 1
-let g:syntastic_python_checkers = ['pylint', 'pyflakes', 'pep8']
-"let g:syntastic_mode_map = {'passive_filetypes': ['python'] }
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_warning_symbol = '❗️'
-let g:syntastic_style_error_symbol = '💡'
-let g:syntastic_style_warning_symbol = '💡'
-let g:syntastic_vim_checkers = ['vint']
-" }
-
-" Plugin: UltiSnips {
-let g:UltiSnipsExpandTrigger = '<Leader><tab>'
-" }
-
-" Plugin: Clighter8 {
-nmap <silent> <Leader>r :ClRenameCursor<CR>
-
-let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
-let g:clighter8_libclang_path='/usr/lib/x86_64-linux-gnu/libclang-3.9.so.1'
-if &diff == 1
-    let g:clighter8_autostart = 0
-endif
-
-augroup vimrc
-au FileType c,cpp set formatexpr=ClFormat()
-augroup end
-"let g:clang_format_path='clang-format'
-nmap <silent><C-\>s :GtagsCursor<CR>
-nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
-nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
-
-let g:Gtags_Auto_Update = 0
-" }
-
-" Plugin: unite.vim {
-"silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
-"nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
-" }
-
-" Plugin: FZF {
-"nmap <silent> <C-p> :FZF<CR>
-" }
-
-" Plugin: LeaderF {
-let g:Lf_ShortcutF = '<C-P>'
-" }
-
-" Plugin: CtrlP.vim {
-"silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
-"if executable('ag')
-  "set grepprg=ag\ --nogroup\ --nocolor
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  "let g:ctrlp_use_caching = 0
-"endif
-" }
-
-" Plugin: airline {
-let g:airline_theme='wombat'
-" }
-"
-" Plugin: delimitMate {
-let delimitMate_expand_cr=1
-" }
-
-" Plugin: neocomplete {
-let g:neocomplete#enable_at_startup=1
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
-" }
-
-" Plugin: lightline {
-let g:lightline={}
-
-let g:lightline.active = {
-            \ 'left': [ [ 'mode', 'paste' ],
-            \           [ 'readonly', 'filename', 'modified' ] ],
-            \ 'right': [ [ 'lineinfo' ],
-            \            [ 'percent' ],
-            \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
-"
-
-" Plugin: validator
-let g:validator_auto_open_quickfix = 0
-let g:validator_ignore = ['cpp, c']
-let g:validator_error_symbol = '❌'
-let g:validator_warning_symbol = '❗️'
-let g:validator_style_error_symbol = '💡'
-let g:validator_style_warning_symbol = '💡'
-" 
-
-
-" vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
+"vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
