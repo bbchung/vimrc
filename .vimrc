@@ -64,8 +64,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-
 let g:ycm_confirm_extra_conf=0
 nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_error_symbol = '❌'
-let g:ycm_warning_symbol = '❗️'
+let g:ycm_error_symbol = '❎'
+let g:ycm_warning_symbol = '⚠️'
 let g:ycm_style_error_symbol = '💡'
 let g:ycm_style_warning_symbol = '💡'
 "}
@@ -124,8 +124,8 @@ Plug 'a.vim'
 Plug 'maralla/validator.vim'
 let g:validator_auto_open_quickfix = 0
 let g:validator_ignore = ['cpp, c']
-let g:validator_error_symbol = '❌'
-let g:validator_warning_symbol = '❗️'
+let g:validator_error_symbol = '❎'
+let g:validator_warning_symbol = '⚠️'
 let g:validator_style_error_symbol = '💡'
 let g:validator_style_warning_symbol = '💡'
 "}
@@ -139,8 +139,8 @@ let g:validator_style_warning_symbol = '💡'
 "let g:syntastic_enable_signs = 1
 "let g:syntastic_python_checkers = ['pylint', 'pyflakes', 'pep8']
 "let g:syntastic_mode_map = {'passive_filetypes': ['python'] }
-"let g:syntastic_error_symbol = '❌'
-"let g:syntastic_warning_symbol = '❗️'
+"let g:syntastic_error_symbol = '❎'
+"let g:syntastic_warning_symbol = '⚠️'
 "let g:syntastic_style_error_symbol = '💡'
 "let g:syntastic_style_warning_symbol = '💡'
 "let g:syntastic_vim_checkers = ['vint']
