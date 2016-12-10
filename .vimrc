@@ -253,6 +253,7 @@ set updatetime=700
 set undofile
 set backspace=2
 set termguicolors
+set nosol
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
