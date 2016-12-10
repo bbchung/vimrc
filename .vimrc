@@ -16,7 +16,7 @@ Plug 'twerth/ir_black'
 Plug 'itchyny/lightline.vim'
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'jellybeans',
       \ 'component': {
       \ }
       \ }
