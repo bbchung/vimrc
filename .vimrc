@@ -254,6 +254,7 @@ set undofile
 set backspace=2
 set termguicolors
 set nosol
+set expandtab
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
@@ -267,7 +268,7 @@ vmap # y?<C-r>"<CR>
 augroup vimrc
 au VimLeave * if &diff == 0 | silent! mksession! .session | endif
 
-au FileType c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 augroup END
