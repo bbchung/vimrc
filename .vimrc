@@ -224,7 +224,8 @@ if !&diff
     set cursorline
 endif
 set title
-set novisualbell
+set noerrorbells
+set vb t_vb=
 set mouse=a
 set laststatus=2
 set number
