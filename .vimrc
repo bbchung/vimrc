@@ -66,6 +66,7 @@ let g:lightline.inactive = {
 "Plugin: LeaderF {
 Plug 'Yggdroot/LeaderF'
 let g:Lf_ShortcutF = '<C-P>'
+"let g:Lf_ShortcutB = '<Leader>be'
 "}
 
 "}
@@ -203,6 +204,7 @@ Plug 'honza/vim-snippets'
 
 "Plugin: auto-pairs {
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsShortcutBackInsert = '<Leader>bb'
 "}
 "}
 
