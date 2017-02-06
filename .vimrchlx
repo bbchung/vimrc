@@ -20,6 +20,18 @@ let g:lightline = {
       \ 'component': {
       \ }
       \ }
+
+let g:lightline.active = {
+    \ 'left': [ [ 'mode', 'paste' ],
+    \           [ 'readonly', 'absolutepath', 'modified' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ],
+    \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+let g:lightline.inactive = {
+    \ 'left': [ [ 'absolutepath' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ] ] }
+
 "}
 
 "Plugin: vim-airline {
@@ -54,6 +66,7 @@ let g:lightline = {
 "Plugin: LeaderF {
 Plug 'Yggdroot/LeaderF'
 let g:Lf_ShortcutF = '<C-P>'
+"let g:Lf_ShortcutB = '<Leader>be'
 "}
 
 "}
@@ -62,7 +75,8 @@ let g:Lf_ShortcutF = '<C-P>'
 "Plugin: YouCompleteMe {
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
 let g:ycm_confirm_extra_conf=0
-nmap <silent> <C-]> :YcmCompleter GoTo<CR>
+nmap <silent><C-\>g :YcmCompleter GoTo<CR>
+"nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_error_symbol = 'E'
 let g:ycm_warning_symbol = 'W'
@@ -95,6 +109,8 @@ nmap <silent> <Leader>r :ClRenameCursor<CR>
 
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/lib/libclang.so'
+let g:clighter8_syntax_highlight = 0
+let g:clighter8_autostart = 1
 if &diff == 1
     let g:clighter8_autostart = 0
 endif
@@ -121,7 +137,7 @@ Plug 'a.vim'
 
 "Plugin Group: Linter{
 "Plugin: validator.vim {
-"Plug 'maralla/validator.vim'
+Plug 'maralla/validator.vim'
 let g:validator_auto_open_quickfix = 0
 let g:validator_ignore = ['cpp, c']
 let g:validator_error_symbol = 'E'
@@ -191,6 +207,7 @@ Plug 'honza/vim-snippets'
 
 "Plugin: auto-pairs {
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsShortcutBackInsert = '<Leader>bb'
 "}
 "}
 
@@ -224,7 +241,8 @@ if !&diff
     set cursorline
 endif
 set title
-set novisualbell
+set noerrorbells
+set vb t_vb=
 set mouse=a
 set laststatus=2
 set number
