@@ -281,7 +281,7 @@ vmap * y/<C-r>"<CR>
 vmap # y?<C-r>"<CR>
 
 augroup vimrc
-au VimLeave * if &diff == 0 | silent! mksession! .session | endif
+au VimLeave * if &diff == 0 && expand('%:t')[0] != '.' | silent! mksession! .session | endif
 
 au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
