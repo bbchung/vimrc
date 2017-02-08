@@ -68,7 +68,6 @@ Plug 'Yggdroot/LeaderF'
 let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 "}
-
 "}
 
 "Plugin Group: Autocomplete{
@@ -208,6 +207,7 @@ let g:AutoPairsShortcutBackInsert = '<Leader>bb'
 "}
 "}
 
+"Plugin Group: Others {
 "Plugin: vim-fugitive {
 "Plug 'tpope/vim-fugitive'
 "}
@@ -218,6 +218,7 @@ let g:AutoPairsShortcutBackInsert = '<Leader>bb'
 
 "Plugin: asyncrun.vim {
 "Plug 'skywind3000/asyncrun.vim'
+"}
 "}
 
 call plug#end()
