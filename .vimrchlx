@@ -6,13 +6,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-"Plugin Group: Color Scheme {
+"Plugin Group: Color Scheme <<
 Plug 'nanotech/jellybeans.vim'
 Plug 'twerth/ir_black'
-"}
+">>
 
-"Plugin Group: Status Bar{
-"Plugin: lightline.vim {
+"Plugin Group: Status Bar <<
+"Plugin: lightline.vim <<
 Plug 'itchyny/lightline.vim'
 
 let g:lightline = {
@@ -32,23 +32,23 @@ let g:lightline.inactive = {
     \ 'right': [ [ 'lineinfo' ],
     \            [ 'percent' ] ] }
 
-"}
+">>
 
-"Plugin: vim-airline {
+"Plugin: vim-airline <<
 "Plug 'bling/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 "let g:airline_theme='wombat'
-"}
-"}
+">>
+">>
 
-"Plugin Group: Search{
-"Plugin: unite.vim {
+"Plugin Group: Search <<
+"Plugin: unite.vim <<
 "Plug 'Shougo/unite.vim'
 "silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
 "nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
-"}
+">>
 
-"Plugin: ctrlp.vim {
+"Plugin: ctrlp.vim <<
 "Plug 'ctrlpvim/ctrlp.vim'
 "silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
 "if executable('ag')
@@ -56,22 +56,23 @@ let g:lightline.inactive = {
   "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   "let g:ctrlp_use_caching = 0
 "endif
-"}
+">>
 
-"Plugin: fzf {
+"Plugin: fzf <<
 "Plug 'junegunn/fzf'
 "nmap <silent> <C-p> :FZF<CR>
-"}
+">>
 
-"Plugin: LeaderF {
+"Plugin: LeaderF <<
 Plug 'Yggdroot/LeaderF'
 let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
-"}
-"}
+">>
 
-"Plugin Group: Autocomplete{
-"Plugin: YouCompleteMe {
+">>
+
+"Plugin Group: Autocomplete<<
+"Plugin: YouCompleteMe <<
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
 let g:ycm_confirm_extra_conf=0
 nmap <silent><C-\>g :YcmCompleter GoTo<CR>
@@ -81,28 +82,28 @@ let g:ycm_error_symbol = 'E'
 let g:ycm_warning_symbol = 'W'
 let g:ycm_style_error_symbol = 'S'
 let g:ycm_style_warning_symbol = 'S'
-"}
+">>
 
-"Plugin: neocomplete {
+"Plugin: neocomplete <<
 "Plug 'Shougo/neocomplete.vim'
 "let g:neocomplete#enable_at_startup=1
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
-"}
+">>
 
-"Plugin: clang_complete {
+"Plugin: clang_complete <<
 "Plug 'Rip-Rip/clang_complete'
-"}
-"}
+">>
+">>
 
-"Plugin Group: C++{
-"Plugin: vim-clang-format{
+"Plugin Group: C++<<
+"Plugin: vim-clang-format<<
 "Plug 'rhysd/vim-clang-format'
 "let g:clang_format#command = 'clang-format-3.9'
 "let g:clang_format#auto_formatexpr=1
-"}
+">>
 
-"Plugin: Clighter8 {
+"Plugin: Clighter8 <<
 Plug 'bbchung/clighter8'
 nmap <silent> <Leader>r :ClRenameCursor<CR>
 
@@ -124,19 +125,19 @@ nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 
 let g:Gtags_Auto_Update = 0
-"}
+">>
 
-"Plugin: a.vim {
+"Plugin: a.vim <<
 Plug 'a.vim'
-"}
+">>
 
-"Plugin: Conque-GDB {
+"Plugin: Conque-GDB <<
 "Plug 'Conque-GDB'
-"}
-"}
+">>
+">>
 
-"Plugin Group: Linter{
-"Plugin: validator.vim {
+"Plugin Group: Linter<<
+"Plugin: validator.vim <<
 Plug 'maralla/validator.vim'
 let g:validator_auto_open_quickfix = 0
 let g:validator_ignore = ['cpp, c']
@@ -144,9 +145,9 @@ let g:validator_error_symbol = 'E'
 let g:validator_warning_symbol = 'W'
 let g:validator_style_error_symbol = 'S'
 let g:validator_style_warning_symbol = 'S'
-"}
+">>
 
-"Plugin: syntastic {
+"Plugin: syntastic <<
 "Plug 'scrooloose/syntastic'
 "let g:syntastic_cursor_columns = 0
 "let g:syntastic_loc_list_height=5
@@ -162,68 +163,67 @@ let g:validator_style_warning_symbol = 'S'
 "let g:syntastic_vim_checkers = ['vint']
 "}
 
-"Plugin: neomake {
+"Plugin: neomake <<
 "Plug 'benekastah/neomake'
 "let g:neomake_error_sign = { 'text': '🚫', 'texthl': 'SyntasticErrorSign'}
 "let g:neomake_warning_sign = { 'text': '⚠️', 'texthl': 'SyntasticWarningSign'}
-"}
-"}
+">>
+">>
 
-"Plugin Group: Explorer{
-"Plugin: tagbar {
+"Plugin Group: Explorer<<
+"Plugin: tagbar <<
 "Plug 'majutsushi/tagbar'
 "let g:tagbar_left = 1
 "let g:tagbar_width = 28
 "nmap <silent> <F2> :TagbarToggle<CR>
-"}
+">>
 
-"Plugin: bufexplorer {
+"Plugin: bufexplorer <<
 Plug 'jlanzarotta/bufexplorer'
-"}
+">>
 
-"Plugin: nerdtree {
+"Plugin: nerdtree <<
 "Plug 'scrooloose/nerdtree'
-"}
-" }
+">>
+">>
 
-"Plugin Group: Edit{
-"Plugin: nerdcommenter {
+"Plugin Group: Edit<<
+"Plugin: nerdcommenter <<
 Plug 'scrooloose/nerdcommenter'
-"}
+">>
 
-"Plugin: ultisnips {
+"Plugin: ultisnips <<
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
-"}
+">>
 
-"Plugin: vim-snippets {
+"Plugin: vim-snippets <<
 Plug 'honza/vim-snippets'
-"}
+">>
 
-"Plugin: delimitMate {
+"Plugin: delimitMate <<
 "Plug 'Raimondi/delimitMate'
 "let delimitMate_expand_cr=1
-"}
+">>
 
-"Plugin: auto-pairs {
+"Plugin: auto-pairs <<
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsShortcutBackInsert = '<Leader>bb'
-"}
-"}
+">>
+">>
 
-"Plugin Group: Others {
-"Plugin: vim-fugitive {
+"Plugin: vim-fugitive <<
 "Plug 'tpope/vim-fugitive'
-"}
+">>
 
-"Plugin: CSApprox {
+"Plugin: CSApprox <<
 "Plug 'CSApprox'
-"}
+">>
 
-"Plugin: asyncrun.vim {
+"Plugin: asyncrun.vim <<
 "Plug 'skywind3000/asyncrun.vim'
-"}
-"}
+">>
+">>
 
 call plug#end()
 
@@ -231,7 +231,7 @@ if exists('s:install_plug')
     PlugInstall
 endif
 
-"General vim settings {
+"My Settings <<
 colorscheme clighter8
 syntax on
 
@@ -245,6 +245,7 @@ endif
 set title
 set noerrorbells
 set vb t_vb=
+set t_ut=
 set mouse=a
 set laststatus=2
 set number
@@ -292,6 +293,6 @@ au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 augroup END
-"}
+">>
 
-" vim:foldmarker={,}:foldlevel=0:foldmethod=marker:
+" vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:

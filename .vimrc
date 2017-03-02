@@ -241,6 +241,7 @@ endif
 set title
 set noerrorbells
 set vb t_vb=
+set t_ut=
 set mouse=a
 set laststatus=2
 set number
