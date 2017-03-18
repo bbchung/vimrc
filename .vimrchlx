@@ -7,8 +7,8 @@ endif
 call plug#begin('~/.vim/plugged')
 
 "Plugin Group: Color Scheme <<
-Plug 'nanotech/jellybeans.vim'
-Plug 'twerth/ir_black'
+"Plug 'nanotech/jellybeans.vim'
+"Plug 'twerth/ir_black'
 ">>
 
 "Plugin Group: Status Bar <<
@@ -69,11 +69,16 @@ let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 ">>
 
+"Plugin: Tagbar <<
+Plug 'majutsushi/tagbar'
+">>
+
 ">>
 
 "Plugin Group: Autocomplete<<
 "Plugin: YouCompleteMe <<
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
+Plug 'Valloric/YouCompleteMe'
 let g:ycm_confirm_extra_conf=0
 nmap <silent><C-\>g :YcmCompleter GoTo<CR>
 "nmap <silent> <C-]> :YcmCompleter GoTo<CR>
@@ -109,7 +114,7 @@ nmap <silent> <Leader>r :ClRenameCursor<CR>
 
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/lib/libclang.so'
-let g:clighter8_syntax_highlight = 0
+let g:clighter8_syntax_highlight = 1
 
 let g:clighter8_autostart = 1
 if &diff == 1
@@ -162,6 +167,7 @@ let g:validator_style_warning_symbol = 'S'
 "let g:syntastic_style_warning_symbol = 'S'
 "let g:syntastic_vim_checkers = ['vint']
 "}
+">>
 
 "Plugin: neomake <<
 "Plug 'benekastah/neomake'
@@ -208,10 +214,12 @@ Plug 'honza/vim-snippets'
 
 "Plugin: auto-pairs <<
 Plug 'jiangmiao/auto-pairs'
-let g:AutoPairsShortcutBackInsert = '<Leader>bb'
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsMultilineClose=0
 ">>
 ">>
 
+"Plugin Group: Others <<
 "Plugin: vim-fugitive <<
 "Plug 'tpope/vim-fugitive'
 ">>

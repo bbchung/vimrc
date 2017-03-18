@@ -203,7 +203,8 @@ Plug 'honza/vim-snippets'
 
 "Plugin: auto-pairs {
 Plug 'jiangmiao/auto-pairs'
-let g:AutoPairsShortcutBackInsert = '<Leader>bb'
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsMultilineClose=0
 "}
 "}
 
