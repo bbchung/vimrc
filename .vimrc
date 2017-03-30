@@ -65,7 +65,7 @@ let g:lightline.inactive = {
 
 "Plugin: LeaderF {
 Plug 'Yggdroot/LeaderF'
-let g:Lf_ShortcutF = '<C-P>'
+"let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 "}
 "}
@@ -174,7 +174,7 @@ let g:validator_style_warning_symbol = '💡'
 "}
 
 "Plugin: bufexplorer {
-Plug 'jlanzarotta/bufexplorer'
+"Plug 'jlanzarotta/bufexplorer'
 "}
 
 "Plugin: nerdtree {
