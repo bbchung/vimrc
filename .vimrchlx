@@ -65,7 +65,7 @@ let g:lightline.inactive = {
 
 "Plugin: LeaderF <<
 Plug 'Yggdroot/LeaderF'
-let g:Lf_ShortcutF = '<C-P>'
+"let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 ">>
 
@@ -87,6 +87,7 @@ let g:ycm_error_symbol = 'E'
 let g:ycm_warning_symbol = 'W'
 let g:ycm_style_error_symbol = 'S'
 let g:ycm_style_warning_symbol = 'S'
+let g:ycm_show_diagnostics_ui = 0
 ">>
 
 "Plugin: neocomplete <<
@@ -110,10 +111,10 @@ let g:ycm_style_warning_symbol = 'S'
 
 "Plugin: Clighter8 <<
 Plug 'bbchung/clighter8'
-nmap <silent> <Leader>r :ClRenameCursor<CR>
+nmap <silent> <Leader>R :ClRenameCursor<CR>
 
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
-let g:clighter8_libclang_path='/usr/lib/libclang.so'
+let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
 let g:clighter8_syntax_highlight = 1
 
 let g:clighter8_autostart = 1
@@ -125,7 +126,7 @@ augroup vimrc
 au FileType c,cpp set formatexpr=ClFormat()
 augroup end
 "let g:clang_format_path='clang-format'
-nmap <silent><C-\>s :GtagsCursor<CR>
+nmap <silent><C-\>s :w <CR>:GtagsCursor<CR>
 nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 
@@ -143,13 +144,23 @@ Plug 'a.vim'
 
 "Plugin Group: Linter<<
 "Plugin: validator.vim <<
-Plug 'maralla/validator.vim'
-let g:validator_auto_open_quickfix = 0
-let g:validator_ignore = ['cpp, c']
-let g:validator_error_symbol = 'E'
-let g:validator_warning_symbol = 'W'
-let g:validator_style_error_symbol = 'S'
-let g:validator_style_warning_symbol = 'S'
+"Plug 'maralla/validator.vim'
+"let g:validator_auto_open_quickfix = 0
+"let g:validator_ignore = ['cpp, c']
+"let g:validator_error_symbol = 'E'
+"let g:validator_warning_symbol = 'W'
+"let g:validator_style_error_symbol = 'S'
+"let g:validator_style_warning_symbol = 'S'
+">>
+
+"Plugin: validator.vim <<
+Plug 'w0rp/ale'
+"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
+hi ALEErrorSign guifg=RED guibg=bg
+hi ALEWarningSign guifg=Yellow guibg=bg
+
 ">>
 
 "Plugin: syntastic <<
@@ -185,7 +196,7 @@ let g:validator_style_warning_symbol = 'S'
 ">>
 
 "Plugin: bufexplorer <<
-Plug 'jlanzarotta/bufexplorer'
+"Plug 'jlanzarotta/bufexplorer'
 ">>
 
 "Plugin: nerdtree <<
