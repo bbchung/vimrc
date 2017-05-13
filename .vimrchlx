@@ -18,12 +18,15 @@ Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
       \ }
       \ }
 
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
-    \           [ 'readonly', 'absolutepath', 'modified' ] ],
+    \           [ 'fugitive', 'readonly', 'absolutepath', 'modified' ] ],
     \ 'right': [ [ 'lineinfo' ],
     \            [ 'percent' ],
     \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
@@ -72,7 +75,6 @@ Plug 'Yggdroot/LeaderF'
 "Plugin: Tagbar <<
 Plug 'majutsushi/tagbar'
 ">>
-
 ">>
 
 "Plugin Group: Autocomplete<<
@@ -134,7 +136,7 @@ let g:Gtags_Auto_Update = 0
 ">>
 
 "Plugin: a.vim <<
-Plug 'a.vim'
+Plug 'vim-scripts/a.vim'
 ">>
 
 "Plugin: Conque-GDB <<
@@ -153,13 +155,17 @@ Plug 'a.vim'
 "let g:validator_style_warning_symbol = 'S'
 ">>
 
-"Plugin: validator.vim <<
+"Plugin: ale.vim <<
 Plug 'w0rp/ale'
 "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
+let g:ale_sign_column_always = 0
 hi ALEErrorSign guifg=RED guibg=bg
 hi ALEWarningSign guifg=Yellow guibg=bg
+let g:ale_linters = {
+\   'cpp': [],
+\}
 
 ">>
 
@@ -232,7 +238,7 @@ let g:AutoPairsMultilineClose=0
 
 "Plugin Group: Others <<
 "Plugin: vim-fugitive <<
-"Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 ">>
 
 "Plugin: CSApprox <<
@@ -240,7 +246,7 @@ let g:AutoPairsMultilineClose=0
 ">>
 
 "Plugin: asyncrun.vim <<
-"Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 ">>
 ">>
 
@@ -286,6 +292,7 @@ set wildmenu
 set completeopt=longest,menuone
 set grepprg=grep\ -nH\ $*
 set sessionoptions=buffers,curdir,folds,winsize,options
+set encoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf-16
 set fileformat=unix
