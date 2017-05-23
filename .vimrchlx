@@ -131,6 +131,9 @@ augroup end
 nmap <silent><C-\>s :w <CR>:GtagsCursor<CR>
 nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
+command! -nargs=1 G execute "Gtags -g "<f-args>
+
+
 
 let g:Gtags_Auto_Update = 0
 ">>
