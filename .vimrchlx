@@ -20,7 +20,6 @@ let g:lightline = {
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
       \ }
       \ }
 
@@ -111,9 +110,15 @@ let g:ycm_show_diagnostics_ui = 0
 "let g:clang_format#auto_formatexpr=1
 ">>
 
+"Plugin: ClangFormatHelper <<
+Plug 'bbchung/ClangFormatHelper'
+let g:Gtags_Auto_Update = 0
+"let g:clang_format_path='clang-format'
+">>
+
 "Plugin: Clighter8 <<
 Plug 'bbchung/clighter8'
-nmap <silent> <Leader>R :ClRenameCursor<CR>
+"nmap <silent> <Leader>R :ClRenameCursor<CR>
 
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation', 'clighter8Constructor', 'clighter8Destructor']
 let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
@@ -124,18 +129,11 @@ if &diff == 1
     let g:clighter8_autostart = 0
 endif
 
-augroup vimrc
-au FileType c,cpp set formatexpr=ClFormat()
-augroup end
-"let g:clang_format_path='clang-format'
 nmap <silent><C-\>s :w <CR>:GtagsCursor<CR>
 nmap <silent><C-\>r :execute("Gtags -r ".expand('<cword>'))<CR>
 nmap <silent><C-\>d :execute("Gtags ".expand('<cword>'))<CR>
 command! -nargs=1 G execute "Gtags -g "<f-args>
 
-
-
-let g:Gtags_Auto_Update = 0
 ">>
 
 "Plugin: a.vim <<
@@ -168,6 +166,7 @@ hi ALEErrorSign guifg=RED guibg=bg
 hi ALEWarningSign guifg=Yellow guibg=bg
 let g:ale_linters = {
 \   'cpp': [],
+\   'asm': [],
 \}
 
 ">>
@@ -251,6 +250,10 @@ Plug 'tpope/vim-fugitive'
 "Plugin: asyncrun.vim <<
 Plug 'skywind3000/asyncrun.vim'
 ">>
+
+"Plugin: AutoGtag <<
+Plug 'bbchung/autogtag'
+">>
 ">>
 
 call plug#end()
@@ -263,7 +266,7 @@ endif
 colorscheme clighter8
 syntax on
 
-"set lazyredraw
+set lazyredraw
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
