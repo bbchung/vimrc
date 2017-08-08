@@ -166,6 +166,7 @@ hi ALEErrorSign guifg=RED guibg=bg
 hi ALEWarningSign guifg=Yellow guibg=bg
 let g:ale_linters = {
 \   'cpp': [],
+\   'c': [],
 \   'asm': [],
 \}
 
@@ -227,14 +228,14 @@ Plug 'honza/vim-snippets'
 ">>
 
 "Plugin: delimitMate <<
-"Plug 'Raimondi/delimitMate'
-"let delimitMate_expand_cr=1
+Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr=1
 ">>
 
 "Plugin: auto-pairs <<
-Plug 'jiangmiao/auto-pairs'
-let g:AutoPairsFlyMode = 0
-let g:AutoPairsMultilineClose=0
+"Plug 'jiangmiao/auto-pairs'
+"let g:AutoPairsFlyMode = 0
+"let g:AutoPairsMultilineClose=0
 ">>
 ">>
 
@@ -297,7 +298,7 @@ set wildmode=longest,full
 set wildmenu
 set completeopt=longest,menuone
 set grepprg=grep\ -nH\ $*
-set sessionoptions=buffers,curdir,folds,winsize,options
+"set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf-16
