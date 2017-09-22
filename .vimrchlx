@@ -309,6 +309,7 @@ set backspace=2
 set termguicolors
 set nosol
 set expandtab
+set signcolumn=yes
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
@@ -323,7 +324,7 @@ augroup vimrc
 au VimLeave * if &diff == 0 && expand('%:t')[0] != '.' | silent! mksession! .session | endif
 
 au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
-au FileType python setlocal ts=4 formatprg=autopep8\ -aa\ -
+au FileType python setlocal ts=4 formatexpr= formatprg=autopep8\ -aa\ -
 au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
 augroup END
 ">>
