@@ -84,10 +84,11 @@ let g:ycm_confirm_extra_conf=0
 nmap <silent><C-\>g :YcmCompleter GoTo<CR>
 "nmap <silent> <C-]> :YcmCompleter GoTo<CR>
 let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_error_symbol = 'E'
-let g:ycm_warning_symbol = 'W'
-let g:ycm_style_error_symbol = 'S'
-let g:ycm_style_warning_symbol = 'S'
+
+let g:ycm_error_symbol = '⨉'
+let g:ycm_warning_symbol = '⚠'
+let g:ycm_style_error_symbol = '⚠'
+let g:ycm_style_warning_symbol = '⚠'
 let g:ycm_show_diagnostics_ui = 0
 ">>
 
@@ -165,8 +166,6 @@ let g:ale_sign_column_always = 0
 hi ALEErrorSign guifg=RED guibg=bg
 hi ALEWarningSign guifg=Yellow guibg=bg
 let g:ale_linters = {
-\   'cpp': [],
-\   'c': [],
 \   'asm': [],
 \   'yaml': [],
 \}
