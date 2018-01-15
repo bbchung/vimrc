@@ -141,6 +141,8 @@ command! -nargs=1 G execute "Gtags -g "<f-args>
 
 "Plugin: a.vim <<
 Plug 'vim-scripts/a.vim'
+let g:alternateExtensions_h = "cpp,c"
+
 ">>
 
 "Plugin: Conque-GDB <<
@@ -292,7 +294,7 @@ set number
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
-set scrolloff=4
+set scrolloff=8
 set sidescrolloff=1
 set incsearch
 set hlsearch
