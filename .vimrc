@@ -247,6 +247,8 @@ let delimitMate_expand_cr=1
 
 "Plugin Group: Others <<
 
+Plug 'mhinz/vim-startify'
+let g:startify_session_persistence=1
 
 "Plugin: vim-fugitive <<
 Plug 'tpope/vim-fugitive'
@@ -330,9 +332,6 @@ command! W silent execute "w !sudo > /dev/null tee %"
 vmap * y/<C-r>"<CR>
 vmap # y?<C-r>"<CR>
 nmap <F4> :qa<CR>
-
-augroup vimrc
-au VimLeave * if &diff == 0 && expand('%:t')[0] != '.' | silent! mksession! .session | endif
 
 au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType python setlocal ts=4 formatexpr= formatprg=autopep8\ -aa\ -
