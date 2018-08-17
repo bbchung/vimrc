@@ -63,23 +63,23 @@ let g:lsp_async_completion = 0
 nmap <silent> <Leader>d :LspDefinition<CR>
 nmap <silent> <Leader>r :LspReference<CR>
 
-"if executable('clangd')
-    "autocmd User lsp_setup call lsp#register_server({
-        "\ 'name': 'clangd',
-        "\ 'cmd': {server_info->['clangd']},
-        "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        "\ })
-"endif
-
-if executable('ccls')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'ccls',
-      \ 'cmd': {server_info->['ccls']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/ccls_cache" },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
+if executable('clangd')
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
 endif
+
+"if executable('ccls')
+   "au User lsp_setup call lsp#register_server({
+      "\ 'name': 'ccls',
+      "\ 'cmd': {server_info->['ccls']},
+      "\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/ccls_cache" },
+      "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      "\ })
+"endif
 
 
 "if executable('cquery')
@@ -186,41 +186,42 @@ let g:ycm_show_diagnostics_ui = 1
 ">>
 
 "Plugin Group: Color Scheme <<
-Plug 'bbchung/ccolor'
+"Plug 'bbchung/ccolor'
 Plug 'nanotech/jellybeans.vim'
 Plug 'dracula/vim'
+"Plug 'morhetz/gruvbox'
 "Plug 'twerth/ir_black'
 ">>
 
 "Plugin Group: Status Bar <<
 "Plugin: lightline.vim <<
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
 
-let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \ }
-      \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'jellybeans',
+      "\ 'component': {
+      "\   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
+      "\   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      "\ }
+      "\ }
 
-let g:lightline.active = {
-    \ 'left': [ [ 'mode', 'paste' ],
-    \           [ 'readonly', 'absolutepath', 'modified' ] ],
-    \ 'right': [ [ 'lineinfo' ],
-    \            [ 'percent' ],
-    \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
-let g:lightline.inactive = {
-    \ 'left': [ [ 'absolutepath' ] ],
-    \ 'right': [ [ 'lineinfo' ],
-    \            [ 'percent' ] ] }
+"let g:lightline.active = {
+    "\ 'left': [ [ 'mode', 'paste' ],
+    "\           [ 'readonly', 'absolutepath', 'modified' ] ],
+    "\ 'right': [ [ 'lineinfo' ],
+    "\            [ 'percent' ],
+    "\            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+"let g:lightline.inactive = {
+    "\ 'left': [ [ 'absolutepath' ] ],
+    "\ 'right': [ [ 'lineinfo' ],
+    "\            [ 'percent' ] ] }
 
 ">>
 
 "Plugin: vim-airline <<
-"Plug 'bling/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"let g:airline_theme='wombat'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme='jellybeans'
 ">>
 ">>
 
@@ -341,7 +342,13 @@ Plug 'scrooloose/nerdcommenter'
 
 "Plugin: vim_current_word <<
 Plug 'lygaret/autohighlight.vim'
-hi default link CursorAutoHighlight IncSearch
+"hi default link CursorAutoHighlight IncSearch
+fun! s:filetype_autohighlight()
+    if index(['c', 'cpp'], &filetype) == -1 || &diff
+        let b:autohighlight_enabled=0
+    endif
+endf
+au BufEnter * call s:filetype_autohighlight()
 ">>
 
 "Plugin: ultisnips <<
@@ -394,10 +401,10 @@ if exists('s:install_plug')
 endif
 
 "My Settings <<
-colorscheme ccolor
+set background=dark
+colorscheme jellybeans
 syntax on
 
-set lazyredraw
 set tf
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
