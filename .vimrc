@@ -5,15 +5,21 @@ if !filereadable(s:vim_plug_dir.'/plug.vim')
 endif
 
 packadd termdebug
-let g:termdebug_wide = 1
-
+let g:termdebug_wide = 1 
 call plug#begin('~/.vim/plugged')
 
+"Plugin Group: LSP "<<
 
-"Plugin Group: LSP<<
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} "<<
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+autocmd CursorHold * silent call CocActionAsync('highlight')
+set formatexpr=CocAction('formatSelected')
+">>
 
-"Plug 'natebosch/vim-lsc' 
-"<<
+"Plug 'natebosch/vim-lsc' "<<
 
 "let g:lsc_server_commands = {
  "\ 'cpp': {
@@ -49,19 +55,17 @@ let g:lsc_server_commands = {
 "highlight lscReference ctermbg=160
 "nmap <silent> <Leader>d :LSClientGoToDefinition<CR>
 "nmap <silent> <Leader>r :LSClientFindReferences<CR>
-
 " >>
 
-Plug 'prabirshrestha/vim-lsp'
-"<<
+"Plug 'prabirshrestha/vim-lsp' "<<
 
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 0 " enable echo under cursor when in normal mode
-let g:lsp_async_completion = 0
-
-
-nmap <silent> <Leader>d :LspDefinition<CR>
-nmap <silent> <Leader>r :LspReference<CR>
+let g:lsp_signs_enabled=1
+if &diff
+	let g:lsp_auto_enable = 0
+endif
+"let g:lsp_signs_error = {'text': '⚠'}
+"let g:lsp_signs_warning = {'text': '⚠'}
+"let g:lsp_signs_hint = {'text': '🛈'}
 
 if executable('clangd')
     autocmd User lsp_setup call lsp#register_server({
@@ -76,11 +80,10 @@ endif
       "\ 'name': 'ccls',
       "\ 'cmd': {server_info->['ccls']},
       "\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/ccls_cache" },
+      "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/ccls_cache", 'index' : {'threads' : 4} },
       "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       "\ })
 "endif
-
 
 "if executable('cquery')
    "au User lsp_setup call lsp#register_server({
@@ -120,17 +123,14 @@ endif
 
 ">>
 
-"Plugin Group: Autocomplete<<
+"Plugin Group: Autocomplete "<<
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-file.vim'
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/asyncomplete-file.vim'
+"Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
 "Plug 'prabirshrestha/asyncomplete-buffer.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-"let g:asyncomplete_remove_duplicates = 1
-"let g:asyncomplete_force_refresh_on_context_changed = 1
+"Plug 'prabirshrestha/asyncomplete-lsp.vim' "<<
 
 "au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
     "\ 'name': 'buffer',
@@ -139,28 +139,21 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
     "\ 'completor': function('asyncomplete#sources#buffer#completor'),
     "\ }))
 
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    \ 'name': 'file',
-    \ 'whitelist': ['*'],
-    \ 'priority': 10,
-    \ 'completor': function('asyncomplete#sources#file#completor')
-    \ }))
+"au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+    "\ 'name': 'file',
+    "\ 'whitelist': ['*'],
+    "\ 'priority': 10,
+    "\ 'completor': function('asyncomplete#sources#file#completor')
+    "\ }))
 
-au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-    \ 'name': 'ultisnips',
-    \ 'whitelist': ['*'],
-    \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-    \ }))
+"au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+    "\ 'name': 'ultisnips',
+    "\ 'whitelist': ['*'],
+    "\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+    "\ }))
+">>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-"Plug 'maralla/completor.vim'
-"let g:completor_clang_binary = '/usr/local/bin/clang'
-
-"Plugin: YouCompleteMe <<
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'}
-"Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'} "<<
 let g:ycm_confirm_extra_conf=0
 let g:ycm_enable_diagnostic_signs = 1
 
@@ -173,106 +166,70 @@ let g:ycm_show_diagnostics_ui = 1
 "nmap <silent> <Leader>d :YcmCompleter GoTo<CR>
 ">>
 
-"Plugin: neocomplete <<
-"Plug 'Shougo/neocomplete.vim'
-"let g:neocomplete#enable_at_startup=1
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-"inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 ">>
 
-"Plugin: clang_complete <<
-"Plug 'Rip-Rip/clang_complete'
-">>
-">>
-
-"Plugin Group: Color Scheme <<
+"Plugin Group: Color Scheme "<<
 "Plug 'bbchung/ccolor'
 Plug 'nanotech/jellybeans.vim'
-Plug 'dracula/vim'
-"Plug 'morhetz/gruvbox'
+"Plug 'romainl/Apprentice'
+"Plug 'dracula/vim'
+"Plug 'morhetz/gruvbox' "<<
+let g:gruvbox_contrast_dark='hard'
+let g:jellybeans_use_term_italics = 0
+">>
 "Plug 'twerth/ir_black'
 ">>
 
-"Plugin Group: Status Bar <<
-"Plugin: lightline.vim <<
-"Plug 'itchyny/lightline.vim'
+"Plugin Group: Status Bar "<<
+Plug 'liuchengxu/eleline.vim'
+"Plug 'itchyny/lightline.vim' "<<
 
-"let g:lightline = {
-      "\ 'colorscheme': 'jellybeans',
-      "\ 'component': {
-      "\   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
-      "\   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      "\ }
-      "\ }
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \ }
+      \ }
 
-"let g:lightline.active = {
-    "\ 'left': [ [ 'mode', 'paste' ],
-    "\           [ 'readonly', 'absolutepath', 'modified' ] ],
-    "\ 'right': [ [ 'lineinfo' ],
-    "\            [ 'percent' ],
-    "\            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
-"let g:lightline.inactive = {
-    "\ 'left': [ [ 'absolutepath' ] ],
-    "\ 'right': [ [ 'lineinfo' ],
-    "\            [ 'percent' ] ] }
+let g:lightline.active = {
+    \ 'left': [ [ 'mode', 'paste' ],
+    \           [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ],
+    \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+let g:lightline.inactive = {
+    \ 'left': [ [ 'absolutepath' ] ],
+    \ 'right': [ [ 'lineinfo' ],
+    \            [ 'percent' ] ] }
 
+let g:lightline.component_function = {
+      \   'gitbranch': 'fugitive#head'
+      \ }
 ">>
 
-"Plugin: vim-airline <<
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme='jellybeans'
-">>
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"let g:airline_theme='jellybeans'
 ">>
 
-"Plugin Group: Search <<
-"Plugin: unite.vim <<
-"Plug 'Shougo/unite.vim'
-"silent! nmap <silent> <Leader>be :Unite -here buffer<CR>
-"nmap <silent> <C-p> :Unite -start-insert -here file_rec<CR>
-">>
+"Plugin Group: Search "<<
 
-"Plugin: ctrlp.vim <<
-"Plug 'ctrlpvim/ctrlp.vim'
-"silent! nmap <silent> <Leader>b :CtrlPBuffer<CR>
-"if executable('ag')
-  "set grepprg=ag\ --nogroup\ --nocolor
-  "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  "let g:ctrlp_use_caching = 0
-"endif
-">>
-
-"Plugin: fzf <<
-"Plug 'junegunn/fzf'
+"Plug 'junegunn/fzf' "<<
 "nmap <silent> <C-p> :FZF<CR>
 ">>
 
-"Plugin: LeaderF <<
-Plug 'Yggdroot/LeaderF'
-
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
+let g:Lf_StlColorscheme='default'
 "let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 ">>
 
-"Plugin: Tagbar <<
-Plug 'majutsushi/tagbar'
-">>
 ">>
 
-"Plugin Group: C++<<
-"Plugin: vim-clang-format<<
-"Plug 'rhysd/vim-clang-format'
-"let g:clang_format#command = 'clang-format-3.9'
-"let g:clang_format#auto_formatexpr=1
-">>
+"Plugin Group: C++ "<<
 
-"Plugin: ClangFormatHelper <<
-Plug 'bbchung/ClangFormatHelper'
-"let g:clang_format_path='clang-format'
-">>
-
-"Plugin: Clighter8 <<
-"Plug 'bbchung/clighter8'
+"Plug 'bbchung/clighter8' "<<
 "nmap <silent> <Leader>R :ClRenameCursor<CR>
 
 let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation']
@@ -282,118 +239,72 @@ let g:clighter8_autostart = 0
 
 ">>
 
-"Plugin: a.vim <<
-Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = "cpp,c"
 
 ">>
 " >>
 
-"Plugin Group: Linter<<
-"Plugin: validator.vim <<
-"Plug 'maralla/validator.vim'
-"let g:validator_auto_open_quickfix = 0
-"let g:validator_ignore = ['cpp, c']
-"let g:validator_error_symbol = 'E'
-"let g:validator_warning_symbol = 'W'
-"let g:validator_style_error_symbol = 'S'
-"let g:validator_style_warning_symbol = 'S'
-">>
+"Plugin Group: Linter "<<
 
-"Plugin: ale.vim <<
-"Plug 'w0rp/ale'
+"Plug 'w0rp/ale' "<<
 "let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_sign_column_always = 0
+let g:ale_completion_enabled = 1
 hi ALEErrorSign guifg=RED guibg=bg
 hi ALEWarningSign guifg=Yellow guibg=bg
 let g:ale_linters = {
-\   'cpp': ['clang'],
-\   'c': ['clang'],
-\   'asm': [],
-\   'yaml': [],
+\   'cpp': [],
+\   'c': [],
+\   'r': [],
 \}
 
 ">>
 ">>
 
-"Plugin Group: Explorer<<
-"Plugin: tagbar <<
-"Plug 'majutsushi/tagbar'
+"Plugin Group: Explorer "<<
+"Plug 'majutsushi/tagbar' "<<
 "let g:tagbar_left = 1
 "let g:tagbar_width = 28
 "nmap <silent> <F2> :TagbarToggle<CR>
 ">>
 
-"Plugin: bufexplorer <<
 "Plug 'jlanzarotta/bufexplorer'
-">>
-
-"Plugin: nerdtree <<
 "Plug 'scrooloose/nerdtree'
-">>
 ">>
 
 "Plugin Group: Edit<<
-"Plugin: nerdcommenter <<
 Plug 'scrooloose/nerdcommenter'
-">>
 
-"Plugin: vim_current_word <<
-Plug 'lygaret/autohighlight.vim'
-"hi default link CursorAutoHighlight IncSearch
-fun! s:filetype_autohighlight()
-    if index(['c', 'cpp'], &filetype) == -1 || &diff
-        let b:autohighlight_enabled=0
-    endif
-endf
-au BufEnter * call s:filetype_autohighlight()
-">>
-
-"Plugin: ultisnips <<
-Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips' "<<
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 ">>
 
-"Plugin: vim-snippets <<
 Plug 'honza/vim-snippets'
-">>
 
-"Plugin: delimitMate <<
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 ">>
 
-"Plugin: auto-pairs <<
-"Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs' "<<
 "let g:AutoPairsFlyMode = 0
 "let g:AutoPairsMultilineClose=0
 ">>
 ">>
 
 "Plugin Group: Others << 
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify' "<<
 let g:startify_session_persistence=1
+let g:startify_change_to_dir=0
+">>
 
-"Plugin: vim-fugitive <<
 Plug 'tpope/vim-fugitive'
-">>
+Plug 'roxma/vim-tmux-clipboard'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
-"Plugin: asyncrun.vim <<
-"Plug 'skywind3000/asyncrun.vim'
 ">>
-
-"Plugin: AutoGtag <<
-Plug 'bbchung/autogtag'
-
-let g:Gtags_Auto_Update = 0
-nmap <Leader>s :GtagsCursor<CR>
-nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 G execute "Gtags -g "<f-args>
-">>
-">>
-
 call plug#end()
 
 if exists('s:install_plug')
@@ -406,13 +317,11 @@ colorscheme jellybeans
 syntax on
 
 set tf
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
 set cursorline
 if &diff
     set nocursorline
 endif
+set vb
 set title
 set timeoutlen=300
 set noerrorbells
@@ -436,7 +345,7 @@ set foldlevelstart=20
 set tabpagemax=100
 set wildmode=longest,full
 set wildmenu
-set completeopt=menuone,noselect
+set completeopt=menuone,noinsert,noselect
 set grepprg=grep\ -nH\ $*
 "set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
@@ -449,6 +358,7 @@ set termguicolors
 set nosol
 set expandtab
 set signcolumn=yes
+set clipboard=unnamedplus
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
@@ -457,17 +367,35 @@ endif
 
 command! TrimWhiteSpace execute ":%s/\s\+$//e"      
 command! W silent execute "w !sudo > /dev/null tee %"
-vmap * y/<C-r>"<CR>
-vmap # y?<C-r>"<CR>
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
+
 nmap <F4> :qa<CR>
 nmap Q <Nop>
 vmap <C-c> <ESC>
 imap <C-c> <ESC>
 nmap <C-c> <ESC>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
-au FileType python setlocal ts=4 formatexpr= formatprg=autopep8\ -aa\ -
-au FileType tex,help,markdown setlocal tw=78 cc=78 formatprg=
+au FileType gitcommit,text setlocal spell
+
+let g:Gtags_Auto_Update = 1
+nmap <Leader>s :GtagsCursor<CR>
+nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
+command! -nargs=1 G execute "Gtags -g "<f-args>
+hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
+hi default link CocErrorHighlight CocErrorSign
 ">>
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
