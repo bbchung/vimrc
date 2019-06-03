@@ -1,0 +1,184 @@
+Host l1
+    HostName 10.10.90.1
+    Port 22
+    User chris
+
+Host l2
+    HostName 192.168.1.12
+    Port 22
+    User chris
+
+#Host l3
+    #HostName 192.168.1.13
+    #Port 22
+    #User chris
+
+#Host l4
+    #HostName 192.168.1.14
+    #Port 22
+    #User chris
+
+Host l5
+    HostName 192.168.1.15
+    Port 22
+    User chris
+
+#Host l6
+    #HostName 192.168.1.22
+    #Port 22
+    #User wfcuser
+
+Host l7
+    HostName 192.168.1.17
+    Port 22
+    User chris
+
+#Host l8
+    #HostName 192.168.1.18
+    #Port 22
+    #User wfcuser
+
+#Host l10
+    #HostName 192.168.1.23
+    #Port 22
+    #User wfcuser
+
+#Host l11
+    #HostName 192.168.1.24
+    #Port 22
+    #User wfcuser
+
+#Host sht-zr-prod-l1
+Host sht-l1
+    HostName 139.196.79.13
+    Port 14000
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+#Host sht-zr-prod-l2
+Host sht-l2
+    HostName 139.196.79.13
+    Port 14006
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+#Host shs-zr-prod-l1
+Host shs-zr
+    HostName 139.196.79.13
+    Port 14001
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+Host sht-zr
+    HostName 139.196.79.13
+    Port 14000
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+
+#Host shs-ws-prod-l1
+Host shs-ws
+    HostName 139.196.79.13
+    Port 14007
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+#Host shy-ws-prod-l1
+Host shy
+    HostName 139.196.79.13
+    Port 14003
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+#Host shy-ws-prod-l1
+Host shy2
+    HostName 139.196.79.13
+    Port 14002
+    User wfcuser
+    IdentityFile ~/.ssh/stage.pem
+
+
+#Host tpx-cs-stage-l1
+Host tpx
+    HostName 61.219.118.13
+    Port 11008
+    User wfcuser
+    IdentityFile ~/.ssh/stage.pem
+
+#Host dlf-ws-test-l1
+Host dlf
+    HostName 139.196.79.13
+    Port 14004
+    User wfcuser
+    IdentityFile ~/.ssh/stage.pem
+
+#Host shd-tx-test-l1
+Host shd
+    HostName 180.166.217.139
+    Port 2082
+    User root
+    IdentityFile ~/.ssh/stage.pem
+
+#Host fluentes
+Host flu
+    HostName 139.196.94.89
+    Port 15000
+    User root
+
+#Host sha-hop-l1
+Host sha
+    HostName 139.196.79.13
+    Port 22
+    User root
+
+Host trd1
+    HostName 192.168.1.16
+    Port 22
+    User root
+
+Host hka
+    HostName 203.186.254.189
+    Port 51236
+    User administrator
+Host hkex
+    ProxyCommand ssh -A wfcuser@220.135.109.55 -i ~/.ssh/stage -p 8000 -W %h:%p
+    HostName 118.143.62.139
+    Port 20622
+    User winfun
+    IdentityFile ~/.ssh/stage
+Host kgil2
+    ProxyCommand ssh -A wfcuser@192.168.1.25 -i ~/.ssh/tpe-dev.pem -p 22 -W %h:%p
+    HostName 210.59.138.4
+    Port 22
+    User wfcuser
+    IdentityFile ~/.ssh/prod
+Host tpe-prod-l1
+    Hostname 10.10.200.1
+    Port 22
+    User wfcuser
+    IdentityFile ~/.ssh/tpe-dev.pem
+Host tpb-cs-prod-l1
+    ProxyJump tpe-prod-l1
+    HostName 220.130.133.50
+    Port 22
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+Host tpb-cs-prod-l2
+    ProxyJump tpb-cs-prod-l1
+    HostName 10.93.220.91
+    Port 22
+    User wfcuser
+    IdentityFile ~/.ssh/prod.pem
+
+Host opt-l3
+    HostName 10.10.102.3
+    Port 22
+    User chris
+
+Host opt-l1
+    HostName 10.10.102.1
+    Port 22
+    User chris
+
+

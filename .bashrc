@@ -40,3 +40,5 @@ export VISUAL=vim
 export CXX="distcc /opt/rh/devtoolset-7/root/usr/bin/g++"
 export CC="distcc /opt/rh/devtoolset-7/root/usr/bin/gcc"
 unset MAILCHECK
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

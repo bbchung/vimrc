@@ -5,18 +5,23 @@ if !filereadable(s:vim_plug_dir.'/plug.vim')
 endif
 
 packadd termdebug
-let g:termdebug_wide = 1 
+let g:termdebug_wide = 1
 call plug#begin('~/.vim/plugged')
 
 "Plugin Group: LSP "<<
 
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} "<<
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <silent> <Leader>x <Plug>(coc-fix-current)
+nmap <silent> <Leader>r <Plug>(coc-rename)
+autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 set formatexpr=CocAction('formatSelected')
+let g:coc_snippet_next = '<TAB>'
+let g:coc_snippet_prev = '<S-TAB>'
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -61,19 +66,19 @@ let g:lsc_server_commands = {
 
 let g:lsp_signs_enabled=1
 if &diff
-	let g:lsp_auto_enable = 0
+    let g:lsp_auto_enable = 0
 endif
 "let g:lsp_signs_error = {'text': '⚠'}
 "let g:lsp_signs_warning = {'text': '⚠'}
 "let g:lsp_signs_hint = {'text': '🛈'}
 
-if executable('clangd')
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-endif
+"if executable('clangd')
+    "autocmd User lsp_setup call lsp#register_server({
+        "\ 'name': 'clangd',
+        "\ 'cmd': {server_info->['clangd']},
+        "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        "\ })
+"endif
 
 "if executable('ccls')
    "au User lsp_setup call lsp#register_server({
@@ -95,29 +100,29 @@ endif
       "\ })
 "endif
 
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+"if executable('pyls')
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'pyls',
+        "\ 'cmd': {server_info->['pyls']},
+        "\ 'whitelist': ['python'],
+        "\ })
+"endif
 
-if executable('bash-language-server')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'bash',
-        \ 'cmd': {server_info->['bash-language-server', 'start']},
-        \ 'whitelist': ['sh'],
-        \ })
-endif
+"if executable('bash-language-server')
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'bash',
+        "\ 'cmd': {server_info->['bash-language-server', 'start']},
+        "\ 'whitelist': ['sh'],
+        "\ })
+"endif
 
-if executable('R')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'R',
-        \ 'cmd': {server_info->['R', '--quiet', '--slave', '-e', 'languageserver::run()']},
-        \ 'whitelist': ['r'],
-        \ })
-endif
+"if executable('R')
+    "au User lsp_setup call lsp#register_server({
+        "\ 'name': 'R',
+        "\ 'cmd': {server_info->['R', '--quiet', '--slave', '-e', 'languageserver::run()']},
+        "\ 'whitelist': ['r'],
+        "\ })
+"endif
 
 ">>
 
@@ -170,10 +175,14 @@ let g:ycm_show_diagnostics_ui = 1
 
 "Plugin Group: Color Scheme "<<
 "Plug 'bbchung/ccolor'
-Plug 'nanotech/jellybeans.vim'
+Plug 'nanotech/jellybeans.vim' "<<
+"let g:jellybeans_background_color = "000000"
+">>
 "Plug 'romainl/Apprentice'
 "Plug 'dracula/vim'
+"Plug 'NLKNguyen/papercolor-theme'
 "Plug 'morhetz/gruvbox' "<<
+"Plug 'cocopon/iceberg.vim'
 let g:gruvbox_contrast_dark='hard'
 let g:jellybeans_use_term_italics = 0
 ">>
@@ -181,8 +190,8 @@ let g:jellybeans_use_term_italics = 0
 ">>
 
 "Plugin Group: Status Bar "<<
-Plug 'liuchengxu/eleline.vim'
-"Plug 'itchyny/lightline.vim' "<<
+"Plug 'liuchengxu/eleline.vim'
+Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
@@ -194,23 +203,26 @@ let g:lightline = {
 
 let g:lightline.active = {
     \ 'left': [ [ 'mode', 'paste' ],
-    \           [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
+    \           [ 'readonly', 'absolutepath', 'modified', 'gitbranch'] ],
     \ 'right': [ [ 'lineinfo' ],
     \            [ 'percent' ],
-    \            [ 'fileformat', 'fileencoding', 'filetype' ] ] }
+    \            [ 'fileformat', 'fileencoding', 'filetype' ] ],
+    \ }
+
 let g:lightline.inactive = {
     \ 'left': [ [ 'absolutepath' ] ],
     \ 'right': [ [ 'lineinfo' ],
     \            [ 'percent' ] ] }
 
 let g:lightline.component_function = {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'cocstatus': 'coc#status'
       \ }
 ">>
 
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
-"let g:airline_theme='jellybeans'
+"let g:airline_theme='wombat'
 ">>
 
 "Plugin Group: Search "<<
@@ -220,14 +232,16 @@ let g:lightline.component_function = {
 ">>
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
-let g:Lf_StlColorscheme='default'
+let g:Lf_StlColorscheme='jellybeans'
+"let g:Lf_GtagsAutoGenerate=1
+"let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
 "let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 ">>
 
 ">>
 
-"Plugin Group: C++ "<<
+"Plugin Group: Language "<<
 
 "Plug 'bbchung/clighter8' "<<
 "nmap <silent> <Leader>R :ClRenameCursor<CR>
@@ -241,8 +255,12 @@ let g:clighter8_autostart = 0
 
 Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = "cpp,c"
-
 ">>
+
+
+"Plug 'jalvesaq/Nvim-R' "<<
+">>
+
 " >>
 
 "Plugin Group: Linter "<<
@@ -282,11 +300,13 @@ Plug 'SirVer/ultisnips' "<<
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 ">>
 
+Plug 'tpope/vim-surround' "<<
+" >>
 Plug 'honza/vim-snippets'
 
-"Plug 'Raimondi/delimitMate' "<<
+Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
-">>
+" >>
 
 "Plug 'jiangmiao/auto-pairs' "<<
 "let g:AutoPairsFlyMode = 0
@@ -294,7 +314,10 @@ let g:delimitMate_expand_cr=1
 ">>
 ">>
 
-"Plugin Group: Others << 
+"Plugin Group: Others <<
+Plug 'itchyny/calendar.vim'
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
 Plug 'mhinz/vim-startify' "<<
 let g:startify_session_persistence=1
 let g:startify_change_to_dir=0
@@ -303,6 +326,8 @@ let g:startify_change_to_dir=0
 Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'chrisbra/csv.vim'
+"Plug 'mechatroner/rainbow_csv'
 
 ">>
 call plug#end()
@@ -324,7 +349,7 @@ endif
 set vb
 set title
 set timeoutlen=300
-set noerrorbells
+set belloff=all
 "set vb t_vb=
 "set t_ut=
 set mouse=a
@@ -351,7 +376,7 @@ set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=700
+set updatetime=300
 set undofile
 set backspace=2
 set termguicolors
@@ -359,13 +384,15 @@ set nosol
 set expandtab
 set signcolumn=yes
 set clipboard=unnamedplus
+set hidden
+set shortmess+=c
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
     call mkdir(&undodir, 'p')
 endif
 
-command! TrimWhiteSpace execute ":%s/\s\+$//e"      
+command! TrimWhiteSpace :%s/\s\+$//gI
 command! W silent execute "w !sudo > /dev/null tee %"
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -384,11 +411,13 @@ nmap Q <Nop>
 vmap <C-c> <ESC>
 imap <C-c> <ESC>
 nmap <C-c> <ESC>
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
-au FileType gitcommit,text setlocal spell
+au FileType gitcommit setlocal spell
 
 let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>

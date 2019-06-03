@@ -4,8 +4,10 @@
 	st = status
 	br = branch
 	dt = difftool
+	dy = difftool -y
 	mt = mergetool
-    dn = diff master --name-only
+    dn = diff --name-only --relative
+    ri = rebase -i
 [user]
 	email = chris.chung@winfuncapital.com
 	name = chris
@@ -14,9 +16,14 @@
 [merge]
 	tool = vimdiff
 [diff]
-	tool = vimdiff
+    tool = vimdiff
+[difftool]
+    #prompt = false
+	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[mergetool]
+	trustExitCode = true
