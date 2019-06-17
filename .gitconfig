@@ -9,8 +9,8 @@
     dn = diff --name-only --relative
     ri = rebase -i
 [user]
-	email = chris.chung@winfuncapital.com
-	name = chris
+	email = afafaf4@gmail.com
+	name = bbchung
 [core]
 	editor = vim
 [merge]
