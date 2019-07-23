@@ -4,13 +4,13 @@
 	st = status
 	br = branch
 	dt = difftool
-	dy = difftool -y
+    dy = "!git difftool -y $1 -- ':!*.so.*' #"
 	mt = mergetool
     dn = diff --name-only --relative
     ri = rebase -i
 [user]
-	email = afafaf4@gmail.com
-	name = bbchung
+	email = cchung@timelinecapital.com
+	name = cchung
 [core]
 	editor = vim
 [merge]

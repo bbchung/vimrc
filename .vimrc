@@ -22,6 +22,8 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 set formatexpr=CocAction('formatSelected')
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
+let g:coc_enable_locationlist = 0
+autocmd User CocLocationsChange CocList --normal -A location
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -233,8 +235,13 @@ let g:lightline.component_function = {
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
 let g:Lf_StlColorscheme='jellybeans'
+let g:Lf_WildIgnore = {
+              \ 'dir': ['.svn','.git','.hg','build'],
+              \ 'file': ['*o']
+              \}
+let g:Lf_RecurseSubmodules = 1
 "let g:Lf_GtagsAutoGenerate=1
-"let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
+let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
 "let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 ">>
@@ -296,15 +303,15 @@ let g:ale_linters = {
 "Plugin Group: Edit<<
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'SirVer/ultisnips' "<<
+"Plug 'SirVer/ultisnips' "<<
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 ">>
 
-Plug 'tpope/vim-surround' "<<
+"Plug 'tpope/vim-surround' "<<
 " >>
 Plug 'honza/vim-snippets'
 
-Plug 'Raimondi/delimitMate' "<<
+"Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
@@ -315,7 +322,7 @@ let g:delimitMate_expand_cr=1
 ">>
 
 "Plugin Group: Others <<
-Plug 'itchyny/calendar.vim'
+"Plug 'itchyny/calendar.vim'
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
 Plug 'mhinz/vim-startify' "<<
@@ -324,8 +331,8 @@ let g:startify_change_to_dir=0
 ">>
 
 Plug 'tpope/vim-fugitive'
-Plug 'roxma/vim-tmux-clipboard'
-Plug 'tmux-plugins/vim-tmux-focus-events'
+"Plug 'roxma/vim-tmux-clipboard'
+"Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'chrisbra/csv.vim'
 "Plug 'mechatroner/rainbow_csv'
 
@@ -370,7 +377,7 @@ set foldlevelstart=20
 set tabpagemax=100
 set wildmode=longest,full
 set wildmenu
-set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noselect
 set grepprg=grep\ -nH\ $*
 "set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
@@ -383,9 +390,11 @@ set termguicolors
 set nosol
 set expandtab
 set signcolumn=yes
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 set hidden
 set shortmess+=c
+set nobackup
+set nowritebackup
 
 let &undodir=$HOME.'/.vim/undo'
 if !isdirectory(&undodir)
@@ -422,9 +431,8 @@ au FileType gitcommit setlocal spell
 let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>
 nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 G execute "Gtags -g "<f-args>
+command! -nargs=1 T execute "Gtags -g "<f-args>
 hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
 hi default link CocErrorHighlight CocErrorSign
 ">>
-
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
