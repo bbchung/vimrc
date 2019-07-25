@@ -10,7 +10,6 @@ call plug#begin('~/.vim/plugged')
 
 "Plugin Group: LSP "<<
 
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} "<<
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -19,11 +18,15 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
+"autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 set formatexpr=CocAction('formatSelected')
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal -A location
+hi CocFloating guifg=#ffffff guibg=#606060
+hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
+hi default link CocErrorHighlight CocErrorSign
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -180,10 +183,12 @@ let g:ycm_show_diagnostics_ui = 1
 Plug 'nanotech/jellybeans.vim' "<<
 "let g:jellybeans_background_color = "000000"
 ">>
-"Plug 'romainl/Apprentice'
-"Plug 'dracula/vim'
+Plug 'romainl/Apprentice'
+Plug 'dracula/vim'
+Plug 'dunstontc/vim-vscode-theme'
+Plug 'tomasiser/vim-code-dark'
 "Plug 'NLKNguyen/papercolor-theme'
-"Plug 'morhetz/gruvbox' "<<
+Plug 'morhetz/gruvbox' "<<
 "Plug 'cocopon/iceberg.vim'
 let g:gruvbox_contrast_dark='hard'
 let g:jellybeans_use_term_italics = 0
@@ -196,7 +201,7 @@ let g:jellybeans_use_term_italics = 0
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'gruvbox',
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
@@ -224,7 +229,7 @@ let g:lightline.component_function = {
 
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
-"let g:airline_theme='wombat'
+"let g:airline_theme = 'codedark'
 ">>
 
 "Plugin Group: Search "<<
@@ -311,7 +316,7 @@ let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 " >>
 Plug 'honza/vim-snippets'
 
-"Plug 'Raimondi/delimitMate' "<<
+Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
@@ -345,7 +350,7 @@ endif
 
 "My Settings <<
 set background=dark
-colorscheme jellybeans
+colorscheme gruvbox
 syntax on
 
 set tf
@@ -432,7 +437,5 @@ let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>
 nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
 command! -nargs=1 T execute "Gtags -g "<f-args>
-hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
-hi default link CocErrorHighlight CocErrorSign
 ">>
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:

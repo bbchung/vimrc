@@ -7,6 +7,9 @@
     dy = "!git difftool -y $1 -- ':!*.so.*' #"
 	mt = mergetool
     dn = diff --name-only --relative
+    dcs = submodule foreach --recursive git difftool --cached
+    dts = submodule foreach --recursive git difftool ':!*.so.*'
+    dns = submodule foreach git diff --name-only --relative
     ri = rebase -i
 [user]
 	email = cchung@timelinecapital.com

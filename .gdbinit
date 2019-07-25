@@ -1,6 +1,6 @@
 python
 import sys
-sys.path.insert(0, '/opt/rh/devtoolset-7/root/usr/share/gdb/python')
+sys.path.insert(0, '/usr/share/gcc-9/python')
 from libstdcxx.v6.printers import register_libstdcxx_printers
 register_libstdcxx_printers (None)
 end
