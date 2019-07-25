@@ -182,18 +182,34 @@ let g:ycm_show_diagnostics_ui = 1
 "Plug 'bbchung/ccolor'
 Plug 'nanotech/jellybeans.vim' "<<
 "let g:jellybeans_background_color = "000000"
+let g:jellybeans_use_term_italics = 0
 ">>
 Plug 'romainl/Apprentice'
 Plug 'dracula/vim'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
-"Plug 'NLKNguyen/papercolor-theme'
-Plug 'morhetz/gruvbox' "<<
 "Plug 'cocopon/iceberg.vim'
-let g:gruvbox_contrast_dark='hard'
-let g:jellybeans_use_term_italics = 0
-">>
 "Plug 'twerth/ir_black'
+Plug 'NLKNguyen/papercolor-theme' "<<
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+">>
+Plug 'morhetz/gruvbox' "<<
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_italic=1
+let g:gruvbox_sign_column='bg0'
+">>
 ">>
 
 "Plugin Group: Status Bar "<<
@@ -201,7 +217,7 @@ let g:jellybeans_use_term_italics = 0
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'seoul256',
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
@@ -239,7 +255,7 @@ let g:lightline.component_function = {
 ">>
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
-let g:Lf_StlColorscheme='jellybeans'
+let g:Lf_StlColorscheme='one'
 let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build'],
               \ 'file': ['*o']
@@ -247,6 +263,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_RecurseSubmodules = 1
 "let g:Lf_GtagsAutoGenerate=1
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
+let g:Lf_UseVersionControlTool = 0
 "let g:Lf_ShortcutF = '<C-P>'
 "let g:Lf_ShortcutB = '<Leader>be'
 ">>
