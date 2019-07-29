@@ -22,11 +22,11 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 set formatexpr=CocAction('formatSelected')
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
-let g:coc_enable_locationlist = 0
-autocmd User CocLocationsChange CocList --normal -A location
-hi CocFloating guifg=#ffffff guibg=#606060
-hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
-hi default link CocErrorHighlight CocErrorSign
+"let g:coc_enable_locationlist = 0
+"autocmd User CocLocationsChange CocList --normal -A location
+"hi CocFloating guifg=#ffffff guibg=#606060
+"hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
+"hi default link CocErrorHighlight CocErrorSign
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -70,12 +70,6 @@ let g:lsc_server_commands = {
 "Plug 'prabirshrestha/vim-lsp' "<<
 
 let g:lsp_signs_enabled=1
-if &diff
-    let g:lsp_auto_enable = 0
-endif
-"let g:lsp_signs_error = {'text': '⚠'}
-"let g:lsp_signs_warning = {'text': '⚠'}
-"let g:lsp_signs_hint = {'text': '🛈'}
 
 "if executable('clangd')
     "autocmd User lsp_setup call lsp#register_server({
@@ -217,7 +211,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'jellybeans',
       \ 'component': {
       \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
@@ -261,11 +255,9 @@ let g:Lf_WildIgnore = {
               \ 'file': ['*o']
               \}
 let g:Lf_RecurseSubmodules = 1
-"let g:Lf_GtagsAutoGenerate=1
+let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_UseVersionControlTool = 0
-"let g:Lf_ShortcutF = '<C-P>'
-"let g:Lf_ShortcutB = '<Leader>be'
+let g:Lf_UseVersionControlTool = 1
 ">>
 
 ">>
@@ -286,30 +278,7 @@ Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = "cpp,c"
 ">>
 
-
-"Plug 'jalvesaq/Nvim-R' "<<
-">>
-
 " >>
-
-"Plugin Group: Linter "<<
-
-"Plug 'w0rp/ale' "<<
-"let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '?'
-let g:ale_sign_column_always = 0
-let g:ale_completion_enabled = 1
-hi ALEErrorSign guifg=RED guibg=bg
-hi ALEWarningSign guifg=Yellow guibg=bg
-let g:ale_linters = {
-\   'cpp': [],
-\   'c': [],
-\   'r': [],
-\}
-
-">>
-">>
 
 "Plugin Group: Explorer "<<
 "Plug 'majutsushi/tagbar' "<<
@@ -322,15 +291,13 @@ let g:ale_linters = {
 "Plug 'scrooloose/nerdtree'
 ">>
 
-"Plugin Group: Edit<<
+"Plugin Group: Edit "<<
 Plug 'scrooloose/nerdcommenter'
 
 "Plug 'SirVer/ultisnips' "<<
 let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 ">>
 
-"Plug 'tpope/vim-surround' "<<
-" >>
 Plug 'honza/vim-snippets'
 
 Plug 'Raimondi/delimitMate' "<<
@@ -343,7 +310,7 @@ let g:delimitMate_expand_cr=1
 ">>
 ">>
 
-"Plugin Group: Others <<
+"Plugin Group: Others "<<
 "Plug 'itchyny/calendar.vim'
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
@@ -372,14 +339,10 @@ syntax on
 
 set tf
 set cursorline
-if &diff
-    set nocursorline
-endif
-set vb
 set title
 set timeoutlen=300
 set belloff=all
-"set vb t_vb=
+set vb t_vb=
 "set t_ut=
 set mouse=a
 set laststatus=2
@@ -406,7 +369,6 @@ set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
 set updatetime=300
-set undofile
 set backspace=2
 set termguicolors
 set nosol
@@ -417,10 +379,12 @@ set hidden
 set shortmess+=c
 set nobackup
 set nowritebackup
-
+set undofile
 let &undodir=$HOME.'/.vim/undo'
-if !isdirectory(&undodir)
-    call mkdir(&undodir, 'p')
+call mkdir(&undodir, 'p')
+if &diff
+    colorscheme jellybeans
+    set nocursorline
 endif
 
 command! TrimWhiteSpace :%s/\s\+$//gI
@@ -453,6 +417,6 @@ au FileType gitcommit setlocal spell
 let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>
 nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 T execute "Gtags -g "<f-args>
+command! -nargs=1 G execute "Gtags -g "<f-args>
 ">>
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
