@@ -341,6 +341,7 @@ set timeoutlen=300
 set belloff=all
 set vb t_vb=
 "set t_ut=
+"set ttyscroll=1
 set mouse=a
 set laststatus=2
 set number
@@ -414,6 +415,6 @@ au FileType gitcommit setlocal spell
 let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>
 nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 G execute "Gtags -g "<f-args>
+command! -nargs=1 T execute "Gtags -g "<f-args>
 ">>
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
