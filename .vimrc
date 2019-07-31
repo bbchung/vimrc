@@ -22,11 +22,8 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 set formatexpr=CocAction('formatSelected')
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
-"let g:coc_enable_locationlist = 0
-"autocmd User CocLocationsChange CocList --normal -A location
-"hi CocFloating guifg=#ffffff guibg=#606060
-"hi CocHighlightText guifg=#A0D5F0 guibg=#202B30
-"hi default link CocErrorHighlight CocErrorSign
+vmap <C-j> <Plug>(coc-snippets-select)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -201,7 +198,7 @@ let g:PaperColor_Theme_Options = {
 ">>
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_italic=1
+let g:gruvbox_italic=0
 let g:gruvbox_sign_column='bg0'
 ">>
 ">>
@@ -211,30 +208,29 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"ro":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \ }
-      \ }
+\ 'colorscheme': 'jellybeans',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
+\   'right': [ [ 'percent', 'lineinfo' ],
+\            [ 'fileformat', 'fileencoding', 'filetype' ],
+\            [ 'cocstatus' ] ],
+\ },
+\ 'inactive': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
+\   'right': [ [ 'percent', 'lineinfo' ],
+\            [ 'fileformat', 'fileencoding', 'filetype' ],
+\            [ 'cocstatus' ] ],
+\ },
+\ 'component_function': {
+\   'gitbranch': 'fugitive#head',
+\   'cocstatus': 'coc#status'
+\ },
+\ }
 
-let g:lightline.active = {
-    \ 'left': [ [ 'mode', 'paste' ],
-    \           [ 'readonly', 'absolutepath', 'modified', 'gitbranch'] ],
-    \ 'right': [ [ 'lineinfo' ],
-    \            [ 'percent' ],
-    \            [ 'fileformat', 'fileencoding', 'filetype' ] ],
-    \ }
 
-let g:lightline.inactive = {
-    \ 'left': [ [ 'absolutepath' ] ],
-    \ 'right': [ [ 'lineinfo' ],
-    \            [ 'percent' ] ] }
 
-let g:lightline.component_function = {
-      \   'gitbranch': 'fugitive#head',
-      \   'cocstatus': 'coc#status'
-      \ }
 ">>
 
 "Plug 'vim-airline/vim-airline'
@@ -295,7 +291,7 @@ let g:alternateExtensions_h = "cpp,c"
 Plug 'scrooloose/nerdcommenter'
 
 "Plug 'SirVer/ultisnips' "<<
-let g:UltiSnipsExpandTrigger = '<Leader><tab>'
+"let g:UltiSnipsExpandTrigger = '<Leader><tab>'
 ">>
 
 Plug 'honza/vim-snippets'
@@ -311,6 +307,7 @@ let g:delimitMate_expand_cr=1
 ">>
 
 "Plugin Group: Others "<<
+"Plug 'iandingx/leetcode.vim'
 "Plug 'itchyny/calendar.vim'
 let g:calendar_google_calendar = 1
 let g:calendar_google_task = 1
