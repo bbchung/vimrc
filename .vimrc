@@ -24,6 +24,7 @@ let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+hi default link CocHighlightText PmenuSbar
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
