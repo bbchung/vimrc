@@ -1,27 +1,29 @@
 {
-    "yank.highlight.enable": false,
-    "languageserver": {
-        "clangd": {
-            "command": "clangd",
-            "rootPatterns": [
-                "compile_flags.txt",
-                "compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "filetypes": [
-                "c",
-                "cpp",
-                "objc",
-                "objcpp"
-            ]
-        }
-    },
-    "snippets.ultisnips.enable": false,
-    "snippets.extends": {
-        "cpp": [
-            "c"
-        ]
+	"languageserver": {
+		"clangd": {
+			"command": "clangd",
+            "args": ["--background-index"],
+			"rootPatterns": [
+				"compile_flags.txt",
+				"compile_commands.json",
+				".vim/",
+				".git/",
+				".hg/"
+			],
+			"filetypes": [
+				"c",
+				"cpp",
+				"objc",
+				"objcpp"
+			]
+		}
+	},
+    "coc.preferences.useQuickfixForLocations":true,
+    "json.format.enable":true,
+    "yank.highlight.enable":false,
+    "snippets.extends":{
+        "cpp": ["c"],
+        "javascriptreact": ["javascript"],
+        "typescript": ["javascript"]
     }
 }
