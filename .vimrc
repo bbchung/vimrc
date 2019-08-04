@@ -171,15 +171,17 @@ let g:ycm_show_diagnostics_ui = 1
 ">>
 
 "Plugin Group: Color Scheme "<<
+Plug 'ayu-theme/ayu-vim'
+let ayucolor="dark"
 "Plug 'bbchung/ccolor'
 Plug 'nanotech/jellybeans.vim' "<<
 "let g:jellybeans_background_color = "000000"
 let g:jellybeans_use_term_italics = 0
 ">>
-Plug 'romainl/Apprentice'
-Plug 'dracula/vim'
-Plug 'dunstontc/vim-vscode-theme'
-Plug 'tomasiser/vim-code-dark'
+"Plug 'romainl/Apprentice'
+"Plug 'dracula/vim'
+"Plug 'dunstontc/vim-vscode-theme'
+"Plug 'tomasiser/vim-code-dark'
 "Plug 'cocopon/iceberg.vim'
 "Plug 'twerth/ir_black'
 Plug 'NLKNguyen/papercolor-theme' "<<
@@ -213,15 +215,15 @@ let g:lightline = {
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
-\   'right': [ [ 'percent', 'lineinfo' ],
-\            [ 'fileformat', 'fileencoding', 'filetype' ],
+\   'right': [ [ 'lineinfo' ],
+\            [ 'fileformat', 'fileencoding', 'filetype', 'percent' ],
 \            [ 'cocstatus' ] ],
 \ },
 \ 'inactive': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
-\   'right': [ [ 'percent', 'lineinfo' ],
-\            [ 'fileformat', 'fileencoding', 'filetype' ],
+\   'right': [ [ 'lineinfo' ],
+\            [ 'fileformat', 'fileencoding', 'filetype', 'percent' ],
 \            [ 'cocstatus' ] ],
 \ },
 \ 'component_function': {
@@ -330,9 +332,6 @@ if exists('s:install_plug')
     PlugInstall
 endif
 
-"My Settings <<
-set background=dark
-colorscheme gruvbox
 syntax on
 
 set tf
@@ -365,7 +364,7 @@ set completeopt=menuone,noselect
 set grepprg=grep\ -nH\ $*
 "set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
-set fileencodings=utf-8,big5,gb2312,utf16le
+set fileencodings=utf-8,big5,gb2312
 set fileformat=unix
 set updatetime=300
 set backspace=2
@@ -381,10 +380,6 @@ set nowritebackup
 set undofile
 let &undodir=$HOME.'/.vim/undo'
 call mkdir(&undodir, 'p')
-if &diff
-    colorscheme jellybeans
-    set nocursorline
-endif
 
 command! TrimWhiteSpace :%s/\s\+$//gI
 command! W silent execute "w !sudo > /dev/null tee %"
@@ -417,5 +412,11 @@ let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>
 nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
 command! -nargs=1 T execute "Gtags -g "<f-args>
-">>
+
+if &diff
+    set nocursorline
+endif
+set background=dark
+colorscheme gruvbox
+
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
