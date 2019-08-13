@@ -176,7 +176,6 @@ Plug 'ayu-theme/ayu-vim'
 let ayucolor="dark"
 "Plug 'bbchung/ccolor'
 Plug 'nanotech/jellybeans.vim' "<<
-"let g:jellybeans_background_color = "000000"
 let g:jellybeans_use_term_italics = 0
 ">>
 "Plug 'romainl/Apprentice'
@@ -212,19 +211,19 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-\ 'colorscheme': 'jellybeans',
+\ 'colorscheme': 'gruvbox',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
-\   'right': [ [ 'lineinfo' ],
-\            [ 'fileformat', 'fileencoding', 'filetype', 'percent' ],
+\   'right': [ [ 'percent', 'lineinfo' ],
+\            [ 'fileformat', 'fileencoding', 'filetype' ],
 \            [ 'cocstatus' ] ],
 \ },
 \ 'inactive': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
-\   'right': [ [ 'lineinfo' ],
-\            [ 'fileformat', 'fileencoding', 'filetype', 'percent' ],
+\   'right': [ [ 'percent', 'lineinfo' ],
+\            [ 'fileformat', 'fileencoding', 'filetype' ],
 \            [ 'cocstatus' ] ],
 \ },
 \ 'component_function': {
@@ -365,7 +364,7 @@ set completeopt=menuone,noselect
 set grepprg=grep\ -nH\ $*
 "set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
-set fileencodings=utf-8,big5,gb2312
+set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
 set updatetime=300
 set backspace=2
