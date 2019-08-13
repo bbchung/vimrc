@@ -15,6 +15,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <silent> <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
@@ -188,13 +189,13 @@ Plug 'NLKNguyen/papercolor-theme' "<<
 let g:PaperColor_Theme_Options = {
   \   'language': {
   \     'python': {
-  \       'highlight_builtins' : 1
+  \       'highlight_builtins' : 0
   \     },
   \     'cpp': {
-  \       'highlight_standard_library': 1
+  \       'highlight_standard_library': 0
   \     },
   \     'c': {
-  \       'highlight_builtins' : 1
+  \       'highlight_builtins' : 0
   \     }
   \   }
   \ }
@@ -256,7 +257,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_UseVersionControlTool = 1
+let g:Lf_UseVersionControlTool = 0
 ">>
 
 ">>

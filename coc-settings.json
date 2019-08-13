@@ -18,9 +18,10 @@
 			]
 		}
 	},
+    "diagnostic.warningSign":">>",
     "coc.preferences.useQuickfixForLocations":true,
     "json.format.enable":true,
-    "yank.highlight.enable":false,
+    "snippets.snipmate.enable" : false,
     "snippets.extends":{
         "cpp": ["c"],
         "javascriptreact": ["javascript"],
