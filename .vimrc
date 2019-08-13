@@ -211,20 +211,20 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-\ 'colorscheme': 'gruvbox',
+\ 'colorscheme': 'jellybeans',
 \ 'active': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
-\   'right': [ [ 'percent', 'lineinfo' ],
-\            [ 'fileformat', 'fileencoding', 'filetype' ],
-\            [ 'cocstatus' ] ],
+\   'left': [['mode', 'paste', 'readonly'],
+\            ['absolutepath', 'gitbranch', 'modified', 'cocstatus']],
+\   'right': [['lineinfo'],
+\             ['percent'],
+\             ['fileformat', 'fileencoding', 'filetype']],
 \ },
 \ 'inactive': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'readonly', 'absolutepath', 'modified', 'gitbranch' ] ],
-\   'right': [ [ 'percent', 'lineinfo' ],
-\            [ 'fileformat', 'fileencoding', 'filetype' ],
-\            [ 'cocstatus' ] ],
+\   'left': [['mode', 'paste', 'readonly'],
+\            ['absolutepath', 'gitbranch']],
+\   'right': [['lineinfo'],
+\             ['percent'],
+\             ['fileformat', 'fileencoding', 'filetype']],
 \ },
 \ 'component_function': {
 \   'gitbranch': 'fugitive#head',
