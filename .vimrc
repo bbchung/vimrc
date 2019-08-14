@@ -18,7 +18,7 @@ nmap gr <Plug>(coc-references)
 nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <Leader>rn <Plug>(coc-rename)
-nmap <silent><Leader>k :call CocAction("format") <CR>
+nmap <silent><Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
