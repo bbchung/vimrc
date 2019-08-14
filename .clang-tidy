@@ -1,4 +1,9 @@
-Checks: '-*,clang-analyzer-core*,clang-analyzer-cplusplus*,clang-analyzer-unix*,readability-*,performance-*,misc-*,-misc-unused-parameters'
+Checks: '-*
+,clang-analyzer-core*,clang-analyzer-cplusplus*,clang-analyzer-unix*,performance-*
+,readability-*,misc-*
+,modernize-avoid-bind,modernize-make-shared,modernize-pass-by-value,modernize-redundant-void-arg,modernize-use-auto,modernize-use-bool-literals,modernize-use-emplace,modernize-use-equals-default,modernize-use-equals-delete,modernize-use-nullptr,modernize-use-override,modernize-use-using,
+,-misc-non-private-member-variables-in-classes,-readability-magic-numbers'
+
 CheckOptions:
   - key:             readability-identifier-naming.NamespaceCase
     value:           CamelCase
