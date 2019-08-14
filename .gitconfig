@@ -4,12 +4,12 @@
 	st = status
 	br = branch
 	dt = difftool
-    dy = "!git difftool -y -- $1  ':!*.so.*' #"
+    dy = difftool -y -- ':(exclude)*.so.*'
 	mt = mergetool
-    dn = diff --name-only --relative
-    dts = "!git submodule foreach --recursive git difftool $1 ':!*.so.*' #"
-    dns = submodule foreach git diff --name-only --relative
     ri = rebase -i
+    dn = diff --name-only --relative
+    dts = submodule foreach --recursive git difftool -y -- ':(exclude)*.so.*'
+    dns = submodule foreach git diff --name-only --relative
 [user]
 	email = cchung@timelinecapital.com
 	name = cchung
@@ -20,12 +20,11 @@
 [diff]
     tool = vimdiff
 [difftool]
-    #prompt = false
+	trustExitCode = true
+[mergetool]
 	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[mergetool]
-	trustExitCode = true
