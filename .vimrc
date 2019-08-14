@@ -6,26 +6,29 @@ endif
 
 packadd termdebug
 let g:termdebug_wide = 1
+
 call plug#begin('~/.vim/plugged')
 
 "Plugin Group: LSP "<<
 
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} "<<
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gh :call CocActionAsync('doHover') <CR>
-nmap <silent> <Leader>x <Plug>(coc-fix-current)
-nmap <silent> <Leader>r <Plug>(coc-rename)
-autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
-"autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} "<<
+nmap gd <Plug>(coc-definition)
+nmap gy <Plug>(coc-type-definition)
+nmap gi <Plug>(coc-implementation)
+nmap gr <Plug>(coc-references)
+nmap gh :call CocActionAsync('doHover') <CR>
+nmap <Leader>x <Plug>(coc-fix-current)
+nmap <Leader>r <Plug>(coc-rename)
+vmap <C-j> <Plug>(coc-snippets-select)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 set formatexpr=CocAction('formatSelected')
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
-vmap <C-j> <Plug>(coc-snippets-select)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+let g:coc_enable_locationlist = 0
 hi default link CocHighlightText PmenuSbar
+autocmd User CocLocationsChange CocList --normal location
+autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
+"autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -43,23 +46,23 @@ hi default link CocHighlightText PmenuSbar
  "\  },
  "\}
 
-let g:lsc_server_commands = {
- \ 'cpp': {
- \    'command': 'clangd', 'suppress_stderr': v:true
- \    },
- \ 'c': {
- \    'command': 'clangd', 'suppress_stderr': v:true
- \    },
- \ 'python': {
- \    'command': 'pyls',
- \    },
- \ 'r': {
- \    'command': 'R --quiet --slave -e languageserver::run()',
- \    },
- \ 'sh': {
- \    'command': 'bash-language-server start',
- \    },
- \}
+"let g:lsc_server_commands = {
+ "\ 'cpp': {
+ "\    'command': 'clangd', 'suppress_stderr': v:true
+ "\    },
+ "\ 'c': {
+ "\    'command': 'clangd', 'suppress_stderr': v:true
+ "\    },
+ "\ 'python': {
+ "\    'command': 'pyls',
+ "\    },
+ "\ 'r': {
+ "\    'command': 'R --quiet --slave -e languageserver::run()',
+ "\    },
+ "\ 'sh': {
+ "\    'command': 'bash-language-server start',
+ "\    },
+ "\}
 
 "highlight lscReference ctermbg=160
 "nmap <silent> <Leader>d :LSClientGoToDefinition<CR>
@@ -68,7 +71,7 @@ let g:lsc_server_commands = {
 
 "Plug 'prabirshrestha/vim-lsp' "<<
 
-let g:lsp_signs_enabled=1
+"let g:lsp_signs_enabled=1
 
 "if executable('clangd')
     "autocmd User lsp_setup call lsp#register_server({
@@ -157,14 +160,14 @@ let g:lsp_signs_enabled=1
 ">>
 
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'} "<<
-let g:ycm_confirm_extra_conf=0
-let g:ycm_enable_diagnostic_signs = 1
+"let g:ycm_confirm_extra_conf=0
+"let g:ycm_enable_diagnostic_signs = 1
 
-let g:ycm_error_symbol = '⨉'
-let g:ycm_warning_symbol = '⚠'
-let g:ycm_style_error_symbol = '⚠'
-let g:ycm_style_warning_symbol = '⚠'
-let g:ycm_show_diagnostics_ui = 1
+"let g:ycm_error_symbol = '⨉'
+"let g:ycm_warning_symbol = '⚠'
+"let g:ycm_style_error_symbol = '⚠'
+"let g:ycm_style_warning_symbol = '⚠'
+"let g:ycm_show_diagnostics_ui = 1
 
 "nmap <silent> <Leader>d :YcmCompleter GoTo<CR>
 ">>
@@ -266,10 +269,10 @@ let g:Lf_UseVersionControlTool = 0
 "Plug 'bbchung/clighter8' "<<
 "nmap <silent> <Leader>R :ClRenameCursor<CR>
 
-let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation']
-let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
-let g:clighter8_syntax_highlight = 1
-let g:clighter8_autostart = 0
+"let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation']
+"let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
+"let g:clighter8_syntax_highlight = 1
+"let g:clighter8_autostart = 0
 
 ">>
 
@@ -311,9 +314,10 @@ let g:delimitMate_expand_cr=1
 
 "Plugin Group: Others "<<
 "Plug 'iandingx/leetcode.vim'
-"Plug 'itchyny/calendar.vim'
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
+"Plug 'itchyny/calendar.vim' "<<
+"let g:calendar_google_calendar = 1
+"let g:calendar_google_task = 1
+">>
 Plug 'mhinz/vim-startify' "<<
 let g:startify_session_persistence=1
 let g:startify_change_to_dir=0
@@ -334,9 +338,10 @@ endif
 
 syntax on
 
-set tf
-set cursorline
+set nocompatible
 set title
+set ttyfast
+set cursorline
 set timeoutlen=300
 set belloff=all
 set vb t_vb=
@@ -345,6 +350,7 @@ set vb t_vb=
 set mouse=a
 set laststatus=2
 set number
+set expandtab
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
@@ -362,17 +368,13 @@ set wildmode=longest,full
 set wildmenu
 set completeopt=menuone,noselect
 set grepprg=grep\ -nH\ $*
-"set sessionoptions=buffers,curdir,folds,winsize,options
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
 set updatetime=300
 set backspace=2
 set termguicolors
-set nosol
-set expandtab
 set signcolumn=yes
-"set clipboard=unnamedplus
 set hidden
 set shortmess+=c
 set nobackup
@@ -394,19 +396,19 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-
 nmap <F4> :qa<CR>
 nmap Q <Nop>
 vmap <C-c> <ESC>
 imap <C-c> <ESC>
 nmap <C-c> <ESC>
-
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
-au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
-au FileType gitcommit setlocal spell
+augroup BB
+    au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
+    au FileType gitcommit setlocal spell
+augroup END
 
 let g:Gtags_Auto_Update = 1
 nmap <Leader>s :GtagsCursor<CR>
