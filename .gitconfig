@@ -4,7 +4,7 @@
 	st = status
 	br = branch
 	dt = difftool
-    dy = "!git difftool -y $1 -- ':!*.so.*' #"
+    dy = "!git difftool -y -- $1  ':!*.so.*' #"
 	mt = mergetool
     dn = diff --name-only --relative
     dts = "!git submodule foreach --recursive git difftool $1 ':!*.so.*' #"
