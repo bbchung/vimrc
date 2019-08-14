@@ -10,13 +10,12 @@ let g:termdebug_wide = 1
 call plug#begin('~/.vim/plugged')
 
 "Plugin Group: LSP "<<
-
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} "<<
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
 nmap gd <Plug>(coc-definition)
 nmap gy <Plug>(coc-type-definition)
 nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
-nmap gh :call CocActionAsync('doHover') <CR>
+nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <Leader>r <Plug>(coc-rename)
 vmap <C-j> <Plug>(coc-snippets-select)
@@ -126,7 +125,6 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 "endif
 
 ">>
-
 ">>
 
 "Plugin Group: Autocomplete "<<
@@ -174,7 +172,7 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 
 ">>
 
-"Plugin Group: Color Scheme "<<
+"Plugin Group: Theme "<<
 Plug 'ayu-theme/ayu-vim'
 let ayucolor="dark"
 "Plug 'bbchung/ccolor'
@@ -209,7 +207,7 @@ let g:gruvbox_sign_column='bg0'
 ">>
 ">>
 
-"Plugin Group: Status Bar "<<
+"Plugin Group: StatusBar "<<
 "Plug 'liuchengxu/eleline.vim'
 Plug 'itchyny/lightline.vim' "<<
 
@@ -264,24 +262,6 @@ let g:Lf_UseVersionControlTool = 0
 
 ">>
 
-"Plugin Group: Language "<<
-
-"Plug 'bbchung/clighter8' "<<
-"nmap <silent> <Leader>R :ClRenameCursor<CR>
-
-"let g:clighter8_highlight_whitelist = ['clighter8EnumConstantDecl', 'clighter8MacroInstantiation']
-"let g:clighter8_libclang_path='/usr/local/lib/libclang.so'
-"let g:clighter8_syntax_highlight = 1
-"let g:clighter8_autostart = 0
-
-">>
-
-Plug 'vim-scripts/a.vim' "<<
-let g:alternateExtensions_h = "cpp,c"
-">>
-
-" >>
-
 "Plugin Group: Explorer "<<
 "Plug 'majutsushi/tagbar' "<<
 "let g:tagbar_left = 1
@@ -312,7 +292,10 @@ let g:delimitMate_expand_cr=1
 ">>
 ">>
 
-"Plugin Group: Others "<<
+"Plugin Group: Misc "<<
+Plug 'vim-scripts/a.vim' "<<
+let g:alternateExtensions_h = "cpp,c"
+">>
 "Plug 'iandingx/leetcode.vim'
 "Plug 'itchyny/calendar.vim' "<<
 "let g:calendar_google_calendar = 1
@@ -330,6 +313,7 @@ Plug 'chrisbra/csv.vim'
 "Plug 'mechatroner/rainbow_csv'
 
 ">>
+
 call plug#end()
 
 if exists('s:install_plug')
