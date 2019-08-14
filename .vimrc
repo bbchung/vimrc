@@ -17,7 +17,8 @@ nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
 nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
-nmap <Leader>r <Plug>(coc-rename)
+nmap <Leader>rn <Plug>(coc-rename)
+vmap <Leader>f :call CocAction("formatSelected", "v") <CR>
 vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 set formatexpr=CocAction('formatSelected')
@@ -382,9 +383,7 @@ vnoremap <silent> # :<C-U>
 
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-vmap <C-c> <ESC>
-imap <C-c> <ESC>
-nmap <C-c> <ESC>
+map <C-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
