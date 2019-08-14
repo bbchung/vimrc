@@ -18,10 +18,10 @@ nmap gr <Plug>(coc-references)
 nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <Leader>rn <Plug>(coc-rename)
-vmap <Leader>f :call CocAction("formatSelected", "v") <CR>
+nmap <silent><Leader>k :call CocAction("format") <CR>
+set formatexpr=CocAction('formatSelected')
 vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-set formatexpr=CocAction('formatSelected')
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
 let g:coc_enable_locationlist = 0
