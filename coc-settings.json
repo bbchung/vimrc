@@ -22,6 +22,8 @@
     },
     "diagnostic.warningSign": ">>",
     "snippets.snipmate.enable": false,
+    "yaml.format.enable": true,
+    "r.lsp.diagnostics": false,
     "snippets.extends": {
         "cpp": [
             "c"
