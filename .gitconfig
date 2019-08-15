@@ -19,9 +19,6 @@
 	tool = vimdiff
 [diff]
 	tool = vimdiff
-[diff "cpp"]
-	textconv = /bin/true
-    binary = true
 [difftool]
 	trustExitCode = true
 [mergetool]
