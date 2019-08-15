@@ -24,6 +24,7 @@
     "snippets.snipmate.enable": false,
     "yaml.format.enable": true,
     "r.lsp.diagnostics": false,
+    "coc.preferences.useQuickfixForLocations": true,
     "snippets.extends": {
         "cpp": [
             "c"
