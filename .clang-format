@@ -4,7 +4,7 @@ Language:        Cpp
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 #AlignConsecutiveMacros: false
-#AlignConsecutiveAssicdgnments: true
+#AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: false
 AlignEscapedNewlines: Right
 AlignOperands:   true
@@ -27,7 +27,7 @@ BinPackParameters: true
 BreakBeforeBraces: Custom
 BraceWrapping:
 #  AfterCaseLabel:  false
-  AfterClass:      false
+  AfterClass:      true
   AfterControlStatement: false
   AfterEnum:       false
   AfterFunction:   true
@@ -36,7 +36,7 @@ BraceWrapping:
   AfterStruct:     true
   AfterUnion:      true
   AfterExternBlock: false
-  BeforeCatch:     true
+  BeforeCatch:     false
   BeforeElse:      false
   IndentBraces:    false
   SplitEmptyFunction: true
