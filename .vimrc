@@ -383,7 +383,7 @@ vnoremap <silent> # :<C-U>
 
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-map <C-c> <ESC>
+map! <C-c> <ESC>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
