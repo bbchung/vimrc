@@ -22,8 +22,8 @@ nmap <silent><Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
 let g:coc_enable_locationlist = 0
 hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
