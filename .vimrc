@@ -22,9 +22,7 @@ nmap <silent><Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 vmap <C-j> <Plug>(coc-snippets-select)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-let g:coc_enable_locationlist = 0
+let g:coc_enable_locationlist = 1
 hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
@@ -370,12 +368,12 @@ call mkdir(&undodir, 'p')
 
 command! TrimWhiteSpace :%s/\s\+$//gI
 command! W silent execute "w !sudo > /dev/null tee %"
-vnoremap <silent> * :<C-U>
+vmap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
   \gvy/<C-R><C-R>=substitute(
   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
+vmap <silent> # :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
   \gvy?<C-R><C-R>=substitute(
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
@@ -384,9 +382,9 @@ vnoremap <silent> # :<C-U>
 nmap <F4> :qa<CR>
 nmap Q <Nop>
 map! <C-c> <ESC>
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 augroup BB
     au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
