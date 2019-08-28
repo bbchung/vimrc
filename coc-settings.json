@@ -20,11 +20,12 @@
             ]
         }
     },
+    "yank.highlight.enable": false,
     "diagnostic.warningSign": ">>",
     "snippets.snipmate.enable": false,
     "yaml.format.enable": true,
     "r.lsp.diagnostics": false,
-    "coc.preferences.useQuickfixForLocations": true,
+    "coc.preferences.useQuickfixForLocations": false,
     "snippets.extends": {
         "cpp": [
             "c"
