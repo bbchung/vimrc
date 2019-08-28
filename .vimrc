@@ -20,10 +20,6 @@ nmap <Leader>x <Plug>(coc-fix-current)
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <silent><Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
-vmap <C-j> <Plug>(coc-snippets-select)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-let g:coc_snippet_next = '<c-j>'
-let g:coc_snippet_prev = '<c-k>'
 let g:coc_enable_locationlist = 0
 hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
@@ -330,7 +326,7 @@ set cursorline
 set timeoutlen=300
 set belloff=all
 set vb t_vb=
-"set t_ut=
+set t_ut=
 "set ttyscroll=1
 set mouse=a
 set laststatus=2
@@ -356,7 +352,7 @@ set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=300
+set updatetime=550
 set backspace=2
 set termguicolors
 set signcolumn=yes
