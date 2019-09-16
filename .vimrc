@@ -7,23 +7,27 @@ endif
 packadd termdebug
 let g:termdebug_wide = 1
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
-nmap gd <Plug>(coc-definition)
-nmap gy <Plug>(coc-type-definition)
-nmap gi <Plug>(coc-implementation)
-nmap gr <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> <c-]> <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <Leader>rn <Plug>(coc-rename)
-nmap <silent><Leader>r :call CocAction("format") <CR>
+nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
+if &diff
+    let g:coc_start_at_startup=0
+endif
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
@@ -170,6 +174,7 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
 ">>
 
 "Plugin Group: Theme "<<
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 let ayucolor="dark"
 "Plug 'bbchung/ccolor'
@@ -255,6 +260,7 @@ let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
 let g:Lf_UseVersionControlTool = 0
+let g:Lf_DefaultMode='NameOnly'
 ">>
 
 ">>
@@ -279,7 +285,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'honza/vim-snippets'
 
-Plug 'Raimondi/delimitMate' "<<
+"Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
@@ -317,14 +323,20 @@ if exists('s:install_plug')
     PlugInstall
 endif
 
+">>
+
 syntax on
 
+set belloff=all
+set completeopt=menuone,noselect
+set termguicolors
+set signcolumn=yes
+set shortmess+=c
 set nocompatible
 set title
 set ttyfast
 set cursorline
 set timeoutlen=300
-set belloff=all
 set vb t_vb=
 set t_ut=
 "set ttyscroll=1
@@ -347,17 +359,13 @@ set foldlevelstart=20
 set tabpagemax=100
 set wildmode=longest,full
 set wildmenu
-set completeopt=menuone,noselect
 set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=550
+set updatetime=450
 set backspace=2
-set termguicolors
-set signcolumn=yes
 set hidden
-set shortmess+=c
 set nobackup
 set nowritebackup
 set undofile
@@ -379,7 +387,8 @@ vmap <silent> # :<C-U>
 
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-map! <C-c> <ESC>
+imap <C-c> <ESC>
+nmap <C-c> <ESC>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
@@ -390,12 +399,13 @@ augroup BB
 augroup END
 
 let g:Gtags_Auto_Update = 1
-nmap <Leader>s :GtagsCursor<CR>
-nmap <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
+nmap <silent> <Leader>s :GtagsCursor<CR>
+nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
 command! -nargs=1 T execute "Gtags -g "<f-args>
 
 if &diff
     set nocursorline
+    let g:coc_start_at_startup=0
 endif
 set background=dark
 colorscheme gruvbox
