@@ -179,6 +179,7 @@ Plug 'ayu-theme/ayu-vim'
 let ayucolor="dark"
 "Plug 'bbchung/ccolor'
 Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
 ">>
@@ -200,7 +201,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-\ 'colorscheme': 'gruvbox',
+\ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['absolutepath', 'gitbranch', 'modified', 'cocstatus']],
@@ -394,6 +395,6 @@ if &diff
     let g:coc_start_at_startup=0
 endif
 set background=dark
-colorscheme gruvbox
+colorscheme onedark
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
