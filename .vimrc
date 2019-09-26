@@ -18,7 +18,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gh :call CocActionAsync('doHover') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
-nmap <Leader>rn <Plug>(coc-rename)
+nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
@@ -174,10 +174,11 @@ endif
 ">>
 
 "Plugin Group: Theme "<<
-Plug 'drewtempelmeyer/palenight.vim'
+"Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
 let ayucolor="dark"
 "Plug 'bbchung/ccolor'
+Plug 'joshdick/onedark.vim'
 Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
 ">>
@@ -185,22 +186,7 @@ let g:jellybeans_use_term_italics = 0
 "Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 "Plug 'tomasiser/vim-code-dark'
-"Plug 'cocopon/iceberg.vim'
 "Plug 'twerth/ir_black'
-Plug 'NLKNguyen/papercolor-theme' "<<
-let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 0
-  \     },
-  \     'cpp': {
-  \       'highlight_standard_library': 0
-  \     },
-  \     'c': {
-  \       'highlight_builtins' : 0
-  \     }
-  \   }
-  \ }
 ">>
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
@@ -214,7 +200,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-\ 'colorscheme': 'jellybeans',
+\ 'colorscheme': 'onedark',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['absolutepath', 'gitbranch', 'modified', 'cocstatus']],
@@ -408,6 +394,6 @@ if &diff
     let g:coc_start_at_startup=0
 endif
 set background=dark
-colorscheme gruvbox
+colorscheme onedark
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
