@@ -200,7 +200,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 let g:lightline = {
-\ 'colorscheme': 'onedark',
+\ 'colorscheme': 'gruvbox',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['absolutepath', 'gitbranch', 'modified', 'cocstatus']],
@@ -394,6 +394,6 @@ if &diff
     let g:coc_start_at_startup=0
 endif
 set background=dark
-colorscheme onedark
+colorscheme gruvbox
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
