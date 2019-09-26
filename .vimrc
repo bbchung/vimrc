@@ -285,7 +285,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'honza/vim-snippets'
 
-"Plug 'Raimondi/delimitMate' "<<
+Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
@@ -336,9 +336,9 @@ set nocompatible
 set title
 set ttyfast
 set cursorline
-set timeoutlen=300
+set timeoutlen=400
 set vb t_vb=
-set t_ut=
+"set t_ut=
 "set ttyscroll=1
 set mouse=a
 set laststatus=2
