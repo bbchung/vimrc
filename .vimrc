@@ -25,9 +25,6 @@ let g:coc_enable_locationlist = 0
 hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
-if &diff
-    let g:coc_start_at_startup=0
-endif
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
@@ -391,6 +388,7 @@ nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
 command! -nargs=1 T execute "Gtags -g "<f-args>
 
 if &diff
+    syntax off
     set nocursorline
     let g:coc_start_at_startup=0
 endif
