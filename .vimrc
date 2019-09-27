@@ -185,7 +185,6 @@ let g:jellybeans_use_term_italics = 0
 "Plug 'dunstontc/vim-vscode-theme'
 "Plug 'tomasiser/vim-code-dark'
 "Plug 'twerth/ir_black'
-">>
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_italic=0
@@ -322,7 +321,7 @@ set ttyfast
 set cursorline
 set timeoutlen=500
 set vb t_vb=
-"set t_ut=
+set t_ut=
 "set ttyscroll=1
 set mouse=a
 set laststatus=2
