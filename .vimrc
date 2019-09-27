@@ -24,7 +24,7 @@ set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
-autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('highlight')
+autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
@@ -201,10 +201,10 @@ let g:lightline = {
 \ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['absolutepath', 'gitbranch', 'modified', 'cocstatus']],
+\            ['absolutepath', 'gitbranch', 'modified']],
 \   'right': [['lineinfo'],
 \             ['percent'],
-\             ['fileformat', 'fileencoding', 'filetype']],
+\             ['cocstatus', 'fileformat', 'fileencoding', 'filetype']],
 \ },
 \ 'inactive': {
 \   'left': [['mode', 'paste', 'readonly'],
@@ -320,7 +320,7 @@ set nocompatible
 set title
 set ttyfast
 set cursorline
-set timeoutlen=400
+set timeoutlen=500
 set vb t_vb=
 "set t_ut=
 "set ttyscroll=1
