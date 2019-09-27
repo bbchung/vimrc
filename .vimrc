@@ -321,7 +321,7 @@ set ttyfast
 set cursorline
 set timeoutlen=500
 set vb t_vb=
-set t_ut=
+"set t_ut=
 "set ttyscroll=1
 set mouse=a
 set laststatus=2
