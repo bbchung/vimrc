@@ -374,7 +374,7 @@ imap <C-c> <ESC>
 nmap <C-c> <ESC>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+"imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
 augroup BB
     au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
