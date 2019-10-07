@@ -22,8 +22,8 @@ nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
-hi default link CocHighlightText PmenuSbar
 autocmd User CocLocationsChange CocList --normal location
+hi default link CocHighlightText PmenuSbar
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
@@ -268,11 +268,11 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'honza/vim-snippets'
 
-Plug 'Raimondi/delimitMate' "<<
+"Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
-"Plug 'jiangmiao/auto-pairs' "<<
+Plug 'jiangmiao/auto-pairs' "<<
 "let g:AutoPairsFlyMode = 0
 "let g:AutoPairsMultilineClose=0
 ">>
