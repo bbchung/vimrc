@@ -11,12 +11,19 @@ call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> <c-]> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gh :call CocActionAsync('doHover') <CR>
+nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
