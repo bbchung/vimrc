@@ -242,7 +242,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_UseVersionControlTool = 0
+let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
 ">>
 
