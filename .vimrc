@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -28,8 +29,8 @@ nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
-let g:coc_enable_locationlist = 0
-autocmd User CocLocationsChange CocList --normal location
+"let g:coc_enable_locationlist = 0
+"autocmd User CocLocationsChange CocList --normal location
 hi default link CocHighlightText PmenuSbar
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
@@ -249,7 +250,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_UseVersionControlTool = 1
+let g:Lf_UseVersionControlTool = 0
 let g:Lf_DefaultMode='NameOnly'
 ">>
 
@@ -275,11 +276,11 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'honza/vim-snippets'
 
-"Plug 'Raimondi/delimitMate' "<<
+Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
-Plug 'jiangmiao/auto-pairs' "<<
+"Plug 'jiangmiao/auto-pairs' "<<
 "let g:AutoPairsFlyMode = 0
 "let g:AutoPairsMultilineClose=0
 ">>
@@ -353,7 +354,7 @@ set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=450
+set updatetime=500
 set backspace=2
 set hidden
 set nobackup
@@ -391,7 +392,7 @@ augroup END
 let g:Gtags_Auto_Update = 1
 nmap <silent> <Leader>s :GtagsCursor<CR>
 nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 T execute "Gtags -g "<f-args>
+command! -nargs=1 S execute "Gtags -g "<f-args>
 
 if &diff
     syntax off
@@ -400,6 +401,5 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
-
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
