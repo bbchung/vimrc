@@ -10,8 +10,8 @@ let g:termdebug_wide = 1
 call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
