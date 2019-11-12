@@ -10,8 +10,8 @@ let g:termdebug_wide = 1
 call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " <<
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -29,8 +29,8 @@ nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
-"let g:coc_enable_locationlist = 0
-"autocmd User CocLocationsChange CocList --normal location
+let g:coc_enable_locationlist = 0
+autocmd User CocLocationsChange CocList --normal location
 hi default link CocHighlightText PmenuSbar
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
@@ -244,13 +244,14 @@ let g:lightline = {
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
 let g:Lf_StlColorscheme='one'
 let g:Lf_WildIgnore = {
-              \ 'dir': ['.svn','.git','.hg','build'],
+              \ 'dir': ['.svn','.git','.hg','build','third_party', '.clangd'],
               \ 'file': ['*o']
               \}
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_UseVersionControlTool = 0
+let g:Lf_DefaultExternalTool = 'rg'
+let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
 ">>
 
@@ -289,6 +290,8 @@ let g:delimitMate_expand_cr=1
 "Plugin Group: Misc "<<
 Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = "cpp,c"
+let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
+let g:alternateRelativeFiles = 1
 ">>
 "Plug 'iandingx/leetcode.vim'
 "Plug 'itchyny/calendar.vim' "<<
