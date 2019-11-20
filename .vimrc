@@ -251,7 +251,7 @@ let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
 let g:Lf_DefaultExternalTool = 'rg'
-let g:Lf_UseVersionControlTool = 1
+let g:Lf_UseVersionControlTool = 0
 let g:Lf_DefaultMode='NameOnly'
 ">>
 
@@ -332,7 +332,7 @@ set ttyfast
 set cursorline
 set timeoutlen=500
 set vb t_vb=
-"set t_ut=
+set t_ut=
 "set ttyscroll=1
 set mouse=a
 set laststatus=2
