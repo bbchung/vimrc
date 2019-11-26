@@ -204,25 +204,37 @@ let g:gruvbox_sign_column='bg0'
 "Plug 'liuchengxu/eleline.vim'
 Plug 'itchyny/lightline.vim' "<<
 
+function! LightlineReadonly()
+    return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+    if exists('*fugitive#head')
+        let branch = fugitive#head()
+        return branch !=# '' ? ''.branch : ''
+    endif
+    return ''
+endfunction
+
 let g:lightline = {
 \ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['absolutepath', 'gitbranch', 'modified']],
+\            ['relativepath', 'gitbranch', 'modified']],
 \   'right': [['lineinfo'],
 \             ['percent'],
 \             ['cocstatus', 'fileformat', 'fileencoding', 'filetype']],
 \ },
 \ 'inactive': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['absolutepath', 'gitbranch']],
+\            ['relativepath', 'gitbranch']],
 \   'right': [['lineinfo'],
 \             ['percent'],
 \             ['fileformat', 'fileencoding', 'filetype']],
 \ },
 \ 'component_function': {
-\   'gitbranch': 'fugitive#head',
-\   'cocstatus': 'coc#status'
+\   'gitbranch': 'LightlineFugitive',
+\   'readonly': 'LightlineReadonly',
+\   'cocstatus': 'coc#status',
 \ },
 \ }
 
@@ -244,14 +256,14 @@ let g:lightline = {
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
 let g:Lf_StlColorscheme='one'
 let g:Lf_WildIgnore = {
-              \ 'dir': ['.svn','.git','.hg','build','third_party', '.clangd'],
+              \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
               \}
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_DefaultExternalTool = 'rg'
-let g:Lf_UseVersionControlTool = 0
+let g:Lf_DefaultExternalTool = "rg"
+let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
 ">>
 
