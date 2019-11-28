@@ -5,7 +5,7 @@
 	br = branch
 	dt = difftool
     dy = "!f() { git difftool -y $@ ':(exclude)*.so.*'; }; f"
-    dn = diff --name-only --relative -- ':(exclude)*.so.*'
+    dn = diff --name-only --relative
 	mt = mergetool
     ri = rebase -i
     ls = ls-files
