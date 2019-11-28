@@ -219,7 +219,7 @@ let g:lightline = {
 \ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch', 'modified']],
+\            ['relativepath'], ['gitbranch', 'modified']],
 \   'right': [['lineinfo'],
 \             ['percent'],
 \             ['cocstatus', 'fileformat', 'fileencoding', 'filetype']],
@@ -410,6 +410,7 @@ nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
 command! -nargs=1 S execute "Gtags -g "<f-args>
 
 if &diff
+    set noro
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
