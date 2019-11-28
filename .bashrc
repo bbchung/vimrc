@@ -122,5 +122,3 @@ alias v='vi'
 alias F='clang-format-10 -i `git ls *.cpp *.h *.hpp`'
 alias TD='clang-tidy-10 -fix `git ls *.cpp *.h *.hpp`'
 PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]: \[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]$(__git_ps1 \ %s)\[\033[00m\]\$ '
-
-#export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/home/chris/workspace/timeline/cpphft/bin/:/home/chris/workspace/timeline/cpphft/lib
