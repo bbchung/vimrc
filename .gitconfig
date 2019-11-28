@@ -9,8 +9,7 @@
 	mt = mergetool
     ri = rebase -i
     ls = ls-files
-    dts = submodule foreach --recursive git difftool -y -- ':(exclude)*.so.*'
-    dns = submodule foreach git diff --name-only --relative
+    sm = "!f() { git submodule foreach --recursive $@; }; f"
 [user]
 	email = cchung@timelinecapital.com
 	name = cchung
