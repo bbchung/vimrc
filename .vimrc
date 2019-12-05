@@ -219,14 +219,14 @@ let g:lightline = {
 \ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath2'], ['gitbranch', 'modified']],
+\            ['relativepath'], ['gitbranch', 'modified', 'cocstatus']],
 \   'right': [['lineinfo'],
 \             ['percent'],
-\             ['cocstatus', 'fileformat', 'fileencoding', 'filetype']],
+\             ['fileformat', 'fileencoding', 'filetype']],
 \ },
 \ 'inactive': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath2', 'gitbranch']],
+\            ['relativepath'], ['gitbranch', 'modified', 'cocstatus']],
 \   'right': [['lineinfo'],
 \             ['percent'],
 \             ['fileformat', 'fileencoding', 'filetype']],
@@ -236,8 +236,6 @@ let g:lightline = {
 \   'readonly': 'LightlineReadonly',
 \   'cocstatus': 'coc#status',
 \ },
-\ 'component': {
-\ }
 \ }
 
 
@@ -293,7 +291,6 @@ Plug 'honza/vim-snippets'
 
 Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
-"let g:delimitMate_balance_matchpairs=1
 " >>
 
 "Plug 'jiangmiao/auto-pairs' "<<
