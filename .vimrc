@@ -416,6 +416,6 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
-hi CocHighlightText guibg=#32363d
+hi default link CocHighlightText IncSearch
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
