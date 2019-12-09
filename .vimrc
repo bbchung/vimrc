@@ -31,7 +31,6 @@ nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
-hi default link CocHighlightText CocListBlueGrey
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
@@ -417,5 +416,6 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
+hi CocHighlightText guibg=#32363d
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
