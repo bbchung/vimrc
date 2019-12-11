@@ -203,6 +203,9 @@ let g:gruvbox_sign_column='bg0'
 "Plug 'liuchengxu/eleline.vim'
 Plug 'itchyny/lightline.vim' "<<
 
+function! RelativePath()
+    return expand("%:~:.")
+endfunction
 function! LightlineReadonly()
     return &readonly ? '🔒' : ''
 endfunction
@@ -231,6 +234,7 @@ let g:lightline = {
 \             ['cocstatus']],
 \ },
 \ 'component': {
+\   'relativepath': '%:~:.',
 \   'lineinfo': '%3l:%-2v',
 \   'paste': '%{&paste?"📋":""}',
 \ },
@@ -238,6 +242,7 @@ let g:lightline = {
 \   'gitbranch': 'LightlineFugitive',
 \   'readonly': 'LightlineReadonly',
 \   'cocstatus': 'coc#status',
+\   'relativepath': 'RelativePath',
 \ },
 \ 'separator': { 'left': '', 'right': '' },
 \ 'subseparator': { 'left': '', 'right': '' }
