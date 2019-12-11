@@ -188,7 +188,7 @@ Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
 ">>
 "Plug 'romainl/Apprentice'
-"Plug 'dracula/vim'
+Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 "Plug 'tomasiser/vim-code-dark'
 "Plug 'twerth/ir_black'
@@ -204,7 +204,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 function! LightlineReadonly()
-    return &readonly ? '' : ''
+    return &readonly ? '🔒' : ''
 endfunction
 function! LightlineFugitive()
     if exists('*fugitive#head')
@@ -218,23 +218,29 @@ let g:lightline = {
 \ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath'], ['gitbranch', 'modified', 'cocstatus']],
-\   'right': [['lineinfo'],
-\             ['percent'],
-\             ['fileformat', 'fileencoding', 'filetype']],
+\            ['relativepath', 'gitbranch'], ['modified']],
+\   'right': [['percent', 'lineinfo'],
+\             ['fileformat', 'fileencoding', 'filetype'],
+\             ['cocstatus']],
 \ },
 \ 'inactive': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath'], ['gitbranch', 'modified', 'cocstatus']],
-\   'right': [['lineinfo'],
-\             ['percent'],
-\             ['fileformat', 'fileencoding', 'filetype']],
+\            ['relativepath', 'gitbranch'], ['modified']],
+\   'right': [['percent', 'lineinfo'],
+\             ['fileformat', 'fileencoding', 'filetype'],
+\             ['cocstatus']],
+\ },
+\ 'component': {
+\   'lineinfo': '%3l:%-2v',
+\   'paste': '%{&paste?"📋":""}',
 \ },
 \ 'component_function': {
 \   'gitbranch': 'LightlineFugitive',
 \   'readonly': 'LightlineReadonly',
 \   'cocstatus': 'coc#status',
 \ },
+\ 'separator': { 'left': '', 'right': '' },
+\ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
 
@@ -398,10 +404,8 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
-augroup BB
-    au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
-    au FileType gitcommit setlocal spell
-augroup END
+au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType gitcommit setlocal spell
 
 let g:Gtags_Auto_Update = 1
 nmap <silent> <Leader>s :GtagsCursor<CR>
