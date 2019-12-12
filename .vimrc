@@ -180,7 +180,7 @@ autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 "Plugin Group: Theme "<<
 "Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ayu-theme/ayu-vim'
-let ayucolor="dark"
+let ayucolor='dark'
 "Plug 'bbchung/ccolor'
 Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
@@ -204,7 +204,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
-    return expand("%:~:.")
+    return expand('%:~:.')
 endfunction
 function! LightlineReadonly()
     return &readonly ? '🔒' : ''
@@ -272,7 +272,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
-let g:Lf_DefaultExternalTool = "rg"
+let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
 ">>
@@ -311,7 +311,7 @@ let g:delimitMate_expand_cr=1
 
 "Plugin Group: Misc "<<
 Plug 'vim-scripts/a.vim' "<<
-let g:alternateExtensions_h = "cpp,c"
+let g:alternateExtensions_h = 'cpp,c'
 let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
 let g:alternateRelativeFiles = 1
 ">>
