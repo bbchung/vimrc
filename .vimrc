@@ -346,7 +346,7 @@ syntax on
 set belloff=all
 set completeopt=menuone,noselect
 set termguicolors
-set signcolumn=yes
+set signcolumn=number
 set shortmess+=c
 set nocompatible
 set title
