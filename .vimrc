@@ -275,6 +275,8 @@ let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
 ">>
 
 ">>
