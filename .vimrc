@@ -183,7 +183,7 @@ Plug 'ayu-theme/ayu-vim'
 let ayucolor='dark'
 "Plug 'bbchung/ccolor'
 Plug 'joshdick/onedark.vim'
-Plug 'rakr/vim-one'
+"Plug 'rakr/vim-one'
 Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
 ">>
@@ -301,7 +301,10 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'honza/vim-snippets'
 
-Plug 'Raimondi/delimitMate' "<<
+Plug 'cohama/lexima.vim' "<<
+" >>
+
+"Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 " >>
 
@@ -428,5 +431,6 @@ endif
 set background=dark
 colorscheme onedark
 hi default link CocHighlightText IncSearch
+call lexima#add_rule({'char': '(', 'at': '\%#\w'})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
