@@ -277,6 +277,8 @@ let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
+let g:Lf_CursorBlink = 0
+let g:Lf_PopupShowStatusline=0
 ">>
 
 ">>
