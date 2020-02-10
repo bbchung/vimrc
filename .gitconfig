@@ -18,10 +18,12 @@
 [merge]
 	tool = vimdiff
 [diff]
-    tool = vimdiff
+	tool = vimdiff
 [difftool]
-    #prompt = false
 	trustExitCode = true
+[diff "so"]
+    command = /bin/true
+    #textconv = /bin/true
 [mergetool]
 	trustExitCode = true
 [filter "lfs"]
