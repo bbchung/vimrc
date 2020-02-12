@@ -337,6 +337,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim'
 "Plug 'mechatroner/rainbow_csv'
 
+Plug 'bbchung/gasynctags'
+
 ">>
 
 call plug#end()
@@ -349,6 +351,8 @@ endif
 
 syntax on
 
+set csprg=gtags-cscope
+set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 set belloff=all
 set completeopt=menuone,noselect
 set termguicolors
@@ -418,10 +422,23 @@ imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 au FileType sh,c,cpp,objc,objcpp,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 
-let g:Gtags_Auto_Update = 1
-nmap <silent> <Leader>s :GtagsCursor<CR>
-nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 S execute "Gtags -g "<f-args>
+
+nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :cw <CR>
+nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :cw <CR>
+"nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
+"nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
+"nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
+"nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
+"nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+"nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+"nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+
+
+
+"let g:Gtags_Auto_Update = 1
+"nmap <silent> <Leader>s :GtagsCursor<CR>
+"nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
+"command! -nargs=1 S execute "Gtags -g "<f-args>
 
 if &diff
     set noro
