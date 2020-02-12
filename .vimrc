@@ -338,8 +338,8 @@ Plug 'chrisbra/csv.vim'
 "Plug 'mechatroner/rainbow_csv'
 
 Plug 'bbchung/gasynctags' "<<
-nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :cw <CR>
-nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :cw <CR>
+"nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
+"nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
 "nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
 "nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
 "nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
@@ -348,10 +348,9 @@ nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :cw <CR>
 "nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 "nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
 
-"let g:Gtags_Auto_Update = 1
-"nmap <silent> <Leader>s :GtagsCursor<CR>
-"nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-"command! -nargs=1 S execute "Gtags -g "<f-args>
+nmap <silent> <Leader>s :GtagsCursor<CR>
+nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
+command! -nargs=1 S execute "Gtags -g "<f-args>
 
 ">>
 
