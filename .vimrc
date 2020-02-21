@@ -29,9 +29,10 @@ nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
+hi default link CocHighlightText IncSearch
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
@@ -405,7 +406,7 @@ set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=500
+set updatetime=350
 set backspace=2
 set hidden
 set nobackup
@@ -435,10 +436,12 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 
-au FileType sh,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " restore cursor position
+au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 if &diff
     set noro
@@ -448,7 +451,6 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
-hi default link CocHighlightText IncSearch
 call lexima#add_rule({'char': '(', 'at': '\%#\w'})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
