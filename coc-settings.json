@@ -47,12 +47,14 @@
 			]
 		},
 	},
+    "clangd.arguments": ["--background-index"],
 	"diagnostic.hintSign": ">",
 	"diagnostic.warningSign": "‽",
 	"diagnostic.errorSign": "✘",
 	"snippets.snipmate.enable": false,
 	"yaml.format.enable": true,
 	"r.lsp.diagnostics": false,
+    "python.formatting.autopep8Args" : ["-a"],
 	"coc.preferences.useQuickfixForLocations": true,
 	"snippets.extends": {
 		"cpp": [
