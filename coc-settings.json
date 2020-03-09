@@ -1,42 +1,68 @@
 {
-    "languageserver": {
-        "clangd": {
-            "command": "clangd",
-            "args": [
-                "--background-index"
-            ],
-            "rootPatterns": [
-                "compile_flags.txt",
-                "compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "filetypes": [
-                "c",
-                "cpp",
-                "objc",
-                "objcpp"
-            ]
-        }
-    },
-    "yank.highlight.enable": false,
-    "diagnostic.hintSign": ">",
-    "diagnostic.warningSign": "‽",
-    "diagnostic.errorSign": "✘",
-    "snippets.snipmate.enable": false,
-    "yaml.format.enable": true,
-    "r.lsp.diagnostics": false,
-    "coc.preferences.useQuickfixForLocations": true,
-    "snippets.extends": {
-        "cpp": [
-            "c"
-        ],
-        "javascriptreact": [
-            "javascript"
-        ],
-        "typescript": [
-            "javascript"
-        ]
-    }
+	"languageserver": {
+		//    "clangd": {
+		//        "command": "clangd",
+		//        "args": [
+		//            "--background-index",
+		//            "--clang-tidy",
+		//            "--limit-results=30",
+		//            "--pch-storage=memory"
+		//        ],
+		//        "rootPatterns": [
+		//            "compile_flags.txt",
+		//            "compile_commands.json",
+		//            ".vim/",
+		//            ".git/",
+		//            ".hg/"
+		//        ],
+		//        "filetypes": [
+		//            "c",
+		//            "cpp",
+		//            "objc",
+		//            "objcpp"
+		//        ]
+		//    }
+		"cmake": {
+			"command": "cmake-language-server",
+			"filetypes": [
+				"cmake"
+			],
+			"rootPatterns": [
+				"build/"
+			],
+			"initializationOptions": {
+				"buildDirectory": "build"
+			}
+		},
+		"bash": {
+			"command": "bash-language-server",
+			"args": [
+				"start"
+			],
+			"filetypes": [
+				"sh"
+			],
+			"ignoredRootPaths": [
+				"~"
+			]
+		},
+	},
+	"diagnostic.hintSign": ">",
+	"diagnostic.warningSign": "‽",
+	"diagnostic.errorSign": "✘",
+	"snippets.snipmate.enable": false,
+	"yaml.format.enable": true,
+	"r.lsp.diagnostics": false,
+	"coc.preferences.useQuickfixForLocations": true,
+	"snippets.extends": {
+		"cpp": [
+			"c"
+		],
+		"javascriptreact": [
+			"javascript"
+		],
+		"typescript": [
+			"javascript"
+		]
+	}
 }
