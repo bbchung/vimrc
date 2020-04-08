@@ -22,18 +22,6 @@
 		//            "objcpp"
 		//        ]
 		//    }
-		"cmake": {
-			"command": "cmake-language-server",
-			"filetypes": [
-				"cmake"
-			],
-			"rootPatterns": [
-				"build/"
-			],
-			"initializationOptions": {
-				"buildDirectory": "build"
-			}
-		},
 		"bash": {
 			"command": "bash-language-server",
 			"args": [
@@ -47,7 +35,8 @@
 			]
 		},
 	},
-    "clangd.arguments": ["--background-index"],
+    "clangd.arguments": ["--background-index", "--pch-storage=memory"],
+    "clangd.semanticHighlighting": false,
 	"diagnostic.hintSign": ">",
 	"diagnostic.warningSign": "‽",
 	"diagnostic.errorSign": "✘",

@@ -10,6 +10,10 @@ let g:termdebug_wide = 1
 call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
+
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+hi default link None Normal
+
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 function! s:show_documentation()
@@ -452,5 +456,7 @@ endif
 set background=dark
 colorscheme onedark
 call lexima#add_rule({'char': '(', 'at': '\%#\w'})
+call lexima#add_rule({'char': '"', 'at': '\%#\w'})
+call lexima#add_rule({'char': "\'", 'at': '\%#\w'})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
