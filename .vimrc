@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged') "<<
 "Plugin Group: LSP "<<
 
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+let g:lsp_cxx_hl_use_text_props = 1
 hi default link None Normal
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
@@ -29,7 +30,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>x <Plug>(coc-fix-current)
-nmap <silent> <Leader>rn <Plug>(coc-rename)
+nmap <silent> <Leader>n <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
@@ -438,6 +439,7 @@ imap <C-c> <ESC>
 nmap <C-c> <ESC>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 imap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
@@ -455,6 +457,7 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
+call lexima#add_rule({'char': '[', 'at': '\%#\w'})
 call lexima#add_rule({'char': '(', 'at': '\%#\w'})
 call lexima#add_rule({'char': '"', 'at': '\%#\w'})
 call lexima#add_rule({'char': "\'", 'at': '\%#\w'})
