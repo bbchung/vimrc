@@ -457,9 +457,9 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
-call lexima#add_rule({'char': '[', 'at': '\%#\w'})
-call lexima#add_rule({'char': '(', 'at': '\%#\w'})
-call lexima#add_rule({'char': '"', 'at': '\%#\w'})
-call lexima#add_rule({'char': "\'", 'at': '\%#\w'})
+call lexima#add_rule({'char': '[', 'at': '\%#.'})
+call lexima#add_rule({'char': '(', 'at': '\%#.'})
+call lexima#add_rule({'char': '"', 'at': '\%#.'})
+call lexima#add_rule({'char': "\'", 'at': '\%#.'})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
