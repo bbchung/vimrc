@@ -11,9 +11,10 @@ call plug#begin('~/.vim/plugged') "<<
 
 "Plugin Group: LSP "<<
 
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
 let g:lsp_cxx_hl_use_text_props = 1
 hi default link None Normal
+">>
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
@@ -136,6 +137,7 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 "endif
 
 ">>
+
 ">>
 
 "Plugin Group: Autocomplete "<<
@@ -285,6 +287,8 @@ let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_CursorBlink = 0
 let g:Lf_PopupShowStatusline=0
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_ShowDevIcons = 0
 ">>
 
 ">>
@@ -323,6 +327,8 @@ let g:delimitMate_expand_cr=1
 ">>
 
 "Plugin Group: Misc "<<
+Plug 'skywind3000/asyncrun.vim' "<<
+">>
 Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = 'cpp,c'
 let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
@@ -336,6 +342,8 @@ let g:alternateRelativeFiles = 1
 Plug 'mhinz/vim-startify' "<<
 let g:startify_session_persistence=1
 let g:startify_change_to_dir=0
+let g:startify_fortune_use_unicode = 1
+autocmd User Startified setlocal cursorline
 ">>
 
 Plug 'tpope/vim-fugitive'
@@ -361,6 +369,11 @@ command! -nargs=1 S execute "Gtags -g "<f-args>
 
 ">>
 
+">>
+
+"Plugin Group: R "<<
+Plug 'jalvesaq/Nvim-R' "<<
+">>
 ">>
 
 call plug#end()
@@ -460,6 +473,6 @@ set background=dark
 colorscheme onedark
 call lexima#add_rule({'char': '(', 'at': '\%#.'})
 call lexima#add_rule({'char': '"', 'at': '\%#.'})
-call lexima#add_rule({'char': "\'", 'at': '\%#.'})
+"call lexima#add_rule({'char': "\'", 'at': '\%#.'})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
