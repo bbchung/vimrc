@@ -475,7 +475,9 @@ colorscheme onedark
 call lexima#add_rule({'char': '(', 'at': '\%#\S'})
 call lexima#add_rule({'char': '"', 'at': '\%#\S'})
 call lexima#add_rule({'char': '"', 'at': '\S\%#'})
+call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
 call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
 call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
+call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
