@@ -33,6 +33,7 @@ nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>n <Plug>(coc-rename)
 nmap <silent> <Leader>r :call CocAction("format") <CR>
+nmap <silent> <Leader>a :CocAction<CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
@@ -471,8 +472,10 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
-call lexima#add_rule({'char': '(', 'at': '\%#.'})
-call lexima#add_rule({'char': '"', 'at': '\%#.'})
-"call lexima#add_rule({'char': "\'", 'at': '\%#.'})
+call lexima#add_rule({'char': '(', 'at': '\%#\S'})
+call lexima#add_rule({'char': '"', 'at': '\%#\S'})
+call lexima#add_rule({'char': '"', 'at': '\S\%#'})
+call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
+call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
