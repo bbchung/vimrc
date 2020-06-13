@@ -31,8 +31,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>x <Plug>(coc-fix-current)
-nmap <silent> <Leader>n <Plug>(coc-rename)
-nmap <silent> <Leader>r :call CocAction("format") <CR>
+nmap <silent> <Leader>r <Plug>(coc-rename)
+nmap <silent> <Leader>k :call CocAction("format") <CR>
 nmap <silent> <Leader>a :CocAction<CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
@@ -460,7 +460,7 @@ tnoremap <Esc> <C-w>N
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " restore cursor position
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute("normal `\"") | endif " restore cursor position
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
