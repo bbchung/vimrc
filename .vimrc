@@ -210,7 +210,7 @@ let g:gruvbox_sign_column='bg0'
 
 "Plugin Group: StatusBar "<<
 "Plug 'liuchengxu/eleline.vim'
-Plug 'itchyny/lightline.vim' "<<
+"Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -261,9 +261,11 @@ let g:lightline = {
 
 ">>
 
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"let g:airline_theme = 'codedark'
+Plug 'vim-airline/vim-airline'
+let g:airline_powerline_fonts = 1
+Plug 'vim-airline/vim-airline-themes'
+let g:airline_theme = 'onedark'
+
 ">>
 
 "Plugin Group: Search "<<
@@ -295,6 +297,8 @@ let g:Lf_ShowDevIcons = 0
 ">>
 
 "Plugin Group: Explorer "<<
+"Plug 'liuchengxu/vista.vim'
+"let g:vista#renderer#icons=0
 "Plug 'majutsushi/tagbar' "<<
 "let g:tagbar_left = 1
 "let g:tagbar_width = 28
@@ -350,8 +354,8 @@ autocmd User Startified setlocal cursorline
 Plug 'tpope/vim-fugitive'
 "Plug 'roxma/vim-tmux-clipboard'
 "Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'chrisbra/csv.vim'
-"Plug 'mechatroner/rainbow_csv'
+"Plug 'chrisbra/csv.vim'
+Plug 'mechatroner/rainbow_csv'
 
 Plug 'bbchung/gasynctags' "<<
 "nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
