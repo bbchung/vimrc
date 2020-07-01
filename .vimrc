@@ -192,6 +192,7 @@ Plug 'ayu-theme/ayu-vim'
 let ayucolor='dark'
 "Plug 'bbchung/ccolor'
 Plug 'joshdick/onedark.vim'
+Plug 'tomasiser/vim-code-dark'
 "Plug 'rakr/vim-one'
 Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
@@ -276,6 +277,7 @@ let g:airline_theme = 'onedark'
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
 let g:Lf_StlColorscheme='one'
+let g:Lf_PopupColorscheme='one'
 let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
@@ -436,6 +438,7 @@ set hidden
 set nobackup
 set nowritebackup
 set undofile
+set lazyredraw
 let &undodir=$HOME.'/.vim/undo'
 call mkdir(&undodir, 'p')
 
