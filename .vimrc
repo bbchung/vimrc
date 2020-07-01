@@ -405,6 +405,7 @@ set cursorline
 set timeoutlen=500
 set vb t_vb=
 set t_ut=
+set nowrap
 "set ttyscroll=1
 set mouse=a
 set laststatus=2
