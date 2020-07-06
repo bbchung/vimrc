@@ -321,6 +321,15 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
 
 Plug 'cohama/lexima.vim' "<<
+au VimEnter *
+    \ call lexima#add_rule({'char': '(', 'at': '\%#\S'}) |
+    \ call lexima#add_rule({'char': '"', 'at': '\%#\S'}) |
+    \ call lexima#add_rule({'char': '"', 'at': '\S\%#'}) |
+    \ call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'}) |
+    \ call lexima#add_rule({'char': "\'", 'at': '\%#\S'}) |
+    \ call lexima#add_rule({'char': "\'", 'at': '\S\%#'}) |
+    \ call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
+
 " >>
 
 "Plug 'Raimondi/delimitMate' "<<
@@ -362,13 +371,13 @@ Plug 'mechatroner/rainbow_csv'
 Plug 'bbchung/gasynctags' "<<
 "nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
 "nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
-"nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-"nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-"nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-"nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-"nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+"nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 "nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-"nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+"nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 nmap <silent> <Leader>s :GtagsCursor<CR>
 nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
@@ -480,12 +489,4 @@ if &diff
 endif
 set background=dark
 colorscheme onedark
-call lexima#add_rule({'char': '(', 'at': '\%#\S'})
-call lexima#add_rule({'char': '"', 'at': '\%#\S'})
-call lexima#add_rule({'char': '"', 'at': '\S\%#'})
-call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
-call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
-call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
-
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
