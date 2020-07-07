@@ -199,7 +199,7 @@ let g:jellybeans_use_term_italics = 0
 "Plug 'romainl/Apprentice'
 Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
-"Plug 'tomasiser/vim-code-dark'
+Plug 'tomasiser/vim-code-dark'
 "Plug 'twerth/ir_black'
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
@@ -210,7 +210,7 @@ let g:gruvbox_sign_column='bg0'
 
 "Plugin Group: StatusBar "<<
 "Plug 'liuchengxu/eleline.vim'
-"Plug 'itchyny/lightline.vim' "<<
+Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -261,10 +261,9 @@ let g:lightline = {
 
 ">>
 
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 Plug 'vim-airline/vim-airline-themes'
-let g:airline_theme = 'onedark'
 
 ">>
 
@@ -363,8 +362,10 @@ autocmd User Startified setlocal cursorline
 Plug 'tpope/vim-fugitive'
 "Plug 'roxma/vim-tmux-clipboard'
 "Plug 'tmux-plugins/vim-tmux-focus-events'
-"Plug 'chrisbra/csv.vim'
-Plug 'mechatroner/rainbow_csv'
+Plug 'chrisbra/csv.vim' "<<
+autocmd CursorHold *.csv WhatColumn!
+">>
+"Plug 'mechatroner/rainbow_csv'
 
 Plug 'bbchung/gasynctags' "<<
 "nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
