@@ -40,6 +40,8 @@ autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
 hi default link CocHighlightText IncSearch
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
+let g:coc_status_error_sign='🔴'
+let g:coc_status_warning_sign='🟡'
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
@@ -230,17 +232,15 @@ let g:lightline = {
 \ 'colorscheme': 'one',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch'], ['modified']],
+\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
 \   'right': [['percent', 'lineinfo'],
-\             ['fileformat', 'fileencoding', 'filetype'],
-\             ['cocstatus']],
+\             ['fileformat', 'fileencoding', 'filetype']]
 \ },
 \ 'inactive': {
 \   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch'], ['modified']],
+\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
 \   'right': [['percent', 'lineinfo'],
-\             ['fileformat', 'fileencoding', 'filetype'],
-\             ['cocstatus']],
+\             ['fileformat', 'fileencoding', 'filetype']]
 \ },
 \ 'component': {
 \   'relativepath': '%:~:.',
@@ -257,6 +257,7 @@ let g:lightline = {
 \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
+autocmd User CocStatusChange call lightline#update()
 
 
 ">>
