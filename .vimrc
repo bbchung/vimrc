@@ -212,7 +212,7 @@ let g:gruvbox_sign_column='bg0'
 
 "Plugin Group: StatusBar "<<
 "Plug 'liuchengxu/eleline.vim'
-Plug 'itchyny/lightline.vim' "<<
+"Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -262,7 +262,7 @@ autocmd User CocStatusChange call lightline#update()
 
 ">>
 
-"Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 let g:airline_powerline_fonts = 1
 Plug 'vim-airline/vim-airline-themes'
 
@@ -363,12 +363,17 @@ autocmd User Startified setlocal cursorline
 Plug 'tpope/vim-fugitive'
 "Plug 'roxma/vim-tmux-clipboard'
 "Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'chrisbra/csv.vim' "<<
-autocmd CursorHold *.csv WhatColumn!
+"Plug 'chrisbra/csv.vim' "<<
+"autocmd CursorHold *.csv WhatColumn!
 ">>
-"Plug 'mechatroner/rainbow_csv'
+Plug 'mechatroner/rainbow_csv'
 
-Plug 'bbchung/gasynctags' "<<
+Plug 'ludovicchabant/vim-gutentags'
+let g:gutentags_modules = ['gtags_cscope']
+nmap <silent> <Leader>s :cs f s <C-R>=expand("<cword>")<CR><CR> <bar> :copen <CR>
+nmap <silent> <Leader>g :cs f t <C-R>=expand("<cword>")<CR><CR> <bar> :copen <CR>
+"nmap <silent> <Leader>g :copen | cs f t <C-R>=expand("<cword>")<CR><CR>
+"Plug 'bbchung/gasynctags' "<<
 "nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
 "nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
 "nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -379,9 +384,9 @@ Plug 'bbchung/gasynctags' "<<
 "nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 "nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-nmap <silent> <Leader>s :GtagsCursor<CR>
-nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
-command! -nargs=1 S execute "Gtags -g "<f-args>
+"nmap <silent> <Leader>s :GtagsCursor<CR>
+"nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
+"command! -nargs=1 S execute "Gtags -g "<f-args>
 
 ">>
 
