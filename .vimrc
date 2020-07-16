@@ -287,6 +287,7 @@ let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_GtagsStoreInProject = 1
 map <silent> <Leader>g <Plug>LeaderfGtagsGrep
 map <silent> <Leader>s <Plug>LeaderfGtagsReference
+command! -nargs=1 S execute "Leaderf! gtags --stayOpen --bottom -g "<f-args>
 ">>
 
 ">>
