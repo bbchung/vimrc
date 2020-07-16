@@ -9,7 +9,7 @@ let g:termdebug_wide = 1
 
 call plug#begin('~/.vim/plugged') "<<
 
-"Plugin Group: LSP "<<
+"Plugin Group: Language "<<
 
 Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
 let g:lsp_cxx_hl_use_text_props = 1
@@ -17,19 +17,10 @@ hi default link None Normal
 ">>
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
-"Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> K :call <SID>show_documentation()<CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>k :call CocAction("format") <CR>
@@ -141,6 +132,7 @@ let g:coc_status_warning_sign='🟡'
 
 ">>
 
+Plug 'jalvesaq/Nvim-R'
 ">>
 
 "Plugin Group: Autocomplete "<<
@@ -189,12 +181,10 @@ let g:coc_status_warning_sign='🟡'
 ">>
 
 "Plugin Group: Theme "<<
-"Plug 'drewtempelmeyer/palenight.vim'
-Plug 'ayu-theme/ayu-vim'
+Plug 'ayu-theme/ayu-vim' "<<
 let ayucolor='dark'
-"Plug 'bbchung/ccolor'
+">>
 Plug 'joshdick/onedark.vim'
-"Plug 'rakr/vim-one'
 Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
 ">>
@@ -210,60 +200,61 @@ let g:gruvbox_sign_column='bg0'
 ">>
 ">>
 
-"Plugin Group: StatusBar "<<
+"Plugin Group: StatusLine "<<
 "Plug 'liuchengxu/eleline.vim'
 "Plug 'itchyny/lightline.vim' "<<
 
-function! RelativePath()
-    return expand('%:~:.')
-endfunction
-function! LightlineReadonly()
-    return &readonly ? '🔒' : ''
-endfunction
-function! LightlineFugitive()
-    if exists('*fugitive#head')
-        let branch = fugitive#head()
-        return branch !=# '' ? ''.branch : ''
-    endif
-    return ''
-endfunction
+"function! RelativePath()
+    "return expand('%:~:.')
+"endfunction
+"function! LightlineReadonly()
+    "return &readonly ? '🔒' : ''
+"endfunction
+"function! LightlineFugitive()
+    "if exists('*fugitive#head')
+        "let branch = fugitive#head()
+        "return branch !=# '' ? ''.branch : ''
+    "endif
+    "return ''
+"endfunction
 
-let g:lightline = {
-\ 'colorscheme': 'one',
-\ 'active': {
-\   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
-\   'right': [['percent', 'lineinfo'],
-\             ['fileformat', 'fileencoding', 'filetype']]
-\ },
-\ 'inactive': {
-\   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
-\   'right': [['percent', 'lineinfo'],
-\             ['fileformat', 'fileencoding', 'filetype']]
-\ },
-\ 'component': {
-\   'relativepath': '%:~:.',
-\   'lineinfo': '%3l:%-2v',
-\   'paste': '%{&paste?"📋":""}',
-\ },
-\ 'component_function': {
-\   'gitbranch': 'LightlineFugitive',
-\   'readonly': 'LightlineReadonly',
-\   'cocstatus': 'coc#status',
-\   'relativepath': 'RelativePath',
-\ },
-\ 'separator': { 'left': '', 'right': '' },
-\ 'subseparator': { 'left': '', 'right': '' }
-\ }
+"let g:lightline = {
+"\ 'colorscheme': 'one',
+"\ 'active': {
+"\   'left': [['mode', 'paste', 'readonly'],
+"\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
+"\   'right': [['percent', 'lineinfo'],
+"\             ['fileformat', 'fileencoding', 'filetype']]
+"\ },
+"\ 'inactive': {
+"\   'left': [['mode', 'paste', 'readonly'],
+"\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
+"\   'right': [['percent', 'lineinfo'],
+"\             ['fileformat', 'fileencoding', 'filetype']]
+"\ },
+"\ 'component': {
+"\   'relativepath': '%:~:.',
+"\   'lineinfo': '%3l:%-2v',
+"\   'paste': '%{&paste?"📋":""}',
+"\ },
+"\ 'component_function': {
+"\   'gitbranch': 'LightlineFugitive',
+"\   'readonly': 'LightlineReadonly',
+"\   'cocstatus': 'coc#status',
+"\   'relativepath': 'RelativePath',
+"\ },
+"\ 'separator': { 'left': '', 'right': '' },
+"\ 'subseparator': { 'left': '', 'right': '' }
+"\ }
 
-autocmd User CocStatusChange call lightline#update()
+"autocmd User CocStatusChange call lightline#update()
 
 
 ">>
 
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
+">>
 Plug 'vim-airline/vim-airline-themes'
 
 ">>
@@ -292,13 +283,18 @@ let g:Lf_CursorBlink = 0
 let g:Lf_PopupShowStatusline=0
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_ShowDevIcons = 0
+let g:Lf_GtagsAutoGenerate = 1
+let g:Lf_GtagsStoreInProject = 1
+map <silent> <Leader>g <Plug>LeaderfGtagsGrep
+map <silent> <Leader>s <Plug>LeaderfGtagsReference
 ">>
 
 ">>
 
 "Plugin Group: Explorer "<<
-"Plug 'liuchengxu/vista.vim'
+"Plug 'liuchengxu/vista.vim' "<<
 "let g:vista#renderer#icons=0
+">>
 "Plug 'majutsushi/tagbar' "<<
 "let g:tagbar_left = 1
 "let g:tagbar_width = 28
@@ -327,11 +323,10 @@ au VimEnter *
     \ call lexima#add_rule({'char': "\'", 'at': '\%#\S'}) |
     \ call lexima#add_rule({'char': "\'", 'at': '\S\%#'}) |
     \ call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
-
 " >>
 
 "Plug 'Raimondi/delimitMate' "<<
-let g:delimitMate_expand_cr=1
+"let g:delimitMate_expand_cr=1
 " >>
 
 "Plug 'jiangmiao/auto-pairs' "<<
@@ -341,8 +336,7 @@ let g:delimitMate_expand_cr=1
 ">>
 
 "Plugin Group: Misc "<<
-Plug 'skywind3000/asyncrun.vim' "<<
-">>
+Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = 'cpp,c'
 let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
@@ -368,33 +362,13 @@ Plug 'tpope/vim-fugitive'
 ">>
 Plug 'mechatroner/rainbow_csv'
 
-Plug 'ludovicchabant/vim-gutentags'
-let g:gutentags_modules = ['gtags_cscope']
-nmap <silent> <Leader>s :cs f s <C-R>=expand("<cword>")<CR><CR> <bar> :copen <CR>
-nmap <silent> <Leader>g :cs f t <C-R>=expand("<cword>")<CR><CR> <bar> :copen <CR>
-"nmap <silent> <Leader>g :copen | cs f t <C-R>=expand("<cword>")<CR><CR>
 "Plug 'bbchung/gasynctags' "<<
-"nmap <Leader>s :cs find s <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
-"nmap <Leader>t :cs find t <C-R>=expand("<cword>")<CR><CR> <BAR> :copen <CR>
-"nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-"nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-"nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
 "nmap <silent> <Leader>s :GtagsCursor<CR>
 "nmap <silent> <Leader>g :execute("Gtags -g ".expand('<cword>'))<CR>
 "command! -nargs=1 S execute "Gtags -g "<f-args>
 
 ">>
 
-">>
-
-"Plugin Group: R "<<
-Plug 'jalvesaq/Nvim-R' "<<
-">>
 ">>
 
 call plug#end()
@@ -455,6 +429,14 @@ set undofile
 let &undodir=$HOME.'/.vim/undo'
 call mkdir(&undodir, 'p')
 
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 command! TrimWhiteSpace :%s/\s\+$//gI
 command! W silent execute "w !sudo > /dev/null tee %"
 vmap <silent> * :<C-U>
@@ -477,6 +459,7 @@ imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 imap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 tnoremap <Esc> <C-w>N
+nmap <silent> K :call <SID>show_documentation()<CR>
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
