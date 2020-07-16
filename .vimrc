@@ -271,6 +271,7 @@ let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
               \}
+let g:Lf_WindowHeight = 0.3
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
@@ -285,8 +286,10 @@ let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_ShowDevIcons = 0
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_GtagsStoreInProject = 1
-map <silent> <Leader>g <Plug>LeaderfGtagsGrep
-map <silent> <Leader>s <Plug>LeaderfGtagsReference
+nmap <silent> <Leader>s :silent! execute("Leaderf! gtags --stayOpen --bottom -r ".expand('<cword>'))<CR>
+vmap <silent> <Leader>s :silent! <C-U> execute("Leaderf! gtags --stayOpen --bottom -r ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]])<CR>
+nmap <silent> <Leader>g :silent! execute("Leaderf! gtags --stayOpen --bottom -g ".expand('<cword>'))<CR>
+vmap <silent> <Leader>g :silent! <C-U> execute("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]])<CR>
 command! -nargs=1 S execute "Leaderf! gtags --stayOpen --bottom -g "<f-args>
 ">>
 
