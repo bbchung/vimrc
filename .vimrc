@@ -28,7 +28,7 @@ nmap <silent> <Leader>a :CocAction<CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
-autocmd CursorHold *.cpp,*.h,*.py,*.r silent! call CocActionAsync('highlight')
+autocmd CursorHold * call CocActionAsync('highlight')
 hi default link CocHighlightText IncSearch
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 let g:coc_status_error_sign='🔴'
@@ -271,7 +271,7 @@ let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
               \}
-let g:Lf_WindowHeight = 0.3
+let g:Lf_WindowHeight = 0.2
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_RootMarkers = ['compile_commands.json']
