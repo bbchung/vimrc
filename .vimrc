@@ -274,7 +274,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_WindowHeight = 0.3
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
-let g:Lf_RootMarkers = ['.git', '.hg', '.svn', '.project']
+let g:Lf_RootMarkers = ['compile_commands.json']
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
@@ -286,11 +286,12 @@ let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_ShowDevIcons = 0
 let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_GtagsStoreInProject = 1
+let g:Lf_WorkingDirectoryMode = 'a'
 nmap <silent> <Leader>s :silent! exe "Leaderf! gtags --stayOpen --bottom -r ".expand('<cword>')<CR>
 vmap <silent> <Leader>s :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -r ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
 nmap <silent> <Leader>g :silent! exe "Leaderf! gtags --stayOpen --bottom -g ".expand('<cword>')<CR>
 vmap <silent> <Leader>g :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
-command! -nargs=1 S exe "Leaderf! gtags --stayOpen --bottom -g "<f-args>
+command! -nargs=1 S silent! exe "Leaderf! gtags --stayOpen --bottom -g "<f-args>
 ">>
 
 ">>
@@ -456,8 +457,6 @@ vmap <silent> # :<C-U>
 
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-imap <C-c> <ESC>
-nmap <C-c> <ESC>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
