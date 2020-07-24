@@ -1,4 +1,9 @@
-let s:vim_plug_dir=expand($HOME.'/.vim/autoload')
+if has('nvim')
+    let s:home = $HOME.'/.config/nvim/'
+else
+    let s:home = $HOME.'/.vim/'
+endif
+let s:vim_plug_dir=expand(s:home.'/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
     exe '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
     let s:install_plug=1
@@ -7,12 +12,16 @@ endif
 packadd termdebug
 let g:termdebug_wide = 1
 
-call plug#begin('~/.vim/plugged') "<<
+call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
 Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
-let g:lsp_cxx_hl_use_text_props = 1
+if has('nvim')
+    let g:lsp_cxx_hl_use_nvim_text_props = 1 
+else
+    let g:lsp_cxx_hl_use_text_props = 1
+endif
 hi default link None Normal
 ">>
 
@@ -380,12 +389,20 @@ endif
 
 syntax on
 
+if has('nvim')
+    set signcolumn=yes:1
+    set guicursor=
+else
+    set signcolumn=number
+endif
+let &undodir=$HOME.'/.vim/undo'
+call mkdir(&undodir, 'p')
 set csprg=gtags-cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 set belloff=all
 set completeopt=menuone,noselect
+set diffopt+=vertical
 set termguicolors
-set signcolumn=number
 set shortmess+=c
 set nocompatible
 set title
@@ -425,8 +442,6 @@ set hidden
 set nobackup
 set nowritebackup
 set undofile
-let &undodir=$HOME.'/.vim/undo'
-call mkdir(&undodir, 'p')
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
