@@ -201,6 +201,7 @@ let g:jellybeans_use_term_italics = 0
 Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
+let g:codedark_conservative = 1
 "Plug 'twerth/ir_black'
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
@@ -436,7 +437,7 @@ set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=350
+set updatetime=250
 set backspace=2
 set hidden
 set nobackup
@@ -480,12 +481,14 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
+set background=dark
 if &diff
     set noro
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
+    colorscheme onedark
+else
+    colorscheme codedark
 endif
-set background=dark
-colorscheme onedark
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
