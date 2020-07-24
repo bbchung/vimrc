@@ -14,20 +14,24 @@
 	email = cchung@timelinecapital.com
 	name = cchung
 [core]
-	editor = vim
+	editor = vi
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
 [diff]
-	tool = vimdiff
-[difftool]
-	trustExitCode = true
+	tool = nvimdiff
 [diff "so"]
     command = /bin/true
     #textconv = /bin/true
+[difftool]
+	trustExitCode = true
 [mergetool]
 	trustExitCode = true
+[mergetool "nvimdiff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[pull]
+	rebase = false
