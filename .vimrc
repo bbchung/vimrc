@@ -284,14 +284,13 @@ let g:Lf_CursorBlink = 0
 let g:Lf_PopupShowStatusline=0
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_ShowDevIcons = 0
-let g:Lf_GtagsAutoGenerate = 1
 let g:Lf_GtagsStoreInProject = 1
 let g:Lf_WorkingDirectoryMode = 'a'
-nmap <silent> <Leader>s :silent! exe "Leaderf! gtags --stayOpen --bottom -r ".expand('<cword>')<CR>
-vmap <silent> <Leader>s :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -r ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
-nmap <silent> <Leader>g :silent! exe "Leaderf! gtags --stayOpen --bottom -g ".expand('<cword>')<CR>
-vmap <silent> <Leader>g :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
-command! -nargs=1 S silent! exe "Leaderf! gtags --stayOpen --bottom -g "<f-args>
+"nmap <silent> <Leader>s :silent! exe "Leaderf! gtags --stayOpen --bottom -r ".expand('<cword>')<CR>
+"vmap <silent> <Leader>s :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -r ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
+"nmap <silent> <Leader>g :silent! exe "Leaderf! gtags --stayOpen --bottom -g ".expand('<cword>')<CR>
+"vmap <silent> <Leader>g :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
+"command! -nargs=1 S silent! exe "Leaderf! gtags --stayOpen --bottom -g "<f-args>
 ">>
 
 ">>
@@ -367,12 +366,7 @@ Plug 'tpope/vim-fugitive'
 ">>
 Plug 'mechatroner/rainbow_csv'
 
-"Plug 'bbchung/gasynctags' "<<
-"nmap <silent> <Leader>s :GtagsCursor<CR>
-"nmap <silent> <Leader>g :exe("Gtags -g ".expand('<cword>'))<CR>
-"command! -nargs=1 S exe "Gtags -g "<f-args>
-
-">>
+Plug 'bbchung/gasynctags'
 
 ">>
 
