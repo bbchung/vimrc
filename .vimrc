@@ -329,15 +329,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
 
 Plug 'cohama/lexima.vim' "<<
-au VimEnter *
-    \ call lexima#add_rule({'char': '(', 'at': '\%#\S'}) |
-    \ call lexima#add_rule({'char': '"', 'at': '\%#\S'}) |
-    \ call lexima#add_rule({'char': '"', 'at': '\S\%#'}) |
-    \ call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'}) |
-    \ call lexima#add_rule({'char': "\'", 'at': '\%#\S'}) |
-    \ call lexima#add_rule({'char': "\'", 'at': '\S\%#'}) |
-    \ call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
-" >>
+let g:lexima_nvim_accept_pum_with_enter = 0
+ >>
 
 "Plug 'Raimondi/delimitMate' "<<
 "let g:delimitMate_expand_cr=1
@@ -465,12 +458,20 @@ vmap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
+call lexima#add_rule({'char': '(', 'at': '\%#\S'})
+call lexima#add_rule({'char': '"', 'at': '\%#\S'})
+call lexima#add_rule({'char': '"', 'at': '\S\%#'})
+call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
+call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
+call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
+
 nmap <F4> :qa<CR>
 nmap Q <Nop>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-imap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"imap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
+imap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : lexima#expand('<LT>CR>', 'i')
 tnoremap <Esc> <C-w>N
 nmap <silent> K :call <SID>show_documentation()<CR>
 
