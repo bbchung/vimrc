@@ -370,6 +370,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mechatroner/rainbow_csv'
 
 Plug 'bbchung/gasynctags'
+let g:gasynctags_auto_update = 0
 
 ">>
 
