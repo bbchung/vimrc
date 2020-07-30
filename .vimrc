@@ -387,6 +387,7 @@ syntax on
 if has('nvim')
     set signcolumn=yes:1
     set guicursor=
+    set wildoptions+=pum
 else
     set signcolumn=number
 endif
@@ -431,7 +432,7 @@ set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformat=unix
-set updatetime=250
+set updatetime=200
 set backspace=2
 set hidden
 set nobackup
