@@ -329,7 +329,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
 
 Plug 'cohama/lexima.vim' "<<
-let g:lexima_nvim_accept_pum_with_enter = 0
+let g:lexima_accept_pum_with_enter = 0
  >>
 
 "Plug 'Raimondi/delimitMate' "<<
@@ -392,6 +392,7 @@ else
     set signcolumn=number
 endif
 let &undodir=$HOME.'/.vim/undo'
+let &t_Cs = "\e[4:3m"
 call mkdir(&undodir, 'p')
 set csprg=gtags-cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
