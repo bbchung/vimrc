@@ -38,7 +38,7 @@ set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold * call CocActionAsync('highlight')
-hi default link CocHighlightText IncSearch
+hi default link CocHighlightText MatchParen
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 let g:coc_status_error_sign='🔴'
 let g:coc_status_warning_sign='🟡'
@@ -469,6 +469,7 @@ call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
 call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
 call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 
+nmap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap Q <Nop>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -481,7 +482,6 @@ nmap <silent> K :call <SID>show_documentation()<CR>
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
@@ -493,6 +493,7 @@ if &diff
     let g:coc_start_at_startup=0
     colorscheme onedark
 else
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
     colorscheme codedark
 endif
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
