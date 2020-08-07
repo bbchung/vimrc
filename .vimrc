@@ -330,7 +330,7 @@ Plug 'honza/vim-snippets'
 
 Plug 'cohama/lexima.vim' "<<
 let g:lexima_accept_pum_with_enter = 0
- >>
+" >>
 
 "Plug 'Raimondi/delimitMate' "<<
 "let g:delimitMate_expand_cr=1
