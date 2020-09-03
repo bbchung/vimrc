@@ -201,7 +201,7 @@ let g:jellybeans_use_term_italics = 0
 Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
-let g:codedark_conservative = 1
+let g:codedark_conservative = 0
 "Plug 'twerth/ir_black'
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
@@ -265,6 +265,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
+let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 Plug 'vim-airline/vim-airline-themes'
 
@@ -285,6 +286,7 @@ let g:Lf_WildIgnore = {
 let g:Lf_WindowHeight = 0.2
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_GtagsAutoUpdate = 0
 let g:Lf_RootMarkers = ['compile_commands.json']
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseVersionControlTool = 1
@@ -371,7 +373,7 @@ Plug 'chrisbra/csv.vim' "<<
 "Plug 'mechatroner/rainbow_csv'
 
 Plug 'bbchung/gasynctags'
-let g:gasynctags_auto_update = 0
+let g:gasynctags_auto_update = 1
 
 ">>
 
