@@ -476,8 +476,8 @@ call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 nmap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-imap <expr> <Tab> pumvisible() ? "\<Down>" : "\<Tab>"
-imap <expr> <S-Tab> pumvisible() ? "\<Up>" : "\<S-Tab>"
+imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "imap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
 imap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : lexima#expand('<LT>CR>', 'i')
 tnoremap <Esc> <C-w>N
