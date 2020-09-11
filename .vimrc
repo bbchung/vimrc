@@ -18,7 +18,7 @@ call plug#begin(s:home.'/plugged') "<<
 
 Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
 if has('nvim')
-    let g:lsp_cxx_hl_use_nvim_text_props = 1 
+    let g:lsp_cxx_hl_use_nvim_text_props = 1
 else
     let g:lsp_cxx_hl_use_text_props = 1
 endif
@@ -265,7 +265,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
-let g:airline#extensions#whitespace#checks = ['trailing']
+"let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 Plug 'vim-airline/vim-airline-themes'
 
