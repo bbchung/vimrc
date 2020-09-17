@@ -265,7 +265,7 @@ let g:gruvbox_sign_column='bg0'
 Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
-"let g:airline#extensions#whitespace#checks = ['trailing']
+let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 Plug 'vim-airline/vim-airline-themes'
 
@@ -395,7 +395,6 @@ else
     set signcolumn=number
 endif
 let &undodir=$HOME.'/.vim/undo'
-let &t_Cs = "\e[4:3m"
 call mkdir(&undodir, 'p')
 set cst
 set csprg=gtags-cscope
