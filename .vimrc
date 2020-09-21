@@ -38,7 +38,6 @@ set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold * call CocActionAsync('highlight')
-au VimEnter * hi link CocHighlightText MatchParen
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 let g:coc_status_error_sign='🔴'
 let g:coc_status_warning_sign='🟡'
@@ -499,4 +498,6 @@ else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
     colorscheme codedark
 endif
+
+hi link CocHighlightText MatchParen
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
