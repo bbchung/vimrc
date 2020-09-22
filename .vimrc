@@ -394,6 +394,7 @@ else
     set signcolumn=number
 endif
 let &undodir=$HOME.'/.vim/undo'
+let &t_Cs = "\e[4:3m"
 call mkdir(&undodir, 'p')
 set cst
 set csprg=gtags-cscope
