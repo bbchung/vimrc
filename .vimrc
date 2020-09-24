@@ -211,57 +211,51 @@ let g:gruvbox_sign_column='bg0'
 
 "Plugin Group: StatusLine "<<
 "Plug 'liuchengxu/eleline.vim'
-"Plug 'itchyny/lightline.vim' "<<
+Plug 'itchyny/lightline.vim' "<<
 
-"function! RelativePath()
-    "return expand('%:~:.')
-"endfunction
-"function! LightlineReadonly()
-    "return &readonly ? '🔒' : ''
-"endfunction
-"function! LightlineFugitive()
-    "if exists('*fugitive#head')
-        "let branch = fugitive#head()
-        "return branch !=# '' ? ''.branch : ''
-    "endif
-    "return ''
-"endfunction
+function! RelativePath()
+    return expand('%:~:.')
+endfunction
+function! LightlineFugitive()
+    if exists('*FugitiveHead')
+        let branch = FugitiveHead()
+        return branch !=# '' ? ''.branch : ''
+    endif
+    return ''
+endfunction
 
-"let g:lightline = {
-"\ 'colorscheme': 'one',
-"\ 'active': {
-"\   'left': [['mode', 'paste', 'readonly'],
-"\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
-"\   'right': [['percent', 'lineinfo'],
-"\             ['fileformat', 'fileencoding', 'filetype']]
-"\ },
-"\ 'inactive': {
-"\   'left': [['mode', 'paste', 'readonly'],
-"\            ['relativepath', 'gitbranch'], ['modified'], ['cocstatus']],
-"\   'right': [['percent', 'lineinfo'],
-"\             ['fileformat', 'fileencoding', 'filetype']]
-"\ },
-"\ 'component': {
-"\   'relativepath': '%:~:.',
-"\   'lineinfo': '%3l:%-2v',
-"\   'paste': '%{&paste?"📋":""}',
-"\ },
-"\ 'component_function': {
-"\   'gitbranch': 'LightlineFugitive',
-"\   'readonly': 'LightlineReadonly',
-"\   'cocstatus': 'coc#status',
-"\   'relativepath': 'RelativePath',
-"\ },
-"\ 'separator': { 'left': '', 'right': '' },
-"\ 'subseparator': { 'left': '', 'right': '' }
-"\ }
+let g:lightline = {
+\ 'colorscheme': 'one',
+\ 'active': {
+\   'left': [['mode', 'paste', 'readonly'],
+\            ['relativepath', 'gitbranch'], ['modified']],
+\   'right': [['percent', 'lineinfo'],
+\             ['fileformat', 'fileencoding', 'filetype'], ['cocstatus']]
+\ },
+\ 'inactive': {
+\   'left': [['mode', 'paste', 'readonly'],
+\            ['relativepath', 'gitbranch'], ['modified']],
+\   'right': [['percent', 'lineinfo'],
+\             ['fileformat', 'fileencoding', 'filetype']]
+\ },
+\ 'component': {
+\   'paste': '%{&paste?"📋":""}',
+\   'readonly': '%{&readonly?"🔒":""}',
+\ },
+\ 'component_function': {
+\   'gitbranch': 'LightlineFugitive',
+\   'cocstatus': 'coc#status',
+\   'relativepath': 'RelativePath',
+\ },
+\ 'separator': { 'left': '', 'right': '' },
+\ 'subseparator': { 'left': '', 'right': '' }
+\ }
 
-"autocmd User CocStatusChange call lightline#update()
-
+autocmd User CocStatusChange call lightline#update()
 
 ">>
 
-Plug 'vim-airline/vim-airline' "<<
+"Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#whitespace#checks = ['trailing']
