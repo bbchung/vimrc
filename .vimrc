@@ -39,8 +39,8 @@ let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
-let g:coc_status_error_sign='🔴'
-let g:coc_status_warning_sign='🟡'
+"let g:coc_status_error_sign='🔴'
+"let g:coc_status_warning_sign='🟡'
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
 ">>
 
