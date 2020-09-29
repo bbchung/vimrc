@@ -22,27 +22,26 @@
 		//            "objcpp"
 		//        ]
 		//    }
-		"bash": {
-			"command": "bash-language-server",
-			"args": [
-				"start"
-			],
-			"filetypes": [
-				"sh"
-			],
-			"ignoredRootPaths": [
-				"~"
-			]
-		},
+		// "cmake": {
+		// 	"command": "cmake-language-server",
+		// 	"filetypes": [
+		// 		"cmake"
+		// 	],
+		// 	"rootPatterns": [
+		// 		"build/"
+		// 	],
+		// 	"initializationOptions": {
+		// 		"buildDirectory": "build"
+		// 	}
+		// }
 	},
-    "clangd.arguments": ["--background-index", "--pch-storage=memory"],
     "clangd.semanticHighlighting": false,
+    "clangd.arguments": ["--background-index", "--pch-storage=memory", "--cross-file-rename"],
 	"diagnostic.hintSign": ">",
 	"diagnostic.warningSign": "‽",
 	"diagnostic.errorSign": "✘",
 	"snippets.snipmate.enable": false,
 	"yaml.format.enable": true,
-	"r.lsp.diagnostics": false,
     "python.formatting.autopep8Args" : ["-a"],
 	"coc.preferences.useQuickfixForLocations": true,
 	"snippets.extends": {
