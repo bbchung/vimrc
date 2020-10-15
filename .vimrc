@@ -260,7 +260,7 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 ">>
 
@@ -345,7 +345,8 @@ let g:alternateExtensions_h = 'cpp,c'
 let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
 let g:alternateRelativeFiles = 1
 ">>
-"Plug 'iandingx/leetcode.vim'
+Plug 'ianding1/leetcode.vim'
+let g:leetcode_browser='firefox'
 "Plug 'itchyny/calendar.vim' "<<
 "let g:calendar_google_calendar = 1
 "let g:calendar_google_task = 1
@@ -491,7 +492,7 @@ if &diff
     colorscheme onedark
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme codedark
+    colorscheme gruvbox
 endif
 
 hi link CocHighlightText MatchParen
