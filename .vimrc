@@ -362,7 +362,7 @@ Plug 'tpope/vim-fugitive'
 "Plug 'roxma/vim-tmux-clipboard'
 "Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'chrisbra/csv.vim' "<<
-autocmd CursorHold *.csv WhatColumn!
+"autocmd CursorHold *.csv WhatColumn!
 ">>
 "Plug 'mechatroner/rainbow_csv'
 
@@ -492,7 +492,7 @@ if &diff
     colorscheme onedark
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme gruvbox
+    colorscheme codedark
 endif
 
 hi link CocHighlightText MatchParen
