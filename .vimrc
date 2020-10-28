@@ -362,7 +362,7 @@ Plug 'tpope/vim-fugitive'
 "Plug 'roxma/vim-tmux-clipboard'
 "Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'chrisbra/csv.vim' "<<
-"autocmd CursorHold *.csv WhatColumn!
+let g:no_csv_maps=1
 ">>
 "Plug 'mechatroner/rainbow_csv'
 
@@ -383,8 +383,6 @@ syntax on
 
 if has('nvim')
     set signcolumn=yes:1
-    set guicursor=
-    set wildoptions+=pum
 else
     set signcolumn=number
 endif
@@ -441,6 +439,8 @@ set undofile
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     exe 'h '.expand('<cword>')
+  elseif (index(['csv'], &filetype) >= 0)
+    exe "WhatColumn!"
   else
     call CocAction('doHover')
   endif
