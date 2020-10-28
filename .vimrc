@@ -383,6 +383,7 @@ syntax on
 
 if has('nvim')
     set signcolumn=yes:1
+    set noguicursor
 else
     set signcolumn=number
 endif
