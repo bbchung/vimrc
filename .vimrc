@@ -26,6 +26,8 @@ hi default link None Normal
 ">>
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
@@ -39,6 +41,33 @@ let g:coc_enable_locationlist = 0
 autocmd User CocLocationsChange CocList --normal location
 autocmd CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" completion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+
 "let g:coc_status_error_sign='🔴'
 "let g:coc_status_warning_sign='🟡'
 "autocmd CursorHold *.cpp,*.h,*.py,*.r silent call CocActionAsync('doHover')
@@ -381,12 +410,8 @@ endif
 
 syntax on
 
-if has('nvim')
-    set signcolumn=yes:1
-    set guicursor=
-else
-    set signcolumn=number
-endif
+set guicursor=
+set signcolumn=number
 let &undodir=$HOME.'/.vim/undo'
 let &t_Cs = "\e[4:3m"
 call mkdir(&undodir, 'p')
@@ -471,10 +496,8 @@ call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 nmap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-imap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-imap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"imap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : "\<C-g>u\<CR>"
-imap <expr> <cr> complete_info()["selected"] != -1 ? "\<C-y>" : lexima#expand('<LT>CR>', 'i')
+
+
 tnoremap <Esc> <C-w>N
 nmap <silent> K :call <SID>show_documentation()<CR>
 
