@@ -31,7 +31,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr :cexpr[] <BAR> call CocAction("jumpReferences") <CR>
+nmap <silent> gr :cexpr[] <BAR> call CocAction('jumpReferences') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>k :call CocAction("format") <CR>
@@ -494,6 +494,7 @@ call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
 call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 
 nmap <C-c> <Esc>
+imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap Q <Nop>
 
