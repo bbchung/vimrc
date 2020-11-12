@@ -38,11 +38,10 @@ nmap <silent> <Leader>k :call CocAction("format") <CR>
 nmap <silent> <Leader>a :CocAction<CR>
 set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
-autocmd User CocLocationsChange CocList --normal location
-autocmd CursorHold * call CocActionAsync('highlight')
+au User CocLocationsChange CocList --normal location
+au CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-" completion
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -355,6 +354,13 @@ Plug 'honza/vim-snippets'
 
 Plug 'cohama/lexima.vim' "<<
 let g:lexima_accept_pum_with_enter = 0
+au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
+au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\S'})
+au VimEnter * call lexima#add_rule({'char': '"', 'at': '\S\%#'})
+au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+au VimEnter * call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
+au VimEnter * call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
+au VimEnter * call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 " >>
 
 "Plug 'Raimondi/delimitMate' "<<
@@ -466,7 +472,7 @@ function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     exe 'h '.expand('<cword>')
   elseif (index(['csv'], &filetype) >= 0)
-    exe "WhatColumn!"
+    :WhatColumn!
   else
     call CocAction('doHover')
   endif
@@ -485,20 +491,10 @@ vmap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-call lexima#add_rule({'char': '(', 'at': '\%#\S'})
-call lexima#add_rule({'char': '"', 'at': '\%#\S'})
-call lexima#add_rule({'char': '"', 'at': '\S\%#'})
-call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-call lexima#add_rule({'char': "\'", 'at': '\%#\S'})
-call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
-call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
-
 nmap <C-c> <Esc>
 imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap Q <Nop>
-
-
 tnoremap <Esc> <C-w>N
 nmap <silent> K :call <SID>show_documentation()<CR>
 
