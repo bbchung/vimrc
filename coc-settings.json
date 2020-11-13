@@ -22,21 +22,23 @@
 		//            "objcpp"
 		//        ]
 		//    }
-		// "cmake": {
-		// 	"command": "cmake-language-server",
-		// 	"filetypes": [
-		// 		"cmake"
-		// 	],
-		// 	"rootPatterns": [
-		// 		"build/"
-		// 	],
-		// 	"initializationOptions": {
-		// 		"buildDirectory": "build"
-		// 	}
-		// }
+		"bash": {
+			"command": "bash-language-server",
+			"args": [
+				"start"
+			],
+			"filetypes": [
+				"sh"
+			],
+			"ignoredRootPaths": [
+				"~"
+			]
+		}
 	},
-    "clangd.semanticHighlighting": false,
     "clangd.arguments": ["--background-index", "--pch-storage=memory", "--cross-file-rename"],
+    "clangd.semanticHighlighting": false,
+    "clangd.fallbackFlags": ["-std=c++2a"],
+    "coc.preferences.colorSupport": true,
 	"diagnostic.hintSign": ">",
 	"diagnostic.warningSign": "‽",
 	"diagnostic.errorSign": "✘",
@@ -44,6 +46,7 @@
 	"yaml.format.enable": true,
     "python.formatting.autopep8Args" : ["-a"],
 	"coc.preferences.useQuickfixForLocations": true,
+    "leetcode.language": "cpp",
 	"snippets.extends": {
 		"cpp": [
 			"c"
