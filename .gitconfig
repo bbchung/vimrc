@@ -1,37 +1,37 @@
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	dt = difftool
-    dy = "!f() { git difftool -y $@ ':(exclude)*.so.*'; }; f"
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    dt = difftool
+    #dy = "!f() { git difftool -y $@ ':(exclude)*.so.*'; }; f"
+    dy = difftool -y
     dn = diff --name-only --relative
-	mt = mergetool
+    mt = mergetool
     ri = rebase -i
     ls = ls-files
-    sm = "!f() { git submodule foreach --recursive git $@; }; f"
+    sm = submodule
+    fsm = "!f() { git submodule foreach --recursive git $@; }; f"
 [user]
-	email = cchung@timelinecapital.com
-	name = cchung
+    email = cchung@timelinecapital.com
+    name = cchung
 [core]
-	editor = vi
+    editor = vi
 [merge]
-	tool = nvimdiff
+    tool = vimdiff
 [diff]
-	tool = nvimdiff
+    tool = vimdiff
 [diff "so"]
     command = /bin/true
     #textconv = /bin/true
 [difftool]
-	trustExitCode = true
+    trustExitCode = true
 [mergetool]
-	trustExitCode = true
-[mergetool "nvimdiff"]
-    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED
+    trustExitCode = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [pull]
-	rebase = false
+    rebase = false
