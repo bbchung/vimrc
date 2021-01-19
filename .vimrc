@@ -160,7 +160,7 @@ vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(
 
 ">>
 
-Plug 'jalvesaq/Nvim-R'
+"Plug 'jalvesaq/Nvim-R'
 ">>
 
 "Plugin Group: Autocomplete "<<
@@ -220,7 +220,7 @@ let g:jellybeans_use_term_italics = 0
 Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
-let g:codedark_conservative = 0
+"let g:codedark_conservative = 0
 "Plug 'twerth/ir_black'
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
@@ -486,6 +486,7 @@ vmap <silent> # :<C-U>
 nmap <C-c> <Esc>
 imap <C-c> <Esc>
 nmap <F4> :qa<CR>
+nmap <F3> :bd<CR>
 nmap Q <Nop>
 tnoremap <Esc> <C-w>N
 nmap <silent> K :call <SID>show_documentation()<CR>
