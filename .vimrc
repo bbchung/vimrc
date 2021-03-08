@@ -219,6 +219,7 @@ let ayucolor='dark'
 Plug 'joshdick/onedark.vim'
 Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
+let g:jellybeans_use_gui_italics = 0
 ">>
 "Plug 'romainl/Apprentice'
 Plug 'dracula/vim'
@@ -275,7 +276,7 @@ let g:lightline = {
 \ 'subseparator': { 'left': '', 'right': '' }
 \ }
 
-autocmd User CocStatusChange call lightline#update()
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 ">>
 
@@ -505,7 +506,7 @@ if &diff
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
-    colorscheme onedark
+    colorscheme jellybeans
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
     colorscheme codedark
