@@ -1,8 +1,12 @@
 if has('nvim')
     let s:home = $HOME.'/.config/nvim/'
+    let &undodir=$HOME.'/.vim/undo2'
+    call mkdir(&undodir, 'p')
 else
     let s:home = $HOME.'/.vim/'
+    let &undodir=$HOME.'/.vim/undo'
 endif
+call mkdir(&undodir, 'p')
 let s:vim_plug_dir=expand(s:home.'/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
     exe '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.s:vim_plug_dir
@@ -245,7 +249,7 @@ function! LightlineFugitive()
 endfunction
 
 let g:lightline = {
-\ 'colorscheme': 'one',
+\ 'colorscheme': 'codedark',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -410,9 +414,7 @@ syntax on
 
 set guicursor=
 set signcolumn=number
-let &undodir=$HOME.'/.vim/undo'
 let &t_Cs = "\e[4:3m"
-call mkdir(&undodir, 'p')
 set cst
 set csprg=gtags-cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
@@ -460,7 +462,7 @@ set nobackup
 set nowritebackup
 set undofile
 
-function! s:show_documentation()
+function! <SID>show_doc()
   if (index(['vim','help'], &filetype) >= 0)
     exe 'h '.expand('<cword>')
   elseif (index(['csv'], &filetype) >= 0)
@@ -483,13 +485,13 @@ vmap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-nmap <C-c> <Esc>
+"nmap <C-c> <Esc>
 imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap <F3> :bd<CR>
 nmap Q <Nop>
 tnoremap <Esc> <C-w>N
-nmap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> K :call <SID>show_doc()<CR>
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
@@ -509,5 +511,5 @@ else
     colorscheme codedark
 endif
 
-hi link CocHighlightText MatchParen
+hi link CocHighlightText IncSearch
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
