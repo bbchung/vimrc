@@ -40,7 +40,6 @@ nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>k :call CocAction("format") <CR>
 nmap <silent> <Leader>a :CocAction<CR>
-set formatexpr=CocAction('formatSelected')
 let g:coc_enable_locationlist = 0
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
@@ -473,6 +472,10 @@ function! <SID>show_doc()
   endif
 endfunction
 
+function! CsvFormat(start, end)
+    execute a:start.','.a:end.'CSVArrangeColumn'
+endfunction
+
 command! TrimWhiteSpace :%s/\s\+$//gI
 command! W silent exe "w !sudo > /dev/null tee %"
 vmap <silent> * :<C-U>
@@ -497,6 +500,9 @@ nmap <silent> K :call <SID>show_doc()<CR>
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
+au FileType markdown setlocal textwidth=80
+au FileType c,cpp setlocal formatexpr=CocAction('formatSelected')
+au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
@@ -506,7 +512,7 @@ if &diff
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
-    colorscheme jellybeans
+    colorscheme onedark
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
     colorscheme codedark
