@@ -13,8 +13,8 @@
     sm = submodule
     fsm = "!f() { git submodule foreach --recursive git $@; }; f"
 [user]
-    email = cchung@timelinecapital.com
-    name = cchung
+	email = afafaf4@gmail.com
+	name = bbchung
 [core]
     editor = vi
 [merge]
