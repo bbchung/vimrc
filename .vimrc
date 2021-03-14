@@ -454,7 +454,7 @@ set wildmenu
 set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
-set fileformat=unix
+set fileformats=unix,dos
 set updatetime=200
 set backspace=2
 set hidden
