@@ -20,6 +20,8 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
+Plug 'bfrg/vim-cpp-modern'
+
 Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
 if has('nvim')
     let g:lsp_cxx_hl_use_nvim_text_props = 1
@@ -249,7 +251,7 @@ function! LightlineFugitive()
 endfunction
 
 let g:lightline = {
-\ 'colorscheme': 'onedark',
+\ 'colorscheme': 'codedark',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -506,6 +508,7 @@ au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
+let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
 if &diff
     set noro
@@ -515,9 +518,9 @@ if &diff
     colorscheme onedark
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme onedark
+    colorscheme codedark
 endif
 
 hi link CocHighlightText IncSearch
-"let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
+
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
