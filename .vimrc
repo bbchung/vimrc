@@ -249,7 +249,7 @@ function! LightlineFugitive()
 endfunction
 
 let g:lightline = {
-\ 'colorscheme': 'codedark',
+\ 'colorscheme': 'onedark',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -515,9 +515,9 @@ if &diff
     colorscheme onedark
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme codedark
+    colorscheme onedark
 endif
 
 hi link CocHighlightText IncSearch
-let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
+"let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
