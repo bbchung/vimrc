@@ -463,6 +463,8 @@ set hidden
 set nobackup
 set nowritebackup
 set undofile
+tnoremap <Esc> <C-W>N
+tnoremap <Esc><Esc> <C-W>N
 
 function! <SID>show_doc()
   if (index(['vim','help'], &filetype) >= 0)
@@ -496,13 +498,11 @@ imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap <F3> :bd<CR>
 nmap Q <Nop>
-tnoremap <Esc> <C-W>N
-tnoremap <Esc><Esc> <C-W>N
+tnoremap <Esc> <C-w>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
-au FileType markdown setlocal textwidth=80
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp setlocal formatexpr=CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
