@@ -496,7 +496,8 @@ imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap <F3> :bd<CR>
 nmap Q <Nop>
-tnoremap <Esc> <C-w>N
+tnoremap <Esc> <C-W>N
+tnoremap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
