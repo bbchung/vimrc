@@ -123,5 +123,5 @@ alias n='nvim'
 alias g='git'
 alias F='clang-format -i `git ls *.cpp *.h *.hpp`'
 alias TD='run-clang-tidy-13 -fix -export-fixes clang-tidy.log'
-alias vdb='f(){ eval "vim -M \"+colorscheme onedark\" \"+TermdebugCommand $@\""; unset -f f; }; f'
+alias vdb='f(){ eval "vim -M \"+colorscheme onedark\" \"+Termdebug $@\""; unset -f f; }; f'
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
