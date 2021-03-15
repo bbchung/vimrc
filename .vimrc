@@ -20,7 +20,9 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
-Plug 'bfrg/vim-cpp-modern'
+Plug 'bfrg/vim-cpp-modern' "<<
+let g:cpp_no_function_highlight = 1
+">>
 
 Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
 if has('nvim')
