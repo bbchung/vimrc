@@ -509,7 +509,6 @@ au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-hi link CocHighlightText IncSearch
 let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
 if &diff
@@ -523,4 +522,5 @@ else
     colorscheme codedark
 endif
 
+hi link CocHighlightText IncSearch
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
