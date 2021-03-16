@@ -437,6 +437,7 @@ set t_ut=
 set nowrap
 "set ttyscroll=1
 set mouse=a
+set mousemodel=popup_setpos
 set laststatus=2
 set number
 set expandtab
