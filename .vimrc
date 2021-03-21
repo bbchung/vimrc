@@ -224,7 +224,7 @@ Plug 'nanotech/jellybeans.vim' "<<
 let g:jellybeans_use_term_italics = 0
 let g:jellybeans_use_gui_italics = 0
 ">>
-"Plug 'romainl/Apprentice'
+Plug 'romainl/Apprentice'
 Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
@@ -253,7 +253,7 @@ function! LightlineFugitive()
 endfunction
 
 let g:lightline = {
-\ 'colorscheme': 'codedark',
+\ 'colorscheme': 'apprentice',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -299,7 +299,7 @@ let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
-let g:Lf_PopupColorscheme='one'
+let g:Lf_PopupColorscheme='codedark'
 let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
@@ -380,7 +380,7 @@ let g:alternateExtensions_h = 'cpp,c'
 let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
 let g:alternateRelativeFiles = 1
 ">>
-Plug 'ianding1/leetcode.vim'
+"Plug 'ianding1/leetcode.vim'
 let g:leetcode_browser='firefox'
 "Plug 'itchyny/calendar.vim' "<<
 "let g:calendar_google_calendar = 1
@@ -512,18 +512,18 @@ au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
+"let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
 if &diff
     set noro
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
-    colorscheme onedark
+    colorscheme apprentice
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme codedark
+    colorscheme apprentice
 endif
 
-hi link CocHighlightText IncSearch
+hi link CocHighlightText Cursor
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
