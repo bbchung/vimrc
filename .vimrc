@@ -1,11 +1,5 @@
-if has('nvim')
-    let s:home = $HOME.'/.config/nvim/'
-    let &undodir=$HOME.'/.vim/undo2'
-    call mkdir(&undodir, 'p')
-else
-    let s:home = $HOME.'/.vim/'
-    let &undodir=$HOME.'/.vim/undo'
-endif
+let s:home = $HOME.'/.vim/'
+let &undodir=$HOME.'/.vim/undo'
 call mkdir(&undodir, 'p')
 let s:vim_plug_dir=expand(s:home.'/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
@@ -523,8 +517,10 @@ if &diff
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
+    colorscheme apprentice
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
+    colorscheme everforest
 endif
-colorscheme everforest
+
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
