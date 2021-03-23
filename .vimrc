@@ -235,6 +235,13 @@ let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_italic=0
 let g:gruvbox_sign_column='bg0'
 ">>
+Plug 'sainnhe/everforest' "<<
+let g:everforest_background = 'hard'
+let g:everforest_enable_italic = 0
+let g:everforest_disable_italic_comment = 1
+">>
+Plug 'sainnhe/gruvbox-material' "<<
+">>
 ">>
 
 "Plugin Group: StatusLine "<<
@@ -253,7 +260,7 @@ function! LightlineFugitive()
 endfunction
 
 let g:lightline = {
-\ 'colorscheme': 'apprentice',
+\ 'colorscheme': 'everforest',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -418,7 +425,6 @@ syntax on
 
 set guicursor=
 set signcolumn=number
-let &t_Cs = "\e[4:3m"
 set cst
 set csprg=gtags-cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
@@ -435,7 +441,6 @@ set timeoutlen=500
 set vb t_vb=
 set t_ut=
 set nowrap
-"set ttyscroll=1
 set mouse=a
 set mousemodel=popup_setpos
 set laststatus=2
@@ -466,8 +471,6 @@ set hidden
 set nobackup
 set nowritebackup
 set undofile
-tnoremap <Esc> <C-W>N
-tnoremap <Esc><Esc> <C-W>N
 
 function! <SID>show_doc()
   if (index(['vim','help'], &filetype) >= 0)
@@ -501,7 +504,8 @@ imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap <F3> :bd<CR>
 nmap Q <Nop>
-tnoremap <Esc> <C-w>N
+tnoremap <Esc> <C-W>N
+tnoremap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
@@ -509,8 +513,6 @@ au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp setlocal formatexpr=CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
-au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 "let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
@@ -519,11 +521,8 @@ if &diff
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
-    colorscheme apprentice
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme apprentice
 endif
-
-hi link CocHighlightText Cursor
+colorscheme everforest
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
