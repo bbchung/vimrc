@@ -423,6 +423,9 @@ endif
 
 syntax on
 
+set vb t_vb=
+set t_ut=
+set t_Cs = "\e[4:3m"
 set guicursor=
 set signcolumn=number
 set cst
@@ -438,8 +441,6 @@ set title
 set ttyfast
 set cursorline
 set timeoutlen=500
-set vb t_vb=
-set t_ut=
 set nowrap
 set mouse=a
 set mousemodel=popup_setpos
@@ -486,7 +487,6 @@ function! CsvFormat(start, end)
     execute a:start.','.a:end.'CSVArrangeColumn'
 endfunction
 
-command! TrimWhiteSpace :%s/\s\+$//gI
 command! W silent exe "w !sudo > /dev/null tee %"
 vmap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -500,12 +500,12 @@ vmap <silent> # :<C-U>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "nmap <C-c> <Esc>
-imap <C-c> <Esc>
+"imap <C-c> <Esc>
 nmap <F4> :qa<CR>
 nmap <F3> :bd<CR>
 nmap Q <Nop>
-tnoremap <Esc> <C-W>N
-tnoremap <Esc><Esc> <C-W>N
+tmap <Esc> <C-W>N
+tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
@@ -513,6 +513,8 @@ au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp setlocal formatexpr=CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
+"au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+"au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 "let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
