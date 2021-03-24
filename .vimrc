@@ -235,6 +235,9 @@ let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_enable_italic = 0
 let g:gruvbox_material_disable_italic_comment = 1
 ">>
+Plug 'arcticicestudio/nord-vim' "<<
+">>
+">>
 ">>
 
 "Plugin Group: StatusLine "<<
@@ -253,7 +256,7 @@ function! LightlineFugitive()
 endf
 
 let g:lightline = {
-\ 'colorscheme': 'apprentice',
+\ 'colorscheme': 'nord',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -299,7 +302,7 @@ let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
-let g:Lf_PopupColorscheme='codedark'
+let g:Lf_PopupColorscheme='nord'
 let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
@@ -516,11 +519,10 @@ if &diff
     syntax off
     set nocursorline
     let g:coc_start_at_startup=0
-    colorscheme apprentice
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! `\"" | endif " restore cursor position
-    colorscheme apprentice
 endif
+colorscheme nord
 
-hi link CocHighlightText Cursor
+hi link CocHighlightText Visual
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
