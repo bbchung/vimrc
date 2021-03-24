@@ -14,7 +14,7 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
-"Plug 'bfrg/vim-cpp-modern' "<<
+Plug 'bfrg/vim-cpp-modern' "<<
 let g:cpp_no_function_highlight = 1
 ">>
 
@@ -358,6 +358,8 @@ Plug 'honza/vim-snippets'
 Plug 'cohama/lexima.vim' "<<
 let g:lexima_accept_pum_with_enter = 0
 au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
+au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S'})
+au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S'})
 au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\S'})
 au VimEnter * call lexima#add_rule({'char': '"', 'at': '\S\%#'})
 au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
