@@ -14,17 +14,13 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
-Plug 'bfrg/vim-cpp-modern' "<<
+"Plug 'bfrg/vim-cpp-modern' "<<
 let g:cpp_no_function_highlight = 1
 ">>
 
 Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
-if has('nvim')
-    let g:lsp_cxx_hl_use_nvim_text_props = 1
-else
-    let g:lsp_cxx_hl_use_text_props = 1
-endif
-hi default link None Normal
+let g:lsp_cxx_hl_use_nvim_text_props = 1
+let g:lsp_cxx_hl_use_text_props = 1
 ">>
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
@@ -43,26 +39,26 @@ au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-inoremap <silent><expr> <TAB>
+imap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+endf
 
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+imap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+imap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+imap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 ">>
 
 "Plug 'natebosch/vim-lsc' "<<
@@ -235,6 +231,9 @@ let g:everforest_enable_italic = 0
 let g:everforest_disable_italic_comment = 1
 ">>
 Plug 'sainnhe/gruvbox-material' "<<
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_enable_italic = 0
+let g:gruvbox_material_disable_italic_comment = 1
 ">>
 ">>
 
@@ -244,17 +243,17 @@ Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
-endfunction
+endf
 function! LightlineFugitive()
     if exists('*FugitiveHead')
         let branch = FugitiveHead()
         return branch !=# '' ? ''.branch : ''
     endif
     return ''
-endfunction
+endf
 
 let g:lightline = {
-\ 'colorscheme': 'everforest',
+\ 'colorscheme': 'apprentice',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -468,30 +467,30 @@ set nowritebackup
 set undofile
 
 function! <SID>show_doc()
-  if (index(['vim','help'], &filetype) >= 0)
-    exe 'h '.expand('<cword>')
-  elseif (index(['csv'], &filetype) >= 0)
-    :WhatColumn!
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+    if (index(['vim','help'], &filetype) >= 0)
+        exe 'h '.expand('<cword>')
+    elseif (index(['csv'], &filetype) >= 0)
+        WhatColumn!
+    else
+        call CocAction('doHover')
+    endif
+endf
 
 function! CsvFormat(start, end)
     execute a:start.','.a:end.'CSVArrangeColumn'
-endfunction
+endf
 
 command! W silent exe "w !sudo > /dev/null tee %"
 vmap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy/<C-R><C-R>=substitute(
+            \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:call setreg('"', old_reg, old_regtype)<CR>
 vmap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy?<C-R><C-R>=substitute(
+            \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "nmap <C-c> <Esc>
 "imap <C-c> <Esc>
@@ -519,8 +518,9 @@ if &diff
     let g:coc_start_at_startup=0
     colorscheme apprentice
 else
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
-    colorscheme everforest
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! `\"" | endif " restore cursor position
+    colorscheme apprentice
 endif
 
+hi link CocHighlightText Cursor
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
