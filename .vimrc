@@ -355,6 +355,7 @@ Plug 'scrooloose/nerdcommenter'
 
 Plug 'honza/vim-snippets'
 
+
 Plug 'cohama/lexima.vim' "<<
 let g:lexima_accept_pum_with_enter = 0
 au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
@@ -526,5 +527,5 @@ else
 endif
 colorscheme nord
 
-hi link CocHighlightText Visual
+hi link CocHighlightText MatchParen
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
