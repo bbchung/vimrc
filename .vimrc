@@ -370,6 +370,9 @@ au VimEnter * call lexima#add_rule({'char': "\'", 'at': '\S\%#'})
 au VimEnter * call lexima#add_rule({'char': "\'", 'at': "\'\%#\'", 'leave': "\'"})
 " >>
 
+Plug 'tpope/vim-endwise' "<<
+" >>
+
 "Plug 'Raimondi/delimitMate' "<<
 "let g:delimitMate_expand_cr=1
 " >>
@@ -524,7 +527,7 @@ if &diff
     set nocursorline
     let g:coc_start_at_startup=0
 else
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! `\"" | endif " restore cursor position
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
 endif
 exe "colorscheme ".s:theme
 
