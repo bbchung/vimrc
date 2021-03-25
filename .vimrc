@@ -1,3 +1,4 @@
+let s:theme="everforest"
 let s:home = $HOME.'/.vim/'
 let &undodir=$HOME.'/.vim/undo'
 call mkdir(&undodir, 'p')
@@ -256,7 +257,7 @@ function! LightlineFugitive()
 endf
 
 let g:lightline = {
-\ 'colorscheme': 'nord',
+\ 'colorscheme': s:theme,
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -302,7 +303,7 @@ let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
-let g:Lf_PopupColorscheme='nord'
+let g:Lf_PopupColorscheme=s:theme
 let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
@@ -525,7 +526,7 @@ if &diff
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! `\"" | endif " restore cursor position
 endif
-colorscheme nord
+exe "colorscheme ".s:theme
 
 hi link CocHighlightText MatchParen
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
