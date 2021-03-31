@@ -1,6 +1,10 @@
 let s:theme="everforest"
 let s:home = $HOME.'/.vim/'
-let &undodir=$HOME.'/.vim/undo'
+if has('nvim')
+    let &undodir=$HOME.'/.vim/undo2'
+else
+    let &undodir=$HOME.'/.vim/undo'
+endif
 call mkdir(&undodir, 'p')
 let s:vim_plug_dir=expand(s:home.'/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
@@ -384,6 +388,11 @@ Plug 'tpope/vim-endwise' "<<
 ">>
 
 "Plugin Group: Misc "<<
+Plug 'Yggdroot/indentLine' "<<
+let g:indentLine_setColors=0
+let g:indentLine_fileType=['c', 'cpp', 'python', 'r']
+let g:indentLine_char = '⸽'
+">>
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-scripts/a.vim' "<<
 let g:alternateExtensions_h = 'cpp,c'
