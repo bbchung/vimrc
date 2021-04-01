@@ -234,6 +234,7 @@ Plug 'sainnhe/everforest' "<<
 let g:everforest_background = 'hard'
 let g:everforest_enable_italic = 0
 let g:everforest_disable_italic_comment = 1
+let g:everforest_sign_column_background = 'none'
 ">>
 Plug 'sainnhe/gruvbox-material' "<<
 let g:gruvbox_material_background = 'hard'
@@ -388,7 +389,7 @@ Plug 'tpope/vim-endwise' "<<
 ">>
 
 "Plugin Group: Misc "<<
-Plug 'Yggdroot/indentLine' "<<
+"Plug 'Yggdroot/indentLine' "<<
 let g:indentLine_setColors=0
 let g:indentLine_fileType=['c', 'cpp', 'python', 'r']
 let g:indentLine_char = '⸽'
@@ -525,8 +526,8 @@ au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp setlocal formatexpr=CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
-"au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-"au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
 "let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
