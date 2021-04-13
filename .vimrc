@@ -1,4 +1,3 @@
-let s:theme="everforest"
 let s:home = $HOME.'/.vim/'
 if has('nvim')
     let &undodir=$HOME.'/.vim/undo2'
@@ -19,7 +18,7 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
-Plug 'bfrg/vim-cpp-modern' "<<
+"Plug 'bfrg/vim-cpp-modern' "<<
 let g:cpp_no_function_highlight = 1
 ">>
 
@@ -248,7 +247,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 
 "Plugin Group: StatusLine "<<
 "Plug 'liuchengxu/eleline.vim'
-Plug 'itchyny/lightline.vim' "<<
+"Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -262,7 +261,7 @@ function! LightlineFugitive()
 endf
 
 let g:lightline = {
-\ 'colorscheme': s:theme,
+\ 'colorscheme': 'everforest',
 \ 'active': {
 \   'left': [['mode', 'paste', 'readonly'],
 \            ['relativepath', 'gitbranch'], ['modified']],
@@ -292,7 +291,7 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 ">>
 
-"Plug 'vim-airline/vim-airline' "<<
+Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#whitespace#checks = ['trailing']
@@ -308,7 +307,6 @@ let g:airline#extensions#whitespace#checks = ['trailing']
 ">>
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
-let g:Lf_PopupColorscheme=s:theme
 let g:Lf_WildIgnore = {
               \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
               \ 'file': ['*o']
@@ -539,7 +537,7 @@ if &diff
 else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
 endif
-exe "colorscheme ".s:theme
+colorscheme everforest
 
 hi link CocHighlightText MatchParen
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
