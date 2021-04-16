@@ -247,7 +247,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 
 "Plugin Group: StatusLine "<<
 "Plug 'liuchengxu/eleline.vim'
-"Plug 'itchyny/lightline.vim' "<<
+Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -260,41 +260,96 @@ function! LightlineFugitive()
     return ''
 endf
 
-let g:lightline = {
-\ 'colorscheme': 'everforest',
-\ 'active': {
-\   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch'], ['modified']],
-\   'right': [['percent', 'lineinfo'],
-\             ['fileformat', 'fileencoding', 'filetype'], ['cocstatus']]
-\ },
-\ 'inactive': {
-\   'left': [['mode', 'paste', 'readonly'],
-\            ['relativepath', 'gitbranch'], ['modified']],
-\   'right': [['percent', 'lineinfo'],
-\             ['fileformat', 'fileencoding', 'filetype']]
-\ },
-\ 'component': {
-\   'paste': '%{&paste?"📋":""}',
-\   'readonly': '%{&readonly?"🔒":""}',
-\ },
-\ 'component_function': {
-\   'gitbranch': 'LightlineFugitive',
-\   'cocstatus': 'coc#status',
-\   'relativepath': 'RelativePath',
-\ },
-\ 'separator': { 'left': '', 'right': '' },
-\ 'subseparator': { 'left': '', 'right': '' }
+let g:lightline = 
+\ {
+\    "colorscheme":"everforest",
+\    "active":{
+\       "left":[
+\          [
+\             "mode",
+\             "paste"
+\          ],
+\          [
+\             "readonly",
+\             "relativepath",
+\             "modified"
+\          ],
+\          [
+\			  "gitbranch"
+\          ]
+\       ],
+\       "right":[
+\          [
+\             "lineinfo"
+\          ],
+\          [
+\             "percent"
+\          ],
+\          [
+\             "cocstatus",
+\             "fileformat",
+\             "fileencoding",
+\             "filetype"
+\          ]
+\       ]
+\    },
+\    "inactive":{
+\       "left":[
+\          [
+\             "mode",
+\             "paste"
+\          ],
+\          [
+\             "readonly",
+\             "relativepath",
+\             "modified"
+\          ],
+\          [
+\			  "gitbranch"
+\          ]
+\       ],
+\       "right":[
+\          [
+\             "lineinfo"
+\          ],
+\          [
+\             "percent"
+\          ],
+\          [
+\             "fileformat",
+\             "fileencoding",
+\             "filetype"
+\          ]
+\       ]
+\    },
+\    "component":{
+\       "paste":"%{&paste?\"📋\":\"\"}",
+\       "readonly":"%{&readonly?\"🔒\":\"\"}"
+\    },
+\    "component_function":{
+\       "gitbranch":"LightlineFugitive",
+\       "cocstatus":"coc#status",
+\       "relativepath":"RelativePath"
+\    },
+\    "separator":{
+\       "left":"",
+\       "right":""
+\    },
+\    "subseparator":{
+\       "left":"",
+\       "right":""
+\    }
 \ }
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 ">>
 
-Plug 'vim-airline/vim-airline' "<<
+"Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#csv#column_display = 'Name'
-let g:airline#extensions#whitespace#checks = ['trailing']
+let g:airline_symbols = {'dirty': '*'}
 ">>
 "Plug 'vim-airline/vim-airline-themes'
 
