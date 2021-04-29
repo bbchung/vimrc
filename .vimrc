@@ -490,7 +490,7 @@ endif
 syntax on
 
 set vb t_vb=
-set t_ut=
+"set t_ut=
 set t_Cs = "\e[4:3m"
 set guicursor=
 set signcolumn=number
