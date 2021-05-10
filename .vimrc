@@ -247,7 +247,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 
 "Plugin Group: StatusLine "<<
 "Plug 'liuchengxu/eleline.vim'
-Plug 'itchyny/lightline.vim' "<<
+"Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -345,10 +345,12 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 ">>
 
-"Plug 'vim-airline/vim-airline' "<<
+Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#csv#column_display = 'Name'
+let g:airline#extensions#csv#enabled = 0
+let g:airline#extensions#scrollbar#enabled = 0
 let g:airline_symbols = {'dirty': '*'}
 ">>
 "Plug 'vim-airline/vim-airline-themes'
