@@ -247,7 +247,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 
 "Plugin Group: StatusLine "<<
 "Plug 'liuchengxu/eleline.vim'
-"Plug 'itchyny/lightline.vim' "<<
+Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -260,7 +260,7 @@ function! LightlineFugitive()
     return ''
 endf
 
-let g:lightline = 
+let g:lightline =
 \ {
 \    "colorscheme":"everforest",
 \    "active":{
@@ -345,13 +345,12 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 ">>
 
-Plug 'vim-airline/vim-airline' "<<
+"Plug 'vim-airline/vim-airline' "<<
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#scrollbar#enabled = 0
-let g:airline_symbols = {'dirty': '*'}
 ">>
 "Plug 'vim-airline/vim-airline-themes'
 
@@ -492,7 +491,7 @@ endif
 syntax on
 
 set vb t_vb=
-"set t_ut=
+set t_ut=
 set t_Cs = "\e[4:3m"
 set guicursor=
 set signcolumn=number
@@ -569,8 +568,8 @@ vmap <silent> # :<C-U>
 
 "nmap <C-c> <Esc>
 "imap <C-c> <Esc>
-nmap <F4> :qa<CR>
-nmap <F3> :bd<CR>
+nmap <F4> :qa!<CR>
+nmap <F3> :bd!<CR>
 nmap Q <Nop>
 tmap <Esc> <C-W>N
 tmap <Esc><Esc> <C-W>N
