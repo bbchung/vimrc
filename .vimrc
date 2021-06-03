@@ -578,7 +578,7 @@ nmap <silent> K :call <SID>show_doc()<CR>
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
-au FileType c,cpp setlocal formatexpr=CocAction('formatSelected')
+au FileType c,cpp,python setlocal formatexpr=CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
 au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
