@@ -33,10 +33,11 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr :cexpr[] <BAR> call CocAction('jumpReferences') <CR>
+nmap <silent> gr :cexpr[] <CR> <BAR> <Plug>(coc-references)
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
-nmap <silent> <Leader>k :call CocAction("format") <CR>
+nmap <silent> <Leader>k <Plug>(coc-format)
+vmap <silent> <leader>k <Plug>(coc-format-selected)
 nmap <silent> <Leader>a :CocAction<CR>
 let g:coc_enable_locationlist = 0
 au User CocLocationsChange CocList --normal location
