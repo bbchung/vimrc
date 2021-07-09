@@ -22,7 +22,7 @@ call plug#begin(s:home.'/plugged') "<<
 let g:cpp_no_function_highlight = 1
 ">>
 
-Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
+"Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
 let g:lsp_cxx_hl_use_nvim_text_props = 1
 let g:lsp_cxx_hl_use_text_props = 1
 ">>
