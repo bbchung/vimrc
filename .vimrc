@@ -23,11 +23,11 @@ let g:cpp_no_function_highlight = 1
 ">>
 
 "Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
-let g:lsp_cxx_hl_use_nvim_text_props = 1
+"let g:lsp_cxx_hl_use_nvim_text_props = 1
 let g:lsp_cxx_hl_use_text_props = 1
 ">>
 
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} "<<
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "<<
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
@@ -475,6 +475,7 @@ Plug 'tpope/vim-fugitive'
 "Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'chrisbra/csv.vim' "<<
 let g:no_csv_maps=1
+let g:csv_no_progress = 1
 ">>
 "Plug 'mechatroner/rainbow_csv'
 
@@ -493,6 +494,7 @@ endif
 
 syntax on
 
+set nomore
 set vb t_vb=
 set t_ut=
 set t_Cs = "\e[4:3m"
@@ -513,7 +515,7 @@ set cursorline
 set timeoutlen=500
 set nowrap
 set mouse=a
-set mousemodel=popup_setpos
+set mousemodel=popup
 set laststatus=2
 set number
 set expandtab
@@ -573,6 +575,7 @@ vmap <silent> # :<C-U>
 "imap <C-c> <Esc>
 nmap <F4> :qa!<CR>
 nmap <F3> :bd!<CR>
+nmap <F2> :bp<CR>
 nmap Q <Nop>
 tmap <Esc> <C-W>N
 tmap <Esc><Esc> <C-W>N
