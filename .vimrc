@@ -41,6 +41,19 @@ nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 nmap <silent> <Leader>a :CocAction<CR>
 let g:coc_enable_locationlist = 0
+let g:coc_global_extensions = [
+            \'coc-clang-format-style-options', 
+            \'coc-clangd', 
+            \'coc-cmake', 
+            \'coc-json', 
+            \'coc-lists', 
+            \'coc-pyright', 
+            \'coc-r-lsp',
+            \'coc-sh', 
+            \'coc-tabnine', 
+            \'coc-vimlsp', 
+            \'coc-yaml'
+            \]
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
@@ -232,10 +245,11 @@ let g:gruvbox_italic=0
 let g:gruvbox_sign_column='bg0'
 ">>
 Plug 'sainnhe/everforest' "<<
-let g:everforest_background = 'hard'
+let g:everforest_background = 'medium'
 let g:everforest_enable_italic = 0
 let g:everforest_disable_italic_comment = 1
 let g:everforest_sign_column_background = 'none'
+let g:everforest_diagnostic_text_highlight = 1
 ">>
 Plug 'sainnhe/gruvbox-material' "<<
 let g:gruvbox_material_background = 'hard'
@@ -539,7 +553,6 @@ set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformats=unix,dos
 set updatetime=200
-set backspace=2
 set hidden
 set nobackup
 set nowritebackup
@@ -574,8 +587,9 @@ vmap <silent> # :<C-U>
 "nmap <C-c> <Esc>
 "imap <C-c> <Esc>
 nmap <F4> :qa!<CR>
-nmap <F3> :bd!<CR>
-nmap <F2> :bp<CR>
+nmap <F5> :bp<CR>
+nmap <F6> :bd!<CR>
+nmap <F7> :bn<CR>
 nmap Q <Nop>
 tmap <Esc> <C-W>N
 tmap <Esc><Esc> <C-W>N
