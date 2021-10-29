@@ -28,6 +28,19 @@ let g:lsp_cxx_hl_use_text_props = 1
 ">>
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "<<
+let g:coc_global_extensions = [
+            \'coc-clang-format-style-options',
+            \'coc-clangd',
+            \'coc-cmake',
+            \'coc-json',
+            \'coc-lists',
+            \'coc-pyright',
+            \'coc-r-lsp',
+            \'coc-sh',
+            \'coc-tabnine',
+            \'coc-vimlsp',
+            \'coc-yaml'
+            \]
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
@@ -39,7 +52,7 @@ nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
-nmap <silent> <Leader>a :CocAction<CR>
+map <silent> <Leader>a :CocAction<CR>
 let g:coc_enable_locationlist = 0
 let g:coc_global_extensions = [
             \'coc-clang-format-style-options', 
@@ -557,6 +570,7 @@ set hidden
 set nobackup
 set nowritebackup
 set undofile
+set backspace=2
 
 function! <SID>show_doc()
     if (index(['vim','help'], &filetype) >= 0)
@@ -584,9 +598,8 @@ vmap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-"nmap <C-c> <Esc>
-"imap <C-c> <Esc>
-nmap <F4> :qa!<CR>
+map <C-c> <Esc>
+map <F4> :qa!<CR>
 nmap <F5> :bp<CR>
 nmap <F6> :bd!<CR>
 nmap <F7> :bn<CR>
