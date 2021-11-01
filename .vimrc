@@ -46,8 +46,8 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-"nmap <silent> gr :cexpr[] <CR> <BAR> <Plug>(coc-references)
+"nmap <silent> gr :cexpr[] <BAR> <Plug>(coc-references)
+nmap <silent> gr :cexpr[] <BAR> call CocAction('jumpReferences') <CR>
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>k <Plug>(coc-format)
@@ -265,9 +265,10 @@ let g:everforest_sign_column_background = 'none'
 let g:everforest_diagnostic_text_highlight = 1
 ">>
 Plug 'sainnhe/gruvbox-material' "<<
-let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_background = 'medium'
 let g:gruvbox_material_enable_italic = 0
 let g:gruvbox_material_disable_italic_comment = 1
+let g:gruvbox_material_sign_column_background = 'none'
 ">>
 Plug 'arcticicestudio/nord-vim' "<<
 ">>
@@ -542,7 +543,7 @@ set cursorline
 set timeoutlen=500
 set nowrap
 set mouse=a
-set mousemodel=popup
+set mousemodel=popup_setpos
 set laststatus=2
 set number
 set expandtab
