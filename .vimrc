@@ -535,12 +535,9 @@ set belloff=all
 set completeopt=menuone,noselect
 set diffopt+=vertical
 set termguicolors
-set shortmess+=c
-set nocompatible
+set shortmess-=S
 set title
-set ttyfast
 set cursorline
-set timeoutlen=500
 set nowrap
 set mouse=a
 set mousemodel=popup_setpos
