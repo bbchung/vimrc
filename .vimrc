@@ -597,10 +597,11 @@ vmap <silent> # :<C-U>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 map <C-c> <Esc>
+imap <C-c> <Esc>
+nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 nmap <F5> :bp<CR>
-nmap <F6> :bd!<CR>
-nmap <F7> :bn<CR>
+nmap <F6> :bn<CR>
 nmap Q <Nop>
 tmap <Esc> <C-W>N
 tmap <Esc><Esc> <C-W>N
