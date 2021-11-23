@@ -18,15 +18,6 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
-"Plug 'bfrg/vim-cpp-modern' "<<
-let g:cpp_no_function_highlight = 1
-">>
-
-"Plug 'jackguo380/vim-lsp-cxx-highlight' "<<
-"let g:lsp_cxx_hl_use_nvim_text_props = 1
-let g:lsp_cxx_hl_use_text_props = 1
-">>
-
 Plug 'neoclide/coc.nvim', {'branch': 'release'} "<<
 let g:coc_global_extensions = [
             \'coc-clang-format-style-options',
@@ -72,18 +63,18 @@ au CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 imap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endf
 
 imap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -96,35 +87,35 @@ vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) :
 "Plug 'natebosch/vim-lsc' "<<
 
 "let g:lsc_server_commands = {
- "\ 'cpp': {
- "\    'command': 'ccls',
- "\    'message_hooks': {
- "\        'initialize': {
- "\            'initializationOptions': {'cacheDirectory': $HOME."/.vim/ccls_cache"},
- "\            'rootUri': {->getcwd()},
- "\        },
- "\    },
- "\    'suppress_stderr': v:true
- "\  },
- "\}
+            "\ 'cpp': {
+            "\    'command': 'ccls',
+            "\    'message_hooks': {
+            "\        'initialize': {
+            "\            'initializationOptions': {'cacheDirectory': $HOME."/.vim/ccls_cache"},
+            "\            'rootUri': {->getcwd()},
+            "\        },
+            "\    },
+            "\    'suppress_stderr': v:true
+            "\  },
+"\}
 
 "let g:lsc_server_commands = {
- "\ 'cpp': {
- "\    'command': 'clangd', 'suppress_stderr': v:true
- "\    },
- "\ 'c': {
- "\    'command': 'clangd', 'suppress_stderr': v:true
- "\    },
- "\ 'python': {
- "\    'command': 'pyls',
- "\    },
- "\ 'r': {
- "\    'command': 'R --quiet --slave -e languageserver::run()',
- "\    },
- "\ 'sh': {
- "\    'command': 'bash-language-server start',
- "\    },
- "\}
+            "\ 'cpp': {
+            "\    'command': 'clangd', 'suppress_stderr': v:true
+            "\    },
+            "\ 'c': {
+            "\    'command': 'clangd', 'suppress_stderr': v:true
+            "\    },
+            "\ 'python': {
+            "\    'command': 'pyls',
+            "\    },
+            "\ 'r': {
+            "\    'command': 'R --quiet --slave -e languageserver::run()',
+            "\    },
+            "\ 'sh': {
+            "\    'command': 'bash-language-server start',
+            "\    },
+"\}
 
 "highlight lscReference ctermbg=160
 "nmap <silent> <Leader>d :LSClientGoToDefinition<CR>
@@ -136,55 +127,55 @@ vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) :
 "let g:lsp_signs_enabled=1
 
 "if executable('clangd')
-    "autocmd User lsp_setup call lsp#register_server({
-        "\ 'name': 'clangd',
-        "\ 'cmd': {server_info->['clangd']},
-        "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        "\ })
+"autocmd User lsp_setup call lsp#register_server({
+            "\ 'name': 'clangd',
+            "\ 'cmd': {server_info->['clangd']},
+            "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+            "\ })
 "endif
 
 "if executable('ccls')
-   "au User lsp_setup call lsp#register_server({
-      "\ 'name': 'ccls',
-      "\ 'cmd': {server_info->['ccls']},
-      "\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/ccls_cache", 'index' : {'threads' : 4} },
-      "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      "\ })
+"au User lsp_setup call lsp#register_server({
+            "\ 'name': 'ccls',
+            "\ 'cmd': {server_info->['ccls']},
+            "\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+            "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/ccls_cache", 'index' : {'threads' : 4} },
+            "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+            "\ })
 "endif
 
 "if executable('cquery')
-   "au User lsp_setup call lsp#register_server({
-      "\ 'name': 'cquery',
-      "\ 'cmd': {server_info->['cquery']},
-      "\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/cquery_cache" },
-      "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      "\ })
+"au User lsp_setup call lsp#register_server({
+            "\ 'name': 'cquery',
+            "\ 'cmd': {server_info->['cquery']},
+            "\ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+            "\ 'initialization_options': { 'cacheDirectory': $HOME."/.vim/cquery_cache" },
+            "\ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+            "\ })
 "endif
 
 "if executable('pyls')
-    "au User lsp_setup call lsp#register_server({
-        "\ 'name': 'pyls',
-        "\ 'cmd': {server_info->['pyls']},
-        "\ 'whitelist': ['python'],
-        "\ })
+"au User lsp_setup call lsp#register_server({
+            "\ 'name': 'pyls',
+            "\ 'cmd': {server_info->['pyls']},
+            "\ 'whitelist': ['python'],
+            "\ })
 "endif
 
 "if executable('bash-language-server')
-    "au User lsp_setup call lsp#register_server({
-        "\ 'name': 'bash',
-        "\ 'cmd': {server_info->['bash-language-server', 'start']},
-        "\ 'whitelist': ['sh'],
-        "\ })
+"au User lsp_setup call lsp#register_server({
+            "\ 'name': 'bash',
+            "\ 'cmd': {server_info->['bash-language-server', 'start']},
+            "\ 'whitelist': ['sh'],
+            "\ })
 "endif
 
 "if executable('R')
-    "au User lsp_setup call lsp#register_server({
-        "\ 'name': 'R',
-        "\ 'cmd': {server_info->['R', '--quiet', '--slave', '-e', 'languageserver::run()']},
-        "\ 'whitelist': ['r'],
-        "\ })
+"au User lsp_setup call lsp#register_server({
+            "\ 'name': 'R',
+            "\ 'cmd': {server_info->['R', '--quiet', '--slave', '-e', 'languageserver::run()']},
+            "\ 'whitelist': ['r'],
+            "\ })
 "endif
 
 ">>
@@ -202,24 +193,24 @@ vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) :
 "Plug 'prabirshrestha/asyncomplete-lsp.vim' "<<
 
 "au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-    "\ 'name': 'buffer',
-    "\ 'whitelist': ['*'],
-    "\ 'blacklist': [],
-    "\ 'completor': function('asyncomplete#sources#buffer#completor'),
-    "\ }))
+            "\ 'name': 'buffer',
+            "\ 'whitelist': ['*'],
+            "\ 'blacklist': [],
+            "\ 'completor': function('asyncomplete#sources#buffer#completor'),
+            "\ }))
 
 "au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-    "\ 'name': 'file',
-    "\ 'whitelist': ['*'],
-    "\ 'priority': 10,
-    "\ 'completor': function('asyncomplete#sources#file#completor')
-    "\ }))
+            "\ 'name': 'file',
+            "\ 'whitelist': ['*'],
+            "\ 'priority': 10,
+            "\ 'completor': function('asyncomplete#sources#file#completor')
+            "\ }))
 
 "au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-    "\ 'name': 'ultisnips',
-    "\ 'whitelist': ['*'],
-    "\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-    "\ }))
+            "\ 'name': 'ultisnips',
+            "\ 'whitelist': ['*'],
+            "\ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+            "\ }))
 ">>
 
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang'} "<<
@@ -394,9 +385,9 @@ let g:airline#extensions#scrollbar#enabled = 0
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
 let g:Lf_WildIgnore = {
-              \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
-              \ 'file': ['*o']
-              \}
+            \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
+            \ 'file': ['*o']
+            \}
 let g:Lf_WindowHeight = 0.2
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
@@ -444,7 +435,6 @@ Plug 'scrooloose/nerdcommenter'
 ">>
 
 Plug 'honza/vim-snippets'
-
 
 Plug 'cohama/lexima.vim' "<<
 let g:lexima_accept_pum_with_enter = 0
