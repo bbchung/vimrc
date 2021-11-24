@@ -18,7 +18,7 @@ call plug#begin(s:home.'/plugged') "<<
 
 "Plugin Group: Language "<<
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} "<<
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} "<<
 let g:coc_global_extensions = [
             \'coc-clang-format-style-options',
             \'coc-clangd',
