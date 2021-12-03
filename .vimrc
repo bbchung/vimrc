@@ -13,6 +13,8 @@ endif
 
 packadd termdebug
 let g:termdebug_wide = 1
+au User TermdebugStartPre silent CocDisable
+au User TermdebugStopPost silent CocEnable
 
 call plug#begin(s:home.'/plugged') "<<
 
