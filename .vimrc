@@ -251,7 +251,7 @@ let g:gruvbox_italic=0
 let g:gruvbox_sign_column='bg0'
 ">>
 Plug 'sainnhe/everforest' "<<
-let g:everforest_background = 'medium'
+let g:everforest_background = 'hard'
 let g:everforest_enable_italic = 0
 let g:everforest_disable_italic_comment = 1
 let g:everforest_sign_column_background = 'none'
@@ -439,16 +439,13 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
 
 Plug 'cohama/lexima.vim' "<<
-let g:lexima_accept_pum_with_enter = 0
 au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
 au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S'})
 au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': '"', 'at': '\S\%#'})
-au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-au VimEnter * call lexima#add_rule({'char': "'", 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': "'", 'at': '\S\%#'})
-au VimEnter * call lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
+au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\w'})
+au VimEnter * call lexima#add_rule({'char': '"', 'at': '\w\%#'})
+au VimEnter * call lexima#add_rule({'char': "'", 'at': '\%#\w'})
+au VimEnter * call lexima#add_rule({'char': "'", 'at': '\w\%#'})
 
 " >>
 
