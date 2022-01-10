@@ -537,7 +537,7 @@ set softtabstop=4
 set tabstop=4
 set shiftwidth=4
 set scrolloff=8
-set sidescrolloff=1
+set sidescrolloff=8
 set incsearch
 set hlsearch
 set ignorecase
@@ -616,5 +616,4 @@ else
 endif
 colorscheme everforest
 
-hi link CocHighlightText MatchParen
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
