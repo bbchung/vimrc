@@ -256,6 +256,8 @@ let g:everforest_enable_italic = 0
 let g:everforest_disable_italic_comment = 1
 let g:everforest_sign_column_background = 'none'
 let g:everforest_diagnostic_text_highlight = 1
+let g:everforest_better_performance = 1
+
 ">>
 Plug 'sainnhe/gruvbox-material' "<<
 let g:gruvbox_material_background = 'medium'
@@ -617,5 +619,6 @@ else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
 endif
 colorscheme everforest
+hi link CocHighlightText MatchParen
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
