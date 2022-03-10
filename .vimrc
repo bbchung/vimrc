@@ -1,9 +1,5 @@
 let s:home = $HOME.'/.vim/'
-if has('nvim')
-    let &undodir=$HOME.'/.vim/undo2'
-else
-    let &undodir=$HOME.'/.vim/undo'
-endif
+let &undodir=$HOME.'/.vim/undo'
 call mkdir(&undodir, 'p')
 let s:vim_plug_dir=expand(s:home.'/autoload')
 if !filereadable(s:vim_plug_dir.'/plug.vim')
@@ -21,32 +17,6 @@ call plug#begin(s:home.'/plugged') "<<
 "Plugin Group: LSP "<<
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} "<<
 let g:coc_global_extensions = [
-            \'coc-clang-format-style-options',
-            \'coc-clangd',
-            \'coc-cmake',
-            \'coc-json',
-            \'coc-lists',
-            \'coc-pyright',
-            \'coc-r-lsp',
-            \'coc-sh',
-            \'coc-tabnine',
-            \'coc-vimlsp',
-            \'coc-yaml'
-            \]
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-"nmap <silent> gr :cexpr[] <BAR> <Plug>(coc-references)
-nmap <silent> gr :cexpr[] <BAR> call CocAction('jumpReferences') <CR>
-nmap <Leader>x <Plug>(coc-fix-current)
-nmap <silent> <Leader>r <Plug>(coc-rename)
-nmap <silent> <Leader>k <Plug>(coc-format)
-vmap <silent> <leader>k <Plug>(coc-format-selected)
-map <silent> <Leader>a :CocAction<CR>
-let g:coc_enable_locationlist = 0
-let g:coc_global_extensions = [
             \'coc-clang-format-style-options', 
             \'coc-clangd', 
             \'coc-cmake', 
@@ -57,22 +27,36 @@ let g:coc_global_extensions = [
             \'coc-sh', 
             \'coc-tabnine', 
             \'coc-vimlsp', 
-            \'coc-yaml'
+            \'coc-yaml',
+            \'coc-snippets'
             \]
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gr :cexpr[] <BAR> call CocAction('jumpReferences') <CR>
+nmap <Leader>x <Plug>(coc-fix-current)
+nmap <silent> <Leader>r <Plug>(coc-rename)
+nmap <silent> <Leader>k <Plug>(coc-format)
+vmap <silent> <leader>k <Plug>(coc-format-selected)
+map <silent> <Leader>a :CocAction<CR>
+let g:coc_enable_locationlist = 0
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
-imap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endf
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -262,22 +246,26 @@ let g:Lf_WorkingDirectoryMode = 'a'
 "Plugin Group: Edit "<<
 Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
-Plug 'cohama/lexima.vim' "<<
-au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': '"', 'at': '\S\%#'})
-au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-au VimEnter * call lexima#add_rule({'char': "'", 'at': '\%#\S'})
-au VimEnter * call lexima#add_rule({'char': "'", 'at': '\S\%#'})
-au VimEnter * call lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
+Plug 'Raimondi/delimitMate' "<<
+let g:delimitMate_expand_cr=1
+let g:delimitMate_smart_matchpairs = '^\%(\S\)'
+" >>
+"Plug 'cohama/lexima.vim' "<<
+"au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
+"au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S'})
+"au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S'})
+"au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\S'})
+"au VimEnter * call lexima#add_rule({'char': '"', 'at': '\S\%#'})
+"au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+"au VimEnter * call lexima#add_rule({'char': "'", 'at': '\%#\S'})
+"au VimEnter * call lexima#add_rule({'char': "'", 'at': '\S\%#'})
+"au VimEnter * call lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
 
 " >>
 ">>
 
 "Plugin Group: Misc "<<
-Plug 'Yggdroot/indentLine' "<<
+"Plug 'Yggdroot/indentLine' "<<
 let g:indentLine_setColors=0
 let g:indentLine_fileType=['c', 'cpp', 'python', 'r']
 let g:indentLine_char = '⸽'
@@ -365,7 +353,7 @@ set hidden
 set nobackup
 set nowritebackup
 set undofile
-set backspace=2
+set backspace=indent,eol,start
 
 function! <SID>show_doc()
     if (index(['vim','help'], &filetype) >= 0)
