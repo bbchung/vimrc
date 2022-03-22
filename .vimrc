@@ -270,10 +270,6 @@ let g:indentLine_fileType=['c', 'cpp', 'python', 'r']
 let g:indentLine_char = '⸽'
 ">>
 Plug 'skywind3000/asyncrun.vim'
-Plug 'vim-scripts/a.vim' "<<
-let g:alternateExtensions_h = 'cpp,c'
-let g:alternateSearchPath = 'reg:/include/src/g/,reg:/src/include/g/'
-let g:alternateRelativeFiles = 1
 ">>
 "Plug 'ianding1/leetcode.vim' "<<
 let g:leetcode_browser='firefox'
