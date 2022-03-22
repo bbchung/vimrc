@@ -35,8 +35,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-"nmap <silent> gr :cexpr[] <BAR> call CocAction('jumpReferences') <CR>
+nmap <silent> gr :cexpr[] <CR> <Plug>(coc-references)
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>k <Plug>(coc-format)
@@ -46,6 +45,7 @@ let g:coc_enable_locationlist = 0
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! A CocCommand clangd.switchSourceHeader
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -77,7 +77,6 @@ let g:jellybeans_use_term_italics = 0
 let g:jellybeans_use_gui_italics = 0
 ">>
 Plug 'romainl/Apprentice'
-Plug 'dracula/vim'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
 "let g:codedark_conservative = 0
