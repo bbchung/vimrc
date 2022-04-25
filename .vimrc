@@ -9,8 +9,6 @@ endif
 
 packadd termdebug
 let g:termdebug_wide = 1
-au User TermdebugStartPre silent CocDisable
-au User TermdebugStopPost silent CocEnable
 
 call plug#begin(s:home.'/plugged') "<<
 
@@ -64,6 +62,8 @@ imap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scr
 imap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+au User TermdebugStartPre silent CocDisable
+au User TermdebugStopPost silent CocEnable
 ">>
 ">>
 
@@ -247,7 +247,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
-let g:delimitMate_smart_matchpairs = '^\%(\S\)'
+let g:delimitMate_smart_matchpairs = '^\%(\w\|\!\)'
 " >>
 "Plug 'cohama/lexima.vim' "<<
 "au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
@@ -383,7 +383,6 @@ map <F4> :qa!<CR>
 nmap <F5> :bp<CR>
 nmap <F6> :bn<CR>
 nmap Q <Nop>
-tmap <Esc> <C-W>N
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
@@ -392,10 +391,9 @@ au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp,python setlocal formatexpr=CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
-au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+"au InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+"au InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
 
-"let g:terminal_ansi_colors = ['#282C34', '#E06C75', '#98C379', '#E5C07B', '#61AFEF', '#C678DD', '#56B6C2', '#ABB2BF', '#3E4452', '#BE5046', '#98C379', '#D19A66', '#61AFEF', '#C678DD', '#56B6C2', '#5C6370']
 set background=dark
 if &diff
     set noro
