@@ -15,16 +15,16 @@ call plug#begin(s:home.'/plugged') "<<
 "Plugin Group: LSP "<<
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} "<<
 let g:coc_global_extensions = [
-            \'coc-clang-format-style-options', 
-            \'coc-clangd', 
-            \'coc-cmake', 
-            \'coc-json', 
-            \'coc-lists', 
-            \'coc-pyright', 
+            \'coc-clang-format-style-options',
+            \'coc-clangd',
+            \'coc-cmake',
+            \'coc-json',
+            \'coc-lists',
+            \'coc-pyright',
             \'coc-r-lsp',
-            \'coc-sh', 
-            \'coc-tabnine', 
-            \'coc-vimlsp', 
+            \'coc-sh',
+            \'coc-tabnine',
+            \'coc-vimlsp',
             \'coc-yaml',
             \'coc-snippets'
             \]
@@ -105,7 +105,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 ">>
 
 "Plugin Group: StatusLine "<<
-Plug 'itchyny/lightline.vim' "<<
+"Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -202,14 +202,15 @@ let g:lightline =
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 ">>
-"Plug 'vim-airline/vim-airline' "<<
+Plug 'vim-airline/vim-airline' "<<
+let g:airline_experimental = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#csv#enabled = 0
+let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#csv#column_display = 'Name'
-let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#scrollbar#enabled = 0
+"let g:airline_section_c_only_filename = 1
 ">>
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 ">>
 
 "Plugin Group: Search "<<
@@ -278,6 +279,7 @@ Plug 'mhinz/vim-startify' "<<
 let g:startify_session_persistence=1
 let g:startify_change_to_dir=0
 let g:startify_fortune_use_unicode = 1
+let g:startify_relative_path = 1
 autocmd User Startified setlocal cursorline
 ">>
 Plug 'tpope/vim-fugitive'
