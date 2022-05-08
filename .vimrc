@@ -64,6 +64,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
+au User CocStatusChange,CocDiagnosticChange call lightline#update()
 ">>
 ">>
 
@@ -105,7 +106,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 ">>
 
 "Plugin Group: StatusLine "<<
-"Plug 'itchyny/lightline.vim' "<<
+Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -123,61 +124,26 @@ let g:lightline =
 \    "colorscheme":"everforest",
 \    "active":{
 \       "left":[
-\          [
-\             "mode",
-\             "paste"
-\          ],
-\          [
-\             "readonly",
-\             "relativepath",
-\             "modified"
-\          ],
-\          [
-\			  "gitbranch"
-\          ]
+\          ["mode", "paste"],
+\          ["readonly", "relativepath", "modified"],
+\          ["gitbranch"]
 \       ],
 \       "right":[
-\          [
-\             "lineinfo"
-\          ],
-\          [
-\             "percent"
-\          ],
-\          [
-\             "cocstatus",
-\             "fileformat",
-\             "fileencoding",
-\             "filetype"
-\          ]
+\          ["lineinfo"],
+\          ["percent"],
+\          ["cocstatus", "fileformat", "fileencoding", "filetype"]
 \       ]
 \    },
 \    "inactive":{
 \       "left":[
-\          [
-\             "mode",
-\             "paste"
-\          ],
-\          [
-\             "readonly",
-\             "relativepath",
-\             "modified"
-\          ],
-\          [
-\			  "gitbranch"
-\          ]
+\          ["mode", "paste"],
+\          ["readonly", "relativepath", "modified"],
+\          ["gitbranch"]
 \       ],
 \       "right":[
-\          [
-\             "lineinfo"
-\          ],
-\          [
-\             "percent"
-\          ],
-\          [
-\             "fileformat",
-\             "fileencoding",
-\             "filetype"
-\          ]
+\          ["lineinfo"],
+\          ["percent"],
+\          ["cocstatus", "fileformat", "fileencoding", "filetype"]
 \       ]
 \    },
 \    "component":{
@@ -199,18 +165,15 @@ let g:lightline =
 \    }
 \ }
 
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
 ">>
-Plug 'vim-airline/vim-airline' "<<
+"Plug 'vim-airline/vim-airline' "<<
 let g:airline_experimental = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#scrollbar#enabled = 0
-"let g:airline_section_c_only_filename = 1
 ">>
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 ">>
 
 "Plugin Group: Search "<<
@@ -378,8 +341,8 @@ vmap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-map <C-c> <Esc>
-imap <C-c> <Esc>
+"map <C-c> <Esc>
+"imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 nmap <F5> :bp<CR>
