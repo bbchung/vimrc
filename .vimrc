@@ -344,6 +344,7 @@ vmap <silent> # :<C-U>
 "imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
+tmap <F4> <C-W>N:qa!<CR>
 nmap <F5> :bp<CR>
 nmap <F6> :bn<CR>
 nmap Q <Nop>
