@@ -107,6 +107,8 @@ Plug 'arcticicestudio/nord-vim' "<<
 ">>
 
 "Plugin Group: StatusLine "<<
+Plug 'itchyny/vim-gitbranch' "<<
+" >>
 Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
@@ -152,7 +154,7 @@ let g:lightline =
 \       "readonly":"%{&readonly?\"🔒\":\"\"}"
 \    },
 \    "component_function":{
-\       "gitbranch":"LightlineFugitive",
+\       "gitbranch":"gitbranch#name",
 \       "cocstatus":"coc#status",
 \       "relativepath":"RelativePath"
 \    },
@@ -371,6 +373,6 @@ else
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
 endif
 colorscheme everforest
-hi link CocHighlightText MatchParen
+"hi link CocHighlightText MatchParen
 
 " vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
