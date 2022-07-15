@@ -94,6 +94,7 @@ let g:everforest_enable_italic = 0
 let g:everforest_disable_italic_comment = 1
 let g:everforest_sign_column_background = 'none'
 let g:everforest_diagnostic_text_highlight = 1
+let g:everforest_better_performance = 1
 
 ">>
 Plug 'sainnhe/gruvbox-material' "<<
@@ -115,6 +116,7 @@ function! RelativePath()
     return expand('%:~:.')
 endf
 function! LightlineFugitive()
+    return fugitive#statusline()
     if exists('*FugitiveHead')
         let branch = FugitiveHead()
         return branch !=# '' ? ''.branch : ''
@@ -305,8 +307,9 @@ set pumheight=12
 set previewheight=4
 set foldlevelstart=20
 set tabpagemax=100
-set wildmode=longest,full
+"set wildmode=longest,full
 set wildmenu
+set wildoptions=pum,fuzzy
 set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
@@ -344,8 +347,8 @@ vmap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-"map <C-c> <Esc>
-"imap <C-c> <Esc>
+map <C-c> <Esc>
+imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
