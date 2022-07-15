@@ -116,12 +116,8 @@ function! RelativePath()
     return expand('%:~:.')
 endf
 function! LightlineFugitive()
-    return fugitive#statusline()
-    if exists('*FugitiveHead')
-        let branch = FugitiveHead()
+        let branch = gitbranch#name()
         return branch !=# '' ? ''.branch : ''
-    endif
-    return ''
 endf
 
 let g:lightline =
@@ -156,7 +152,7 @@ let g:lightline =
 \       "readonly":"%{&readonly?\"🔒\":\"\"}"
 \    },
 \    "component_function":{
-\       "gitbranch":"gitbranch#name",
+\       "gitbranch":"LightlineFugitive",
 \       "cocstatus":"coc#status",
 \       "relativepath":"RelativePath"
 \    },
@@ -307,7 +303,7 @@ set pumheight=12
 set previewheight=4
 set foldlevelstart=20
 set tabpagemax=100
-"set wildmode=longest,full
+set wildmode=longest,full
 set wildmenu
 set wildoptions=pum,fuzzy
 set grepprg=grep\ -nH\ $*
