@@ -353,6 +353,7 @@ nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
+au BufEnter * cd .
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
