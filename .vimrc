@@ -65,7 +65,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-au User CocStatusChange,CocDiagnosticChange call lightline#update()
+"au User CocStatusChange,CocDiagnosticChange call lightline#update()
 ">>
 ">>
 
@@ -110,7 +110,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 "Plugin Group: StatusLine "<<
 Plug 'itchyny/vim-gitbranch' "<<
 " >>
-Plug 'itchyny/lightline.vim' "<<
+"Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -167,14 +167,14 @@ let g:lightline =
 \ }
 
 ">>
-"Plug 'vim-airline/vim-airline' "<<
+Plug 'vim-airline/vim-airline' "<<
 let g:airline_experimental = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#scrollbar#enabled = 0
 ">>
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 ">>
 
 "Plugin Group: Search "<<
@@ -301,8 +301,7 @@ set ignorecase
 set smartcase
 set pumheight=12
 set previewheight=4
-set foldlevelstart=20
-set tabpagemax=100
+set foldlevelstart=99
 set wildmode=longest,full
 set wildmenu
 set wildoptions=pum,fuzzy
