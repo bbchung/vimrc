@@ -342,8 +342,8 @@ vmap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-map <C-c> <Esc>
-imap <C-c> <Esc>
+"map <C-c> <Esc>
+"imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
@@ -353,7 +353,7 @@ nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
-au BufEnter * cd .
+au BufRead * cd .
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
@@ -369,7 +369,7 @@ if &diff
     set nocursorline
     let g:coc_start_at_startup=0
 else
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
+    au BufWinEnter * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
 endif
 colorscheme everforest
 "hi link CocHighlightText MatchParen
