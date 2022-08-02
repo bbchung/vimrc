@@ -251,6 +251,7 @@ autocmd User Startified setlocal cursorline
 Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim' "<<
 let g:no_csv_maps=1
+let g:csv_no_progress = 1
 ">>
 "Plug 'mechatroner/rainbow_csv'
 Plug 'bbchung/gasynctags' "<<
