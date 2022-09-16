@@ -1,50 +1,45 @@
 {
-	"languageserver": {
-		"bash": {
-			"command": "bash-language-server",
-			"args": [
-				"start"
-			],
-			"filetypes": [
-				"sh"
-			],
-			"ignoredRootPaths": [
-				"~"
-			]
-		}
-	},
-	"clangd.arguments": [
-		"--background-index",
-		"--pch-storage=memory",
-		"--cross-file-rename"
-	],
-	"clangd.semanticHighlighting": false,
-    "coc.preferences.semanticTokensHighlights": false,
-	"clangd.fallbackFlags": [
-		"-std=c++2a"
-	],
-	"coc.preferences.colorSupport": true,
     "coc.preferences.promptInput": true,
-	"diagnostic.hintSign": ">",
-	"diagnostic.warningSign": "‽",
-	"diagnostic.errorSign": "✘",
-	"snippets.snipmate.enable": false,
-	"yaml.format.enable": true,
-    "python.analysis.typeCheckingMode": "off",
-	"python.formatting.autopep8Args": [
-		"-a"
-	],
-	"coc.preferences.useQuickfixForLocations": true,
-	"leetcode.language": "cpp",
-	"snippets.extends": {
-		"cpp": [
-			"c"
-		],
-		"javascriptreact": [
-			"javascript"
-		],
-		"typescript": [
-			"javascript"
-		]
-	}
+    "coc.preferences.useQuickfixForLocations": true,
+    "inlayHint.enable": true,
+    "semanticTokens.enable": true,
+    "codeLens.enable": true,
+    "outline.showLineNumber": false,
+    "workspace.openResourceCommand": "",
+    "colors.filetypes": [
+        "*"
+    ],
+    "diagnostic.hintSign": ">",
+    "diagnostic.warningSign": "‽",
+    "diagnostic.errorSign": "✘",
+    "suggest.noselect": false,
+    "suggest.enablePreselect": true,
+    "suggest.virtualText": true,
+    "snippets.snipmate.enable": true,
+    "snippets.extends": {
+        "cpp": [
+            "c"
+        ],
+        "javascriptreact": [
+            "javascript"
+        ],
+        "typescript": [
+            "javascript"
+        ]
+    },
+    "yaml.format.enable": true,
+    "clangd.arguments": [
+        "--background-index",
+        "--pch-storage=memory"
+    ],
+    "clangd.fallbackFlags": [
+        "-std=c++2a"
+    ],
+    "clangd.inlayHints.enable": true,
+    "pyright.inlayHints.enable": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+    "python.formatting.autopep8Args": [
+        "-a"
+    ]
 }

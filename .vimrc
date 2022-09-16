@@ -56,7 +56,7 @@ inoremap <silent><expr> <TAB>
 \ <SID>check_back_space() ? "\<Tab>" :
 \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-"inoremap <expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nmap <silent> <C-s> <Plug>(coc-range-select)
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -83,7 +83,7 @@ let g:jellybeans_use_gui_italics = 0
 Plug 'romainl/Apprentice'
 "Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
-"let g:codedark_conservative = 0
+"let g:codedark_conservative = 1
 "Plug 'twerth/ir_black'
 Plug 'morhetz/gruvbox' "<<
 let g:gruvbox_contrast_dark='hard'
@@ -172,7 +172,7 @@ let g:lightline =
 Plug 'vim-airline/vim-airline' "<<
 let g:airline_experimental = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#csv#enabled = 1
+let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#scrollbar#enabled = 0
 ">>
@@ -320,12 +320,14 @@ set undofile
 set backspace=indent,eol,start
 
 function! <SID>show_doc()
-    if (index(['vim','help'], &filetype) >= 0)
-        exe 'h '.expand('<cword>')
-    elseif (index(['csv'], &filetype) >= 0)
+    if (index(['csv'], &filetype) >= 0)
         WhatColumn!
     else
-        call CocAction('doHover')
+        if CocAction('hasProvider', 'hover')
+            call CocActionAsync('doHover')
+        else
+            call feedkeys('K', 'in')
+        endif
     endif
 endf
 
@@ -345,8 +347,8 @@ vmap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-"map <C-c> <Esc>
-"imap <C-c> <Esc>
+map <C-c> <Esc>
+imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
@@ -356,7 +358,7 @@ nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>show_doc()<CR>
 
-au BufRead * cd .
+"au BufRead * cd .
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
