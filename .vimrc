@@ -56,7 +56,7 @@ inoremap <silent><expr> <TAB>
 \ <SID>check_back_space() ? "\<Tab>" :
 \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nmap <silent> <C-s> <Plug>(coc-range-select)
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -67,7 +67,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-"au User CocStatusChange,CocDiagnosticChange call lightline#update()
+au User CocStatusChange call lightline#update()
 ">>
 ">>
 
@@ -112,7 +112,7 @@ Plug 'arcticicestudio/nord-vim' "<<
 "Plugin Group: StatusLine "<<
 Plug 'itchyny/vim-gitbranch' "<<
 " >>
-"Plug 'itchyny/lightline.vim' "<<
+Plug 'itchyny/lightline.vim' "<<
 
 function! RelativePath()
     return expand('%:~:.')
@@ -151,12 +151,12 @@ let g:lightline =
 \    },
 \    "component":{
 \       "paste":"%{&paste?\"📋\":\"\"}",
-\       "readonly":"%{&readonly?\"🔒\":\"\"}"
+\       "readonly":"%{&readonly?\"🔒\":\"\"}",
+\       "relativepath":"%{expand(\"%:~:.\")}"
 \    },
 \    "component_function":{
 \       "gitbranch":"LightlineFugitive",
-\       "cocstatus":"coc#status",
-\       "relativepath":"RelativePath"
+\       "cocstatus":"coc#status"
 \    },
 \    "separator":{
 \       "left":"",
@@ -169,14 +169,15 @@ let g:lightline =
 \ }
 
 ">>
-Plug 'vim-airline/vim-airline' "<<
+"Plug 'vim-airline/vim-airline' "<<
 let g:airline_experimental = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#csv#enabled = 0
 let g:airline#extensions#csv#column_display = 'Name'
 let g:airline#extensions#scrollbar#enabled = 0
+let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
 ">>
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 ">>
 
 "Plugin Group: Search "<<
