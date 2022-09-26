@@ -134,7 +134,8 @@ let g:lightline =
 \       "right":[
 \          ["filetype"],
 \          ["fileformat", "fileencoding"],
-\          ["cocstatus", "percent", "lineinfo"]
+\          ["percent", "lineinfo"],
+\          ["cocstatus"]
 \       ]
 \    },
 \    "inactive":{
@@ -146,7 +147,8 @@ let g:lightline =
 \       "right":[
 \          ["filetype"],
 \          ["fileformat", "fileencoding"],
-\          ["cocstatus", "percent", "lineinfo"]
+\          ["percent", "lineinfo"],
+\          ["cocstatus"]
 \       ]
 \    },
 \    "component":{
