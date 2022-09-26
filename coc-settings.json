@@ -6,14 +6,11 @@
     "codeLens.enable": true,
     "outline.showLineNumber": false,
     "workspace.openResourceCommand": "",
-    "colors.filetypes": [
-        "*"
-    ],
     "diagnostic.hintSign": ">",
     "diagnostic.warningSign": "‽",
     "diagnostic.errorSign": "✘",
-    "suggest.noselect": false,
-    "suggest.enablePreselect": true,
+    "suggest.noselect": true,
+    "suggest.enablePreselect": false,
     "suggest.virtualText": true,
     "snippets.snipmate.enable": true,
     "snippets.extends": {
