@@ -132,9 +132,9 @@ let g:lightline =
 \          ["gitbranch"]
 \       ],
 \       "right":[
-\          ["lineinfo"],
-\          ["percent"],
-\          ["cocstatus", "fileformat", "fileencoding", "filetype"]
+\          ["filetype"],
+\          ["fileformat", "fileencoding"],
+\          ["cocstatus", "percent", "lineinfo"]
 \       ]
 \    },
 \    "inactive":{
@@ -144,9 +144,9 @@ let g:lightline =
 \          ["gitbranch"]
 \       ],
 \       "right":[
-\          ["lineinfo"],
-\          ["percent"],
-\          ["cocstatus", "fileformat", "fileencoding", "filetype"]
+\          ["filetype"],
+\          ["fileformat", "fileencoding"],
+\          ["cocstatus", "percent", "lineinfo"]
 \       ]
 \    },
 \    "component":{
@@ -163,8 +163,8 @@ let g:lightline =
 \       "right":""
 \    },
 \    "subseparator":{
-\       "left":"",
-\       "right":""
+\       "left":"|",
+\       "right":"|"
 \    }
 \ }
 
