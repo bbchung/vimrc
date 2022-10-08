@@ -185,7 +185,9 @@ let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-inden
 "Plugin Group: Search "<<
 "Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } "<<
 "let g:clap_open_preview = 'never'
-"let g:clap_popup_input_delay = 0
+"let g:clap_popup_input_delay = 100
+"let g:clap_provider_grep_delay = 100
+"let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case'
 
 "nmap <silent> <Leader>f :Clap files <CR>
 "nmap <silent> <Leader>b :Clap buffers <CR>
@@ -200,7 +202,6 @@ let g:Lf_WindowHeight = 0.2
 let g:Lf_RecurseSubmodules = 1
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_GtagsAutoUpdate = 0
-let g:Lf_RootMarkers = ['compile_commands.json']
 let g:Lf_DefaultExternalTool = 'rg'
 let g:Lf_UseVersionControlTool = 1
 let g:Lf_DefaultMode='NameOnly'
