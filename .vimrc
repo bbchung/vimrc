@@ -183,10 +183,18 @@ let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-inden
 ">>
 
 "Plugin Group: Search "<<
+"Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } "<<
+"let g:clap_open_preview = 'never'
+"let g:clap_popup_input_delay = 0
+
+"nmap <silent> <Leader>f :Clap files <CR>
+"nmap <silent> <Leader>b :Clap buffers <CR>
+">>
+
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
 let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
-            \ 'file': ['*o']
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
             \}
 let g:Lf_WindowHeight = 0.2
 let g:Lf_RecurseSubmodules = 1
