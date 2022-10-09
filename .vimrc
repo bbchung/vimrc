@@ -193,7 +193,7 @@ let g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-inden
 "nmap <silent> <Leader>b :Clap buffers <CR>
 ">>
 
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } "<<
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg','build','third_party','.clangd'],
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
@@ -213,11 +213,12 @@ let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_ShowDevIcons = 0
 let g:Lf_GtagsStoreInProject = 1
 let g:Lf_WorkingDirectoryMode = 'a'
-"nmap <silent> <Leader>s :silent! exe "Leaderf! gtags --stayOpen --bottom -r ".expand('<cword>')<CR>
-"vmap <silent> <Leader>s :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -r ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
-"nmap <silent> <Leader>g :silent! exe "Leaderf! gtags --stayOpen --bottom -g ".expand('<cword>')<CR>
-"vmap <silent> <Leader>g :silent! <C-U> exe "Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR>
-"command! -nargs=1 S silent! exe "Leaderf! gtags --stayOpen --bottom -g "<f-args>
+"let g:Lf_DisableStl = 1
+"nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
+"nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+"nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
+"vmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR><CR>
+"command! -nargs=1 S Leaderf! gtags --stayOpen --bottom -g <f-args>
 ">>
 ">>
 
