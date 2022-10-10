@@ -1,7 +1,7 @@
 {
     "coc.preferences.promptInput": true,
     "coc.preferences.useQuickfixForLocations": true,
-    "inlayHint.enable": true,
+    "inlayHint.enable": false,
     "semanticTokens.enable": true,
     "codeLens.enable": true,
     "outline.showLineNumber": false,
@@ -35,6 +35,7 @@
     "clangd.inlayHints.enable": true,
     "pyright.inlayHints.enable": true,
     "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
     "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
     "python.formatting.autopep8Args": [
         "-a"
