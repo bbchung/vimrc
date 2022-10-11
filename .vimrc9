@@ -219,7 +219,6 @@ g:Lf_WorkingDirectoryMode = 'a'
 #vmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR><CR>
 #command! -nargs=1 S Leaderf! gtags --stayOpen --bottom -g <f-args>
 #>>
-#>>
 
 #Plugin Group: Edit #<<
 Plug 'scrooloose/nerdcommenter'
@@ -243,7 +242,6 @@ g:indentLine_fileType = ['c', 'cpp', 'python', 'r']
 g:indentLine_char = '⸽'
 #>>
 Plug 'skywind3000/asyncrun.vim'
-#>>
 #Plug 'ianding1/leetcode.vim' #<<
 g:leetcode_browser = 'firefox'
 #>>
