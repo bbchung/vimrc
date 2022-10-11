@@ -1,0 +1,386 @@
+vim9script
+
+var home = $HOME .. '/.vim/'
+&undodir = $HOME .. '/.vim/undo'
+mkdir(&undodir, 'p')
+var vim_plug_dir = expand(home .. '/autoload')
+if !filereadable(vim_plug_dir .. '/plug.vim')
+    exe '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.. vim_plug_dir
+    var install_plug = 1
+endif
+
+packadd termdebug
+g:termdebug_wide = 1
+
+plug#begin(home .. '/plugged') #<<
+
+#Plugin Group: LSP #<<
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
+g:coc_global_extensions = [
+    'coc-clang-format-style-options',
+    'coc-clangd',
+    'coc-cmake',
+    'coc-json',
+    'coc-lists',
+    'coc-pyright',
+    'coc-r-lsp',
+    'coc-sh',
+    'coc-tabnine',
+    #'coc-vimlsp',
+    'coc-yaml',
+    'coc-snippets'
+]
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr :cexpr[] <CR> <Plug>(coc-references)
+nmap <Leader>x <Plug>(coc-fix-current)
+nmap <silent> <Leader>r <Plug>(coc-rename)
+nmap <silent> <Leader>k <Plug>(coc-format)
+vmap <silent> <leader>k <Plug>(coc-format-selected)
+map <silent> <Leader>a :CocAction<CR>
+g:coc_enable_locationlist = 0
+au User CocLocationsChange CocList --normal location
+au CursorHold * call CocActionAsync('highlight')
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! A CocCommand clangd.switchSourceHeader
+
+def CheckBackspace()
+    col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+enddef
+
+# Insert <tab> when previous text is space, refresh completion if not.
+inoremap <silent><expr> <TAB>
+            \ coc#pum#visible() ? coc#pum#next(1):
+            \ <SID>CheckBackspace() ? "\<Tab>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+#inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+nmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+nmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+imap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+imap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+au User TermdebugStartPre silent CocDisable
+au User TermdebugStopPost silent CocEnable
+au User CocStatusChange lightline#update()
+#>>
+#>>
+
+#Plugin Group: Theme #<<
+Plug 'ayu-theme/ayu-vim' #<<
+g:ayucolor = 'dark'
+#>>
+Plug 'joshdick/onedark.vim'
+Plug 'nanotech/jellybeans.vim' #<<
+g:jellybeans_use_term_italics = 0
+g:jellybeans_use_gui_italics = 0
+#>>
+Plug 'romainl/Apprentice'
+#Plug 'dunstontc/vim-vscode-theme'
+Plug 'tomasiser/vim-code-dark'
+#g:codedark_conservative = 1
+#Plug 'twerth/ir_black'
+Plug 'morhetz/gruvbox' #<<
+g:gruvbox_contrast_dark = 'hard'
+g:gruvbox_italic = 0
+g:gruvbox_sign_column = 'bg0'
+#>>
+Plug 'sainnhe/everforest' #<<
+g:everforest_background = 'hard'
+g:everforest_enable_italic = 0
+g:everforest_disable_italic_comment = 1
+g:everforest_sign_column_background = 'none'
+g:everforest_diagnostic_text_highlight = 1
+g:everforest_better_performance = 1
+
+#>>
+Plug 'sainnhe/gruvbox-material' #<<
+g:gruvbox_material_background = 'medium'
+g:gruvbox_material_enable_italic = 0
+g:gruvbox_material_disable_italic_comment = 1
+g:gruvbox_material_sign_column_background = 'none'
+#>>
+Plug 'arcticicestudio/nord-vim' #<<
+#>>
+#>>
+
+#Plugin Group: StatusLine #<<
+Plug 'itchyny/vim-gitbranch' #<<
+# >>
+Plug 'itchyny/lightline.vim' #<<
+
+def LightlineFugitive()
+    branch = gitbranch#name()
+    return branch !=# '' ? ''.branch : ''
+enddef
+
+g:lightline =
+    {
+        colorscheme: "everforest",
+        active: {
+            left: [
+                ["mode", "paste"],
+                ["readonly", "relativepath", "modified"],
+                ["gitbranch"]
+            ],
+            right: [
+                ["filetype"],
+                ["fileformat", "fileencoding"],
+                ["percent", "lineinfo"],
+                ["cocstatus"]
+            ]
+        },
+        inactive: {
+            left: [
+                ["mode", "paste"],
+                ["readonly", "relativepath", "modified"],
+                ["gitbranch"]
+            ],
+            right: [
+                ["filetype"],
+                ["fileformat", "fileencoding"],
+                ["percent", "lineinfo"],
+                ["cocstatus"]
+            ]
+        },
+        component: {
+            paste: "%{&paste?\"📋\":\"\"}",
+            readonly: "%{&readonly?\"🔒\":\"\"}",
+            relativepath: "%{expand(\"%:~:.\")}"
+        },
+        component_function: {
+            gitbranch: "LightlineFugitive",
+            cocstatus: "coc#status"
+        },
+        separator: {
+            left: "",
+            right: ""
+        },
+        subseparator: {
+            left: "|",
+            right: "|"
+        }
+    }
+
+#>>
+#Plug 'vim-airline/vim-airline' #<<
+g:airline_experimental = 1
+g:airline_powerline_fonts = 1
+g:airline#extensions#csv#enabled = 0
+g:airline#extensions#csv#column_display = 'Name'
+g:airline#extensions#scrollbar#enabled = 0
+g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
+#>>
+#Plug 'vim-airline/vim-airline-themes'
+#>>
+
+#Plugin Group: Search #<<
+#Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
+#g:clap_open_preview = 'never'
+#g:clap_popup_input_delay = 100
+#g:clap_provider_grep_delay = 100
+#g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case'
+
+#nmap <silent> <Leader>f :Clap files <CR>
+#nmap <silent> <Leader>b :Clap buffers <CR>
+#>>
+
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+g:Lf_WildIgnore = {
+    dir: ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd'],
+    file: ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
+}
+g:Lf_WindowHeight = 0.2
+g:Lf_RecurseSubmodules = 1
+g:Lf_GtagsAutoGenerate = 0
+g:Lf_GtagsAutoUpdate = 0
+g:Lf_DefaultExternalTool = 'rg'
+g:Lf_UseVersionControlTool = 1
+g:Lf_DefaultMode = 'NameOnly'
+g:Lf_WindowPosition = 'popup'
+g:Lf_PreviewInPopup = 1
+g:Lf_CursorBlink = 0
+g:Lf_PopupShowStatusline = 0
+g:Lf_StlSeparator = {'left': '', 'right': ''}
+g:Lf_ShowDevIcons = 0
+g:Lf_GtagsStoreInProject = 1
+g:Lf_WorkingDirectoryMode = 'a'
+#g:Lf_DisableStl = 1
+#nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
+#nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+#nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
+#vmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR><CR>
+#command! -nargs=1 S Leaderf! gtags --stayOpen --bottom -g <f-args>
+#>>
+#>>
+
+#Plugin Group: Edit #<<
+Plug 'scrooloose/nerdcommenter'
+Plug 'honza/vim-snippets'
+#Plug 'Raimondi/delimitMate' #<<
+g:delimitMate_expand_cr = 1
+g:delimitMate_smart_matchpairs = '^\%(\w\|\!\)'
+# >>
+Plug 'cohama/lexima.vim' #<<
+au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
+au VimEnter * lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
+au VimEnter * lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
+
+# >>
+#>>
+
+#Plugin Group: Misc #<<
+#Plug 'Yggdroot/indentLine' #<<
+g:indentLine_setColors = 0
+g:indentLine_fileType = ['c', 'cpp', 'python', 'r']
+g:indentLine_char = '⸽'
+#>>
+Plug 'skywind3000/asyncrun.vim'
+#>>
+#Plug 'ianding1/leetcode.vim' #<<
+g:leetcode_browser = 'firefox'
+#>>
+Plug 'mhinz/vim-startify' #<<
+g:startify_session_persistence = 1
+g:startify_change_to_dir = 0
+g:startify_fortune_use_unicode = 1
+g:startify_relative_path = 1
+autocmd User Startified setlocal cursorline
+#>>
+Plug 'tpope/vim-fugitive'
+Plug 'chrisbra/csv.vim' #<<
+g:no_csv_maps = 1
+g:csv_no_progress = 1
+#>>
+#Plug 'mechatroner/rainbow_csv'
+Plug 'bbchung/gasynctags' #<<
+g:gasynctags_auto_update = 1
+#>>
+
+#>>
+
+plug#end()
+
+if exists('install_plug')
+    PlugInstall
+endif
+
+#>>
+
+syntax on
+
+set nomore
+set vb t_vb=
+set guicursor=
+set signcolumn=number
+set cst
+set csprg=gtags-cscope
+set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
+set belloff=all
+set completeopt=menuone,noselect
+set diffopt+=vertical
+set termguicolors
+set shortmess-=S
+set shortmess+=c
+set title
+set cursorline
+set nowrap
+set mouse=a
+set mousemodel=popup_setpos
+set laststatus=2
+set number
+set expandtab
+set softtabstop=4
+set tabstop=4
+set shiftwidth=4
+set scrolloff=8
+set sidescrolloff=8
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+set pumheight=12
+set previewheight=4
+set foldlevelstart=99
+set wildmode=longest,full
+set wildmenu
+set wildoptions=pum,fuzzy
+set grepprg=grep\ -nH\ $*
+set encoding=utf-8
+set fileencodings=utf-8,big5,gb2312,utf16le
+set fileformats=unix,dos
+set updatetime=200
+set hidden
+set nobackup
+set nowritebackup
+set undofile
+set backspace=indent,eol,start
+
+def ShowDoc()
+    if (index(['csv'], &filetype) >= 0)
+        WhatColumn!
+    else
+        if CocAction('hasProvider', 'hover')
+            CocActionAsync('doHover')
+        else
+            feedkeys('K', 'in')
+        endif
+    endif
+enddef
+
+def CsvFormat(start: number, end: number)
+    execute start .. ',' .. end .. 'CSVArrangeColumn'
+enddef
+
+command! W silent exe "w !sudo > /dev/null tee %"
+vmap <silent> * :<C-U>
+            \old_reg=getreg('"')<Bar>old_regtype=getregtype('"')<CR>
+            \gvy/<C-R><C-R>=substitute(
+            \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:setreg('"', old_reg, old_regtype)<CR>
+vmap <silent> # :<C-U>
+            \old_reg=getreg('"')<Bar>old_regtype=getregtype('"')<CR>
+            \gvy?<C-R><C-R>=substitute(
+            \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+            \gV:setreg('"', old_reg, old_regtype)<CR>
+
+map <C-c> <Esc>
+imap <C-c> <Esc>
+nmap <F3> :bd!<CR>
+map <F4> :qa!<CR>
+tmap <F4> <C-W>N:qa!<CR>
+nmap <F5> :bp<CR>
+nmap <F6> :bn<CR>
+nmap Q <Nop>
+tmap <Esc><Esc> <C-W>N
+nmap <silent> K :ShowDoc()<CR>
+
+#au BufRead * cd .
+au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType gitcommit setlocal spell
+au FileType markdown setlocal textwidth=80
+au FileType c,cpp,python setlocal formatexpr=CocAction('formatSelected')
+au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
+#au InsertEnter * if !exists('w:last_fdm') | w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+#au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod=w:last_fdm | unw:last_fdm | endif
+
+set background=dark
+if &diff
+    set noro
+    syntax off
+    set nocursorline
+    g:coc_start_at_startup = 0
+else
+    au BufWinEnter * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
+endif
+colorscheme everforest
+#hi link CocHighlightText MatchParen
+
+# vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:

@@ -114,9 +114,6 @@ Plug 'itchyny/vim-gitbranch' "<<
 " >>
 Plug 'itchyny/lightline.vim' "<<
 
-function! RelativePath()
-    return expand('%:~:.')
-endf
 function! LightlineFugitive()
         let branch = gitbranch#name()
         return branch !=# '' ? ''.branch : ''
@@ -225,20 +222,14 @@ let g:Lf_WorkingDirectoryMode = 'a'
 "Plugin Group: Edit "<<
 Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
-Plug 'Raimondi/delimitMate' "<<
+"Plug 'Raimondi/delimitMate' "<<
 let g:delimitMate_expand_cr=1
 let g:delimitMate_smart_matchpairs = '^\%(\w\|\!\)'
 " >>
-"Plug 'cohama/lexima.vim' "<<
-"au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S'})
-"au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S'})
-"au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S'})
-"au VimEnter * call lexima#add_rule({'char': '"', 'at': '\%#\S'})
-"au VimEnter * call lexima#add_rule({'char': '"', 'at': '\S\%#'})
-"au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-"au VimEnter * call lexima#add_rule({'char': "'", 'at': '\%#\S'})
-"au VimEnter * call lexima#add_rule({'char': "'", 'at': '\S\%#'})
-"au VimEnter * call lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
+Plug 'cohama/lexima.vim' "<<
+au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
+au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
+au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
 
 " >>
 ">>
