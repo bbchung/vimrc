@@ -321,17 +321,17 @@ set nowritebackup
 set undofile
 set backspace=indent,eol,start
 
-def ShowDoc()
+fun ShowDoc()
     if (index(['csv'], &filetype) >= 0)
         WhatColumn!
     else
         if CocAction('hasProvider', 'hover')
-            CocActionAsync('doHover')
+            call CocActionAsync('doHover')
         else
             feedkeys('K', 'in')
         endif
     endif
-enddef
+endf
 
 def CsvFormat(start: number, end: number)
     execute start .. ',' .. end .. 'CSVArrangeColumn'
@@ -339,15 +339,15 @@ enddef
 
 command! W silent exe "w !sudo > /dev/null tee %"
 vmap <silent> * :<C-U>
-            \old_reg=getreg('"')<Bar>old_regtype=getregtype('"')<CR>
-            \gvy/<C-R><C-R>=substitute(
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
             \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-            \gV:setreg('"', old_reg, old_regtype)<CR>
+            \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 vmap <silent> # :<C-U>
-            \old_reg=getreg('"')<Bar>old_regtype=getregtype('"')<CR>
-            \gvy?<C-R><C-R>=substitute(
+            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+            \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-            \gV:setreg('"', old_reg, old_regtype)<CR>
+            \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
 map <C-c> <Esc>
 imap <C-c> <Esc>
@@ -358,7 +358,7 @@ nmap <F5> :bp<CR>
 nmap <F6> :bn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
-nmap <silent> K :ShowDoc()<CR>
+nmap <silent> K :call <SID>ShowDoc()<CR>
 
 #au BufRead * cd .
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
