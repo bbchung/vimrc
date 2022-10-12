@@ -326,6 +326,8 @@ set backspace=indent,eol,start
 function! <SID>show_doc()
     if (index(['csv'], &filetype) >= 0)
         WhatColumn!
+    elseif (index(['vim','help'], &filetype) >= 0)
+        exe 'h '.expand('<cword>')
     else
         if CocAction('hasProvider', 'hover')
             call CocActionAsync('doHover')
