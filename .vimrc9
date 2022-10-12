@@ -229,8 +229,12 @@ g:delimitMate_smart_matchpairs = '^\%(\w\|\!\)'
 # >>
 Plug 'cohama/lexima.vim' #<<
 au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
-au VimEnter * lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
-au VimEnter * lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
+    | lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
+    | lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
+    | lexima#add_rule({'char': '"', 'at': '\%#\S'})
+    | lexima#add_rule({'char': '"', 'at': '\S\%#'})
+    | lexima#add_rule({'char': "'", 'at': '\%#\S'})
+    | lexima#add_rule({'char': "'", 'at': '\S\%#'})
 
 # >>
 #>>
@@ -338,12 +342,12 @@ def CsvFormat(start: number, end: number)
 enddef
 
 command! W silent exe "w !sudo > /dev/null tee %"
-vmap <silent> * :<C-U>
+vnoremap <silent> * :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
             \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
             \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-vmap <silent> # :<C-U>
+vnoremap <silent> # :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
             \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
