@@ -38,8 +38,6 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr :cexpr[] <CR> <Plug>(coc-references)
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
-nmap <silent> <Leader>k <Plug>(coc-format)
-vmap <silent> <leader>k <Plug>(coc-format-selected)
 map <silent> <Leader>a :CocAction<CR>
 g:coc_enable_locationlist = 0
 au User CocLocationsChange CocList --normal location
@@ -339,10 +337,6 @@ fun ShowDoc()
     endif
 endf
 
-def CsvFormat(start: number, end: number)
-    execute start .. ',' .. end .. 'CSVArrangeColumn'
-enddef
-
 command! W silent exe "w !sudo > /dev/null tee %"
 vnoremap <silent> * :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
@@ -370,8 +364,9 @@ nmap <silent> K :call <SID>ShowDoc()<CR>
 au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
-au FileType c,cpp,python setlocal formatexpr=CocAction('formatSelected')
-au FileType csv setlocal formatexpr=CsvFormat(v:lnum,v:lnum+v:count-1)
+au FileType c,cpp,python nmap <silent> <Leader>k <Plug>(coc-format)<CR>
+au FileType c,cpp,python vmap <silent> <leader>k <Plug>(coc-format-selected)<CR>
+au FileType csv vmap <silent> <Leader>k :CSVArrangeColumn<CR>
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod=w:last_fdm | unw:last_fdm | endif
 
