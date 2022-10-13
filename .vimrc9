@@ -368,6 +368,7 @@ au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType csv vmap <silent> <Leader>k :CSVArrangeColumn<CR>
+au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod=w:last_fdm | unw:last_fdm | endif
 
