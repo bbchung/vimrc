@@ -26,7 +26,7 @@ g:coc_global_extensions = [
     'coc-r-lsp',
     'coc-sh',
     'coc-tabnine',
-    #'coc-vimlsp',
+    'coc-vimlsp',
     'coc-yaml',
     'coc-snippets'
 ]
@@ -357,7 +357,7 @@ nmap <F5> :bp<CR>
 nmap <F6> :bn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
-nmap <silent> K :<SID>ShowDoc()<CR>
+nmap <silent> K :call <SID>ShowDoc()<CR>
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 
