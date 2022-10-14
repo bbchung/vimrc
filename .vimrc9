@@ -5,7 +5,7 @@ var home = $HOME .. '/.vim/'
 mkdir(&undodir, 'p')
 var vim_plug_dir = expand(home .. '/autoload')
 if !filereadable(vim_plug_dir .. '/plug.vim')
-    exe '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P '.. vim_plug_dir
+    exe '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P ' .. vim_plug_dir
     var install_plug = 1
 endif
 
@@ -30,6 +30,7 @@ g:coc_global_extensions = [
     'coc-yaml',
     'coc-snippets'
 ]
+g:coc_enable_locationlist = 0
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
@@ -38,11 +39,9 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr :cexpr[] <CR> <Plug>(coc-references)
 nmap <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
-map <silent> <Leader>a :CocAction<CR>
-g:coc_enable_locationlist = 0
+map <silent> <Leader>a <Plug>(coc-codeaction-cursor)
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
 command! A CocCommand clangd.switchSourceHeader
 
 def CheckBackspace(): bool
@@ -58,7 +57,7 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 #inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-nmap <silent> <C-s> <Plug>(coc-range-select)
+nmap <silent> <Leader>v <Plug>(coc-range-select)
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 imap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
@@ -358,7 +357,7 @@ nmap <F5> :bp<CR>
 nmap <F6> :bn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
-nmap <silent> K :call <SID>ShowDoc()<CR>
+nmap <silent> K :<SID>ShowDoc()<CR>
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 
