@@ -1,6 +1,7 @@
 {
     "coc.preferences.promptInput": true,
     "coc.preferences.useQuickfixForLocations": true,
+    "coc.preferences.rootPatterns": ["compile_commands.json", ".git",".hg",".projections.json"],
     "inlayHint.enable": false,
     "semanticTokens.enable": true,
     "codeLens.enable": true,
@@ -32,8 +33,6 @@
     "clangd.fallbackFlags": [
         "-std=c++2a"
     ],
-    "clangd.inlayHints.enable": true,
-    "pyright.inlayHints.enable": true,
     "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": true,
     "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
