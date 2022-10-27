@@ -4,8 +4,9 @@ var home = $HOME .. '/.vim/'
 &undodir = $HOME .. '/.vim/undo'
 mkdir(&undodir, 'p')
 var vim_plug_dir = expand(home .. '/autoload')
-if !filereadable(vim_plug_dir .. '/plug.vim')
-    exe '!wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -P ' .. vim_plug_dir
+var vim_plug = home .. '/autoload/plug.vim'
+if !filereadable(vim_plug)
+    system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
     var install_plug = 1
 endif
 
@@ -348,8 +349,8 @@ vnoremap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
-map <C-c> <Esc>
-imap <C-c> <Esc>
+#map <C-c> <Esc>
+#imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
