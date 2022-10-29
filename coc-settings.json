@@ -1,7 +1,7 @@
 {
     "coc.preferences.promptInput": true,
     "coc.preferences.useQuickfixForLocations": true,
-    "coc.preferences.rootPatterns": ["compile_commands.json"],
+    "workspace.rootPatterns": ["compile_commands.json"],
     "inlayHint.enable": false,
     "semanticTokens.enable": true,
     "codeLens.enable": true,
