@@ -11,6 +11,7 @@
     ri = rebase -i
     ls = ls-files
     sm = submodule
+    pul = pull
     fsm = "!f() { git submodule foreach --recursive git $@; }; f"
 [user]
 	email = afafaf4@gmail.com
@@ -35,3 +36,5 @@
     required = true
 [pull]
     rebase = false
+[advice]
+	addIgnoredFile = false

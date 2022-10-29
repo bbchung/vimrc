@@ -16,7 +16,7 @@ g:termdebug_wide = 1
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
+Plug 'neoclide/coc.nvim', {'branch': 'master'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
