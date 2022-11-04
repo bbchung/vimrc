@@ -5,9 +5,10 @@ var home = $HOME .. '/.vim/'
 mkdir(&undodir, 'p')
 var vim_plug_dir = expand(home .. '/autoload')
 var vim_plug = home .. '/autoload/plug.vim'
+var install_plug = 0
 if !filereadable(vim_plug)
     system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
-    var install_plug = 1
+    install_plug = 1
 endif
 
 packadd termdebug
@@ -16,13 +17,13 @@ g:termdebug_wide = 1
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
-Plug 'neoclide/coc.nvim', {'branch': 'master'} #<<
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
     'coc-cmake',
     'coc-json',
-    'coc-lists',
+    #'coc-lists',
     'coc-pyright',
     'coc-r-lsp',
     'coc-sh',
@@ -268,7 +269,7 @@ g:gasynctags_auto_update = 1
 
 plug#end()
 
-if exists('install_plug')
+if install_plug == 1
     PlugInstall
 endif
 
