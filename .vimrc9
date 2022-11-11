@@ -234,6 +234,8 @@ au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
     | lexima#add_rule({'char': '"', 'at': '\S\%#'})
     | lexima#add_rule({'char': "'", 'at': '\%#\S'})
     | lexima#add_rule({'char': "'", 'at': '\S\%#'})
+    | lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+    | lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
 
 # >>
 #>>

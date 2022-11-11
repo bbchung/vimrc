@@ -230,6 +230,8 @@ Plug 'cohama/lexima.vim' "<<
 au VimEnter * call lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
 au VimEnter * call lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
 au VimEnter * call lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
+"au VimEnter * call lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+"au VimEnter * call lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
 
 " >>
 ">>
