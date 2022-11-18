@@ -219,6 +219,8 @@ g:Lf_WorkingDirectoryMode = 'a'
 #command! -nargs=1 S Leaderf! gtags --stayOpen --bottom -g <f-args>
 #>>
 
+Plug 'linjiX/LeaderF-git'
+
 #Plugin Group: Edit #<<
 Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
@@ -238,7 +240,7 @@ au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
     | lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
 
 # >>
-#>>
+# >>
 
 #Plugin Group: Misc #<<
 #Plug 'Yggdroot/indentLine' #<<
