@@ -90,6 +90,7 @@ Plug 'morhetz/gruvbox' #<<
 g:gruvbox_contrast_dark = 'hard'
 g:gruvbox_italic = 0
 g:gruvbox_sign_column = 'bg0'
+g:gruvbox_material_diagnostic_text_highlight = 1
 #>>
 Plug 'sainnhe/everforest' #<<
 g:everforest_background = 'hard'
@@ -290,7 +291,6 @@ set csprg=gtags-cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 set belloff=all
 set completeopt=menuone,noselect
-set diffopt+=vertical
 set termguicolors
 set shortmess-=S
 set shortmess+=c
