@@ -182,17 +182,15 @@ g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-fi
 #>>
 
 #Plugin Group: Search #<<
-#Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
-#g:clap_open_preview = 'never'
-#g:clap_popup_input_delay = 100
-#g:clap_provider_grep_delay = 100
-#g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
+g:clap_open_preview = 'never'
+g:clap_layout = {'relative': 'editor'}
 
-#nmap <silent> <Leader>f :Clap files <CR>
-#nmap <silent> <Leader>b :Clap buffers <CR>
+nmap <silent> <Leader>f :Clap files <CR>
+nmap <silent> <Leader>b :Clap buffers <CR>
 #>>
 
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+#Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 g:Lf_WildIgnore = {
     dir: ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd'],
     file: ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
@@ -354,8 +352,8 @@ vnoremap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
-#map <C-c> <Esc>
-#imap <C-c> <Esc>
+map <C-c> <Esc>
+imap <C-c> <Esc>
 nmap <F3> :bd!<CR>
 map <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
