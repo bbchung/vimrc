@@ -186,6 +186,7 @@ Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
 g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 50
+g:clap_disable_run_rooter = v:true
 
 nmap <silent> <Leader>f :Clap files +name-only<CR>
 nmap <silent> <Leader>b :Clap buffers <CR>
@@ -193,7 +194,7 @@ nmap <silent> <Leader>b :Clap buffers <CR>
 
 #Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 g:Lf_WildIgnore = {
-    dir: ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd'],
+    dir: ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd', 'fuxi.run*'],
     file: ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
 }
 g:Lf_WindowHeight = 0.2
