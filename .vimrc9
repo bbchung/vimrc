@@ -185,8 +185,9 @@ g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-fi
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
 g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
+g:clap_popup_input_delay = 50
 
-nmap <silent> <Leader>f :Clap files <CR>
+nmap <silent> <Leader>f :Clap files +name-only<CR>
 nmap <silent> <Leader>b :Clap buffers <CR>
 #>>
 
