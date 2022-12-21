@@ -59,7 +59,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]: \[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]\$(__git_ps1 \ %s)\[\033[00m\]\$ "
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h: \w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -116,14 +116,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+alias top='bpytop'
+alias grep='rg'
 alias e='exit'
 alias z='zdict'
 alias v='vi'
 alias n='nvim'
 alias g='git'
 alias F='clang-format -i `git ls *.cpp "*.h" *.hpp`'
-alias TD='run-clang-tidy-16 -j6 -fix -export-fixes clang-tidy.txt'
-alias CC='cppcheck --template=gcc -j6 --enable=all --inconclusive --project=compile_commands.json 2>cppcheck.txt'
-alias vdb='f(){ eval "vim -M --cmd \"let g:coc_start_at_startup=0\" \"+set shortmess+=A\" \"+Termdebug $@\""; unset -f f; }; f'
-PATH=$PATH:$HOME/bin
-export MANPATH=$MANPATH:$HOME/share/man
+alias TD='run-clang-tidy-16 -j32 -fix -export-fixes clang-tidy.txt'
+alias CC='cppcheck --template=gcc -j32 --enable=all --inconclusive --project=compile_commands.json 2>cppcheck.txt'
+alias vdb='f(){ vim -M --cmd "let g:coc_start_at_startup=0" "+set shortmess+=A" "+Termdebug $@"; unset -f f; }; f'
+ulimit -n 65536
+#export GNUMAKEFLAGS=-j32
