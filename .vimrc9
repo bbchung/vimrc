@@ -2,12 +2,12 @@ vim9script
 
 var home = $HOME .. '/.vim/'
 &undodir = $HOME .. '/.vim/undo'
-mkdir(&undodir, 'p')
+call mkdir(&undodir, 'p')
 var vim_plug_dir = expand(home .. '/autoload')
 var vim_plug = home .. '/autoload/plug.vim'
 var install_plug = 0
 if !filereadable(vim_plug)
-    system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+    call system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
     install_plug = 1
 endif
 
@@ -17,6 +17,8 @@ g:termdebug_wide = 1
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
+#Plug 'github/copilot.vim'
+
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
@@ -39,8 +41,9 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr :cexpr[] <CR> <Plug>(coc-references)
-nmap <Leader>x <Plug>(coc-fix-current)
+nmap <silent> <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
+nmap <silent> <Leader>v <Plug>(coc-range-select)
 map <silent> <Leader>a <Plug>(coc-codeaction-cursor)
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
@@ -59,7 +62,6 @@ inoremap <silent><expr> <TAB>
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 #inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-nmap <silent> <Leader>v <Plug>(coc-range-select)
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 imap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
@@ -68,7 +70,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-au User CocStatusChange lightline#update()
+#au User CocStatusChange,CocDiagnosticChange call lightline#update()
 #>>
 #>>
 
@@ -185,9 +187,10 @@ g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-fi
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
 g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
-g:clap_popup_input_delay = 50
-g:clap_disable_run_rooter = v:true
+g:clap_popup_input_delay = 0
+#g:clap_disable_run_rooter = v:true
 
+nmap <silent> <Leader>F :Clap gfiles +name-only<CR>
 nmap <silent> <Leader>f :Clap files +name-only<CR>
 nmap <silent> <Leader>b :Clap buffers <CR>
 #>>
@@ -212,15 +215,14 @@ g:Lf_StlSeparator = {'left': '', 'right': ''}
 g:Lf_ShowDevIcons = 0
 g:Lf_GtagsStoreInProject = 1
 g:Lf_WorkingDirectoryMode = 'a'
-#g:Lf_DisableStl = 1
 #nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
 #nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 #nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
 #vmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR><CR>
 #command! -nargs=1 S Leaderf! gtags --stayOpen --bottom -g <f-args>
-#>>
 
 #Plug 'linjiX/LeaderF-git'
+#>>
 
 #Plugin Group: Edit #<<
 Plug 'scrooloose/nerdcommenter'
@@ -264,6 +266,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim' #<<
 g:no_csv_maps = 1
 g:csv_no_progress = 1
+g:start = 1
+g:end = 10
 #>>
 #Plug 'mechatroner/rainbow_csv'
 Plug 'bbchung/gasynctags' #<<
@@ -282,6 +286,7 @@ endif
 
 syntax on
 
+set synmaxcol=10000
 set nomore
 set vb t_vb=
 set guicursor=
@@ -327,10 +332,12 @@ set nobackup
 set nowritebackup
 set undofile
 set backspace=indent,eol,start
+set mmp=10000
+set splitright
 
 def ShowDoc()
     if (index(['csv'], &filetype) >= 0)
-        exe 'WhatColumn!'
+        WhatColumn!
     elseif (index(['vim', 'help'], &filetype) >= 0)
         exe 'h ' .. expand('<cword>')
     else
@@ -356,11 +363,11 @@ vnoremap <silent> # :<C-U>
 
 map <C-c> <Esc>
 imap <C-c> <Esc>
-nmap <F3> :bd!<CR>
-map <F4> :qa!<CR>
+nmap <silent> <F3> :bd!<CR>
+map <silent> <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
-nmap <F5> :bp<CR>
-nmap <F6> :bn<CR>
+nmap <silent> <F5> :bp<CR>
+nmap <silent> <F6> :bn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>ShowDoc()<CR>
@@ -368,7 +375,7 @@ nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 
 function CsvFormat()
-    '<,'>CSVArrangeColumn
+    silent '<,'>CSVArrangeColumn
 endf
 
 #au BufRead * cd .
@@ -392,5 +399,4 @@ else
 endif
 colorscheme everforest
 #hi link CocHighlightText MatchParen
-
 # vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
