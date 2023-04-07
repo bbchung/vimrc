@@ -17,7 +17,9 @@ g:termdebug_wide = 1
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
-#Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
+imap <silent><expr> <Leader>c copilot#Accept("\<CR>")
+g:copilot_no_tab_map = v:true
 
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
@@ -59,7 +61,7 @@ inoremap <silent><expr> <TAB>
             \ coc#pum#visible() ? coc#pum#next(1) :
             \ <SID>CheckBackspace() ? "\<Tab>" :
             \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 #inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
@@ -295,7 +297,7 @@ set cst
 set csprg=gtags-cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-,a-
 set belloff=all
-set completeopt=menuone,noselect
+set completeopt=menuone,noinsert
 set termguicolors
 set shortmess-=S
 set shortmess+=c
@@ -334,10 +336,11 @@ set undofile
 set backspace=indent,eol,start
 set mmp=10000
 set splitright
+set fdm=manual
 
 def ShowDoc()
     if (index(['csv'], &filetype) >= 0)
-        WhatColumn!
+        exe 'WhatColumn!'
     elseif (index(['vim', 'help'], &filetype) >= 0)
         exe 'h ' .. expand('<cword>')
     else
@@ -379,14 +382,14 @@ function CsvFormat()
 endf
 
 #au BufRead * cd .
-au FileType c,cpp,sh,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType sh,python,vim setlocal tw=0 expandtab fdm=syntax
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType csv vmap <silent> <Leader>k :CSVArrangeColumn<CR>
 au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat()
-#au InsertEnter * if !exists('w:last_fdm') | w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
-#au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod=w:last_fdm | unw:last_fdm | endif
+#au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
+#au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
 
 set background=dark
 if &diff
