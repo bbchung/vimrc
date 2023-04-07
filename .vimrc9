@@ -47,6 +47,9 @@ nmap <silent> <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>v <Plug>(coc-range-select)
 map <silent> <Leader>a <Plug>(coc-codeaction-cursor)
+nmap <silent> <Leader>d :call CocActionAsync('fold')<CR>
+nmap <silent> <Leader>k <Plug>(coc-format)
+vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
 command! A CocCommand clangd.switchSourceHeader
@@ -375,8 +378,6 @@ nmap <silent> <F6> :bn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>ShowDoc()<CR>
-nmap <silent> <Leader>k <Plug>(coc-format)
-vmap <silent> <leader>k <Plug>(coc-format-selected)
 
 function CsvFormat()
     silent '<,'>CSVArrangeColumn
