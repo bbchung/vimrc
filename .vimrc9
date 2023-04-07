@@ -51,8 +51,14 @@ nmap <silent> <Leader>d :call CocActionAsync('fold')<CR>
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
-au CursorHold * silent! call CocActionAsync('highlight')
-#au CursorHold * silent! call CocActionAsync('fold')
+
+def g:OnError(err: string, result: number)
+enddef
+
+au CursorHold * silent! call CocActionAsync('highlight', g:OnError)
+au BufWinEnter * au CursorHold * ++once silent! call CocActionAsync('fold', g:OnError)
+au TextChanged * silent! call CocActionAsync('fold', g:OnError)
+
 command! A CocCommand clangd.switchSourceHeader
 
 def CheckBackspace(): bool
