@@ -18,7 +18,7 @@ plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
 Plug 'github/copilot.vim'
-imap <silent><expr> <Leader>y copilot#Accept("\<CR>")
+imap <silent><expr> <C-p> copilot#Accept("\<CR>")
 g:copilot_no_tab_map = v:true
 
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
@@ -51,8 +51,8 @@ nmap <silent> <Leader>d :call CocActionAsync('fold')<CR>
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
-au CursorHold * call CocActionAsync('highlight')
-au User CocDiagnosticChange call CocActionAsync('fold')
+au CursorHold * silent! call CocActionAsync('highlight')
+#au CursorHold * silent! call CocActionAsync('fold')
 command! A CocCommand clangd.switchSourceHeader
 
 def CheckBackspace(): bool
