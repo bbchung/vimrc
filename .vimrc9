@@ -2,12 +2,12 @@ vim9script
 
 var home = $HOME .. '/.vim/'
 &undodir = $HOME .. '/.vim/undo'
-call mkdir(&undodir, 'p')
+mkdir(&undodir, 'p')
 var vim_plug_dir = expand(home .. '/autoload')
 var vim_plug = home .. '/autoload/plug.vim'
 var install_plug = 0
 if !filereadable(vim_plug)
-    call system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
+    system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
     install_plug = 1
 endif
 
@@ -18,7 +18,7 @@ plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
 Plug 'github/copilot.vim'
-imap <silent><expr> <Leader>c copilot#Accept("\<CR>")
+imap <silent><expr> <Leader>y copilot#Accept("\<CR>")
 g:copilot_no_tab_map = v:true
 
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
@@ -52,6 +52,7 @@ nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
 au CursorHold * call CocActionAsync('highlight')
+au User CocDiagnosticChange call CocActionAsync('fold')
 command! A CocCommand clangd.switchSourceHeader
 
 def CheckBackspace(): bool
