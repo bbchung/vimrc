@@ -6,7 +6,7 @@ mkdir(&undodir, 'p')
 var vim_plug_dir = expand(home .. '/autoload')
 var vim_plug = home .. '/autoload/plug.vim'
 var install_plug = 0
-if !filereadable(vim_plug)
+if (!filereadable(vim_plug))
     system('curl -fLo ' .. vim_plug .. ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim')
     install_plug = 1
 endif
@@ -52,12 +52,24 @@ nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
 
-def g:OnError(err: string, result: number)
+func g:OnFoldUpdated(err, result)
+    if (a:result == v:null && (!exists("b:fold_err_times") || b:fold_err_times < 3))
+        let b:fold_err_times = b:fold_err_times + 1
+        call timer_start(1000, {-> CocActionAsync('fold', function("g:OnFoldUpdated"))})
+    else
+        let b:fold_err_times = 0
+        let b:foldedtick = b:changedtick
+    endif
+endf
+
+def UpdateFold()
+    if (!exists("b:foldedtick") || b:foldedtick < b:changedtick)
+        exe 'call CocActionAsync("fold", function("g:OnFoldUpdated"))'
+    endif
 enddef
 
-au CursorHold * silent! call CocActionAsync('highlight', g:OnError)
-au BufWinEnter * au CursorHold * ++once silent! call CocActionAsync('fold', g:OnError)
-au TextChanged * silent! call CocActionAsync('fold', g:OnError)
+au CursorHold * silent! call CocActionAsync('highlight', v:null)
+au BufWinEnter,CursorHold *.c,*.cpp,*.h,*.hpp silent! call UpdateFold()
 
 command! A CocCommand clangd.switchSourceHeader
 
@@ -291,7 +303,7 @@ g:gasynctags_auto_update = 1
 
 plug#end()
 
-if install_plug == 1
+if (install_plug == 1)
     PlugInstall
 endif
 
@@ -347,7 +359,6 @@ set undofile
 set backspace=indent,eol,start
 set mmp=10000
 set splitright
-set fdm=manual
 
 def ShowDoc()
   if (index(['csv'], &filetype) >= 0)
@@ -391,23 +402,23 @@ function CsvFormat()
 endf
 
 #au BufRead * cd .
-au FileType sh,python,vim setlocal tw=0 expandtab fdm=syntax
+au FileType sh,python,vim setlocal tw=0 expandtab
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
-au FileType csv vmap <silent> <Leader>k :CSVArrangeColumn<CR>
 au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
 au FileType csv setlocal formatexpr=CsvFormat()
+au FileType c,cpp setlocal fdm=manual
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
 
 set background=dark
-if &diff
+if (&diff)
     set noro
     syntax off
     set nocursorline
     g:coc_start_at_startup = 0
 else
-    au BufWinEnter * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif " restore cursor position
+    au BufWinEnter * if (line("'\"") > 0 && line("'\"") <= line("$")) | exe "normal! g`\"" | endif " restore cursor position
 endif
 colorscheme everforest
 #hi link CocHighlightText MatchParen
