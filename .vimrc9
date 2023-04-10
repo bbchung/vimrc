@@ -53,9 +53,15 @@ vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
 
 func g:OnFoldUpdated(err, result)
-    if (a:result == v:null && (!exists("b:fold_err_times") || b:fold_err_times < 3))
-        let b:fold_err_times = b:fold_err_times + 1
-        call timer_start(1000, {-> CocActionAsync('fold', function("g:OnFoldUpdated"))})
+    if (a:result == v:null)
+        if (!exists("b:fold_err_times"))
+            let b:fold_err_times = 0
+        endif
+
+        if(b:fold_err_times < 3)
+            let b:fold_err_times = b:fold_err_times + 1
+            call timer_start(1000, {-> CocActionAsync('fold', function("g:OnFoldUpdated"))})
+        endif
     else
         let b:fold_err_times = 0
         let b:foldedtick = b:changedtick
