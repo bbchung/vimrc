@@ -218,7 +218,7 @@ Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
 g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
-#g:clap_disable_run_rooter = v:true
+g:clap_disable_run_rooter = v:true
 
 nmap <silent> <Leader>F :Clap gfiles +name-only<CR>
 nmap <silent> <Leader>f :Clap files +name-only<CR>
