@@ -100,7 +100,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-#au User CocStatusChange,CocDiagnosticChange call lightline#update()
+au User CocStatusChange,CocDiagnosticChange call lightline#update()
 #>>
 #>>
 
@@ -318,7 +318,6 @@ endif
 syntax on
 
 set synmaxcol=10000
-set nomore
 set vb t_vb=
 set guicursor=
 set signcolumn=number
@@ -365,6 +364,8 @@ set undofile
 set backspace=indent,eol,start
 set mmp=10000
 set splitright
+set re=1
+set matchpairs+=<:>
 
 def ShowDoc()
   if (index(['csv'], &filetype) >= 0)
