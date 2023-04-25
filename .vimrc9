@@ -425,7 +425,7 @@ if (&diff)
     set nocursorline
     g:coc_start_at_startup = 0
 else
-    au BufWinEnter * if (line("'\"") > 0 && line("'\"") <= line("$")) | exe "normal! g`\"" | endif " restore cursor position
+    au BufReadPost * if (line("'\"") > 0 && line("'\"") <= line("$")) | exe "normal! g`\"" | endif " restore cursor position
 endif
 colorscheme everforest
 #hi link CocHighlightText MatchParen
