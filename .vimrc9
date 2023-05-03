@@ -130,6 +130,7 @@ g:everforest_enable_italic = 0
 g:everforest_disable_italic_comment = 1
 g:everforest_sign_column_background = 'none'
 g:everforest_diagnostic_text_highlight = 1
+g:everforest_diagnostic_line_highlight = 0
 g:everforest_better_performance = 1
 
 #>>
@@ -413,7 +414,7 @@ au FileType sh,python,vim setlocal tw=0 expandtab
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
-au FileType csv setlocal formatexpr=CsvFormat()
+au FileType csv setlocal formatexpr=CsvFormat() nocursorline
 au FileType c,cpp setlocal fdm=manual
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
