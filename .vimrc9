@@ -17,9 +17,16 @@ g:termdebug_wide = 1
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: LSP #<<
-Plug 'github/copilot.vim'
-imap <silent><expr> <C-p> copilot#Accept("\<CR>")
-g:copilot_no_tab_map = v:true
+#Plug 'github/copilot.vim'
+#imap <silent><expr> <C-p> copilot#Accept("\<CR>")
+#g:copilot_no_tab_map = v:true
+
+Plug 'Exafunction/codeium.vim' #<<
+g:codeium_no_map_tab = v:true
+imap <silent><expr> <C-p> codeium#Accept()
+imap <C-n> <Plug>(codeium-next)
+#>>
+
 
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
@@ -31,12 +38,13 @@ g:coc_global_extensions = [
     'coc-pyright',
     'coc-r-lsp',
     'coc-sh',
-    'coc-tabnine',
-    'coc-vimlsp',
+    #'coc-tabnine',
+    #'coc-vimlsp',
     'coc-yaml',
     'coc-snippets'
 ]
 g:coc_enable_locationlist = 0
+g:coc_quickfix_open_command = 'copen 8'
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
@@ -47,7 +55,6 @@ nmap <silent> <Leader>x <Plug>(coc-fix-current)
 nmap <silent> <Leader>r <Plug>(coc-rename)
 nmap <silent> <Leader>v <Plug>(coc-range-select)
 map <silent> <Leader>a <Plug>(coc-codeaction-cursor)
-nmap <silent> <Leader>d :call CocActionAsync('fold')<CR>
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
@@ -100,7 +107,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-au User CocStatusChange,CocDiagnosticChange call lightline#update()
+#au User CocStatusChange,CocDiagnosticChange call lightline#update()
 #>>
 #>>
 
@@ -116,6 +123,7 @@ g:jellybeans_use_gui_italics = 0
 Plug 'romainl/Apprentice'
 #Plug 'dunstontc/vim-vscode-theme'
 Plug 'tomasiser/vim-code-dark'
+g:codedark_modern = 1
 #g:codedark_conservative = 1
 #Plug 'twerth/ir_black'
 Plug 'morhetz/gruvbox' #<<
@@ -147,7 +155,7 @@ Plug 'arcticicestudio/nord-vim' #<<
 #Plugin Group: StatusLine #<<
 Plug 'itchyny/vim-gitbranch' #<<
 # >>
-Plug 'itchyny/lightline.vim' #<<
+#Plug 'itchyny/lightline.vim' #<<
 
 def g:LightlineFugitive(): string
     var branch = gitbranch#name()
@@ -203,13 +211,14 @@ g:lightline =
     }
 
 #>>
-#Plug 'vim-airline/vim-airline' #<<
+Plug 'vim-airline/vim-airline' #<<
 g:airline_experimental = 1
 g:airline_powerline_fonts = 1
 g:airline#extensions#csv#enabled = 0
 g:airline#extensions#csv#column_display = 'Name'
 g:airline#extensions#scrollbar#enabled = 0
 g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
+g:airline#extensions#coc#show_coc_status = 0
 #>>
 #Plug 'vim-airline/vim-airline-themes'
 #>>
@@ -369,17 +378,17 @@ set re=1
 set matchpairs+=<:>
 
 def ShowDoc()
-  if (index(['csv'], &filetype) >= 0)
-	  exe 'WhatColumn!'
-  elseif (index(['vim', 'help'], &filetype) >= 0)
-	  exe 'h ' .. expand('<cword>')
-  else
-	  if g:CocAction('hasProvider', 'hover')
-		  g:CocActionAsync('doHover')
-	  else
-		  feedkeys('K', 'in')
-	  endif
-  endif
+    if (index(['csv'], &filetype) >= 0)
+        exe 'WhatColumn!'
+    elseif (index(['vim', 'help'], &filetype) >= 0)
+        exe 'h ' .. expand('<cword>')
+    else
+        if g:CocAction('hasProvider', 'hover')
+            g:CocActionAsync('doHover')
+        else
+            feedkeys('K', 'in')
+        endif
+    endif
 enddef
 
 command! W silent exe "w !sudo > /dev/null tee %"
@@ -414,7 +423,7 @@ au FileType sh,python,vim setlocal tw=0 expandtab
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
-au FileType csv setlocal formatexpr=CsvFormat() nocursorline
+au FileType csv setlocal formatexpr=CsvFormat()
 au FileType c,cpp setlocal fdm=manual
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
