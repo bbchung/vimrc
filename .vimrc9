@@ -16,18 +16,19 @@ g:termdebug_wide = 1
 
 plug#begin(home .. '/plugged') #<<
 
-#Plugin Group: LSP #<<
-#Plug 'github/copilot.vim'
+#Plugin Group: AI #<<
+#Plug 'github/copilot.vim' #<<
 #imap <silent><expr> <C-p> copilot#Accept("\<CR>")
 #g:copilot_no_tab_map = v:true
-
+##>>
 Plug 'Exafunction/codeium.vim' #<<
 g:codeium_no_map_tab = v:true
 imap <silent><expr> <C-p> codeium#Accept()
 imap <C-n> <Plug>(codeium-next)
 #>>
+##>>
 
-
+#Plugin Group: LSP #<<
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
@@ -107,7 +108,7 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-#au User CocStatusChange,CocDiagnosticChange call lightline#update()
+au User CocStatusChange,CocDiagnosticChange call lightline#update()
 #>>
 #>>
 
@@ -121,11 +122,10 @@ g:jellybeans_use_term_italics = 0
 g:jellybeans_use_gui_italics = 0
 #>>
 Plug 'romainl/Apprentice'
-#Plug 'dunstontc/vim-vscode-theme'
-Plug 'tomasiser/vim-code-dark'
+Plug 'tomasiser/vim-code-dark' #<<
 g:codedark_modern = 1
 #g:codedark_conservative = 1
-#Plug 'twerth/ir_black'
+#>>
 Plug 'morhetz/gruvbox' #<<
 g:gruvbox_contrast_dark = 'hard'
 g:gruvbox_italic = 0
@@ -155,7 +155,7 @@ Plug 'arcticicestudio/nord-vim' #<<
 #Plugin Group: StatusLine #<<
 Plug 'itchyny/vim-gitbranch' #<<
 # >>
-#Plug 'itchyny/lightline.vim' #<<
+Plug 'itchyny/lightline.vim' #<<
 
 def g:LightlineFugitive(): string
     var branch = gitbranch#name()
@@ -211,7 +211,7 @@ g:lightline =
     }
 
 #>>
-Plug 'vim-airline/vim-airline' #<<
+#Plug 'vim-airline/vim-airline' #<<
 g:airline_experimental = 1
 g:airline_powerline_fonts = 1
 g:airline#extensions#csv#enabled = 0
@@ -264,6 +264,7 @@ g:Lf_WorkingDirectoryMode = 'a'
 
 #Plug 'linjiX/LeaderF-git' #<<
 #>>
+#>>
 
 #Plugin Group: Edit #<<
 Plug 'scrooloose/nerdcommenter'
@@ -314,7 +315,6 @@ g:end = 10
 Plug 'bbchung/gasynctags' #<<
 g:gasynctags_auto_update = 1
 #>>
-
 #>>
 
 plug#end()
