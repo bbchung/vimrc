@@ -230,8 +230,8 @@ g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
 g:clap_disable_run_rooter = v:true
 
-nmap <silent> <Leader>F :Clap gfiles +name-only<CR>
-nmap <silent> <Leader>f :Clap files +name-only<CR>
+nmap <silent> <Leader>F :Clap gfiles --name-only<CR>
+nmap <silent> <Leader>f :Clap files --name-only<CR>
 nmap <silent> <Leader>b :Clap buffers <CR>
 #>>
 
