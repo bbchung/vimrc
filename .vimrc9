@@ -108,7 +108,6 @@ vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) :
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
-au User CocStatusChange,CocDiagnosticChange call lightline#update()
 #>>
 #>>
 
@@ -157,6 +156,7 @@ Plug 'itchyny/vim-gitbranch' #<<
 # >>
 Plug 'itchyny/lightline.vim' #<<
 
+au User CocStatusChange,CocDiagnosticChange call lightline#update()
 def g:LightlineFugitive(): string
     var branch = gitbranch#name()
     return branch !=# '' ? '' .. branch : ''
@@ -167,9 +167,10 @@ g:lightline =
         colorscheme: "everforest",
         active: {
             left: [
-                ["mode", "paste"],
-                ["readonly", "relativepath", "modified"],
-                ["gitbranch"]
+                ["mode", "paste", "readonly"],
+                ["gitbranch"],
+                ["relativepath"],
+                ["modified"]
             ],
             right: [
                 ["filetype"],
@@ -255,6 +256,8 @@ g:Lf_StlSeparator = {'left': '', 'right': ''}
 g:Lf_ShowDevIcons = 0
 g:Lf_GtagsStoreInProject = 1
 g:Lf_WorkingDirectoryMode = 'a'
+#nmap <silent> <Leader>f :Leaderf file --no-auto-preview<CR>
+#nmap <silent> <Leader>b :Leaderf buffer --no-auto-preview<CR>
 #nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
 #nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 #nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
