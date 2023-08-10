@@ -238,26 +238,42 @@ nmap <silent> <Leader>b :Clap buffers <CR>
 
 #Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
 g:Lf_WildIgnore = {
-    dir: ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd', 'fuxi.run*'],
-    file: ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
+    'dir': ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd', 'fuxi.run*'],
+    'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
 }
 g:Lf_WindowHeight = 0.2
 g:Lf_RecurseSubmodules = 1
 g:Lf_GtagsAutoGenerate = 0
 g:Lf_GtagsAutoUpdate = 0
+g:Lf_GtagsStoreInProject = 1
 g:Lf_DefaultExternalTool = 'rg'
 g:Lf_UseVersionControlTool = 1
 g:Lf_DefaultMode = 'NameOnly'
 g:Lf_WindowPosition = 'popup'
 g:Lf_PreviewInPopup = 1
+g:Lf_PopupPreviewPosition = 'bottom'
 g:Lf_CursorBlink = 0
 g:Lf_PopupShowStatusline = 0
 g:Lf_StlSeparator = {'left': '', 'right': ''}
 g:Lf_ShowDevIcons = 0
-g:Lf_GtagsStoreInProject = 1
 g:Lf_WorkingDirectoryMode = 'a'
-#nmap <silent> <Leader>f :Leaderf file --no-auto-preview<CR>
-#nmap <silent> <Leader>b :Leaderf buffer --no-auto-preview<CR>
+g:Lf_PreviewResult = {
+    'File': 0,
+    'Buffer': 0,
+    'Mru': 0,
+    'Tag': 0,
+    'BufTag': 0,
+    'Function': 1,
+    'Line': 0,
+    'Colorscheme': 0,
+    'Rg': 0,
+    'Gtags': 0
+}
+
+g:Lf_RgConfig = [
+    '--glob=!third_party/*'
+]
+
 #nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
 #nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 #nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
@@ -296,7 +312,7 @@ g:indentLine_setColors = 0
 g:indentLine_fileType = ['c', 'cpp', 'python', 'r']
 g:indentLine_char = '⸽'
 #>>
-Plug 'skywind3000/asyncrun.vim'
+#Plug 'skywind3000/asyncrun.vim'
 #Plug 'ianding1/leetcode.vim' #<<
 g:leetcode_browser = 'firefox'
 #>>
@@ -315,8 +331,11 @@ g:start = 1
 g:end = 10
 #>>
 #Plug 'mechatroner/rainbow_csv'
-Plug 'bbchung/gasynctags' #<<
-g:gasynctags_auto_update = 1
+Plug 'bbchung/gtags.vim' #<<
+g:Gtags_Auto_Update = 1
+nmap <silent> <Leader>s :GtagsCursor<CR>
+nmap <silent> <Leader>g :<C-R>=printf("Gtags -g %s", expand('<cword>'))<CR><CR>
+vmap <silent> <Leader>g :<C-U><C-R>=printf("Gtags -g %s", getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1])<CR><CR>
 #>>
 #>>
 
@@ -341,7 +360,7 @@ set belloff=all
 set completeopt=menuone,noinsert
 set termguicolors
 set shortmess-=S
-set shortmess+=c
+set shortmess+=Ac
 set title
 set cursorline
 set nowrap
@@ -377,7 +396,7 @@ set undofile
 set backspace=indent,eol,start
 set mmp=10000
 set splitright
-set re=1
+set re=2
 set matchpairs+=<:>
 
 def ShowDoc()
@@ -388,8 +407,6 @@ def ShowDoc()
     else
         if g:CocAction('hasProvider', 'hover')
             g:CocActionAsync('doHover')
-        else
-            feedkeys('K', 'in')
         endif
     endif
 enddef
