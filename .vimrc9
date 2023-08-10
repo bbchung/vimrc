@@ -334,8 +334,8 @@ g:end = 10
 Plug 'bbchung/gtags.vim' #<<
 g:Gtags_Auto_Update = 1
 nmap <silent> <Leader>s :GtagsCursor<CR>
-nmap <silent> <Leader>g :<C-R>=printf("Gtags -g %s", expand('<cword>'))<CR><CR>
-vmap <silent> <Leader>g :<C-U><C-R>=printf("Gtags -g %s", getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1])<CR><CR>
+nmap <silent> <Leader>g :<C-R>=printf("Gtags -g %s", expand('<cword>'))<CR><CR>:copen<CR>
+vmap <silent> <Leader>g :<C-U><C-R>=printf("Gtags -g %s", getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1])<CR><CR>:copen<CR>
 #>>
 #>>
 
