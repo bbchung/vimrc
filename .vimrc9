@@ -33,10 +33,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lock
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
-    'coc-cmake',
+    #'coc-cmake',
     'coc-json',
     #'coc-lists',
-    'coc-pyright',
+    #'coc-pyright',
+    '@yaegassy/coc-ruff',
     'coc-r-lsp',
     'coc-sh',
     #'coc-tabnine',
@@ -109,6 +110,7 @@ vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) :
 au User TermdebugStartPre silent CocDisable
 au User TermdebugStopPost silent CocEnable
 #>>
+
 #>>
 
 #Plugin Group: Theme #<<
@@ -139,6 +141,7 @@ g:everforest_sign_column_background = 'none'
 g:everforest_diagnostic_text_highlight = 1
 g:everforest_diagnostic_line_highlight = 0
 g:everforest_better_performance = 1
+g:everforest_spell_foreground = 'colored'
 
 #>>
 Plug 'sainnhe/gruvbox-material' #<<
@@ -231,7 +234,7 @@ g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
 g:clap_disable_run_rooter = v:true
 
-nmap <silent> <Leader>F :Clap gfiles --name-only<CR>
+nmap <silent> <Leader>F :Clap gfiles<CR>
 nmap <silent> <Leader>f :Clap files --name-only<CR>
 nmap <silent> <Leader>b :Clap buffers <CR>
 #>>
@@ -241,11 +244,11 @@ g:Lf_WildIgnore = {
     'dir': ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd', 'fuxi.run*'],
     'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
 }
-g:Lf_WindowHeight = 0.2
+g:Lf_WindowHeight = 3
 g:Lf_RecurseSubmodules = 1
 g:Lf_GtagsAutoGenerate = 0
 g:Lf_GtagsAutoUpdate = 0
-g:Lf_GtagsStoreInProject = 1
+g:Lf_GtagsStoreInProject = 0
 g:Lf_DefaultExternalTool = 'rg'
 g:Lf_UseVersionControlTool = 1
 g:Lf_DefaultMode = 'NameOnly'
@@ -312,7 +315,7 @@ g:indentLine_setColors = 0
 g:indentLine_fileType = ['c', 'cpp', 'python', 'r']
 g:indentLine_char = '⸽'
 #>>
-#Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 #Plug 'ianding1/leetcode.vim' #<<
 g:leetcode_browser = 'firefox'
 #>>
@@ -455,7 +458,10 @@ if (&diff)
     set nocursorline
     g:coc_start_at_startup = 0
 else
-    au BufReadPost * if (line("'\"") > 0 && line("'\"") <= line("$")) | exe "normal! g`\"" | endif " restore cursor position
+    au BufReadPost *
+                \ | if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+                \ |   exe "normal! g`\""
+                \ | endif
 endif
 colorscheme everforest
 #hi link CocHighlightText MatchParen
