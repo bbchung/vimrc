@@ -14,6 +14,9 @@ endif
 packadd termdebug
 g:termdebug_wide = 1
 
+g:plug_threads = 8
+g:plug_timeout = 20
+g:plug_window = 'topleft vnew'
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: AI #<<
@@ -29,11 +32,14 @@ imap <C-n> <Plug>(codeium-next)
 ##>>
 
 #Plugin Group: LSP #<<
+
+#Plug 'jamespeapen/Nvim-R'
+
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
-    #'coc-cmake',
+    'coc-cmake',
     'coc-json',
     #'coc-lists',
     'coc-pyright',
@@ -136,7 +142,7 @@ g:gruvbox_material_diagnostic_text_highlight = 1
 Plug 'sainnhe/everforest' #<<
 g:everforest_background = 'hard'
 g:everforest_enable_italic = 0
-g:everforest_disable_italic_comment = 1
+g:everforest_disable_italic_comment = 0
 g:everforest_sign_column_background = 'none'
 g:everforest_diagnostic_text_highlight = 1
 g:everforest_diagnostic_line_highlight = 0
@@ -218,25 +224,25 @@ g:lightline =
 #Plug 'vim-airline/vim-airline' #<<
 g:airline_experimental = 1
 g:airline_powerline_fonts = 1
-g:airline#extensions#csv#enabled = 0
+g:airline#extensions#csv#enabled = 1
 g:airline#extensions#csv#column_display = 'Name'
 g:airline#extensions#scrollbar#enabled = 0
-g:airline#extensions#whitespace#checks = ['indent', 'trailing', 'mixed-indent-file']
+g:airline#extensions#whitespace#checks = ['trailing', 'mixed-indent-file']
 g:airline#extensions#coc#show_coc_status = 0
+g:airline#extensions#codeium#enabled = 0
 #>>
 #Plug 'vim-airline/vim-airline-themes'
 #>>
 
 #Plugin Group: Search #<<
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' } #<<
+nmap <silent> <Leader>F :Clap gfiles<CR>
+nmap <silent> <Leader>f :Clap files --name-only<CR>
+nmap <silent> <Leader>b :Clap buffers <CR>
 g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
 g:clap_disable_run_rooter = v:true
-
-nmap <silent> <Leader>F :Clap gfiles<CR>
-nmap <silent> <Leader>f :Clap files --name-only<CR>
-nmap <silent> <Leader>b :Clap buffers <CR>
 #>>
 
 #Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
@@ -244,13 +250,14 @@ g:Lf_WildIgnore = {
     'dir': ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd', 'fuxi.run*'],
     'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
 }
-g:Lf_WindowHeight = 3
+g:Lf_WindowHeight = 0.3
+g:Lf_PopupHeight = 0.6
 g:Lf_RecurseSubmodules = 1
 g:Lf_GtagsAutoGenerate = 0
 g:Lf_GtagsAutoUpdate = 0
 g:Lf_GtagsStoreInProject = 0
 g:Lf_DefaultExternalTool = 'rg'
-g:Lf_UseVersionControlTool = 1
+g:Lf_UseVersionControlTool = 0
 g:Lf_DefaultMode = 'NameOnly'
 g:Lf_WindowPosition = 'popup'
 g:Lf_PreviewInPopup = 1
@@ -277,7 +284,6 @@ g:Lf_RgConfig = [
     '--glob=!third_party/*'
 ]
 
-#nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
 #nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 #nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
 #vmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR><CR>
@@ -395,6 +401,7 @@ set updatetime=200
 set hidden
 set nobackup
 set nowritebackup
+set noswapfile
 set undofile
 set backspace=indent,eol,start
 set mmp=10000
@@ -415,18 +422,18 @@ def ShowDoc()
 enddef
 
 command! W silent exe "w !sudo > /dev/null tee %"
-vnoremap <silent> * :<C-U>
+vmap <silent> * :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
             \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
             \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
+vmap <silent> # :<C-U>
             \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
             \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
-map <C-c> <Esc>
+#map <C-c> <Esc>
 imap <C-c> <Esc>
 nmap <silent> <F3> :bd!<CR>
 map <silent> <F4> :qa!<CR>
