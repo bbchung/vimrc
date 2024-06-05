@@ -121,10 +121,11 @@ g:codedark_modern = 1
 #g:codedark_conservative = 1
 #>>
 Plug 'morhetz/gruvbox' #<<
-#g:gruvbox_contrast_dark = 'hard'
+g:gruvbox_contrast_dark = 'medium'
 g:gruvbox_italic = 0
 g:gruvbox_sign_column = 'bg0'
 g:gruvbox_material_diagnostic_text_highlight = 1
+g:gruvbox_material_spell_foreground = 'colored'
 #>>
 Plug 'sainnhe/everforest' #<<
 g:everforest_background = 'hard'
@@ -273,6 +274,7 @@ g:Lf_RgConfig = [
     '--glob=!third_party/*'
 ]
 
+#nmap gR :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -r %s", expand("<cword>"))<CR><CR>
 #nmap gD :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 #nmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g %s", expand("<cword>"))<CR><CR>
 #vmap <Leader>g :<C-U><C-R>=printf("Leaderf! gtags --stayOpen --bottom -g ".getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]<CR><CR>
@@ -368,6 +370,7 @@ set laststatus=2
 set number
 set expandtab
 set softtabstop=4
+set nomore
 set tabstop=4
 set shiftwidth=4
 set scrolloff=8
@@ -397,7 +400,6 @@ set mmp=10000
 set splitright
 set re=2
 set matchpairs+=<:>
-#set fdm=syntax
 
 def ShowDoc()
     if (index(['csv'], &filetype) >= 0)
