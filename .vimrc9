@@ -39,7 +39,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lock
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
-    'coc-cmake',
+    #'coc-cmake',
     'coc-json',
     #'coc-lists',
     'coc-pyright',
@@ -67,30 +67,17 @@ nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
 au User CocLocationsChange CocList --normal location
 
-func g:OnFoldUpdated(err, result)
-    if (a:result == v:null)
-        if (!exists("b:fold_err_times"))
-            let b:fold_err_times = 0
-        endif
-
-        if(b:fold_err_times < 3)
-            let b:fold_err_times = b:fold_err_times + 1
-            call timer_start(1000, {-> CocActionAsync('fold', function("g:OnFoldUpdated"))})
-        endif
-    else
-        let b:fold_err_times = 0
+fun g:OnFoldUpdated(err, result)
+    if (a:result != v:null)
         let b:foldedtick = b:changedtick
     endif
 endf
 
-def UpdateFold()
-    if (!exists("b:foldedtick") || b:foldedtick < b:changedtick)
-        exe 'call CocActionAsync("fold", function("g:OnFoldUpdated"))'
-    endif
-enddef
-
-au CursorHold * silent! call CocActionAsync('highlight', v:null)
-au BufWinEnter,CursorHold *.c,*.cpp,*.h,*.hpp silent! call UpdateFold()
+au CursorHold * silent! call CocActionAsync('highlight')
+au BufReadPre *.c,*.cpp,*.h,*.hpp b:foldedtick = 0
+au BufWinEnter,CursorHold *.c,*.cpp,*.h,*.hpp if (b:foldedtick < b:changedtick)
+    | call CocActionAsync("fold", g:OnFoldUpdated) 
+    | endif
 
 command! A CocCommand clangd.switchSourceHeader
 
@@ -134,7 +121,7 @@ g:codedark_modern = 1
 #g:codedark_conservative = 1
 #>>
 Plug 'morhetz/gruvbox' #<<
-g:gruvbox_contrast_dark = 'hard'
+#g:gruvbox_contrast_dark = 'hard'
 g:gruvbox_italic = 0
 g:gruvbox_sign_column = 'bg0'
 g:gruvbox_material_diagnostic_text_highlight = 1
@@ -190,9 +177,10 @@ g:lightline =
         },
         inactive: {
             left: [
-                ["mode", "paste"],
-                ["readonly", "relativepath", "modified"],
-                ["gitbranch"]
+                ["mode", "paste", "readonly"],
+                ["gitbranch"],
+                ["relativepath"],
+                ["modified"]
             ],
             right: [
                 ["filetype"],
@@ -202,8 +190,8 @@ g:lightline =
             ]
         },
         component: {
-            paste: "%{&paste?\"📋\":\"\"}",
-            readonly: "%{&readonly?\"🔒\":\"\"}",
+            paste: "%{&paste?\"󰆒\":\"\"}",
+            readonly: "%{&readonly?\"\":\"\"}",
             relativepath: "%{expand(\"%:~:.\")}"
         },
         component_function: {
@@ -243,6 +231,7 @@ g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
 g:clap_disable_run_rooter = v:true
+#g:clap_enable_icon = 1
 #>>
 
 #Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
@@ -265,7 +254,7 @@ g:Lf_PopupPreviewPosition = 'bottom'
 g:Lf_CursorBlink = 0
 g:Lf_PopupShowStatusline = 0
 g:Lf_StlSeparator = {'left': '', 'right': ''}
-g:Lf_ShowDevIcons = 0
+g:Lf_ShowDevIcons = 1
 g:Lf_WorkingDirectoryMode = 'a'
 g:Lf_PreviewResult = {
     'File': 0,
@@ -408,6 +397,7 @@ set mmp=10000
 set splitright
 set re=2
 set matchpairs+=<:>
+#set fdm=syntax
 
 def ShowDoc()
     if (index(['csv'], &filetype) >= 0)
@@ -465,10 +455,9 @@ if (&diff)
     set nocursorline
     g:coc_start_at_startup = 0
 else
-    au BufReadPost *
-                \ | if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-                \ |   exe "normal! g`\""
-                \ | endif
+    au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+        |   exe "normal! g`\""
+        | endif
 endif
 colorscheme everforest
 #hi link CocHighlightText MatchParen
