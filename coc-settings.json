@@ -1,19 +1,23 @@
 {
     "coc.preferences.promptInput": true,
     "coc.preferences.useQuickfixForLocations": true,
-    "workspace.rootPatterns": ["compile_commands.json"],
+    "workspace.openResourceCommand": "",
+    "workspace.bottomUpFiletypes": [
+        "python"
+    ],
     "inlayHint.enable": false,
     "semanticTokens.enable": true,
     "codeLens.enable": true,
     "outline.showLineNumber": false,
-    "workspace.openResourceCommand": "",
-    "diagnostic.hintSign": ">",
-    "diagnostic.warningSign": "‽",
+    "diagnostic.hintSign": "",
+    "diagnostic.warningSign": "",
     "diagnostic.errorSign": "✘",
+    "diagnostic.level": "information",
     "suggest.noselect": true,
     "suggest.enablePreselect": false,
     "suggest.virtualText": true,
     "snippets.snipmate.enable": true,
+    "snippets.ultisnips.pythonPrompt": false,
     "snippets.extends": {
         "cpp": [
             "c"
@@ -27,16 +31,37 @@
     },
     "yaml.format.enable": true,
     "clangd.arguments": [
+        "--query-driver=/usr/bin/clang++",
         "--background-index",
-        "--pch-storage=memory"
+        "--pch-storage=memory",
+        "--clang-tidy"
     ],
     "clangd.fallbackFlags": [
-        "-std=c++2a"
+        "-std=c++20"
     ],
+    "sh.enable": true,
+    "pyright.organizeimports.provider": "ruff",
+    "python.pythonPath": "/usr/bin/python3",
+    "python.linting.ruffEnabled": true,
     "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "ruff",
     "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
     "python.formatting.autopep8Args": [
-        "-a"
-    ]
+        "-aa",
+        "--experimental"
+    ],
+    "languageserver": {
+        "cmake": {
+            "command": "cmake-language-server",
+            "filetypes": [
+                "cmake"
+            ],
+            "rootPatterns": [
+                "build/"
+            ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
+        }
+    }
 }

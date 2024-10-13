@@ -1,4 +1,7 @@
 [alias]
+    a = add
+    p = pull
+    pul = pull
     co = checkout
     ci = commit
     st = status
@@ -11,7 +14,6 @@
     ri = rebase -i
     ls = ls-files
     sm = submodule
-    pul = pull
     fsm = "!f() { git submodule foreach --recursive git $@; }; f"
 [user]
 	email = afafaf4@gmail.com

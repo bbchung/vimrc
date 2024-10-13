@@ -12,21 +12,22 @@ if (!filereadable(vim_plug))
 endif
 
 au VimEnter * packadd termdebug
-    | g:termdebug_wide = 1
-    | g:plug_threads = 8
-    | g:plug_timeout = 20
-    | g:plug_window = 'topleft vnew'
+g:termdebug_wide = 1
+g:plug_threads = 8
+g:plug_timeout = 20
+g:plug_window = 'topleft vnew'
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: AI #<<
 #Plug 'github/copilot.vim' #<<
 #imap <silent><expr> <C-p> copilot#Accept("\<CR>")
-#g:copilot_no_tab_map = v:true
+#g:copilot_no_tab_map = true
 ##>>
 Plug 'Exafunction/codeium.vim' #<<
-g:codeium_no_map_tab = v:true
+g:codeium_disable_bindings = 1
 imap <silent><expr> <C-p> codeium#Accept()
-imap <C-n> <Plug>(codeium-next)
+imap <C-l> <Plug>(codeium-next)
+imap <C-h> <Plug>(codeium-previous)
 #>>
 ##>>
 
@@ -66,19 +67,19 @@ nmap <silent> <Leader>v <Plug>(coc-range-select)
 map <silent> <Leader>a <Plug>(coc-codeaction-cursor)
 nmap <silent> <Leader>k <Plug>(coc-format)
 vmap <silent> <leader>k <Plug>(coc-format-selected)
-au User CocLocationsChange CocList --normal location
+#au User CocLocationsChange CocList --normal location
 
-fun g:OnFoldUpdated(err, result)
-    if (a:result != v:null)
-        let b:foldedtick = b:changedtick
-    endif
-endf
+#fun g:OnFoldUpdated(err, result)
+    #if (a:result != v:null)
+        #let b:foldedtick = b:changedtick
+    #endif
+#endf
 
 au CursorHold * silent! call CocActionAsync('highlight')
-au BufReadPre *.c,*.cpp,*.h,*.hpp b:foldedtick = 0
-au BufWinEnter,CursorHold *.c,*.cpp,*.h,*.hpp if (b:foldedtick < b:changedtick)
-    | call CocActionAsync("fold", g:OnFoldUpdated) 
-    | endif
+#au BufReadPre *.c,*.cpp,*.h,*.hpp b:foldedtick = 0
+#au BufWinEnter,CursorHold *.c,*.cpp,*.h,*.hpp if (!exists('b:foldedtick') || b:foldedtick < b:changedtick)
+    #| call CocActionAsync("fold", g:OnFoldUpdated) 
+    #| endif
 
 command! A CocCommand clangd.switchSourceHeader
 
@@ -153,7 +154,8 @@ Plug 'itchyny/vim-gitbranch' #<<
 # >>
 Plug 'itchyny/lightline.vim' #<<
 
-au User CocStatusChange,CocDiagnosticChange call lightline#update()
+#au User CocStatusChange,CocDiagnosticChange call lightline#update()
+autocmd User CocStatusChange,CocDiagnosticChange redrawstatus
 def g:LightlineFugitive(): string
     var branch = gitbranch#name()
     return branch !=# '' ? '' .. branch : ''
@@ -173,7 +175,7 @@ g:lightline =
                 ["filetype"],
                 ["fileformat", "fileencoding"],
                 ["percent", "lineinfo"],
-                ["cocstatus"]
+                ["cocstatus", "codeium"]
             ]
         },
         inactive: {
@@ -197,7 +199,8 @@ g:lightline =
         },
         component_function: {
             gitbranch: "LightlineFugitive",
-            cocstatus: "coc#status"
+            cocstatus: "coc#status",
+            codeium: "codeium#GetStatusString",
         },
         separator: {
             left: "",
@@ -231,8 +234,8 @@ nmap <silent> <Leader>b :Clap buffers <CR>
 g:clap_open_preview = 'never'
 g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
-g:clap_disable_run_rooter = v:true
-#g:clap_enable_icon = 1
+g:clap_disable_run_rooter = true
+g:clap_enable_icon = 0
 #>>
 
 #Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
@@ -287,20 +290,21 @@ g:Lf_RgConfig = [
 #Plugin Group: Edit #<<
 Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
-#Plug 'Raimondi/delimitMate' #<<
+Plug 'Raimondi/delimitMate' #<<
 g:delimitMate_expand_cr = 1
 g:delimitMate_smart_matchpairs = '^\%(\w\|\!\)'
+au FileType c,cpp b:delimitMate_matchpairs = "(:),[:],{:}"
 # >>
-Plug 'cohama/lexima.vim' #<<
-au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
-    | lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
-    | lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
-    | lexima#add_rule({'char': '"', 'at': '\%#\S'})
-    | lexima#add_rule({'char': '"', 'at': '\S\%#'})
-    | lexima#add_rule({'char': "'", 'at': '\%#\S'})
-    | lexima#add_rule({'char': "'", 'at': '\S\%#'})
-    | lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-    | lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
+#Plug 'cohama/lexima.vim' #<<
+#au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
+    #| lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
+    #| lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
+    #| lexima#add_rule({'char': '"', 'at': '\%#\S'})
+    #| lexima#add_rule({'char': '"', 'at': '\S\%#'})
+    #| lexima#add_rule({'char': "'", 'at': '\%#\S'})
+    #| lexima#add_rule({'char': "'", 'at': '\S\%#'})
+    #| lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+    #| lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
 
 # >>
 # >>
@@ -311,7 +315,7 @@ g:indentLine_setColors = 0
 g:indentLine_fileType = ['c', 'cpp', 'python', 'r']
 g:indentLine_char = '⸽'
 #>>
-#Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asyncrun.vim'
 #Plug 'ianding1/leetcode.vim' #<<
 g:leetcode_browser = 'firefox'
 #>>
@@ -333,8 +337,8 @@ g:end = 10
 Plug 'bbchung/gtags.vim' #<<
 g:Gtags_Auto_Update = 1
 nmap <silent> <Leader>s :GtagsCursor<CR>
-nmap <silent> <Leader>g :<C-R>=printf("Gtags -g %s", expand('<cword>'))<CR><CR>:copen<CR>
-vmap <silent> <Leader>g :<C-U><C-R>=printf("Gtags -g %s", getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1])<CR><CR>:copen<CR>
+nmap <silent> <Leader>g :call setqflist([])<CR>:<C-R>=printf("Gtags -g %s", expand('<cword>'))<CR><CR>:copen<CR>
+vmap <silent> <Leader>g :call setqflist([])<CR>:<C-U><C-R>=printf("Gtags -g %s", getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1])<CR><CR>:copen<CR>
 #>>
 #>>
 
@@ -348,6 +352,7 @@ endif
 
 syntax on
 
+set nomore
 set synmaxcol=10000
 set vb t_vb=
 set guicursor=
@@ -369,7 +374,6 @@ set laststatus=2
 set number
 set expandtab
 set softtabstop=4
-set nomore
 set tabstop=4
 set shiftwidth=4
 set scrolloff=8
@@ -399,7 +403,7 @@ set mmp=10000
 set splitright
 set re=2
 set matchpairs+=<:>
-#set fdm=syntax
+set fdm=syntax
 
 def ShowDoc()
     if (index(['csv'], &filetype) >= 0)
@@ -436,8 +440,9 @@ nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>ShowDoc()<CR>
 
-function CsvFormat()
-    silent '<,'>CSVArrangeColumn
+fun CsvFormat()
+    exe "'<,'>ArrangeColumn"
+    return 0
 endf
 
 #au BufRead * cd .
@@ -445,8 +450,10 @@ au FileType sh,python,vim setlocal tw=0 expandtab
 au FileType gitcommit setlocal spell
 au FileType markdown setlocal textwidth=80
 au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
-au FileType csv setlocal formatexpr=CsvFormat()
-au FileType c,cpp setlocal fdm=manual
+au FileType csv setlocal formatexpr=s:CsvFormat()
+au FileType python b:coc_root_patterns = ['.pylintrc']
+au FileType c,cpp b:coc_root_patterns = ['.compile_commands.json']
+#au FileType c,cpp setlocal fdm=manual
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
 
