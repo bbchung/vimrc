@@ -13,19 +13,23 @@ endif
 
 au VimEnter * packadd termdebug
 g:termdebug_wide = 1
-g:plug_threads = 8
+g:plug_threads = 16
 g:plug_timeout = 20
 g:plug_window = 'topleft vnew'
 plug#begin(home .. '/plugged') #<<
 
 #Plugin Group: AI #<<
 #Plug 'github/copilot.vim' #<<
-#imap <silent><expr> <C-p> copilot#Accept("\<CR>")
 #g:copilot_no_tab_map = true
+#imap <silent><script><expr> <C-p> copilot#Accept("\<CR>")
+#imap <C-x> <Plug>(copilot-dismiss)
+#imap <C-l> <Plug>(copilot-next)
+#imap <C-h> <Plug>(copilot-previous)
 ##>>
 Plug 'Exafunction/codeium.vim' #<<
 g:codeium_disable_bindings = 1
-imap <silent><expr> <C-p> codeium#Accept()
+imap <script><silent><nowait><expr> <C-p> codeium#Accept()
+imap <C-x> <Plug>(codeium-dismiss)
 imap <C-l> <Plug>(codeium-next)
 imap <C-h> <Plug>(codeium-previous)
 #>>
@@ -51,6 +55,7 @@ g:coc_global_extensions = [
     'coc-yaml',
     'coc-snippets'
 ]
+g:coc_highlight_maximum_count = 1000
 g:coc_status_error_sign = '🚫 '
 g:coc_status_warning_sign = '⚠️  '
 g:coc_enable_locationlist = 0
@@ -147,6 +152,8 @@ g:gruvbox_material_sign_column_background = 'none'
 #>>
 Plug 'arcticicestudio/nord-vim' #<<
 #>>
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' } #<<
+#>>
 #>>
 
 #Plugin Group: StatusLine #<<
@@ -232,7 +239,7 @@ nmap <silent> <Leader>F :Clap gfiles<CR>
 nmap <silent> <Leader>f :Clap files --name-only<CR>
 nmap <silent> <Leader>b :Clap buffers <CR>
 g:clap_open_preview = 'never'
-g:clap_layout = {'relative': 'editor'}
+#g:clap_layout = {'relative': 'editor'}
 g:clap_popup_input_delay = 0
 g:clap_disable_run_rooter = true
 g:clap_enable_icon = 0
@@ -240,25 +247,26 @@ g:clap_enable_icon = 0
 
 #Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
 g:Lf_WildIgnore = {
-    'dir': ['.svn', '.git', '.hg', 'build', 'third_party', '.clangd', 'fuxi.run*'],
+    'dir': ['.*', 'build', 'third_party', '.clangd', 'fuxi.run*'],
     'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
 }
+g:Lf_StlColorscheme = 'everforest'
 g:Lf_WindowHeight = 0.3
 g:Lf_PopupHeight = 0.6
 g:Lf_RecurseSubmodules = 1
 g:Lf_GtagsAutoGenerate = 0
 g:Lf_GtagsAutoUpdate = 0
 g:Lf_GtagsStoreInProject = 0
-g:Lf_DefaultExternalTool = 'rg'
+g:Lf_DefaultExternalTool = 'fd'
 g:Lf_UseVersionControlTool = 0
 g:Lf_DefaultMode = 'NameOnly'
 g:Lf_WindowPosition = 'popup'
-g:Lf_PreviewInPopup = 1
+g:Lf_PreviewInPopup = 0
 g:Lf_PopupPreviewPosition = 'bottom'
 g:Lf_CursorBlink = 0
 g:Lf_PopupShowStatusline = 0
 g:Lf_StlSeparator = {'left': '', 'right': ''}
-g:Lf_ShowDevIcons = 1
+g:Lf_ShowDevIcons = 0
 g:Lf_WorkingDirectoryMode = 'a'
 g:Lf_PreviewResult = {
     'File': 0,
@@ -353,7 +361,7 @@ endif
 syntax on
 
 set nomore
-set synmaxcol=10000
+set synmaxcol=0
 set vb t_vb=
 set guicursor=
 set signcolumn=number
@@ -388,7 +396,6 @@ set foldlevelstart=99
 set wildmode=longest,full
 set wildmenu
 set wildoptions=pum,fuzzy
-set grepprg=grep\ -nH\ $*
 set encoding=utf-8
 set fileencodings=utf-8,big5,gb2312,utf16le
 set fileformats=unix,dos
@@ -399,13 +406,12 @@ set nowritebackup
 set noswapfile
 set undofile
 set backspace=indent,eol,start
-set mmp=10000
 set splitright
-set re=2
+set re=0
 set matchpairs+=<:>
 set fdm=syntax
 
-def ShowDoc()
+def DoHover()
     if (index(['csv'], &filetype) >= 0)
         exe 'WhatColumn!'
     elseif (index(['vim', 'help'], &filetype) >= 0)
@@ -429,16 +435,17 @@ vmap <silent> # :<C-U>
             \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
             \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
-#map <C-c> <Esc>
 imap <C-c> <Esc>
 nmap <silent> <F3> :bd!<CR>
 map <silent> <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
 nmap <silent> <F5> :bp<CR>
 nmap <silent> <F6> :bn<CR>
+nmap <silent> <F7> :cp<CR>
+nmap <silent> <F8> :cn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
-nmap <silent> K :call <SID>ShowDoc()<CR>
+nmap <silent> K :call <SID>DoHover()<CR>
 
 fun CsvFormat()
     exe "'<,'>ArrangeColumn"
@@ -452,7 +459,8 @@ au FileType markdown setlocal textwidth=80
 au FileType c,cpp,python setlocal formatexpr=g:CocAction('formatSelected')
 au FileType csv setlocal formatexpr=s:CsvFormat()
 au FileType python b:coc_root_patterns = ['.pylintrc']
-au FileType c,cpp b:coc_root_patterns = ['.compile_commands.json']
+au FileType c,cpp b:coc_root_patterns = ['compile_commands.json']
+au VimEnter * system("global -qu") 
 #au FileType c,cpp setlocal fdm=manual
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
@@ -464,10 +472,17 @@ if (&diff)
     set nocursorline
     g:coc_start_at_startup = 0
 else
-    au BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+    au BufWinEnter * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
         |   exe "normal! g`\""
         | endif
 endif
+lua << EOF
+require("catppuccin").setup({
+    integrations = {
+        coc_nvim = true,
+    }
+})
+EOF
 colorscheme everforest
 #hi link CocHighlightText MatchParen
 # vim:foldmarker=<<,>>:foldlevel=0:foldmethod=marker:
