@@ -39,7 +39,7 @@ imap <C-h> <Plug>(codeium-previous)
 
 #Plug 'jamespeapen/Nvim-R'
 
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
+Plug 'neoclide/coc.nvim', {'branch': 'release'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
@@ -298,22 +298,24 @@ g:Lf_RgConfig = [
 #Plugin Group: Edit #<<
 Plug 'scrooloose/nerdcommenter'
 Plug 'honza/vim-snippets'
-Plug 'Raimondi/delimitMate' #<<
+#Plug 'Raimondi/delimitMate' #<<
 g:delimitMate_expand_cr = 1
 g:delimitMate_smart_matchpairs = '^\%(\w\|\!\)'
 au FileType c,cpp b:delimitMate_matchpairs = "(:),[:],{:}"
 # >>
-#Plug 'cohama/lexima.vim' #<<
-#au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
-    #| lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
-    #| lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
-    #| lexima#add_rule({'char': '"', 'at': '\%#\S'})
-    #| lexima#add_rule({'char': '"', 'at': '\S\%#'})
-    #| lexima#add_rule({'char': "'", 'at': '\%#\S'})
-    #| lexima#add_rule({'char': "'", 'at': '\S\%#'})
-    #| lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
-    #| lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
+Plug 'cohama/lexima.vim' #<<
+au VimEnter * lexima#add_rule({'char': '(', 'at': '\%#\S', 'except': '\%#)'})
+    | lexima#add_rule({'char': '[', 'at': '\%#\S', 'except': '\%#]'})
+    | lexima#add_rule({'char': '{', 'at': '\%#\S', 'except': '\%#}'})
+    | lexima#add_rule({'char': '"', 'at': '\%#\S'})
+    | lexima#add_rule({'char': '"', 'at': '\S\%#'})
+    | lexima#add_rule({'char': "'", 'at': '\%#\S'})
+    | lexima#add_rule({'char': "'", 'at': '\S\%#'})
+    | lexima#add_rule({'char': '"', 'at': '"\%#"', 'leave': '"'})
+    | lexima#add_rule({'char': "'", 'at': '''\%#''', 'leave': "'"})
 
+# >>
+#Plug 'Eliot00/auto-pairs' #<<
 # >>
 # >>
 
@@ -424,16 +426,8 @@ def DoHover()
 enddef
 
 command! W silent exe "w !sudo > /dev/null tee %"
-vmap <silent> * :<C-U>
-            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-            \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
-            \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-            \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-vmap <silent> # :<C-U>
-            \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-            \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
-            \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-            \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+xnoremap * "sy/<C-R>='\V' .. @s<CR><CR>
+xnoremap # "sy?<C-R>='\V' .. @s<CR><CR>
 
 imap <C-c> <Esc>
 nmap <silent> <F3> :bd!<CR>
@@ -446,6 +440,7 @@ nmap <silent> <F8> :cn<CR>
 nmap Q <Nop>
 tmap <Esc><Esc> <C-W>N
 nmap <silent> K :call <SID>DoHover()<CR>
+nmap <F9> @u
 
 fun CsvFormat()
     exe "'<,'>ArrangeColumn"
@@ -473,7 +468,7 @@ if (&diff)
     g:coc_start_at_startup = 0
 else
     au BufWinEnter * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-        |   exe "normal! g`\""
+        |   exe "normal! `\""
         | endif
 endif
 lua << EOF
