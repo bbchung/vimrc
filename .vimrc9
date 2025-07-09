@@ -26,7 +26,7 @@ plug#begin(home .. '/plugged') #<<
 #imap <C-l> <Plug>(copilot-next)
 #imap <C-h> <Plug>(copilot-previous)
 ##>>
-Plug 'Exafunction/codeium.vim' #<<
+Plug 'Exafunction/windsurf.vim' #<<
 g:codeium_disable_bindings = 1
 imap <script><silent><nowait><expr> <C-p> codeium#Accept()
 imap <C-x> <Plug>(codeium-dismiss)
@@ -39,7 +39,7 @@ imap <C-h> <Plug>(codeium-previous)
 
 #Plug 'jamespeapen/Nvim-R'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'} #<<
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} #<<
 g:coc_global_extensions = [
     'coc-clang-format-style-options',
     'coc-clangd',
@@ -107,8 +107,6 @@ imap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scr
 imap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
 vmap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vmap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-au User TermdebugStartPre silent CocDisable
-au User TermdebugStopPost silent CocEnable
 #>>
 
 #>>
@@ -245,7 +243,7 @@ g:clap_disable_run_rooter = true
 g:clap_enable_icon = 0
 #>>
 
-#Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
 g:Lf_WildIgnore = {
     'dir': ['.*', 'build', 'third_party', '.clangd', 'fuxi.run*'],
     'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
@@ -429,7 +427,8 @@ command! W silent exe "w !sudo > /dev/null tee %"
 xnoremap * "sy/<C-R>='\V' .. @s<CR><CR>
 xnoremap # "sy?<C-R>='\V' .. @s<CR><CR>
 
-imap <C-c> <Esc>
+noremap <C-c> <Esc>
+noremap! <C-c> <Esc>
 nmap <silent> <F3> :bd!<CR>
 map <silent> <F4> :qa!<CR>
 tmap <F4> <C-W>N:qa!<CR>
@@ -456,6 +455,8 @@ au FileType csv setlocal formatexpr=s:CsvFormat()
 au FileType python b:coc_root_patterns = ['.pylintrc']
 au FileType c,cpp b:coc_root_patterns = ['compile_commands.json']
 au VimEnter * system("global -qu") 
+au User TermdebugStartPre call coc#float#close_all() | silent CocDisable
+au User TermdebugStopPost silent CocEnable
 #au FileType c,cpp setlocal fdm=manual
 #au InsertEnter * if !exists('w:last_fdm') | w:last_fdm = &foldmethod | setlocal foldmethod=manual | endif
 #au InsertLeave,WinLeave * if exists('w:last_fdm') | &l:foldmethod = w:last_fdm | unw:last_fdm | endif
@@ -468,7 +469,7 @@ if (&diff)
     g:coc_start_at_startup = 0
 else
     au BufWinEnter * if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-        |   exe "normal! `\""
+        |   exe "normal! g`\""
         | endif
 endif
 lua << EOF
