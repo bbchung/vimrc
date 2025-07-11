@@ -343,10 +343,13 @@ g:end = 10
 #>>
 #Plug 'mechatroner/rainbow_csv'
 Plug 'bbchung/gtags.vim' #<<
+def g:GtagsEscape(pattern: string): string
+  return substitute(pattern, '\v[.*+?^$()|&;!#%\\\[\] ]', '\\&', 'g')
+enddef
 g:Gtags_Auto_Update = 1
 nmap <silent> <Leader>s :GtagsCursor<CR>
-nmap <silent> <Leader>g :call setqflist([])<CR>:<C-R>=printf("Gtags -g %s", expand('<cword>'))<CR><CR>:copen<CR>
-vmap <silent> <Leader>g :call setqflist([])<CR>:<C-U><C-R>=printf("Gtags -g %s", getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1])<CR><CR>:copen<CR>
+nmap <silent> <Leader>g :call setqflist([])<CR>:<C-R>=printf("Gtags -g %s", g:GtagsEscape(expand('<cword>')))<CR><CR>:copen<CR>
+vmap <silent> <Leader>g :call setqflist([])<CR>:<C-U><C-R>=printf("Gtags -g %s", g:GtagsEscape(getline("'<")[getpos("'<")[2]-1:getpos("'>")[2] - 1]))<CR><CR>:copen<CR>
 #>>
 #>>
 
