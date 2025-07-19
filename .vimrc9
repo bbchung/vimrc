@@ -243,7 +243,7 @@ g:clap_disable_run_rooter = true
 g:clap_enable_icon = 0
 #>>
 
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
+#Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' } #<<
 g:Lf_WildIgnore = {
     'dir': ['.*', 'build', 'third_party', '.clangd', 'fuxi.run*'],
     'file': ['*.sw?', '~$*', '*.bak', '*.exe', '*.o', '*.so', '*.py[co]']
