@@ -1,0 +1,92 @@
+keybinds {
+    tab {
+        unbind "n"
+        bind "n" { NewTab { name "bash"; }; SwitchToMode "normal"; }
+    }
+
+    shared_except "locked" {
+        unbind "Alt p"
+        unbind "Alt h" "Alt left" "Alt l" "Alt right"
+
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+        bind "Alt 0" { GoToTab 10; }
+
+        bind "Alt h" "Alt left" { MoveFocus "left"; }
+        bind "Alt l" "Alt right" { MoveFocus "right"; }
+    }
+
+    shared_except "tmux" "locked" {
+        unbind "Ctrl b"
+    }
+
+    shared_except "locked" "scroll" "search" "tmux" {
+        bind "Alt a" { SwitchToMode "tmux"; }
+    }
+
+    tmux {
+        unbind "c"
+        bind "c" { NewTab { name "bash"; }; SwitchToMode "normal"; }
+        bind "v" "PageUp" "PageDown" { SwitchToMode "scroll"; }
+        bind "H" { MovePane "left"; SwitchToMode "normal"; }
+        bind "J" { MovePane "down"; SwitchToMode "normal"; }
+        bind "K" { MovePane "up"; SwitchToMode "normal"; }
+        bind "L" { MovePane "right"; SwitchToMode "normal"; }
+        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
+        bind "Alt a" { Write 27 97; SwitchToMode "normal"; }
+    }
+}
+
+themes {
+    dimtabs {
+        text_unselected {
+            base 124 132 144
+            background 34 40 52
+            emphasis_0 174 132 92
+            emphasis_1 118 154 188
+            emphasis_2 118 164 140
+            emphasis_3 150 132 180
+        }
+        text_selected {
+            base 168 178 190
+            background 34 40 52
+            emphasis_0 194 148 104
+            emphasis_1 146 178 210
+            emphasis_2 146 190 164
+            emphasis_3 174 154 202
+        }
+        ribbon_unselected {
+            base 150 158 170
+            background 34 40 52
+            emphasis_0 168 176 188
+            emphasis_1 168 176 188
+            emphasis_2 168 176 188
+            emphasis_3 168 176 188
+        }
+        ribbon_selected {
+            base 220 228 238
+            background 66 76 98
+            emphasis_0 232 240 248
+            emphasis_1 232 240 248
+            emphasis_2 232 240 248
+            emphasis_3 232 240 248
+        }
+    }
+}
+
+theme "dimtabs"
+default_layout "top_tab"
+hide_session_name true
+pane_frames false
+scroll_buffer_size 100000
+show_startup_tips false
+
+load_plugins {
+}
