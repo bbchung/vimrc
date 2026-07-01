@@ -1,13 +1,5 @@
 keybinds {
-    tab {
-        unbind "n"
-        bind "n" { NewTab { name "bash"; }; SwitchToMode "normal"; }
-    }
-
     shared_except "locked" {
-        unbind "Alt p"
-        unbind "Alt h" "Alt left" "Alt l" "Alt right"
-
         bind "Alt 1" { GoToTab 1; }
         bind "Alt 2" { GoToTab 2; }
         bind "Alt 3" { GoToTab 3; }
@@ -18,9 +10,6 @@ keybinds {
         bind "Alt 8" { GoToTab 8; }
         bind "Alt 9" { GoToTab 9; }
         bind "Alt 0" { GoToTab 10; }
-
-        bind "Alt h" "Alt left" { MoveFocus "left"; }
-        bind "Alt l" "Alt right" { MoveFocus "right"; }
     }
 
     shared_except "tmux" "locked" {
@@ -32,7 +21,6 @@ keybinds {
     }
 
     tmux {
-        unbind "c"
         bind "c" { NewTab { name "bash"; }; SwitchToMode "normal"; }
         bind "v" "PageUp" "PageDown" { SwitchToMode "scroll"; }
         bind "H" { MovePane "left"; SwitchToMode "normal"; }
@@ -40,7 +28,6 @@ keybinds {
         bind "K" { MovePane "up"; SwitchToMode "normal"; }
         bind "L" { MovePane "right"; SwitchToMode "normal"; }
         bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
-        bind "Alt a" { Write 27 97; SwitchToMode "normal"; }
     }
 }
 
@@ -83,7 +70,6 @@ themes {
 
 theme "dimtabs"
 default_layout "top_tab"
-hide_session_name true
 pane_frames false
 scroll_buffer_size 100000
 show_startup_tips false
