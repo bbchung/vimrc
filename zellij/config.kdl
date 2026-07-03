@@ -7,7 +7,6 @@ keybinds {
     shared_except "locked" {
         unbind "Ctrl g" "Ctrl q" "Alt f" "Alt n" "Alt h" "Alt o" "Alt p"
         bind "Alt g" { SwitchToMode "locked"; }
-        bind "Alt q" { Quit; }
         bind "Alt 1" { GoToTab 1; }
         bind "Alt 2" { GoToTab 2; }
         bind "Alt 3" { GoToTab 3; }
