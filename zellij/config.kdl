@@ -1,5 +1,13 @@
 keybinds {
+    normal {
+        bind "PageUp" { SwitchToMode "scroll"; PageScrollUp; }
+        bind "PageDown" { SwitchToMode "scroll"; PageScrollDown; }
+    }
+
     shared_except "locked" {
+        unbind "Ctrl g" "Ctrl q" "Alt f" "Alt n" "Alt h" "Alt o" "Alt p"
+        bind "Alt g" { SwitchToMode "locked"; }
+        bind "Alt q" { Quit; }
         bind "Alt 1" { GoToTab 1; }
         bind "Alt 2" { GoToTab 2; }
         bind "Alt 3" { GoToTab 3; }
@@ -14,6 +22,37 @@ keybinds {
 
     shared_except "tmux" "locked" {
         unbind "Ctrl b"
+        bind "Alt b" { SwitchToMode "tmux"; }
+    }
+
+    shared_except "pane" "locked" {
+        unbind "Ctrl p"
+        bind "Alt p" { SwitchToMode "pane"; }
+    }
+
+    shared_except "resize" "locked" {
+        unbind "Ctrl n"
+        bind "Alt n" { SwitchToMode "resize"; }
+    }
+
+    shared_except "scroll" "locked" {
+        unbind "Ctrl s"
+        bind "Alt s" { SwitchToMode "scroll"; }
+    }
+
+    shared_except "session" "locked" {
+        unbind "Ctrl o"
+        bind "Alt o" { SwitchToMode "session"; }
+    }
+
+    shared_except "tab" "locked" {
+        unbind "Ctrl t"
+        bind "Alt t" { SwitchToMode "tab"; }
+    }
+
+    shared_except "move" "locked" {
+        unbind "Ctrl h"
+        bind "Alt h" { SwitchToMode "move"; }
     }
 
     shared_except "locked" "scroll" "search" "tmux" {
@@ -22,7 +61,6 @@ keybinds {
 
     tmux {
         bind "c" { NewTab { name "bash"; }; SwitchToMode "normal"; }
-        bind "v" "PageUp" "PageDown" { SwitchToMode "scroll"; }
         bind "H" { MovePane "left"; SwitchToMode "normal"; }
         bind "J" { MovePane "down"; SwitchToMode "normal"; }
         bind "K" { MovePane "up"; SwitchToMode "normal"; }
@@ -73,6 +111,12 @@ default_layout "top_tab"
 pane_frames false
 scroll_buffer_size 100000
 show_startup_tips false
+
+web_server true
+web_server_ip "0.0.0.0"
+web_server_port 28082
+web_server_cert "/home/bb/.certs/localhost+3.pem"
+web_server_key "/home/bb/.certs/localhost+3-key.pem"
 
 load_plugins {
 }
