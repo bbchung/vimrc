@@ -57,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]: \[\033[01;34m\]\w\[\033[00m\]\[\033[01;31m\]\$(__git_ps1 \ %s)\[\033[00m\]\$ "
+    PS1="${debian_chroot:+($debian_chroot)}\[\033[38;5;94m\]\t>\[\033[00m\] \[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[03;31m\]\$(__git_ps1 \ %s)\[\033[00m\]\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -116,16 +116,77 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias top='bpytop'
+. "$HOME/.cargo/env"
+alias python3='/usr/bin/python3.13'
+alias gg='cd $(git rev-parse --show-toplevel)'
 alias grep='rg'
 alias e='exit'
-alias z='zdict'
-alias v='vi'
-alias n='nvim'
+#alias z='zellij'
+alias v=nvim
+alias vi=nvim
+alias n=nvim
 alias g='git'
-alias F='clang-format -i `git ls *.cpp "*.h" *.hpp`'
-alias TD='run-clang-tidy-16 -j32 -fix -export-fixes clang-tidy.txt'
-alias CC='cppcheck --template=gcc -j32 --enable=all --inconclusive --project=compile_commands.json 2>cppcheck.txt'
-alias vdb='f(){ vim -M --cmd "let g:coc_start_at_startup=0" "+set shortmess+=A" "+Termdebug $@"; unset -f f; }; f'
+alias F='{ g ls *.cpp "*.h" *.hpp | parallel clang-format -i {} && g ls *.py | parallel ruff format {} && g ls "*CMakeLists.txt" | parallel cmake-format -i {}; g ls *.sh | parallel shfmt -i 4 -w {}; } > /dev/null 2>&1'
+alias TD="run-clang-tidy-23 -j$(nproc) -fix -allow-enabling-alpha-checkers -p ./ -export-fixes clang-tidy.txt"
+alias CC='cppcheck --check-level=exhaustive --inline-suppr --template=gcc -j32 --enable=all --inconclusive --project=compile_commands.json -ithird_party --suppress=missingIncludeSystem --suppress=unusedFunction --suppress=unusedPrivateFunction --suppress=missingInclude --suppress=noExplicitConstructor --suppress=*:*/third_party/* --suppress=*:third_party/* --cppcheck-build-dir=.cppcheck 2>cppcheck.txt'
+alias lsi='timg --title -p sixel'
+alias vdb='f(){ eval "vim -c \"au VimEnter * :Termdebug $@\""; unset -f f; }; f'
+alias ls=lsd
+alias claude='claude --dangerously-skip-permissions'
+alias trans='trans -b :zh-TW+en'
 ulimit -n 65536
-#export GNUMAKEFLAGS=-j32
+
+__zellij_tab_rename() {
+    [ -n "${ZELLIJ:-}" ] || return
+    command -v zellij >/dev/null 2>&1 || return
+    [ -n "${1:-}" ] || return
+
+    zellij action rename-tab "$1" >/dev/null 2>&1
+}
+
+__zellij_tab_prompt_name() {
+    local dir=${PWD##*/}
+    if [ "$PWD" = "$HOME" ]; then
+        dir="~/"
+    elif [ "$PWD" = "/" ]; then
+        dir="/"
+    else
+        dir="${dir}/"
+    fi
+    __zellij_tab_rename "$dir"
+}
+
+__zellij_tab_command_name() {
+    local cmd=$BASH_COMMAND
+
+    case "$cmd" in
+        __zellij_*|history\ -a|trap\ *)
+            return
+            ;;
+        __zoxide_hook|__zoxide_hook\ *)
+            return
+            ;;
+    esac
+
+    cmd=${cmd%%[[:space:];|&<>]*}
+    cmd=${cmd##*/}
+    [ -n "$cmd" ] || return
+    __zellij_tab_rename "$cmd"
+}
+
+export EDITOR=nvim
+export COLORTERM=truecolor
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+PROMPT_COMMAND="history -a; __zellij_tab_prompt_name"
+eval "$(zoxide init bash)"
+trap '__zellij_tab_command_name' DEBUG
+#export CODEX_HOME=/mnt/c/Users/user/.codex
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+[[ -r "$HOME/.grok/completions/bash/grok.bash" ]] && source "$HOME/.grok/completions/bash/grok.bash"
+# <<< grok installer <<<
